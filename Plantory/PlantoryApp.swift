@@ -1,32 +1,27 @@
-//
-//  PlantoryApp.swift
-//  Plantory
-//
-//  Created by 纪洪波 on 2026/3/11.
-//
-
 import SwiftUI
 import SwiftData
 
 @main
 struct PlantoryApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    let container: ModelContainer
 
+    init() {
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            container = try ModelContainer(for: Plant.self, PlantRecord.self, PlantInformation.self)
+            let context = container.mainContext
+            let count = (try? context.fetchCount(FetchDescriptor<PlantInformation>())) ?? 0
+            if count == 0 {
+                PlantInformation.catalog.forEach { context.insert($0) }
+            }
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            fatalError("Failed to create ModelContainer: \(error)")
         }
-    }()
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomePage()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(container)
     }
 }
