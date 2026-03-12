@@ -105,7 +105,11 @@ enum PreviewData {
         context.insert(pothos)
         context.insert(cactus)
 
-        let p1 = Plant(nickname: "My Monstera", information: monstera)
+        let p1 = Plant(
+            nickname: "My Monstera",
+            imageData: PlatformImageData.named("Monstera deliciosa"),
+            information: monstera
+        )
         let p2 = Plant(nickname: "Happy Pothos", information: pothos)
         let p3 = Plant(nickname: "Desert Star", information: cactus)
         p3.activeIssues = [PlantIssue(type: .underwatered, severity: .mild)]

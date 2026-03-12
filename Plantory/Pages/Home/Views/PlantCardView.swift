@@ -8,7 +8,7 @@ struct PlantCardView: View {
             plantPhoto
                 .frame(height: 150)
 
-            VStack(alignment: .leading, spacing: 6) {
+            VStack(alignment: .leading) {
                 Text(plant.displayName)
                     .font(.subheadline.weight(.semibold))
                     .lineLimit(1)
@@ -20,26 +20,28 @@ struct PlantCardView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 10)
         }
-        .background(.background.secondary)
+//        .background(.background.secondary)
+        .background(.background)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .shadow(color: .black.opacity(0.06), radius: 8, y: 2)
     }
 
     @ViewBuilder
     private var plantPhoto: some View {
-        if let photoData = plant.photoData,
-           let image = Image(data: photoData) {
-            image
-                .resizable()
-                .scaledToFill()
-                .clipped()
-        } else {
-            ZStack {
-                LinearGradient(
-                    colors: [.green.opacity(0.12), .mint.opacity(0.08)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
+        ZStack {
+            LinearGradient(
+                colors: [.primary.opacity(0.08), .clear],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            
+            if let photoData = plant.photoData,
+               let image = Image(data: photoData) {
+                image
+                    .resizable()
+                    .scaledToFit()
+                    .shadow(radius: 2)
+            } else {
                 Image(systemName: "leaf.fill")
                     .font(.system(size: 48))
                     .foregroundStyle(
@@ -65,7 +67,7 @@ struct PlantCardView: View {
 #Preview {
     HStack {
         PlantCardView(plant: {
-            let p = Plant(nickname: "My Monstera")
+            let p = Plant(nickname: "My Monstera", imageData: PlatformImageData.named("Monstera deliciosa"))
             return p
         }())
 
