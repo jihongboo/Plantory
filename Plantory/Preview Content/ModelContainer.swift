@@ -41,19 +41,55 @@ enum PreviewData {
         let info = PlantInformation(
             species: "Monstera deliciosa",
             commonName: "Monstera",
+            overview: "Monstera is a tropical foliage plant known for dramatic split leaves and fast indoor growth.",
             light: "Bright indirect light",
             water: "Every 7–10 days",
             temperature: "18–30°C",
             fertilizer: "Monthly in growing season",
             tips: "Yellowing leaves = overwatering"
         )
-        return Plant(nickname: "My Monstera", information: info)
+        let plant = Plant(
+            nickname: "My Monstera",
+            imageData: PlatformImageData.named("Monstera deliciosa"),
+            note: "Placed near the living room window. New leaf unfurled this week.",
+            information: info
+        )
+        plant.records = [
+            PlantRecord(
+                type: .watering,
+                createdAt: .now.addingTimeInterval(-86_400),
+                note: "Soil was dry 2 cm below the surface.",
+                metadata: RecordMetadata(
+                    watering: WateringMetadata(amount: .normal)
+                ),
+                plant: plant
+            ),
+            PlantRecord(
+                type: .diagnosis,
+                createdAt: .now.addingTimeInterval(-3 * 86_400),
+                note: "Checked a few yellow edges on older leaves.",
+                metadata: RecordMetadata(
+                    diagnosis: DiagnosisMetadata(
+                        result: DiagnosisResult(
+                            species: "Monstera deliciosa",
+                            problem: "Mild overwatering stress",
+                            causes: ["Soil stayed damp for too long"],
+                            suggestions: ["Wait for the top soil to dry before watering again"],
+                            rawResponse: ""
+                        )
+                    )
+                ),
+                plant: plant
+            )
+        ]
+        return plant
     }()
 
     static let warningPlant: Plant = {
         let info = PlantInformation(
             species: "Cactus",
             commonName: "Cactus",
+            overview: "Cactus stores water in its stems and prefers a bright, dry environment with long gaps between watering.",
             light: "Full sun",
             water: "Every 2–4 weeks",
             temperature: "15–40°C",
@@ -77,6 +113,7 @@ enum PreviewData {
         let monstera = PlantInformation(
             species: "Monstera deliciosa",
             commonName: "Monstera",
+            overview: "Monstera is a tropical climbing plant that thrives in bright filtered light and appreciates a stable indoor routine.",
             light: "Bright indirect light",
             water: "Every 7–10 days",
             temperature: "18–30°C",
@@ -86,6 +123,7 @@ enum PreviewData {
         let pothos = PlantInformation(
             species: "Epipremnum aureum",
             commonName: "Golden Pothos",
+            overview: "Golden Pothos is an adaptable trailing houseplant that stays forgiving for first-time plant owners.",
             light: "Tolerates low light",
             water: "Every 5–7 days",
             temperature: "15–30°C",
@@ -95,6 +133,7 @@ enum PreviewData {
         let cactus = PlantInformation(
             species: "Cactus",
             commonName: "Cactus",
+            overview: "Cactus prefers strong sun, gritty soil, and long dry periods between drinks.",
             light: "Full sun",
             water: "Every 2–4 weeks",
             temperature: "15–40°C",
@@ -108,6 +147,7 @@ enum PreviewData {
         let p1 = Plant(
             nickname: "My Monstera",
             imageData: PlatformImageData.named("Monstera deliciosa"),
+            note: "Placed near the living room window. Rotated the pot last weekend.",
             information: monstera
         )
         let p2 = Plant(nickname: "Happy Pothos", information: pothos)
@@ -115,6 +155,36 @@ enum PreviewData {
         p3.activeIssues = [PlantIssue(type: .underwatered, severity: .mild)]
         let p4 = Plant(nickname: "Sick Fern")
         p4.activeIssues = [PlantIssue(type: .rootRot, severity: .severe)]
+
+        p1.records = [
+            PlantRecord(
+                type: .watering,
+                createdAt: .now.addingTimeInterval(-86_400),
+                note: "Watered after top soil dried out.",
+                metadata: RecordMetadata(
+                    watering: WateringMetadata(amount: .normal)
+                ),
+                plant: p1
+            ),
+            PlantRecord(
+                type: .photo,
+                createdAt: .now.addingTimeInterval(-5 * 86_400),
+                note: "Captured new split leaf growth.",
+                plant: p1
+            )
+        ]
+
+        p3.records = [
+            PlantRecord(
+                type: .watering,
+                createdAt: .now.addingTimeInterval(-10 * 86_400),
+                note: "Gave a small amount after leaves softened slightly.",
+                metadata: RecordMetadata(
+                    watering: WateringMetadata(amount: .little)
+                ),
+                plant: p3
+            )
+        ]
 
         context.insert(p1)
         context.insert(p2)

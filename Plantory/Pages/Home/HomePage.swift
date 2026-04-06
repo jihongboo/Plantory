@@ -12,6 +12,7 @@ struct HomePage: View {
     @Query(sort: \Plant.createdAt, order: .reverse) private var plants: [Plant]
     
     @State private var filter: PlantFilter = .all
+    @Namespace private var heroNamespace
     
     enum PlantFilter: String, CaseIterable {
         case all = "All"
@@ -26,95 +27,74 @@ struct HomePage: View {
         case .warning: plants.filter { $0.healthStatus != .healthy }
         }
     }
-    
+
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
-    
+
     var body: some View {
         NavigationStack {
-            Group {
-                if plants.isEmpty {
-                    emptyState
-                } else {
-                    plantGrid
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 12) {
+                    ForEach(filteredPlants) { plant in
+                        NavigationLink {
+                            PlantPage(plant: plant)
+                                .navigationTransition(.zoom(sourceID: plant.persistentModelID, in: heroNamespace))
+                        } label: {
+                            PlantCardView(plant: plant)
+                                .matchedTransitionSource(id: plant.persistentModelID, in: heroNamespace)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .overlay {
+                if filteredPlants.isEmpty {
+                    ContentUnavailableView {
+                        Label(
+                            plants.isEmpty ? "No Plants Yet" : "No \(filter.rawValue) plants",
+                            systemImage: "leaf.fill"
+                        )
+                    } description: {
+                        if plants.isEmpty {
+                            VStack(spacing: 32) {
+                                Text("Add your first plant\nand start tracking its growth")
+                                AddPlantMenuView()
+                            }
+                        }
+                    }
+                    .background(.background)
                 }
             }
             .navigationTitle("My Plants")
             .toolbar {
-                ToolbarItem {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Menu {
+                        ForEach(PlantFilter.allCases, id: \.self) { option in
+                            Button {
+                                filter = option
+                            } label: {
+                                Label(option.rawValue, systemImage: icon(for: option))
+                            }
+                        }
+                    } label: {
+                        Label(filter.rawValue, systemImage: "line.3.horizontal.decrease.circle")
+                    }
+
                     AddPlantMenuView()
                 }
             }
         }
     }
 
-    // MARK: - 植物网格
-    
-    private var plantGrid: some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                Picker("Filter", selection: $filter) {
-                    ForEach(PlantFilter.allCases, id: \.self) { f in
-                        Text(f.rawValue).tag(f)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                
-                if filteredPlants.isEmpty {
-                    filterEmptyState
-                } else {
-                    LazyVGrid(columns: columns, spacing: 12) {
-                        ForEach(filteredPlants) { plant in
-                            PlantCardView(plant: plant)
-                        }
-                    }
-                    .padding(.horizontal)
-                }
-            }
-            .padding(.vertical)
+    private func icon(for filter: PlantFilter) -> String {
+        switch filter {
+        case .all:
+            "square.grid.2x2"
+        case .healthy:
+            "checkmark.circle"
+        case .warning:
+            "exclamationmark.triangle"
         }
-    }
-    
-    // MARK: - 空状态（无植物）
-    
-    private var emptyState: some View {
-        VStack(spacing: 24) {
-            Image(systemName: "leaf.fill")
-                .font(.system(size: 72))
-                .foregroundStyle(
-                    LinearGradient(colors: [.green, .mint], startPoint: .top, endPoint: .bottom)
-                )
-            
-            VStack(spacing: 8) {
-                Text("No Plants Yet")
-                    .font(.title2.weight(.semibold))
-                
-                Text("Add your first plant\nand start tracking its growth")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-            
-            AddPlantMenuView()
-        }
-        .padding(40)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-    
-    // MARK: - 筛选无结果
-    
-    private var filterEmptyState: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "line.3.horizontal.decrease.circle")
-                .font(.system(size: 36))
-                .foregroundStyle(.secondary)
-            
-            Text("No \(filter.rawValue) plants")
-                .font(.body)
-                .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 60)
     }
 }
 

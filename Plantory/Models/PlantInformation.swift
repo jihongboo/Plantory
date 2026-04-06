@@ -5,6 +5,7 @@ import SwiftData
 final class PlantInformation {
     var species: String = ""  // 学名
     var commonName: String = ""
+    var overview: String = ""
     var photoURL: String?         // 参考图片，指向 Wikipedia 等来源
     var light: String = ""
     var water: String = ""
@@ -18,6 +19,7 @@ final class PlantInformation {
     init(
         species: String,
         commonName: String,
+        overview: String = "",
         photoURL: String? = nil,
         light: String,
         water: String,
@@ -27,6 +29,7 @@ final class PlantInformation {
     ) {
         self.species = species
         self.commonName = commonName
+        self.overview = overview
         self.photoURL = photoURL
         self.light = light
         self.water = water
@@ -39,11 +42,20 @@ final class PlantInformation {
 // MARK: - 内置植物目录（用于首次启动时预填充数据库）
 
 extension PlantInformation {
+    var displayOverview: String {
+        if !overview.isEmpty {
+            return overview
+        }
+
+        return "\(commonName) is a popular houseplant in the \(species) family. It does best when its light, water, and temperature stay consistent."
+    }
+
     static var catalog: [PlantInformation] {
         [
         PlantInformation(
             species: "Monstera deliciosa",
             commonName: "Monstera",
+            overview: "Monstera is a tropical climbing plant loved for its large split leaves. It grows quickly indoors when it has bright filtered light and steady humidity.",
             light: "Bright indirect light, avoid direct sun",
             water: "Water every 7–10 days, let the top inch of soil dry out first",
             temperature: "18–30°C (64–86°F)",
@@ -53,6 +65,7 @@ extension PlantInformation {
         PlantInformation(
             species: "Epipremnum aureum",
             commonName: "Golden Pothos",
+            overview: "Golden Pothos is one of the easiest trailing houseplants for beginners. It tolerates a range of indoor conditions and recovers quickly from small care mistakes.",
             light: "Tolerates low light; avoid strong direct sun",
             water: "Water every 5–7 days, water thoroughly once soil dries out",
             temperature: "15–30°C (59–86°F)",
@@ -62,6 +75,7 @@ extension PlantInformation {
         PlantInformation(
             species: "Echeveria",
             commonName: "Echeveria Succulent",
+            overview: "Echeveria forms sculptural rosettes and stores water in thick leaves. It needs strong light and a dry soil cycle to keep its compact shape and color.",
             light: "Plenty of sunlight — at least 4–6 hours of direct light daily",
             water: "Water every 10–14 days, let soil dry out completely; avoid waterlogging",
             temperature: "10–35°C (50–95°F)",
@@ -71,6 +85,7 @@ extension PlantInformation {
         PlantInformation(
             species: "Sansevieria trifasciata",
             commonName: "Snake Plant",
+            overview: "Snake Plant is a resilient upright plant that handles drought, shade, and irregular routines better than most indoor plants. It is a strong choice for bedrooms and offices.",
             light: "Tolerates shade and drought; thrives in indirect to direct light",
             water: "Water every 2–3 weeks; reduce to once a month in winter",
             temperature: "15–35°C (59–95°F)",
