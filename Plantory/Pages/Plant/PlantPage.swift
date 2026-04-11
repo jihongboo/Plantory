@@ -5,8 +5,6 @@ struct PlantPage: View {
     let plant: Plant
     @State private var isPresentingAddCareRecord = false
     @State private var isPresentingAddLog = false
-    @State private var isPresentingDiagnosis = false
-    @State private var diagnosisImage: PlatformImage?
     
     private var sortedRecords: [PlantRecord] {
         (plant.records ?? []).sorted { $0.createdAt > $1.createdAt }
@@ -21,10 +19,7 @@ struct PlantPage: View {
                     PlantHeaderView(plant: plant)
                 }
 
-                AIDiagnosisEntryCard { image in
-                    diagnosisImage = image
-                    isPresentingDiagnosis = true
-                }
+                AIDiagnosisEntryCard(plant: plant)
                          
                 CardView(title: "Status") {
                     PlantStatusView(plant: plant)
@@ -75,22 +70,16 @@ struct PlantPage: View {
                     Label("Add", systemImage: "plus.circle.fill")
                 }
             }
+            
+            ToolbarItem {
+                
+            }
         }
         .sheet(isPresented: $isPresentingAddCareRecord) {
             AddCareRecordPage(plant: plant)
         }
         .sheet(isPresented: $isPresentingAddLog) {
             AddLogPage(plant: plant)
-        }
-        .navigationDestination(isPresented: $isPresentingDiagnosis) {
-            if let diagnosisImage {
-                AIDiagnosisPage(plant: plant, sourceImage: diagnosisImage)
-            }
-        }
-        .onChange(of: isPresentingDiagnosis) {
-            if !isPresentingDiagnosis {
-                diagnosisImage = nil
-            }
         }
         .background(
             LinearGradient(

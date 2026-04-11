@@ -38,10 +38,19 @@ private struct PlantRecordMetadataView: View {
 
     @ViewBuilder
     var body: some View {
+        if let result = metadata.diagnosis?.result {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Diagnosis: \(result.problem)")
+                if let firstSuggestion = result.suggestions.first {
+                    Text("Suggestion: \(firstSuggestion)")
+                }
+            }
+        }
+
         switch type {
         case .watering:
-            if let amount = metadata.watering?.amount {
-                Text("Amount: \(amount.label)")
+            if let amountLabel = metadata.watering?.amountLabel {
+                Text("Amount: \(amountLabel)")
             }
         case .fertilizing:
             if let fertilizerName = metadata.fertilizing?.name {
@@ -58,14 +67,7 @@ private struct PlantRecordMetadataView: View {
                 Text("Treatment: \(pestNotes)")
             }
         case .diagnosis:
-            if let result = metadata.diagnosis?.result {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("Problem: \(result.problem)")
-                    if let firstSuggestion = result.suggestions.first {
-                        Text("Suggestion: \(firstSuggestion)")
-                    }
-                }
-            }
+            EmptyView()
         case .photo, .pruning, .repotting, .note:
             EmptyView()
         }

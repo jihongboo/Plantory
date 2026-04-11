@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct PlantInformationPage: View {
     let info: PlantInformation
@@ -8,93 +8,72 @@ struct PlantInformationPage: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 heroSection
-                overviewCard
-                careSection
-                if !info.tips.isEmpty {
-                    tipsCard
-                }
+                PlantInfoInformationCard(info: info)
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 16)
         }
         .navigationTitle(info.commonName)
         .navigationBarTitleDisplayMode(.inline)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color.green.opacity(0.10),
-                    Color.mint.opacity(0.06),
-                    Color.clear
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
+        .background(pageBackground)
+    }
+
+    private var pageBackground: some View {
+        LinearGradient(
+            colors: [
+                Color(.systemGroupedBackground),
+                Color.green.opacity(0.05),
+                Color.mint.opacity(0.04)
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
         )
+        .ignoresSafeArea()
     }
 
     private var heroSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        ZStack(alignment: .bottomLeading) {
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .fill(.ultraThinMaterial)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .stroke(.white.opacity(0.55), lineWidth: 1)
+                }
+
             plantImage
                 .frame(maxWidth: .infinity)
-                .frame(height: 280)
-                .background(
+                .frame(height: 300)
+                .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                .overlay(alignment: .bottomLeading) {
                     LinearGradient(
-                        colors: [.green.opacity(0.16), .mint.opacity(0.08), .clear],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+                        colors: [.clear, .black.opacity(0.22)],
+                        startPoint: .center,
+                        endPoint: .bottom
                     )
-                )
-                .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                }
 
             VStack(alignment: .leading, spacing: 10) {
                 Text(info.commonName)
-                    .font(.largeTitle.bold())
+                    .font(.largeTitle.weight(.bold))
+                    .foregroundStyle(.white)
 
                 Text(info.species)
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.white.opacity(0.86))
                     .italic()
+
+                if !info.displayOverview.isEmpty {
+                    Text(info.displayOverview)
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.92))
+                        .lineLimit(3)
+                }
             }
+            .padding(22)
         }
-    }
-
-    private var overviewCard: some View {
-        informationCard(title: "About", systemImage: "text.book.closed") {
-            Text(info.displayOverview)
-                .font(.body)
-                .foregroundStyle(.primary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-    }
-
-    private var careSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("Care Guide")
-                .font(.title3.weight(.semibold))
-
-            informationCard(title: "Light", systemImage: "sun.max.fill") {
-                Text(info.light)
-            }
-
-            informationCard(title: "Water", systemImage: "drop.fill") {
-                Text(info.water)
-            }
-
-            informationCard(title: "Temperature", systemImage: "thermometer.medium") {
-                Text(info.temperature)
-            }
-
-            informationCard(title: "Fertilizer", systemImage: "leaf.circle.fill") {
-                Text(info.fertilizer)
-            }
-        }
-    }
-
-    private var tipsCard: some View {
-        informationCard(title: "Tips", systemImage: "sparkles") {
-            Text(info.tips)
-                .foregroundStyle(.primary)
-        }
+        .frame(height: 300)
+        .shadow(color: .black.opacity(0.08), radius: 18, y: 10)
     }
 
     @ViewBuilder
@@ -103,7 +82,18 @@ struct PlantInformationPage: View {
             assetImage
                 .resizable()
                 .scaledToFit()
-                .padding(24)
+                .padding(28)
+                .background(
+                    LinearGradient(
+                        colors: [
+                            Color.green.opacity(0.14),
+                            Color.mint.opacity(0.08),
+                            Color.clear
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
         } else if let photoURL = info.photoURL,
                   let url = URL(string: photoURL) {
             AsyncImage(url: url) { phase in
@@ -118,7 +108,6 @@ struct PlantInformationPage: View {
                     fallbackArtwork
                 }
             }
-            .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         } else {
             fallbackArtwork
         }
@@ -139,9 +128,9 @@ struct PlantInformationPage: View {
     }
 
     private var fallbackArtwork: some View {
-        VStack(spacing: 14) {
+        VStack(spacing: 16) {
             Image(systemName: "leaf.fill")
-                .font(.system(size: 72))
+                .font(.system(size: 78, weight: .semibold))
                 .foregroundStyle(
                     LinearGradient(colors: [.green, .mint], startPoint: .top, endPoint: .bottom)
                 )
@@ -151,30 +140,17 @@ struct PlantInformationPage: View {
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private func informationCard<Content: View>(
-        title: String,
-        systemImage: String,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Label(title, systemImage: systemImage)
-                .font(.headline)
-                .foregroundStyle(.primary)
-
-            content()
-                .font(.body)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(18)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .overlay {
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(.white.opacity(0.3), lineWidth: 1)
-        }
+        .background(
+            LinearGradient(
+                colors: [
+                    Color.green.opacity(0.10),
+                    Color.mint.opacity(0.06),
+                    Color.clear
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
     }
 }
 

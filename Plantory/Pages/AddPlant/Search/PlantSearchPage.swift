@@ -1,58 +1,71 @@
 import SwiftUI
 import SwiftData
 
-/// 手动添加植物：填写别名 + 从植物目录中搜索选择种类。
+/// 手动输入植物名称，并交给 AI 返回完整植物资料。
 struct PlantSearchPage: View {
     @Binding var selectedInfo: PlantInformation?
+
     @Environment(\.dismiss) private var dismiss
-    
-    @Query(sort: \PlantInformation.commonName) private var allInfos: [PlantInformation]
-    @State private var searchText = ""
-    private let recommendedInfos = PlantInformation.catalog
-    
-    private var searchResults: [PlantInformation] {
-        guard !searchText.isEmpty else { return allInfos }
-        return allInfos.filter {
-            $0.commonName.localizedStandardContains(searchText) ||
-            $0.species.localizedStandardContains(searchText)
-        }
-    }
-    
+
+    @State private var plantName = ""
+    @State private var generatedInfo: PlantInformation?
+    @State private var generatedResult: DoubaoPlantRecognitionService.IdentificationResult?
+    @State private var isLoading = false
+    @State private var errorMessage: String?
+
     var body: some View {
         NavigationStack {
-            List {
-                if searchText.isEmpty {
-                    Section("Recommended Plants") {
-                        if recommendedInfos.isEmpty {
-                            Text("No recommendations available yet")
-                                .foregroundStyle(.secondary)
-                        } else {
-                            ForEach(recommendedInfos) { info in
-                                PlantSelectionButton(
-                                    info: info,
-                                    selection: $selectedInfo
-                                )
-                            }
+            Form {
+                Section("Plant Name") {
+                    TextField("Enter plant name", text: $plantName)
+                        .textInputAutocapitalization(.words)
+
+                    Button("Generate Plant Info") {
+                        Task {
+                            await generatePlantInfo()
                         }
                     }
-                } else {
-                    Section("Search Results") {
-                        if searchResults.isEmpty {
-                            Text("No matching plants")
+                    .disabled(trimmedPlantName == nil || isLoading)
+                }
+
+                if isLoading {
+                    Section {
+                        HStack(spacing: 12) {
+                            ProgressView()
+                            Text("Generating plant information...")
                                 .foregroundStyle(.secondary)
-                        } else {
-                            ForEach(searchResults) { info in
-                                PlantSelectionButton(
-                                    info: info,
-                                    selection: $selectedInfo
-                                )
-                            }
                         }
+                    }
+                } else if let generatedInfo {
+                    Section("AI Result") {
+                        PlantInfoInformationCard(info: generatedInfo)
+                    }
+
+                    if let generatedResult {
+                        Section("Summary") {
+                            LabeledContent("Confidence", value: "\(generatedResult.structuredResult.confidence)%")
+                            Text(generatedResult.structuredResult.summary)
+                            Text(generatedResult.structuredResult.overview)
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    Section {
+                        Button("Use This Plant") {
+                            selectedInfo = generatedInfo
+                            dismiss()
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                } else if let errorMessage {
+                    Section("Result") {
+                        Text(errorMessage)
+                            .foregroundStyle(.secondary)
                     }
                 }
             }
-            .searchable(text: $searchText, prompt: Text("Search plant"))
-            .navigationTitle("Select a Plant")
+            .navigationTitle("Search Plant")
 #if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
 #endif
@@ -67,8 +80,6 @@ struct PlantSearchPage: View {
     }
 }
 
-// MARK: - Preview
-
 #Preview {
     @Previewable @State var selectedInfo: PlantInformation?
     Rectangle()
@@ -77,4 +88,35 @@ struct PlantSearchPage: View {
             PlantSearchPage(selectedInfo: $selectedInfo)
         }
         .modelContainer(.preview)
+}
+
+private extension PlantSearchPage {
+    var trimmedPlantName: String? {
+        let trimmed = plantName.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+
+    @MainActor
+    func generatePlantInfo() async {
+        guard let trimmedPlantName, !isLoading else { return }
+
+        isLoading = true
+        generatedInfo = nil
+        generatedResult = nil
+        errorMessage = nil
+
+        do {
+            let result = try await DoubaoPlantRecognitionService.identifyPlant(named: trimmedPlantName)
+            generatedResult = result
+            generatedInfo = result.plantInformation
+
+            if generatedInfo == nil {
+                errorMessage = "AI could not generate a complete plant profile from that name."
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+
+        isLoading = false
+    }
 }

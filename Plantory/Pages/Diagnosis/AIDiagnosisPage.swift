@@ -115,13 +115,20 @@ struct AIDiagnosisPage: View {
     @MainActor
     private func runDiagnosis() async {
         analysisState = .analyzing
-        let report = await MockPlantDiagnosisService.analyze(plant: plant)
-        analysisState = .complete(report)
-        persistDiagnosisIfNeeded(report)
+        do {
+            let report = try await DoubaoPlantDiagnosisService.analyze(
+                plant: plant,
+                image: sourceImage
+            )
+            analysisState = .complete(report)
+            persistDiagnosisIfNeeded(report)
+        } catch {
+            analysisState = .failed
+        }
     }
 
     @MainActor
-    private func persistDiagnosisIfNeeded(_ report: MockPlantDiagnosisReport) {
+    private func persistDiagnosisIfNeeded(_ report: PlantDiagnosisReport) {
         guard !hasPersistedRecord else { return }
 
         let note = "AI diagnosis suggests \(report.title.lowercased())."
@@ -158,7 +165,7 @@ private extension AIDiagnosisPage {
     enum AnalysisState {
         case analyzing
         case failed
-        case complete(MockPlantDiagnosisReport)
+        case complete(PlantDiagnosisReport)
     }
 }
 
@@ -170,7 +177,7 @@ private struct DiagnosisLoadingCard: View {
                     ProgressView()
                         .controlSize(.large)
 
-                    Text("Mock data is being prepared for the current flow.")
+                    Text("The photo is being analyzed by AI to identify likely issues and next care steps.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -191,7 +198,7 @@ private struct DiagnosisFailedCard: View {
     var body: some View {
         CardView(title: "Could not prepare diagnosis") {
             VStack(alignment: .leading, spacing: 12) {
-                Label("The mock analysis record could not be saved. Retry to regenerate the result.", systemImage: "exclamationmark.triangle.fill")
+                Label("The AI diagnosis could not be completed. Retry to analyze the photo again.", systemImage: "exclamationmark.triangle.fill")
                     .foregroundStyle(.orange)
 
                 Button("Retry", action: retry)
@@ -203,7 +210,7 @@ private struct DiagnosisFailedCard: View {
 }
 
 private struct DiagnosisSummaryCard: View {
-    let report: MockPlantDiagnosisReport
+    let report: PlantDiagnosisReport
 
     var body: some View {
         CardView(title: report.title) {
@@ -325,7 +332,7 @@ private struct DiagnosisActionCard: View {
 }
 
 private struct DiagnosisWatchCard: View {
-    let report: MockPlantDiagnosisReport
+    let report: PlantDiagnosisReport
 
     var body: some View {
         CardView(title: "Keep watching") {

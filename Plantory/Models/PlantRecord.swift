@@ -127,7 +127,22 @@ struct RecordMetadata: Codable {
 }
 
 struct WateringMetadata: Codable {
-    var amount: RecordMetadata.WaterAmount
+    var amount: String
+
+    init(amount: RecordMetadata.WaterAmount) {
+        self.amount = amount.rawValue
+    }
+
+    var amountLabel: String {
+        switch amount {
+        case RecordMetadata.WaterAmount.little.rawValue:
+            RecordMetadata.WaterAmount.little.label
+        case RecordMetadata.WaterAmount.plenty.rawValue:
+            RecordMetadata.WaterAmount.plenty.label
+        default:
+            RecordMetadata.WaterAmount.normal.label
+        }
+    }
 }
 
 struct FertilizingMetadata: Codable {

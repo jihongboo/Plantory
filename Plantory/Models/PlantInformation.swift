@@ -7,9 +7,15 @@ final class PlantInformation {
     var commonName: String = ""
     var overview: String = ""
     var photoURL: String?         // 参考图片，指向 Wikipedia 等来源
+    var careDifficulty: String = "moderate"
+    var lightLevel: String = "medium"
     var light: String = ""
+    var waterLevel: String = "medium"
     var water: String = ""
+    var humidityLevel: String = "medium"
     var temperature: String = ""
+    var diseaseRiskLevel: String = "medium"
+    var fertilizerLevel: String = "medium"
     var fertilizer: String = ""
     var tips: String = ""
 
@@ -21,9 +27,15 @@ final class PlantInformation {
         commonName: String,
         overview: String = "",
         photoURL: String? = nil,
+        careDifficulty: String = "moderate",
+        lightLevel: String = "medium",
         light: String,
+        waterLevel: String = "medium",
         water: String,
+        humidityLevel: String = "medium",
         temperature: String,
+        diseaseRiskLevel: String = "medium",
+        fertilizerLevel: String? = nil,
         fertilizer: String,
         tips: String
     ) {
@@ -31,17 +43,70 @@ final class PlantInformation {
         self.commonName = commonName
         self.overview = overview
         self.photoURL = photoURL
+        self.careDifficulty = careDifficulty
+        self.lightLevel = lightLevel
         self.light = light
+        self.waterLevel = waterLevel
         self.water = water
+        self.humidityLevel = humidityLevel
         self.temperature = temperature
+        self.diseaseRiskLevel = diseaseRiskLevel
+        self.fertilizerLevel = Self.normalizedFertilizerLevel(
+            fertilizerLevel ?? Self.inferredFertilizerLevel(from: fertilizer)
+        )
         self.fertilizer = fertilizer
         self.tips = tips
+    }
+
+    private static func normalizedFertilizerLevel(_ value: String) -> String {
+        let normalized = value.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        switch normalized {
+        case "low", "medium", "high":
+            return normalized
+        default:
+            return "medium"
+        }
+    }
+
+    private static func inferredFertilizerLevel(from fertilizer: String) -> String {
+        let lowercased = fertilizer.lowercased()
+
+        if lowercased.contains("less is more")
+            || lowercased.contains("once in spring")
+            || lowercased.contains("every 3 months")
+            || lowercased.contains("every three months")
+            || lowercased.contains("every 2 months")
+            || lowercased.contains("every two months")
+            || lowercased.contains("slow-release")
+        {
+            return "low"
+        }
+
+        if lowercased.contains("every 2 weeks")
+            || lowercased.contains("every two weeks")
+            || lowercased.contains("biweekly")
+        {
+            return "high"
+        }
+
+        return "medium"
     }
 }
 
 // MARK: - 内置植物目录（用于首次启动时预填充数据库）
 
 extension PlantInformation {
+    var careDifficultyTitle: String {
+        switch careDifficulty {
+        case "easy":
+            "Easy"
+        case "hard":
+            "Hard"
+        default:
+            "Moderate"
+        }
+    }
+
     var displayOverview: String {
         if !overview.isEmpty {
             return overview

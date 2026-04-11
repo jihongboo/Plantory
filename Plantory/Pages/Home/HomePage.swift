@@ -9,9 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct HomePage: View {
+    @Environment(\.modelContext) private var modelContext
     @Query(sort: \Plant.createdAt, order: .reverse) private var plants: [Plant]
     
     @State private var filter: PlantFilter = .all
+    @State private var plantPendingDeletion: Plant?
     @Namespace private var heroNamespace
     
     enum PlantFilter: String, CaseIterable {
@@ -42,6 +44,13 @@ struct HomePage: View {
                             PlantCardView(plant: plant)
                                 .matchedTransitionSource(id: plant.persistentModelID, in: heroNamespace)
                         }
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                plantPendingDeletion = plant
+                            } label: {
+                                Label("Delete Plant", systemImage: "trash")
+                            }
+                        }
                         .buttonStyle(.plain)
                     }
                 }
@@ -66,6 +75,19 @@ struct HomePage: View {
                 }
             }
             .navigationTitle("My Plants")
+            .navigationSubtitle("\(filteredPlants.count) plants")
+            .confirmationDialog(
+                "Delete this plant?",
+                isPresented: deletionBinding,
+                presenting: plantPendingDeletion
+            ) { plant in
+                Button("Delete \(plant.displayName)", role: .destructive) {
+                    deletePlant(plant)
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: { plant in
+                Text("This will also remove its care records and AI diagnosis history.")
+            }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Menu {
@@ -86,6 +108,17 @@ struct HomePage: View {
         }
     }
 
+    private var deletionBinding: Binding<Bool> {
+        Binding(
+            get: { plantPendingDeletion != nil },
+            set: { isPresented in
+                if !isPresented {
+                    plantPendingDeletion = nil
+                }
+            }
+        )
+    }
+
     private func icon(for filter: PlantFilter) -> String {
         switch filter {
         case .all:
@@ -95,6 +128,12 @@ struct HomePage: View {
         case .warning:
             "exclamationmark.triangle"
         }
+    }
+
+    private func deletePlant(_ plant: Plant) {
+        plantPendingDeletion = nil
+        modelContext.delete(plant)
+        try? modelContext.save()
     }
 }
 
