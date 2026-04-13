@@ -10,9 +10,12 @@ import SwiftData
 
 struct HomePage: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(PlantNavigationCoordinator.self) private var navigationCoordinator
     @Query(sort: \Plant.createdAt, order: .reverse) private var plants: [Plant]
     
     @State private var filter: PlantFilter = .all
+    @State private var path = NavigationPath()
     @State private var plantPendingDeletion: Plant?
     @Namespace private var heroNamespace
     
@@ -55,14 +58,11 @@ struct HomePage: View {
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 12) {
                     ForEach(filteredPlants) { plant in
-                        NavigationLink {
-                            PlantPage(plant: plant)
-                                .navigationTransition(.zoom(sourceID: plant.persistentModelID, in: heroNamespace))
-                        } label: {
+                        NavigationLink(value: HomeDestination.plant(plant.persistentModelID)) {
                             PlantCardView(plant: plant)
                                 .matchedTransitionSource(id: plant.persistentModelID, in: heroNamespace)
                         }
@@ -128,9 +128,46 @@ struct HomePage: View {
                         Label(filter.title, systemImage: "line.3.horizontal.decrease.circle")
                     }
 
+#if DEBUG
+                    NavigationLink(value: HomeDestination.debugNotifications) {
+                        Label("Debug", systemImage: "ladybug")
+                    }
+#endif
+
                     AddPlantMenuView()
                 }
             }
+            .navigationDestination(for: HomeDestination.self) { destination in
+                switch destination {
+                case .plant(let identifier):
+                    if let plant = plants.first(where: { $0.persistentModelID == identifier }) {
+                        PlantPage(plant: plant)
+                            .navigationTransition(.zoom(sourceID: plant.persistentModelID, in: heroNamespace))
+                    } else {
+                        ContentUnavailableView("Plant Not Found", systemImage: "leaf")
+                    }
+
+                case .debugNotifications:
+                    DebugNotificationsPage()
+                }
+            }
+        }
+        .task {
+            await PlantNotificationScheduler.shared.syncNotifications(for: plants)
+            openPendingPlantIfNeeded()
+        }
+        .onChange(of: scenePhase) { _, phase in
+            guard phase == .active else { return }
+            Task { @MainActor in
+                await PlantNotificationScheduler.shared.syncNotifications(for: plants)
+                openPendingPlantIfNeeded()
+            }
+        }
+        .onChange(of: navigationCoordinator.targetPlantIdentifierPrefix) { _, _ in
+            openPendingPlantIfNeeded()
+        }
+        .onChange(of: plants.count) { _, _ in
+            openPendingPlantIfNeeded()
         }
     }
 
@@ -157,10 +194,26 @@ struct HomePage: View {
     }
 
     private func deletePlant(_ plant: Plant) {
+        let notificationPrefix = PlantNotificationScheduler.identifierPrefix(for: plant)
         plantPendingDeletion = nil
+        PlantNotificationScheduler.shared.cancelNotifications(forPlantIdentifierPrefix: notificationPrefix)
         modelContext.delete(plant)
         try? modelContext.save()
     }
+
+    private func openPendingPlantIfNeeded() {
+        guard let targetPrefix = navigationCoordinator.targetPlantIdentifierPrefix else { return }
+        guard let plant = plants.first(where: { PlantNotificationScheduler.identifierPrefix(for: $0) == targetPrefix }) else {
+            return
+        }
+        navigationCoordinator.clearTargetPlantIdentifierPrefix()
+        path.append(HomeDestination.plant(plant.persistentModelID))
+    }
+}
+
+private enum HomeDestination: Hashable {
+    case plant(PersistentIdentifier)
+    case debugNotifications
 }
 
 #Preview {

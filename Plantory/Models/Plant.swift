@@ -34,6 +34,9 @@ final class Plant {
     @Relationship(deleteRule: .cascade, inverse: \PlantRecord.plant)
     var records: [PlantRecord]?
 
+    @Relationship(deleteRule: .cascade, inverse: \PlantNotificationSetting.plant)
+    var notificationSettings: [PlantNotificationSetting]?
+
     init(
         nickname: String? = nil,
         imageData: Data? = nil,

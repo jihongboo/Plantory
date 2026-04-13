@@ -15,7 +15,7 @@ extension ModelContainer {
     static let preview: ModelContainer = {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try! ModelContainer(
-            for: Plant.self, PlantRecord.self, PlantInformation.self,
+            for: Plant.self, PlantRecord.self, PlantInformation.self, PlantNotificationSetting.self,
             configurations: config
         )
         PreviewData.populate(into: container.mainContext)
@@ -25,7 +25,7 @@ extension ModelContainer {
     static let empty: ModelContainer = {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try! ModelContainer(
-            for: Plant.self, PlantRecord.self, PlantInformation.self,
+            for: Plant.self, PlantRecord.self, PlantInformation.self, PlantNotificationSetting.self,
             configurations: config
         )
         return container

@@ -48,7 +48,14 @@ struct PlantHeaderView: View {
                     .font(.footnote)
                     .foregroundStyle(.tertiary)
 
-                Text(plant.note)
+                if plant.note.isEmpty {
+                    Text("No notes yet")
+                        .font(.subheadline)
+                        .foregroundStyle(.tertiary)
+                } else {
+                    Text(plant.note)
+                        .font(.subheadline)
+                }
             }
         }
     }

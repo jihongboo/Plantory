@@ -8,7 +8,7 @@ struct PlantCardView: View {
             plantPhoto
                 .frame(height: 150)
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(plant.displayName)
                     .font(.subheadline.weight(.semibold))
                     .lineLimit(1)
@@ -16,11 +16,11 @@ struct PlantCardView: View {
                 Label(plant.healthStatus.label, systemImage: plant.healthStatus.systemImage)
                     .font(.caption)
                     .foregroundStyle(statusColor(for: plant.healthStatus))
+                    .labelIconToTitleSpacing(4)
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 10)
         }
-//        .background(.background.secondary)
         .background(.background)
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .shadow(color: .black.opacity(0.06), radius: 8, y: 2)
