@@ -3,6 +3,7 @@ import SwiftUI
 struct AddPlantFailureCard: View {
     let recognitionResult: DoubaoPlantRecognitionService.IdentificationResult?
     let errorMessage: String?
+    let debugMessage: String?
 
     var body: some View {
         CardView(
@@ -24,6 +25,13 @@ struct AddPlantFailureCard: View {
                 Text(errorMessage ?? "Could not identify the plant from this photo.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+
+                if let debugMessage, AppEnvironment.isDebugBuild {
+                    Text(debugMessage)
+                        .font(.footnote.monospaced())
+                        .foregroundStyle(.tertiary)
+                        .textSelection(.enabled)
+                }
             }
         }
     }
@@ -32,7 +40,8 @@ struct AddPlantFailureCard: View {
 #Preview {
     AddPlantFailureCard(
         recognitionResult: AddPlantCardPreviewSupport.recognition,
-        errorMessage: "AI could not identify a complete plant profile from this photo."
+        errorMessage: "AI could not identify a complete plant profile from this photo.",
+        debugMessage: "DoubaoPlantRecognitionService.ServiceError.invalidJSON(\"...\")"
     )
     .padding()
     .background(Color(.systemGroupedBackground))

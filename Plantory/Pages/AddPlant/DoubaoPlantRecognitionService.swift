@@ -32,6 +32,9 @@ enum DoubaoPlantRecognitionService {
         let apiResponse = try JSONDecoder().decode(DoubaoResponse.self, from: data)
         let outputText = try apiResponse.outputTextValue()
         let structured = try decodeCombinedStructuredResult(from: outputText)
+        guard structured.recognition.isPlant else {
+            throw ServiceError.noPlantDetected
+        }
 
         return CombinedAnalysisResult(
             identification: IdentificationResult(
@@ -56,6 +59,36 @@ enum DoubaoPlantRecognitionService {
 
         return try decodeIdentificationResult(from: data)
     }
+
+    enum ServiceError: LocalizedError {
+        case invalidImage
+        case invalidResponse
+        case apiFailure(String)
+        case emptyResponse
+        case invalidJSON(String)
+        case noPlantDetected
+
+        var errorDescription: String? {
+            switch self {
+            case .invalidImage:
+                String(localized: "The photo could not be prepared for upload.")
+            case .invalidResponse:
+                String(localized: "The AI service returned an unexpected response.")
+            case .apiFailure(let message):
+                message
+            case .emptyResponse:
+                String(localized: "The AI service did not return any result.")
+            case .invalidJSON(let rawText):
+                String(
+                    format: String(localized: "The AI service returned an unreadable result: %@"),
+                    locale: Locale.current,
+                    rawText
+                )
+            case .noPlantDetected:
+                String(localized: "No plant was detected in the provided input.")
+            }
+        }
+    }
 }
 
 private extension DoubaoPlantRecognitionService {
@@ -70,6 +103,9 @@ private extension DoubaoPlantRecognitionService {
         let apiResponse = try JSONDecoder().decode(DoubaoResponse.self, from: data)
         let outputText = try apiResponse.outputTextValue()
         let structured = try decodeStructuredResult(from: outputText)
+        guard structured.isPlant else {
+            throw ServiceError.noPlantDetected
+        }
         let plantInformation = structured.plantInformation
 
         return IdentificationResult(
@@ -349,33 +385,6 @@ private extension DoubaoPlantRecognitionService {
 
     struct APIErrorDetail: Decodable {
         let message: String?
-    }
-
-    enum ServiceError: LocalizedError {
-        case invalidImage
-        case invalidResponse
-        case apiFailure(String)
-        case emptyResponse
-        case invalidJSON(String)
-
-        var errorDescription: String? {
-            switch self {
-            case .invalidImage:
-                String(localized: "The photo could not be prepared for upload.")
-            case .invalidResponse:
-                String(localized: "The AI service returned an unexpected response.")
-            case .apiFailure(let message):
-                message
-            case .emptyResponse:
-                String(localized: "The AI service did not return any result.")
-            case .invalidJSON(let rawText):
-                String(
-                    format: String(localized: "The AI service returned an unreadable result: %@"),
-                    locale: Locale.current,
-                    rawText
-                )
-            }
-        }
     }
 
     static func makeImagePayload(

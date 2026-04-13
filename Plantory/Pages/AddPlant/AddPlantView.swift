@@ -9,6 +9,37 @@ enum AddPlantDiagnosisState {
     case complete(PlantDiagnosisReport)
 }
 
+struct AddPlantErrorDisplay {
+    let message: String
+    let debugDetails: String?
+    let allowsManualEntry: Bool
+
+    init(message: String, debugDetails: String?, allowsManualEntry: Bool) {
+        self.message = message
+        self.debugDetails = debugDetails
+        self.allowsManualEntry = allowsManualEntry
+    }
+
+    init(error: Error) {
+        if let serviceError = error as? DoubaoPlantRecognitionService.ServiceError {
+            switch serviceError {
+            case .noPlantDetected:
+                message = String(localized: "No plant was detected in this photo. Please choose a photo with a plant as the main subject.")
+                debugDetails = AppEnvironment.isDebugBuild ? String(reflecting: error) : nil
+                allowsManualEntry = false
+            default:
+                message = String(localized: "We couldn't analyze this photo right now. Please try again.")
+                debugDetails = AppEnvironment.isDebugBuild ? String(reflecting: error) : nil
+                allowsManualEntry = true
+            }
+        } else {
+            message = String(localized: "We couldn't analyze this photo right now. Please try again.")
+            debugDetails = AppEnvironment.isDebugBuild ? String(reflecting: error) : nil
+            allowsManualEntry = true
+        }
+    }
+}
+
 struct AddPlantView: View {
     let imageData: Data
 
@@ -20,7 +51,7 @@ struct AddPlantView: View {
     @State private var diagnosisState: AddPlantDiagnosisState = .idle
     @State private var nickname = ""
     @State private var isLoading = true
-    @State private var errorMessage: String?
+    @State private var displayedError: AddPlantErrorDisplay?
 
     var body: some View {
         NavigationStack {
@@ -48,13 +79,9 @@ struct AddPlantView: View {
                     } else {
                         AddPlantFailureCard(
                             recognitionResult: recognitionResult,
-                            errorMessage: errorMessage
+                            errorMessage: displayedError?.message,
+                            debugMessage: displayedError?.debugDetails
                         )
-                        AddPlantDiagnosisCard(
-                            state: diagnosisState,
-                            retryAction: { Task { await identifyPlant() } }
-                        )
-                        AddPlantManualEntryCard(plantInformation: $plantInformation)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -127,7 +154,7 @@ private extension AddPlantView {
                 ?? ""
             }
             diagnosisState = .complete(mockResult.diagnosisReport)
-            errorMessage = nil
+            displayedError = nil
             isLoading = false
             return
         }
@@ -142,12 +169,19 @@ private extension AddPlantView {
                 ?? ""
             }
             diagnosisState = .complete(result.diagnosisReport)
-            errorMessage = plantInformation == nil ? "AI could not identify a complete plant profile from this photo. You can still add it manually." : nil
+            displayedError = plantInformation == nil
+            ? AddPlantErrorDisplay(
+                message: String(localized: "AI could not identify a complete plant profile from this photo. You can still add it manually."),
+                debugDetails: nil,
+                allowsManualEntry: true
+            )
+            : nil
         } catch {
             plantInformation = nil
             recognitionResult = nil
-            diagnosisState = .failed(error.localizedDescription)
-            errorMessage = error.localizedDescription
+            let displayedError = AddPlantErrorDisplay(error: error)
+            self.displayedError = displayedError
+            diagnosisState = .failed(displayedError.message)
         }
 
         isLoading = false
