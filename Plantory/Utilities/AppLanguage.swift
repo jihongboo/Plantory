@@ -5,13 +5,32 @@ enum AppLanguage {
     case simplifiedChinese
 
     static var current: AppLanguage {
-        let candidates = Locale.preferredLanguages + [Locale.current.identifier]
+        // Follow the language iOS actually resolved for this app first.
+        let candidates = Bundle.main.preferredLocalizations
+            + Locale.preferredLanguages.prefix(1)
+            + [Locale.current.identifier]
+
         for identifier in candidates {
-            if identifier.lowercased().hasPrefix("zh") {
-                return .simplifiedChinese
+            if let language = from(identifier: identifier) {
+                return language
             }
         }
+
         return .english
+    }
+
+    private static func from(identifier: String) -> AppLanguage? {
+        let normalized = identifier.lowercased()
+
+        if normalized.hasPrefix("zh") {
+            return .simplifiedChinese
+        }
+
+        if normalized.hasPrefix("en") {
+            return .english
+        }
+
+        return nil
     }
 
     var localeIdentifier: String {

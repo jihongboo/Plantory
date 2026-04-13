@@ -55,6 +55,7 @@ struct PlantPage: View {
                                 .font(.footnote.weight(.semibold))
                                 .foregroundStyle(.tertiary)
                         }
+                        .contentShape(.rect)
                     }
                     .buttonStyle(.plain)
                 }
