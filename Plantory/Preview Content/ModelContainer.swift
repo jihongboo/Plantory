@@ -56,27 +56,21 @@ enum PreviewData {
         )
         plant.records = [
             PlantRecord(
-                type: .watering,
+                actionType: .watering,
                 createdAt: .now.addingTimeInterval(-86_400),
-                note: "Soil was dry 2 cm below the surface.",
-                metadata: RecordMetadata(
-                    watering: WateringMetadata(amount: .normal)
-                ),
                 plant: plant
             ),
             PlantRecord(
-                type: .photo,
                 createdAt: .now.addingTimeInterval(-3 * 86_400),
                 note: "Checked a few yellow edges on older leaves.",
-                metadata: RecordMetadata(
-                    diagnosis: DiagnosisMetadata(
-                        result: DiagnosisResult(
-                            species: "Monstera deliciosa",
-                            problem: "Mild overwatering stress",
-                            causes: ["Soil stayed damp for too long"],
-                            suggestions: ["Wait for the top soil to dry before watering again"],
-                            rawResponse: ""
-                        )
+                photoData: PlatformImageData.named("Monstera deliciosa"),
+                diagnosis: DiagnosisMetadata(
+                    result: DiagnosisResult(
+                        species: "Monstera deliciosa",
+                        problem: "Mild overwatering stress",
+                        causes: ["Soil stayed damp for too long"],
+                        suggestions: ["Wait for the top soil to dry before watering again"],
+                        rawResponse: ""
                     )
                 ),
                 plant: plant
@@ -158,30 +152,22 @@ enum PreviewData {
 
         p1.records = [
             PlantRecord(
-                type: .watering,
+                actionType: .watering,
                 createdAt: .now.addingTimeInterval(-86_400),
-                note: "Watered after top soil dried out.",
-                metadata: RecordMetadata(
-                    watering: WateringMetadata(amount: .normal)
-                ),
                 plant: p1
             ),
             PlantRecord(
-                type: .photo,
                 createdAt: .now.addingTimeInterval(-5 * 86_400),
                 note: "Captured new split leaf growth.",
+                photoData: PlatformImageData.named("Monstera deliciosa"),
                 plant: p1
             )
         ]
 
         p3.records = [
             PlantRecord(
-                type: .watering,
+                actionType: .watering,
                 createdAt: .now.addingTimeInterval(-10 * 86_400),
-                note: "Gave a small amount after leaves softened slightly.",
-                metadata: RecordMetadata(
-                    watering: WateringMetadata(amount: .little)
-                ),
                 plant: p3
             )
         ]

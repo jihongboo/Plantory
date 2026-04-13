@@ -78,7 +78,7 @@ private extension AddLogPage {
     }
 
     var canSave: Bool {
-        compressedPhotoData != nil || !trimmed(note).isEmpty
+        compressedPhotoData != nil
     }
     
     var compressedPhotoData: Data? {
@@ -170,18 +170,17 @@ private extension AddLogPage {
     func saveLog() {
         let trimmedNote = trimmed(note)
         let photoData = compressedPhotoData
-        let type: RecordType = photoData == nil ? .note : .photo
         let diagnosisMetadata: DiagnosisMetadata? = {
             guard case .complete(let report) = diagnosisState else { return nil }
             return DiagnosisMetadata(result: report.diagnosisResult)
         }()
-        
+        guard let photoData else { return }
+
         let record = PlantRecord(
-            type: type,
             createdAt: createdAt,
             note: trimmedNote,
             photoData: photoData,
-            metadata: RecordMetadata(diagnosis: diagnosisMetadata),
+            diagnosis: diagnosisMetadata,
             plant: plant
         )
 

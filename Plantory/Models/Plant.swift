@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 final class Plant {
@@ -141,6 +142,17 @@ enum HealthStatus {
         case .healthy:  "checkmark.circle.fill"
         case .warning:  "exclamationmark.triangle.fill"
         case .critical: "xmark.octagon.fill"
+        }
+    }
+
+    var themeColor: Color {
+        switch self {
+        case .healthy:
+            .green
+        case .warning:
+            .orange
+        case .critical:
+            .red
         }
     }
 }
