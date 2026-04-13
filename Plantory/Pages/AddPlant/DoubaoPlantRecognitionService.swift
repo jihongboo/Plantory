@@ -115,6 +115,106 @@ extension DoubaoPlantRecognitionService {
         let fertilizer: String
         let tips: String
 
+        enum CodingKeys: String, CodingKey {
+            case commonName
+            case species
+            case confidence
+            case isPlant
+            case overview
+            case careDifficulty
+            case careDifficultyDescription
+            case lightLevel
+            case summary
+            case light
+            case waterLevel
+            case water
+            case humidityLevel
+            case humidityDescription
+            case temperature
+            case diseaseRiskLevel
+            case diseaseRiskDescription
+            case fertilizerLevel
+            case fertilizer
+            case tips
+        }
+
+        init(
+            commonName: String?,
+            species: String?,
+            confidence: Int,
+            isPlant: Bool,
+            overview: String,
+            careDifficulty: String,
+            careDifficultyDescription: String,
+            lightLevel: String,
+            summary: String,
+            light: String,
+            waterLevel: String,
+            water: String,
+            humidityLevel: String,
+            humidityDescription: String,
+            temperature: String,
+            diseaseRiskLevel: String,
+            diseaseRiskDescription: String,
+            fertilizerLevel: String,
+            fertilizer: String,
+            tips: String
+        ) {
+            self.commonName = commonName
+            self.species = species
+            self.confidence = confidence
+            self.isPlant = isPlant
+            self.overview = overview
+            self.careDifficulty = careDifficulty
+            self.careDifficultyDescription = careDifficultyDescription
+            self.lightLevel = lightLevel
+            self.summary = summary
+            self.light = light
+            self.waterLevel = waterLevel
+            self.water = water
+            self.humidityLevel = humidityLevel
+            self.humidityDescription = humidityDescription
+            self.temperature = temperature
+            self.diseaseRiskLevel = diseaseRiskLevel
+            self.diseaseRiskDescription = diseaseRiskDescription
+            self.fertilizerLevel = fertilizerLevel
+            self.fertilizer = fertilizer
+            self.tips = tips
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+
+            commonName = container.decodeTrimmedStringIfPresent(forKey: .commonName)
+            species = container.decodeTrimmedStringIfPresent(forKey: .species)
+            confidence = try container.decodeIfPresent(Int.self, forKey: .confidence) ?? 0
+            isPlant = try container.decodeIfPresent(Bool.self, forKey: .isPlant) ?? true
+            overview = container.decodeTrimmedString(forKey: .overview)
+            careDifficulty = container.decodeTrimmedString(forKey: .careDifficulty, default: "moderate")
+            careDifficultyDescription = container.decodeTrimmedString(forKey: .careDifficultyDescription)
+            lightLevel = container.decodeTrimmedString(forKey: .lightLevel, default: "medium")
+            light = container.decodeTrimmedString(forKey: .light)
+            waterLevel = container.decodeTrimmedString(forKey: .waterLevel, default: "medium")
+            water = container.decodeTrimmedString(forKey: .water)
+            humidityLevel = container.decodeTrimmedString(forKey: .humidityLevel, default: "medium")
+            humidityDescription = container.decodeTrimmedString(forKey: .humidityDescription)
+            temperature = container.decodeTrimmedString(forKey: .temperature)
+            diseaseRiskLevel = container.decodeTrimmedString(forKey: .diseaseRiskLevel, default: "medium")
+            diseaseRiskDescription = container.decodeTrimmedString(forKey: .diseaseRiskDescription)
+            fertilizerLevel = container.decodeTrimmedString(forKey: .fertilizerLevel, default: "medium")
+            fertilizer = container.decodeTrimmedString(forKey: .fertilizer)
+            tips = container.decodeTrimmedString(forKey: .tips)
+
+            let fallbackSummary = [
+                commonName,
+                species,
+                nonEmpty(overview)
+            ]
+            .compactMap { $0 }
+            .first ?? "Plant recognized from image."
+            summary = container.decodeTrimmedString(forKey: .summary, default: fallbackSummary)
+        }
+
         var displayName: String? {
             nonEmpty(commonName) ?? nonEmpty(species)
         }
@@ -905,6 +1005,21 @@ private extension DoubaoPlantRecognitionService {
         ])
 
         return allowed.contains(value) ? value : "leaf"
+    }
+}
+
+private extension KeyedDecodingContainer where Key == DoubaoPlantRecognitionService.StructuredPlantRecognition.CodingKeys {
+    func decodeTrimmedString(forKey key: Key, default defaultValue: String = "") -> String {
+        let value = (try? decodeIfPresent(String.self, forKey: key))?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return value?.isEmpty == false ? value! : defaultValue
+    }
+
+    func decodeTrimmedStringIfPresent(forKey key: Key) -> String? {
+        let value = (try? decodeIfPresent(String.self, forKey: key))?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let value, !value.isEmpty else { return nil }
+        return value
     }
 }
 #endif

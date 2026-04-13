@@ -105,6 +105,49 @@ final class PlantInformation {
 // MARK: - 内置植物目录（用于首次启动时预填充数据库）
 
 extension PlantInformation {
+    func mergePreferredValues(from incoming: PlantInformation) {
+        species = Self.preferredValue(incoming.species, fallback: species)
+        commonName = Self.preferredValue(incoming.commonName, fallback: commonName)
+        overview = Self.preferredValue(incoming.overview, fallback: overview)
+        photoURL = Self.preferredOptionalValue(incoming.photoURL, fallback: photoURL)
+        careDifficulty = Self.preferredValue(incoming.careDifficulty, fallback: careDifficulty)
+        careDifficultyDescription = Self.preferredValue(
+            incoming.careDifficultyDescription,
+            fallback: careDifficultyDescription
+        )
+        lightLevel = Self.preferredValue(incoming.lightLevel, fallback: lightLevel)
+        light = Self.preferredValue(incoming.light, fallback: light)
+        waterLevel = Self.preferredValue(incoming.waterLevel, fallback: waterLevel)
+        water = Self.preferredValue(incoming.water, fallback: water)
+        humidityLevel = Self.preferredValue(incoming.humidityLevel, fallback: humidityLevel)
+        humidityDescription = Self.preferredValue(
+            incoming.humidityDescription,
+            fallback: humidityDescription
+        )
+        temperature = Self.preferredValue(incoming.temperature, fallback: temperature)
+        diseaseRiskLevel = Self.preferredValue(incoming.diseaseRiskLevel, fallback: diseaseRiskLevel)
+        diseaseRiskDescription = Self.preferredValue(
+            incoming.diseaseRiskDescription,
+            fallback: diseaseRiskDescription
+        )
+        fertilizerLevel = Self.normalizedFertilizerLevel(
+            Self.preferredValue(incoming.fertilizerLevel, fallback: fertilizerLevel)
+        )
+        fertilizer = Self.preferredValue(incoming.fertilizer, fallback: fertilizer)
+        tips = Self.preferredValue(incoming.tips, fallback: tips)
+    }
+
+    private static func preferredValue(_ primary: String, fallback: String) -> String {
+        let trimmedPrimary = primary.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmedPrimary.isEmpty ? fallback : trimmedPrimary
+    }
+
+    private static func preferredOptionalValue(_ primary: String?, fallback: String?) -> String? {
+        guard let primary else { return fallback }
+        let trimmedPrimary = primary.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmedPrimary.isEmpty ? fallback : trimmedPrimary
+    }
+
 //    var careDifficultyTitle: String {
 //        switch careDifficulty {
 //        case "easy":

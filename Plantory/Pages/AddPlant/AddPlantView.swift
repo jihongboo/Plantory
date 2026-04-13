@@ -158,6 +158,7 @@ private extension AddPlantView {
 
         let persistedInformation: PlantInformation
         if let existing = existingPlantInformation(matching: plantInformation) {
+            existing.mergePreferredValues(from: plantInformation)
             persistedInformation = existing
         } else {
             persistedInformation = plantInformation
