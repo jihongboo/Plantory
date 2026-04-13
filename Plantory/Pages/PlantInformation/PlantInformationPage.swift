@@ -7,7 +7,6 @@ struct PlantInformationPage: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                heroSection
                 PlantInfoInformationCard(info: info)
             }
             .padding(.horizontal, 20)
@@ -15,65 +14,6 @@ struct PlantInformationPage: View {
         }
         .navigationTitle(info.commonName)
         .navigationBarTitleDisplayMode(.inline)
-        .background(pageBackground)
-    }
-
-    private var pageBackground: some View {
-        LinearGradient(
-            colors: [
-                Color(.systemGroupedBackground),
-                Color.green.opacity(0.05),
-                Color.mint.opacity(0.04)
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .ignoresSafeArea()
-    }
-
-    private var heroSection: some View {
-        ZStack(alignment: .bottomLeading) {
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .fill(.ultraThinMaterial)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                        .stroke(.white.opacity(0.55), lineWidth: 1)
-                }
-
-            plantImage
-                .frame(maxWidth: .infinity)
-                .frame(height: 300)
-                .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                .overlay(alignment: .bottomLeading) {
-                    LinearGradient(
-                        colors: [.clear, .black.opacity(0.22)],
-                        startPoint: .center,
-                        endPoint: .bottom
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                }
-
-            VStack(alignment: .leading, spacing: 10) {
-                Text(info.commonName)
-                    .font(.largeTitle.weight(.bold))
-                    .foregroundStyle(.white)
-
-                Text(info.species)
-                    .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.86))
-                    .italic()
-
-                if !info.displayOverview.isEmpty {
-                    Text(info.displayOverview)
-                        .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.92))
-                        .lineLimit(3)
-                }
-            }
-            .padding(22)
-        }
-        .frame(height: 300)
-        .shadow(color: .black.opacity(0.08), radius: 18, y: 10)
     }
 
     @ViewBuilder

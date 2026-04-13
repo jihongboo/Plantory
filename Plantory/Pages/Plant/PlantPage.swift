@@ -3,6 +3,7 @@ import SwiftData
 
 struct PlantPage: View {
     let plant: Plant
+    @Environment(\.modelContext) private var modelContext
     @State private var isPresentingAddLog = false
     
     private var sortedRecords: [PlantRecord] {
@@ -38,6 +39,7 @@ struct PlantPage: View {
                         }
                     }
                 }
+                .animation(.smooth, value: sortedRecords)
             }
             .scenePadding()
         }
@@ -45,16 +47,27 @@ struct PlantPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem {
-                Button {
-                    isPresentingAddLog = true
-                } label: {
-                    Label("Add Log", systemImage: "plus")
+                Menu("Add Log", systemImage: "plus") {
+                    Button("Add Log", systemImage: "photo.badge.plus") {
+                        isPresentingAddLog = true
+                    }
+
+                    ForEach(RecordActionType.allCases) { type in
+                        Button(type.label, systemImage: type.systemImage) {
+                            addActionRecord(type)
+                        }
+                    }
                 }
             }
         }
         .sheet(isPresented: $isPresentingAddLog) {
             AddLogPage(plant: plant)
         }
+    }
+
+    private func addActionRecord(_ type: RecordActionType) {
+        let record = PlantRecord(actionType: type, plant: plant)
+        modelContext.insert(record)
     }
 }
 

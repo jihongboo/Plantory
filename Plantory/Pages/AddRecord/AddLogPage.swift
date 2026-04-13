@@ -10,6 +10,7 @@ struct AddLogPage: View {
     @State private var createdAt: Date = .now
     @State private var note = ""
     @State private var recordImage: PlatformImage?
+    @State private var isAIDiagnosisEnabled = false
     @State private var diagnosisState: DiagnosisState = .idle
     @State private var latestDiagnosisRequestID = UUID()
     
@@ -22,8 +23,10 @@ struct AddLogPage: View {
                         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
 
-                if recordImage != nil || !diagnosisState.isIdle {
-                    Section("AI Diagnosis") {
+                Section("AI Diagnosis") {
+                    Toggle("Enable AI Diagnosis", isOn: $isAIDiagnosisEnabled)
+
+                    if isAIDiagnosisEnabled {
                         diagnosisContent
                     }
                 }
@@ -35,7 +38,7 @@ struct AddLogPage: View {
                     
                     
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Notes")
+                        Text("Notes(Optional)")
                             .font(.headline)
                         
                         TextField("Write something about this plant", text: $note, axis: .vertical)
@@ -55,12 +58,15 @@ struct AddLogPage: View {
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        saveLog()
+                    Button(primaryActionTitle) {
+                        handlePrimaryAction()
                     }
                     .bold()
-                    .disabled(!canSave)
+                    .disabled(!canPerformPrimaryAction)
                 }
+            }
+            .onChange(of: isAIDiagnosisEnabled) { _, isEnabled in
+                handleAIDiagnosisPreferenceChange(isEnabled)
             }
         }
     }
@@ -80,6 +86,29 @@ private extension AddLogPage {
     var canSave: Bool {
         compressedPhotoData != nil
     }
+
+    var canPerformPrimaryAction: Bool {
+        guard canSave else { return false }
+        guard isAIDiagnosisEnabled else { return true }
+
+        if case .analyzing = diagnosisState {
+            return false
+        }
+        return true
+    }
+
+    var primaryActionTitle: String {
+        guard isAIDiagnosisEnabled else { return "Save" }
+
+        switch diagnosisState {
+        case .analyzing:
+            return "Diagnosing..."
+        case .complete:
+            return "Save"
+        case .idle, .failed:
+            return "Diagnose"
+        }
+    }
     
     var compressedPhotoData: Data? {
         guard let recordImage else { return nil }
@@ -94,8 +123,13 @@ private extension AddLogPage {
     var diagnosisContent: some View {
         switch diagnosisState {
         case .idle:
-            Text("Import a photo to run AI diagnosis automatically.")
-                .foregroundStyle(.secondary)
+            if recordImage == nil {
+                Text("Import a photo first, then tap Diagnose.")
+                    .foregroundStyle(.secondary)
+            } else {
+                Text("Tap Diagnose to run AI diagnosis for this log.")
+                    .foregroundStyle(.secondary)
+            }
         case .analyzing:
             HStack(spacing: 12) {
                 ProgressView()
@@ -126,18 +160,45 @@ private extension AddLogPage {
         }
     }
 
+    func handlePrimaryAction() {
+        guard canSave else { return }
+
+        guard isAIDiagnosisEnabled else {
+            saveLog()
+            return
+        }
+
+        switch diagnosisState {
+        case .complete:
+            saveLog()
+        case .analyzing:
+            return
+        case .idle, .failed:
+            retryDiagnosis()
+        }
+    }
+
+    func handleAIDiagnosisPreferenceChange(_ isEnabled: Bool) {
+        guard !isEnabled else { return }
+
+        latestDiagnosisRequestID = UUID()
+        diagnosisState = .idle
+    }
+
     func handleImageChange(_ image: PlatformImage?) {
+        latestDiagnosisRequestID = UUID()
+
         guard image != nil else {
             diagnosisState = .idle
             return
         }
 
-        Task {
-            await diagnoseCurrentImage()
-        }
+        diagnosisState = .idle
     }
 
     func retryDiagnosis() {
+        guard isAIDiagnosisEnabled else { return }
+
         Task {
             await diagnoseCurrentImage()
         }
@@ -145,6 +206,11 @@ private extension AddLogPage {
 
     @MainActor
     func diagnoseCurrentImage() async {
+        guard isAIDiagnosisEnabled else {
+            diagnosisState = .idle
+            return
+        }
+
         guard let recordImage else {
             diagnosisState = .idle
             return
@@ -170,11 +236,13 @@ private extension AddLogPage {
     func saveLog() {
         let trimmedNote = trimmed(note)
         let photoData = compressedPhotoData
-        let diagnosisMetadata: DiagnosisMetadata? = {
-            guard case .complete(let report) = diagnosisState else { return nil }
-            return DiagnosisMetadata(result: report.diagnosisResult)
-        }()
         guard let photoData else { return }
+
+        let diagnosisReport: PlantDiagnosisReport? = {
+            guard case .complete(let report) = diagnosisState else { return nil }
+            return report
+        }()
+        let diagnosisMetadata = diagnosisReport.map { DiagnosisMetadata(result: $0.diagnosisResult) }
 
         let record = PlantRecord(
             createdAt: createdAt,
@@ -184,13 +252,45 @@ private extension AddLogPage {
             plant: plant
         )
 
-        if case .complete(let report) = diagnosisState,
-           let primaryIssue = report.primaryIssue {
-            plant.activeIssues = [primaryIssue]
+        if let diagnosisReport {
+            plant.activeIssues = diagnosedIssues(from: diagnosisReport)
         }
         
         modelContext.insert(record)
-        dismiss()
+
+        do {
+            try modelContext.save()
+            dismiss()
+        } catch {
+            assertionFailure("Failed to save log: \(error.localizedDescription)")
+        }
+    }
+
+    func diagnosedIssues(from report: PlantDiagnosisReport) -> [PlantIssue] {
+        if report.healthStatus == .healthy {
+            return []
+        }
+
+        if let primaryIssue = report.primaryIssue {
+            return [primaryIssue]
+        }
+
+        let fallbackSeverity: IssueSeverity = switch report.healthStatus {
+        case .healthy:
+            .mild
+        case .warning:
+            .moderate
+        case .critical:
+            .severe
+        }
+
+        return [
+            PlantIssue(
+                type: .other,
+                severity: fallbackSeverity,
+                note: report.summary
+            )
+        ]
     }
 }
 

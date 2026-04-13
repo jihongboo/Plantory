@@ -72,7 +72,9 @@ enum RecordCategory: String, Codable, CaseIterable, Hashable {
     }
 }
 
-enum RecordActionType: String, Codable, CaseIterable, Hashable {
+enum RecordActionType: String, Codable, CaseIterable, Hashable, Identifiable {
+    var id: RecordActionType { self }
+    
     case watering
     case fertilizing
     case pestControl
@@ -86,6 +88,31 @@ enum RecordActionType: String, Codable, CaseIterable, Hashable {
         case .pestControl:  "Pest Control"
         case .pruning:      "Pruning"
         case .repotting:    "Repotting"
+        }
+    }
+    
+    var systemImage: String {
+        switch self {
+        case .watering: "drop.fill"
+        case .fertilizing: "leaf.fill"
+        case .pestControl: "ladybug.fill"
+        case .pruning: "scissors"
+        case .repotting: "arrow.triangle.2.circlepath"
+        }
+    }
+    
+    var themeColor: Color {
+        switch self {
+        case .watering:
+            .blue
+        case .fertilizing:
+            .green
+        case .pestControl:
+            .orange
+        case .pruning:
+            .brown
+        case .repotting:
+            .mint
         }
     }
 }
@@ -106,13 +133,7 @@ enum RecordType: Hashable {
     var systemImage: String {
         switch self {
         case .action(let actionType):
-            switch actionType {
-            case .watering: "drop.fill"
-            case .fertilizing: "leaf.fill"
-            case .pestControl: "ladybug.fill"
-            case .pruning: "scissors"
-            case .repotting: "arrow.triangle.2.circlepath"
-            }
+            actionType.systemImage
         case .entry:
             "camera.fill"
         }
@@ -121,18 +142,7 @@ enum RecordType: Hashable {
     var themeColor: Color {
         switch self {
         case .action(let actionType):
-            switch actionType {
-            case .watering:
-                .blue
-            case .fertilizing:
-                .green
-            case .pestControl:
-                .orange
-            case .pruning:
-                .brown
-            case .repotting:
-                .mint
-            }
+            actionType.themeColor
         case .entry:
             .primary
         }
