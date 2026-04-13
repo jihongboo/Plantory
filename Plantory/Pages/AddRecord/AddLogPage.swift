@@ -112,7 +112,7 @@ private extension AddLogPage {
     
     var compressedPhotoData: Data? {
         guard let recordImage else { return nil }
-        return ImageCompression.compressedJPEGData(from: recordImage)
+        return ImageCompression.compressedPNGData(from: recordImage)
     }
     
     func trimmed(_ value: String) -> String {

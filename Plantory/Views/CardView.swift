@@ -32,6 +32,7 @@ struct CardView<Content: View>: View {
         VStack(alignment: .leading, spacing: 12) {
             if showsHeader {
                 header
+                Divider()
             }
 
             content
@@ -47,37 +48,24 @@ struct CardView<Content: View>: View {
     }
 
     private var header: some View {
-        HStack(alignment: .center, spacing: 14) {
-            if let systemImage {
-                ZStack {
-                    Circle()
-                        .fill(iconTint.opacity(0.14))
-                        .frame(width: 44, height: 44)
-
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 2) {
+                if let systemImage {
                     Image(systemName: systemImage)
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(iconTint)
                 }
-            }
-
-            VStack(alignment: .leading, spacing: 4) {
                 if let title {
                     Text(title)
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(.primary)
-                        .multilineTextAlignment(.leading)
-                }
-
-                if let subtitle {
-                    Text(subtitle)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.leading)
                 }
             }
-
-            Spacer(minLength: 12)
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(iconTint)
+            
+            if let subtitle {
+                Text(subtitle)
+                    .font(.subheadline)
+            }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

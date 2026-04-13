@@ -12,7 +12,7 @@ struct AddPlantPhotoHeroCard: View {
             if let image {
                 image
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
                     .overlay {
@@ -64,7 +64,7 @@ struct AddPlantPhotoHeroCard: View {
             }
             .padding(18)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: 300)
         .aspectRatio(1, contentMode: .fit)
         .animation(.snappy(duration: 0.24), value: isRenaming)
     }

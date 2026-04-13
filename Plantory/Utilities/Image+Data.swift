@@ -101,8 +101,7 @@ extension PlatformImage {
         )
 
         #if canImport(UIKit)
-        let rendererFormat = UIGraphicsImageRendererFormat.default()
-        rendererFormat.scale = 1
+        let rendererFormat = transparentRendererFormat
 
         return UIGraphicsImageRenderer(size: targetSize, format: rendererFormat).image { _ in
             draw(in: CGRect(origin: .zero, size: targetSize))
@@ -130,8 +129,7 @@ extension PlatformImage {
         )
 
         #if canImport(UIKit)
-        let rendererFormat = UIGraphicsImageRendererFormat.default()
-        rendererFormat.scale = 1
+        let rendererFormat = transparentRendererFormat
 
         return UIGraphicsImageRenderer(size: targetSize, format: rendererFormat).image { _ in
             draw(in: CGRect(origin: .zero, size: targetSize))
@@ -194,6 +192,13 @@ enum PlatformImageData {
 extension PlatformImage {
     var renderScale: CGFloat { scale }
     var renderOrientation: UIImage.Orientation { imageOrientation }
+
+    private var transparentRendererFormat: UIGraphicsImageRendererFormat {
+        let format = UIGraphicsImageRendererFormat.default()
+        format.scale = 1
+        format.opaque = false
+        return format
+    }
 }
 
 private extension CGImagePropertyOrientation {

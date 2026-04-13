@@ -23,6 +23,7 @@ struct PlantRecordCard: View {
                 image
                     .resizable()
                     .scaledToFit()
+                    .frame(height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
             }
 

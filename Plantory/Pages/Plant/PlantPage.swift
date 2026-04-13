@@ -14,32 +14,38 @@ struct PlantPage: View {
         ScrollView {
             LazyVStack(spacing: 20) {
                 PlantPhotoView(photoData: plant.photoData)
+                    .frame(height: 300)
                 
                 CardView {
                     PlantHeaderView(plant: plant)
                 }
                          
-                CardView(title: "Status") {
+                CardView(title: "Status", systemImage: "stethoscope") {
                     PlantStatusView(plant: plant)
                 }
 
-                CardView(title: "Care Records") {
-                    if sortedRecords.isEmpty {
-                        VStack {
-                            Label("No Records Yet", systemImage: "clock.arrow.circlepath")
-                                .font(.headline)
-                            
-                            Text("Watering, fertilizing, pest control, and photo records will appear here.")
-                                .foregroundStyle(.secondary)
-                        }
-                    } else {
-                        ForEach(sortedRecords) { record in
-                            PlantRecordCard(record: record)
-                            Divider()
+                LazyVStack {
+                    Text("Care Records")
+                        .font(.title3.bold())
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    CardView {
+                        if sortedRecords.isEmpty {
+                            VStack {
+                                Label("No Records Yet", systemImage: "clock.arrow.circlepath")
+                                    .font(.headline)
+                                
+                                Text("Watering, fertilizing, pest control, and photo records will appear here.")
+                                    .foregroundStyle(.secondary)
+                            }
+                        } else {
+                            ForEach(sortedRecords) { record in
+                                PlantRecordCard(record: record)
+                                Divider()
+                            }
                         }
                     }
+                    .animation(.smooth, value: sortedRecords)
                 }
-                .animation(.smooth, value: sortedRecords)
             }
             .scenePadding()
         }
@@ -48,7 +54,7 @@ struct PlantPage: View {
         .toolbar {
             ToolbarItem {
                 Menu("Add Log", systemImage: "plus") {
-                    Button("Add Log", systemImage: "photo.badge.plus") {
+                    Button("Add Log", systemImage: "camera.fill") {
                         isPresentingAddLog = true
                     }
 

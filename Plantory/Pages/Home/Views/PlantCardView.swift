@@ -40,7 +40,6 @@ struct PlantCardView: View {
                 image
                     .resizable()
                     .scaledToFit()
-                    .shadow(radius: 2)
             } else {
                 Image(systemName: "leaf.fill")
                     .font(.system(size: 48))

@@ -18,7 +18,12 @@ private struct PhotoPickerModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .photosPicker(isPresented: $isPresented, selection: $pickerItem, matching: .images)
+            .photosPicker(
+                isPresented: $isPresented,
+                selection: $pickerItem,
+                matching: .images,
+                preferredItemEncoding: .current
+            )
             .onChange(of: pickerItem) {
                 guard let pickerItem else { return }
                 Task {
@@ -29,13 +34,18 @@ private struct PhotoPickerModifier: ViewModifier {
     }
 
     private func loadPlatformImage(from item: PhotosPickerItem) async -> PlatformImage? {
+        let selectedData = try? await item.loadTransferable(type: Data.self)
+        if let selectedData,
+           let image = PlatformImage(data: selectedData) {
+            return image
+        }
+
         if let itemIdentifier = item.itemIdentifier,
            let photoKitImage = await requestImage(for: itemIdentifier) {
             return photoKitImage
         }
 
-        let selectedData = try? await item.loadTransferable(type: Data.self)
-        return selectedData.flatMap(PlatformImage.init(data:))
+        return nil
     }
 
     private func requestImage(for itemIdentifier: String) async -> PlatformImage? {
