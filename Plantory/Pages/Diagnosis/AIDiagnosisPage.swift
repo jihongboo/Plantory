@@ -133,7 +133,7 @@ struct AIDiagnosisPage: View {
 
         let note = "AI diagnosis suggests \(report.title.lowercased())."
         let record = PlantRecord(
-            type: .diagnosis,
+            type: .photo,
             note: note,
             photoData: sourceImage.pngDataRepresentation(),
             metadata: RecordMetadata(

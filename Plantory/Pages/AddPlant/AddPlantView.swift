@@ -176,7 +176,7 @@ private extension AddPlantView {
             }
 
             let record = PlantRecord(
-                type: .diagnosis,
+                type: .photo,
                 note: "AI diagnosis suggests \(report.title.lowercased()).",
                 photoData: imageData,
                 metadata: RecordMetadata(

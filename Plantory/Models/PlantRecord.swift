@@ -34,13 +34,11 @@ final class PlantRecord {
 enum RecordCategory: String, Codable, CaseIterable, Hashable {
     case care
     case log
-    case diagnosis
 
     var label: String {
         switch self {
         case .care: "Care"
         case .log: "Record"
-        case .diagnosis: "AI Diagnosis"
         }
     }
 }
@@ -53,7 +51,6 @@ enum RecordType: String, Codable, CaseIterable, Hashable {
     case pruning        // 修剪
     case repotting      // 换盆
     case note           // 文字备注
-    case diagnosis      // AI 诊断
 
     var category: RecordCategory {
         switch self {
@@ -61,8 +58,6 @@ enum RecordType: String, Codable, CaseIterable, Hashable {
             .care
         case .photo, .note:
             .log
-        case .diagnosis:
-            .diagnosis
         }
     }
 
@@ -75,7 +70,6 @@ enum RecordType: String, Codable, CaseIterable, Hashable {
         case .pruning:      "Pruning"
         case .repotting:    "Repotting"
         case .note:         "Note"
-        case .diagnosis:    "AI Diagnosis"
         }
     }
 
@@ -88,7 +82,6 @@ enum RecordType: String, Codable, CaseIterable, Hashable {
         case .pruning:      "scissors"
         case .repotting:    "arrow.triangle.2.circlepath"
         case .note:         "note.text"
-        case .diagnosis:    "stethoscope"
         }
     }
 }
@@ -159,7 +152,7 @@ struct DiagnosisMetadata: Codable {
     var result: DiagnosisResult
 }
 
-// MARK: - AI 诊断结果（存于 diagnosis 类型记录的 metadata 中）
+// MARK: - AI 诊断结果（附着在普通记录的 metadata 中）
 
 struct DiagnosisResult: Codable {
     var species: String

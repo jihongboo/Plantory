@@ -21,13 +21,7 @@ struct PlantPage: View {
                 CardView(title: "Status") {
                     PlantStatusView(plant: plant)
                 }
-                
-                if let info = plant.information {
-                    CardView(title: "Wiki") {
-                        PlantWikiCell(info: info)
-                    }
-                }
-                
+
                 CardView(title: "Care Records") {
                     if sortedRecords.isEmpty {
                         VStack {

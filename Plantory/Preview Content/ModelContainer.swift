@@ -65,7 +65,7 @@ enum PreviewData {
                 plant: plant
             ),
             PlantRecord(
-                type: .diagnosis,
+                type: .photo,
                 createdAt: .now.addingTimeInterval(-3 * 86_400),
                 note: "Checked a few yellow edges on older leaves.",
                 metadata: RecordMetadata(

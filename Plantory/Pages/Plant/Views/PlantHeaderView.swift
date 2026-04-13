@@ -6,8 +6,28 @@ struct PlantHeaderView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             VStack(alignment: .leading, spacing: 8) {
-                Text(plant.displayName)
-                    .font(.largeTitle.bold())
+                HStack {
+                    Text(plant.displayName)
+                        .font(.largeTitle.bold())
+                    
+                    Spacer()
+                    
+                    if let information = plant.information {
+                        NavigationLink {
+                            PlantInformationPage(info: information)
+                        } label: {
+                            Label("Wiki", systemImage: "chevron.forward")
+                                .labelStyle(.iconOnly)
+                                .font(.footnote.bold())
+                                .tint(.white)
+                                .padding(10)
+                                .background {
+                                    Color.blue
+                                        .clipShape(.circle)
+                                }
+                        }
+                    }
+                }
 
                 HStack {
                     if let commonName = plant.information?.commonName {

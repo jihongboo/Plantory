@@ -66,8 +66,6 @@ private struct PlantRecordMetadataView: View {
             if let pestNotes = metadata.pestControl?.treatmentNotes {
                 Text("Treatment: \(pestNotes)")
             }
-        case .diagnosis:
-            EmptyView()
         case .photo, .pruning, .repotting, .note:
             EmptyView()
         }
