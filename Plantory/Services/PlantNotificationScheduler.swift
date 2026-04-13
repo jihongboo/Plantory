@@ -91,7 +91,7 @@ final class PlantNotificationScheduler {
         guard authorizationStatus.canSchedule else { return false }
 
         let content = UNMutableNotificationContent()
-        content.title = String(localized: "Plantory Debug")
+        content.title = String(localized: "LeafAid Debug")
         content.body = String(localized: "This is a local notification test.")
         content.sound = .default
 

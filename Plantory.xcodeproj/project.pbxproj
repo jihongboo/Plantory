@@ -24,7 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FF90180E2F61558A0056B8CC /* Plantory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Plantory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF90180E2F61558A0056B8CC /* LeafAid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeafAid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF90181F2F61558B0056B8CC /* PlantoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlantoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF9018292F61558B0056B8CC /* PlantoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlantoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,7 +98,7 @@
 		FF90180F2F61558A0056B8CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FF90180E2F61558A0056B8CC /* Plantory.app */,
+				FF90180E2F61558A0056B8CC /* LeafAid.app */,
 				FF90181F2F61558B0056B8CC /* PlantoryTests.xctest */,
 				FF9018292F61558B0056B8CC /* PlantoryUITests.xctest */,
 			);
@@ -127,7 +127,7 @@
 			packageProductDependencies = (
 			);
 			productName = Plantory;
-			productReference = FF90180E2F61558A0056B8CC /* Plantory.app */;
+			productReference = FF90180E2F61558A0056B8CC /* LeafAid.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FF90181E2F61558B0056B8CC /* PlantoryTests */ = {
@@ -319,7 +319,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hongbo.Plantory;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LeafAid;
 				REGISTER_APP_GROUPS = YES;
 				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
 				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
@@ -371,7 +371,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hongbo.Plantory;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LeafAid;
 				REGISTER_APP_GROUPS = YES;
 				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
 				RUNTIME_EXCEPTION_ALLOW_JIT = NO;

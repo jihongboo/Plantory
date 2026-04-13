@@ -69,7 +69,7 @@ struct PlantNotificationsPage: View {
             case .notificationsDenied:
                 Alert(
                     title: Text("Notifications Disabled"),
-                    message: Text("Enable notifications for Plantory in Settings to receive care reminders."),
+                    message: Text("Enable notifications for LeafAid in Settings to receive care reminders."),
                     primaryButton: .default(Text("Open Settings")) {
 #if canImport(UIKit)
                         if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
