@@ -4,6 +4,11 @@
 <dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Take a photo of your plant to identify it and track its health.</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh-Hans</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

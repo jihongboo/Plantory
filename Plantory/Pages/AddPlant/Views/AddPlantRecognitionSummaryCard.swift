@@ -5,8 +5,8 @@ struct AddPlantRecognitionSummaryCard: View {
 
     var body: some View {
         CardView(
-            title: "AI Recognition",
-            subtitle: "Match & confidence from photo.",
+            titleKey: "AI Recognition",
+            subtitleKey: "Match & confidence from photo.",
             systemImage: "sparkles",
             iconTint: .teal
         ) {

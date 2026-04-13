@@ -28,7 +28,7 @@ final class Plant {
     // 展示名称：优先用别名，否则读种类通用名，最后兜底
     var displayName: String {
         if let nickname, !nickname.isEmpty { return nickname }
-        return information?.commonName ?? "Unknown Plant"
+        return information?.commonName ?? String(localized: "Unknown Plant")
     }
 
     @Relationship(deleteRule: .cascade, inverse: \PlantRecord.plant)
@@ -62,7 +62,7 @@ enum IssueType: String, Codable, CaseIterable {
     case fungalDisease      // 真菌病害
     case other              // 其他
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
         case .underwatered:       "Underwatered"
         case .overwatered:        "Overwatered"
@@ -103,7 +103,7 @@ enum IssueSeverity: String, Codable, Comparable {
         return order.firstIndex(of: lhs)! < order.firstIndex(of: rhs)!
     }
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
         case .mild:     "Mild"
         case .moderate: "Moderate"
@@ -129,7 +129,7 @@ enum HealthStatus {
     case warning
     case critical
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
         case .healthy:  "Healthy"
         case .warning:  "Needs Attention"

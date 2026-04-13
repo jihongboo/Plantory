@@ -20,6 +20,28 @@ struct HomePage: View {
         case all = "All"
         case healthy = "Healthy"
         case warning = "Needs Attention"
+
+        var title: LocalizedStringKey {
+            switch self {
+            case .all:
+                "All"
+            case .healthy:
+                "Healthy"
+            case .warning:
+                "Needs Attention"
+            }
+        }
+
+        var emptyStateTitle: LocalizedStringKey {
+            switch self {
+            case .all:
+                "No Plants Yet"
+            case .healthy:
+                "No healthy plants"
+            case .warning:
+                "No plants needing attention"
+            }
+        }
     }
     
     private var filteredPlants: [Plant] {
@@ -60,7 +82,7 @@ struct HomePage: View {
                 if filteredPlants.isEmpty {
                     ContentUnavailableView {
                         Label(
-                            plants.isEmpty ? "No Plants Yet" : "No \(filter.rawValue) plants",
+                            plants.isEmpty ? "No Plants Yet" : filter.emptyStateTitle,
                             systemImage: "leaf.fill"
                         )
                     } description: {
@@ -82,7 +104,10 @@ struct HomePage: View {
                 isPresented: deletionBinding,
                 presenting: plantPendingDeletion
             ) { plant in
-                Button("Delete \(plant.displayName)", role: .destructive) {
+                Button(
+                    "Delete \(plant.displayName)",
+                    role: .destructive
+                ) {
                     deletePlant(plant)
                 }
                 Button("Cancel", role: .cancel) {}
@@ -96,11 +121,11 @@ struct HomePage: View {
                             Button {
                                 filter = option
                             } label: {
-                                Label(option.rawValue, systemImage: icon(for: option))
+                                Label(option.title, systemImage: icon(for: option))
                             }
                         }
                     } label: {
-                        Label(filter.rawValue, systemImage: "line.3.horizontal.decrease.circle")
+                        Label(filter.title, systemImage: "line.3.horizontal.decrease.circle")
                     }
 
                     AddPlantMenuView()

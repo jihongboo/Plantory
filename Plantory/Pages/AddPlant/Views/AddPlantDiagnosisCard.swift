@@ -6,8 +6,8 @@ struct AddPlantDiagnosisCard: View {
 
     var body: some View {
         CardView(
-            title: "Health Check",
-            subtitle: "A first-pass diagnosis from the same imported photo.",
+            titleKey: "Health Check",
+            subtitleKey: "A first-pass diagnosis from the same imported photo.",
             systemImage: "stethoscope",
             iconTint: .orange
         ) {

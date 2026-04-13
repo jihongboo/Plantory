@@ -16,11 +16,11 @@ enum PlantForegroundIsolation {
         var errorDescription: String? {
             switch self {
             case .unsupportedImage:
-                "The selected image could not be prepared for foreground extraction."
+                String(localized: "The selected image could not be prepared for foreground extraction.")
             case .noForegroundDetected:
-                "Vision could not find a foreground subject in this image."
+                String(localized: "Vision could not find a foreground subject in this image.")
             case .failedToRender:
-                "The foreground result could not be rendered."
+                String(localized: "The foreground result could not be rendered.")
             }
         }
     }

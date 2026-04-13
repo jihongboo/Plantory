@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CareTileView: View {
-    let title: String
+    let title: LocalizedStringKey
     let icon: String
     let indicator: CareTileIndicator
     let tint: Color
@@ -9,7 +9,7 @@ struct CareTileView: View {
     let detail: String
 
     init(
-        title: String,
+        title: LocalizedStringKey,
         icon: String,
         indicator: CareTileIndicator = .none,
         tint: Color,

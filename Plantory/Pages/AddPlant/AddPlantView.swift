@@ -213,7 +213,7 @@ private extension AddPlantView {
     }
 
     func previewMockResult() -> DoubaoPlantRecognitionService.CombinedAnalysisResult {
-        let info = PreviewData.healthyPlant.information ?? PlantInformation.catalog.first!
+        let info = PreviewData.healthyPlant.information ?? PlantInformation.catalog
         let recognition = DoubaoPlantRecognitionService.StructuredPlantRecognition(
             commonName: info.commonName,
             species: info.species,
@@ -221,14 +221,17 @@ private extension AddPlantView {
             isPlant: true,
             overview: info.displayOverview,
             careDifficulty: info.careDifficulty,
+            careDifficultyDescription: info.careDifficultyDescription,
             lightLevel: info.lightLevel,
             summary: "\(info.commonName) recognized from preview mock data.",
             light: info.light,
             waterLevel: info.waterLevel,
             water: info.water,
             humidityLevel: info.humidityLevel,
+            humidityDescription: info.humidityDescription,
             temperature: info.temperature,
             diseaseRiskLevel: info.diseaseRiskLevel,
+            diseaseRiskDescription: info.diseaseRiskDescription,
             fertilizerLevel: info.fertilizerLevel,
             fertilizer: info.fertilizer,
             tips: info.tips

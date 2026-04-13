@@ -97,7 +97,7 @@ private extension AddLogPage {
         return true
     }
 
-    var primaryActionTitle: String {
+    var primaryActionTitle: LocalizedStringKey {
         guard isAIDiagnosisEnabled else { return "Save" }
 
         switch diagnosisState {

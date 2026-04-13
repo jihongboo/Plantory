@@ -8,21 +8,45 @@
 import SwiftUI
 
 struct CardView<Content: View>: View {
-    let title: String?
-    let subtitle: String?
+    let title: Text?
+    let subtitle: Text?
     let systemImage: String?
     let iconTint: Color
     @ViewBuilder let content: Content
+    
+    init(
+        @ViewBuilder content: () -> Content
+    ) {
+        self.title = nil
+        self.subtitle = nil
+        self.systemImage = nil
+        self.iconTint = .accentColor
+        self.content = content()
+    }
 
     init(
-        title: String? = nil,
-        subtitle: String? = nil,
+        titleKey: LocalizedStringKey,
+        subtitleKey: LocalizedStringKey? = nil,
         systemImage: String? = nil,
         iconTint: Color = .accentColor,
         @ViewBuilder content: () -> Content
     ) {
-        self.title = title
-        self.subtitle = subtitle
+        self.title = Text(titleKey)
+        self.subtitle = subtitleKey.map { Text($0) }
+        self.systemImage = systemImage
+        self.iconTint = iconTint
+        self.content = content()
+    }
+
+    init<S: StringProtocol>(
+        _ title: S,
+        subtitle: S? = nil,
+        systemImage: String? = nil,
+        iconTint: Color = .accentColor,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.title = Text(title)
+        self.subtitle = subtitle.map { Text($0) }
         self.systemImage = systemImage
         self.iconTint = iconTint
         self.content = content()
@@ -54,14 +78,14 @@ struct CardView<Content: View>: View {
                     Image(systemName: systemImage)
                 }
                 if let title {
-                    Text(title)
+                    title
                 }
             }
             .font(.subheadline.weight(.semibold))
             .foregroundStyle(iconTint)
             
             if let subtitle {
-                Text(subtitle)
+                subtitle
                     .font(.subheadline)
             }
         }
@@ -71,7 +95,7 @@ struct CardView<Content: View>: View {
 
 #Preview {
     VStack {
-        CardView(title: "Care Tips", systemImage: "leaf.fill") {
+        CardView("Care Tips", systemImage: "leaf.fill") {
             VStack(alignment: .leading, spacing: 10) {
                 Label("Bright indirect light", systemImage: "sun.max.fill")
                 Label("Water every 7-10 days", systemImage: "drop.fill")
@@ -82,7 +106,7 @@ struct CardView<Content: View>: View {
         }
         .padding()
         
-        CardView(title: "Care Tips", subtitle: "Bright indirect light Bright indirect light Bright indirect light Bright indirect light ", systemImage: "leaf.fill", iconTint: .red) {
+        CardView("Care Tips", subtitle: "Bright indirect light Bright indirect light Bright indirect light Bright indirect light ", systemImage: "leaf.fill", iconTint: .red) {
             VStack(alignment: .leading, spacing: 10) {
                 Label("Bright indirect light", systemImage: "sun.max.fill")
                 Label("Water every 7-10 days", systemImage: "drop.fill")

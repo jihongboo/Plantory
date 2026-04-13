@@ -64,7 +64,7 @@ enum RecordCategory: String, Codable, CaseIterable, Hashable {
     case action
     case entry
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
         case .action: "Action"
         case .entry: "Record"
@@ -81,7 +81,7 @@ enum RecordActionType: String, Codable, CaseIterable, Hashable, Identifiable {
     case pruning
     case repotting
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
         case .watering:     "Watering"
         case .fertilizing:  "Fertilizing"
@@ -121,7 +121,7 @@ enum RecordType: Hashable {
     case action(RecordActionType)
     case entry
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
         case .action(let actionType):
             actionType.label

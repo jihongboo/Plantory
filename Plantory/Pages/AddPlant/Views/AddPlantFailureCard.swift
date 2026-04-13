@@ -6,8 +6,8 @@ struct AddPlantFailureCard: View {
 
     var body: some View {
         CardView(
-            title: "Recognition Result",
-            subtitle: "The photo was processed, but AI could not build a complete plant profile.",
+            titleKey:"Recognition Result",
+            subtitleKey: "The photo was processed, but AI could not build a complete plant profile.",
             systemImage: "exclamationmark.triangle.fill",
             iconTint: .orange
         ) {

@@ -6,8 +6,8 @@ struct AddPlantManualEntryCard: View {
 
     var body: some View {
         CardView(
-            title: "Manual Entry",
-            subtitle: "Search the plant manually when recognition is incomplete or incorrect.",
+            titleKey: "Manual Entry",
+            subtitleKey: "Search the plant manually when recognition is incomplete or incorrect.",
             systemImage: "square.and.pencil",
             iconTint: .blue
         ) {

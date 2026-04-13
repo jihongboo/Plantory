@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct PlantDiagnosisReport: Identifiable {
     let id = UUID()
@@ -45,7 +46,7 @@ enum DiagnosisUrgency: String {
     case medium
     case high
 
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
         case .low:
             "Low urgency"
@@ -56,7 +57,7 @@ enum DiagnosisUrgency: String {
         }
     }
 
-    var subtitle: String {
+    var subtitle: LocalizedStringKey {
         switch self {
         case .low:
             "Monitor and keep routine stable."
@@ -289,15 +290,19 @@ private extension DoubaoPlantDiagnosisService {
         var errorDescription: String? {
             switch self {
             case .invalidImage:
-                "The diagnosis photo could not be prepared for upload."
+                String(localized: "The diagnosis photo could not be prepared for upload.")
             case .invalidResponse:
-                "The AI diagnosis service returned an unexpected response."
+                String(localized: "The AI diagnosis service returned an unexpected response.")
             case .apiFailure(let message):
                 message
             case .emptyResponse:
-                "The AI diagnosis service returned no diagnosis."
+                String(localized: "The AI diagnosis service returned no diagnosis.")
             case .invalidJSON(let rawText):
-                "The AI diagnosis result could not be parsed: \(rawText)"
+                String(
+                    format: String(localized: "The AI diagnosis result could not be parsed: %@"),
+                    locale: Locale.current,
+                    rawText
+                )
             }
         }
     }
@@ -309,7 +314,11 @@ private extension DoubaoPlantDiagnosisService {
 
         guard (200 ..< 300).contains(httpResponse.statusCode) else {
             let apiError = try? JSONDecoder().decode(APIErrorResponse.self, from: data)
-            let message = apiError?.error?.message ?? "The AI service failed with status code \(httpResponse.statusCode)."
+            let message = apiError?.error?.message ?? String(
+                format: String(localized: "The AI service failed with status code %lld."),
+                locale: Locale.current,
+                httpResponse.statusCode
+            )
             throw ServiceError.apiFailure(message)
         }
     }
@@ -330,17 +339,81 @@ private extension DoubaoPlantDiagnosisService {
     }
 
     static func diagnosisPrompt(for plant: Plant) -> String {
+        let language = AppLanguage.current
         let species = plant.information?.species ?? ""
         let commonName = plant.information?.commonName ?? plant.displayName
         let note = plant.note.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        return """
+        switch language {
+        case .english:
+            return """
+            You are a plant diagnosis and care assistant. Analyze this plant photo and return exactly one JSON object. Do not output markdown or any extra explanation.
+
+            Known plant information:
+            - preferredLanguage: \(language.apiLanguageCode)
+            - commonName: \(commonName)
+            - species: \(species.isEmpty ? language.unknownPlantValue : species)
+            - extraNote: \(note.isEmpty ? language.emptyPromptNoteValue : note)
+
+            Output requirements:
+            1. Diagnose the most likely issue based on leaves, color, spots, drooping, pest signs, and other visible signals.
+            2. `confidence` must be an integer from 0 to 100.
+            3. `urgency` must be `low`, `medium`, or `high`.
+            4. `healthStatus` must be `healthy`, `warning`, or `critical`.
+            5. `primaryIssueType` must be one of these or null:
+               `underwatered` `overwatered` `pestInfestation` `nutrientDeficiency` `rootRot` `sunburn` `insufficientLight` `fungalDisease` `other`
+            6. `primaryIssueSeverity` must be `mild`, `moderate`, `severe`, or null.
+            7. `observedSignals` must contain 2 to 4 items. Each `systemImage` must be one of:
+               `leaf` `drop` `sun.max` `ladybug` `wind` `thermometer` `eye` `sparkles` `exclamationmark.triangle`
+            8. `possibleCauses` must contain 2 to 4 items.
+            9. `carePlan` must contain 2 to 4 items, each with `title`, `detail`, and `timing`.
+            10. `watchItems` must contain 2 items.
+            11. `preventionTip` must contain 1 concise tip.
+            12. All natural-language fields must be concise \(language.aiLanguageName).
+
+            JSON shape:
+            {
+              "speciesName": "Monstera deliciosa",
+              "title": "Overwatering with root stress risk",
+              "summary": "The photo suggests persistent moisture stress with yellowing and soft droop.",
+              "confidence": 91,
+              "urgency": "high",
+              "healthStatus": "critical",
+              "primaryIssueType": "rootRot",
+              "primaryIssueSeverity": "severe",
+              "primaryIssueNote": "Yellow patches and drooping suggest likely root stress.",
+              "observedSignals": [
+                {
+                  "title": "Yellowing zones",
+                  "detail": "Older leaves are losing color first.",
+                  "systemImage": "drop"
+                }
+              ],
+              "possibleCauses": [
+                "Watering happened before the soil had dried."
+              ],
+              "carePlan": [
+                {
+                  "title": "Pause watering",
+                  "detail": "Let the top layer dry before watering again.",
+                  "timing": "Immediately"
+                }
+              ],
+              "watchItems": [
+                "A sour smell from the pot can point to root rot."
+              ],
+              "preventionTip": "Check soil dryness before every watering."
+            }
+            """
+        case .simplifiedChinese:
+            return """
         你是一名植物病害与养护诊断助手。请根据这张植物照片做一次诊断，并且只能输出一个 JSON 对象，不要输出 markdown，不要输出解释性前后缀。
 
         已知植物信息：
+        - preferredLanguage: \(language.apiLanguageCode)
         - commonName: \(commonName)
-        - species: \(species.isEmpty ? "unknown" : species)
-        - extraNote: \(note.isEmpty ? "none" : note)
+        - species: \(species.isEmpty ? language.unknownPlantValue : species)
+        - extraNote: \(note.isEmpty ? language.emptyPromptNoteValue : note)
 
         输出要求：
         1. 根据叶片、颜色、斑点、萎蔫、虫害迹象等判断最可能的问题。
@@ -356,42 +429,43 @@ private extension DoubaoPlantDiagnosisService {
         9. `carePlan` 返回 2 到 4 条，每条包含 `title`、`detail`、`timing`。
         10. `watchItems` 返回 2 条。
         11. `preventionTip` 返回 1 条简洁建议。
-        12. 所有自然语言字段用简洁英文，方便当前页面直接展示。
+        12. 所有自然语言字段用简洁中文。
 
         JSON 格式：
         {
           "speciesName": "Monstera deliciosa",
-          "title": "Overwatering with root stress risk",
-          "summary": "The photo suggests persistent moisture stress with yellowing and soft droop.",
+          "title": "浇水过多并伴随根系受压风险",
+          "summary": "照片显示叶片发黄且轻微软塌，存在持续湿害迹象。",
           "confidence": 91,
           "urgency": "high",
           "healthStatus": "critical",
           "primaryIssueType": "rootRot",
           "primaryIssueSeverity": "severe",
-          "primaryIssueNote": "Yellow patches and drooping suggest likely root stress.",
+          "primaryIssueNote": "叶片发黄和下垂提示根系可能已经受压。",
           "observedSignals": [
             {
-              "title": "Yellowing zones",
-              "detail": "Older leaves are losing color first.",
+              "title": "叶片发黄区域",
+              "detail": "老叶先开始失去绿色。",
               "systemImage": "drop"
             }
           ],
           "possibleCauses": [
-            "Watering happened before the soil had dried."
+            "盆土未干就再次浇水。"
           ],
           "carePlan": [
             {
-              "title": "Pause watering",
-              "detail": "Let the top layer dry before watering again.",
-              "timing": "Immediately"
+              "title": "暂停浇水",
+              "detail": "等待盆土表层变干后再补水。",
+              "timing": "立即执行"
             }
           ],
           "watchItems": [
-            "A sour smell from the pot can point to root rot."
+            "盆土出现酸臭味可能提示烂根。"
           ],
-          "preventionTip": "Check soil dryness before every watering."
+          "preventionTip": "每次浇水前先确认盆土干湿度。"
         }
         """
+        }
     }
 
     static func allowedSymbol(_ value: String) -> String {

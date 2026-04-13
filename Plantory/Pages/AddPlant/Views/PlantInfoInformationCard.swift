@@ -10,7 +10,7 @@ struct PlantInfoInformationCard: View {
 
     var body: some View {
         CardView(
-            title: info.commonName,
+            info.commonName,
             subtitle: info.species,
             systemImage: "leaf.fill",
             iconTint: .green
@@ -45,7 +45,7 @@ struct PlantInfoInformationCard: View {
                     icon: "figure.child",
                     indicator: .level(difficultyMeterLevel(info.careDifficulty)),
                     tint: difficultyColor,
-                    detail: "Best for \(difficultyAudience(info.careDifficulty)) plant care routines."
+                    detail: info.careDifficultyDescription
                 )
                 CareTileView(
                     title: "Light",
@@ -66,7 +66,7 @@ struct PlantInfoInformationCard: View {
                     icon: "humidity",
                     indicator: .level(meterLevel(info.humidityLevel)),
                     tint: .mint,
-                    detail: humidityDescription(for: info.humidityLevel)
+                    detail: info.humidityDescription
                 )
                 CareTileView(
                     title: "Temperature",
@@ -87,10 +87,15 @@ struct PlantInfoInformationCard: View {
                     icon: "cross.case",
                     indicator: .level(meterLevel(info.diseaseRiskLevel)),
                     tint: diseaseRiskColor(info.diseaseRiskLevel),
-                    detail: diseaseRiskDescription(for: info.diseaseRiskLevel)
+                    detail: info.diseaseRiskDescription
                 )
             }
         }
+    }
+
+    private func displayDetail(_ preferred: String, fallback: String) -> String {
+        let trimmed = preferred.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? fallback : trimmed
     }
 
     private func meterLevel(_ value: String) -> Int {
@@ -177,39 +182,6 @@ struct PlantInfoInformationCard: View {
             .red
         default:
             .orange
-        }
-    }
-
-    private func difficultyAudience(_ value: String) -> String {
-        switch value {
-        case "easy":
-            "beginner-friendly"
-        case "hard":
-            "experienced"
-        default:
-            "steady"
-        }
-    }
-
-    private func humidityDescription(for value: String) -> String {
-        switch value {
-        case "low":
-            "Comfortable in drier indoor air with minimal extra humidity."
-        case "high":
-            "Prefers consistently humid air and benefits from added moisture."
-        default:
-            "Does best in moderate indoor humidity without large swings."
-        }
-    }
-
-    private func diseaseRiskDescription(for value: String) -> String {
-        switch value {
-        case "low":
-            "Usually stays stable when watering and airflow remain consistent."
-        case "high":
-            "Monitor leaves and soil closely because stress symptoms show up faster."
-        default:
-            "Watch for early stress signs if light, water, or airflow drift off routine."
         }
     }
 }

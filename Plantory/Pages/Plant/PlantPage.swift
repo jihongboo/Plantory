@@ -13,6 +13,7 @@ struct PlantPage: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 20) {
+                Text(plant.information?.tips ?? "")
                 PlantPhotoView(photoData: plant.photoData)
                     .frame(height: 300)
                 
@@ -20,7 +21,10 @@ struct PlantPage: View {
                     PlantHeaderView(plant: plant)
                 }
                          
-                CardView(title: "Status", systemImage: "stethoscope") {
+                CardView(
+                    titleKey: "Status",
+                    systemImage: "stethoscope"
+                ) {
                     PlantStatusView(plant: plant)
                 }
 

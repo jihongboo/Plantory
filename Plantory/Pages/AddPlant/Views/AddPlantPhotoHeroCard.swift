@@ -32,7 +32,7 @@ struct AddPlantPhotoHeroCard: View {
                 Spacer()
                 
                 HStack(alignment: .center, spacing: 12) {
-                    Text(displayName ?? "Analyzing photo")
+                    Text(displayName ?? String(localized: "Analyzing photo"))
                         .font(.title3.weight(.semibold))
                         .foregroundStyle(.white)
                         .lineLimit(2)

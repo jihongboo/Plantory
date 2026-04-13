@@ -100,14 +100,17 @@ extension DoubaoPlantRecognitionService {
         let isPlant: Bool
         let overview: String
         let careDifficulty: String
+        let careDifficultyDescription: String
         let lightLevel: String
         let summary: String
         let light: String
         let waterLevel: String
         let water: String
         let humidityLevel: String
+        let humidityDescription: String
         let temperature: String
         let diseaseRiskLevel: String
+        let diseaseRiskDescription: String
         let fertilizerLevel: String
         let fertilizer: String
         let tips: String
@@ -128,13 +131,16 @@ extension DoubaoPlantRecognitionService {
                 commonName: commonName,
                 overview: overview,
                 careDifficulty: normalizedLevel(careDifficulty, allowed: ["easy", "moderate", "hard"], fallback: "moderate"),
+                careDifficultyDescription: careDifficultyDescription,
                 lightLevel: normalizedLevel(lightLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
                 light: light,
                 waterLevel: normalizedLevel(waterLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
                 water: water,
                 humidityLevel: normalizedLevel(humidityLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
+                humidityDescription: humidityDescription,
                 temperature: temperature,
                 diseaseRiskLevel: normalizedLevel(diseaseRiskLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
+                diseaseRiskDescription: diseaseRiskDescription,
                 fertilizerLevel: normalizedLevel(fertilizerLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
                 fertilizer: fertilizer,
                 tips: tips
@@ -255,15 +261,19 @@ private extension DoubaoPlantRecognitionService {
         var errorDescription: String? {
             switch self {
             case .invalidImage:
-                "The photo could not be prepared for upload."
+                String(localized: "The photo could not be prepared for upload.")
             case .invalidResponse:
-                "The AI service returned an unexpected response."
+                String(localized: "The AI service returned an unexpected response.")
             case .apiFailure(let message):
                 message
             case .emptyResponse:
-                "The AI service did not return any result."
+                String(localized: "The AI service did not return any result.")
             case .invalidJSON(let rawText):
-                "The AI service returned an unreadable result: \(rawText)"
+                String(
+                    format: String(localized: "The AI service returned an unreadable result: %@"),
+                    locale: Locale.current,
+                    rawText
+                )
             }
         }
     }
@@ -350,7 +360,11 @@ private extension DoubaoPlantRecognitionService {
 
         guard (200 ..< 300).contains(httpResponse.statusCode) else {
             let apiError = try? JSONDecoder().decode(APIErrorResponse.self, from: data)
-            let message = apiError?.error?.message ?? "The AI service failed with status code \(httpResponse.statusCode)."
+            let message = apiError?.error?.message ?? String(
+                format: String(localized: "The AI service failed with status code %lld."),
+                locale: Locale.current,
+                httpResponse.statusCode
+            )
             throw ServiceError.apiFailure(message)
         }
     }
@@ -399,8 +413,57 @@ private extension DoubaoPlantRecognitionService {
     }
 
     static func imageRecognitionPrompt() -> String {
-        return """
+        switch AppLanguage.current {
+        case .english:
+            return """
+            You are a plant identification and care assistant. Analyze the image and return exactly one JSON object. Do not output markdown or any extra explanation.
+            Preferred response language: \(AppLanguage.current.apiLanguageCode)
+
+            Requirements:
+            1. Determine whether the main subject is a plant.
+            2. If it is a plant, return its likely name and practical care information.
+            3. If the exact species is unclear, return the most likely common name or genus.
+            4. `confidence` must be an integer from 0 to 100.
+            5. All natural-language fields must be concise English.
+            6. The following fields must use only these enums:
+               `careDifficulty`: easy | moderate | hard
+               `lightLevel`: low | medium | high
+               `waterLevel`: low | medium | high
+               `humidityLevel`: low | medium | high
+               `diseaseRiskLevel`: low | medium | high
+               `fertilizerLevel`: low | medium | high
+            7. `careDifficultyDescription`, `humidityDescription`, and `diseaseRiskDescription` must be short UI-ready explanations that match their enum levels.
+            8. `light`, `water`, `temperature`, `fertilizer`, and `tips` must be directly usable in the app UI.
+            9. If the image is not a plant, set `isPlant` to false, return null or empty strings for plant fields, and use the middle enum value as fallback.
+
+            Return JSON in this shape with every field present:
+            {
+              "commonName": "Swiss Cheese Plant" | null,
+              "species": "Monstera deliciosa" | null,
+              "confidence": 0,
+              "isPlant": true,
+              "overview": "A common foliage plant with naturally split leaves.",
+              "careDifficulty": "moderate",
+              "careDifficultyDescription": "Best for steady plant care routines.",
+              "lightLevel": "medium",
+              "summary": "The photo shows a Monstera with mature split leaves.",
+              "light": "Bright indirect light, avoid long periods of harsh sun.",
+              "waterLevel": "medium",
+              "water": "Water thoroughly after the top 2 to 3 cm of soil dries.",
+              "humidityLevel": "high",
+              "humidityDescription": "Prefers consistently humid air and benefits from added moisture.",
+              "temperature": "18 to 30 degrees Celsius.",
+              "diseaseRiskLevel": "medium",
+              "diseaseRiskDescription": "Watch for early stress signs if light, water, or airflow drift off routine.",
+              "fertilizerLevel": "medium",
+              "fertilizer": "Feed monthly with a diluted foliage fertilizer during the growing season.",
+              "tips": "Good airflow and moderate humidity help the leaves stay healthy."
+            }
+            """
+        case .simplifiedChinese:
+            return """
         你是一名植物识别与养护信息整理助手。请根据图片识别植物，并且只能输出一个 JSON 对象，不要输出 markdown，不要输出解释性前后缀。
+        语言要求：请使用 \(AppLanguage.current.apiLanguageCode) 对应的简体中文返回自然语言字段。
 
         任务要求：
         1. 先判断图片主体是否是一株植物。
@@ -415,8 +478,9 @@ private extension DoubaoPlantRecognitionService {
            `humidityLevel`: low | medium | high
            `diseaseRiskLevel`: low | medium | high
            `fertilizerLevel`: low | medium | high
-        7. `light`、`water`、`temperature`、`fertilizer`、`tips` 必须给出可直接展示给用户的内容。
-        8. 如果图里不是植物，`isPlant` 返回 false，植物相关字段统一返回 null 或空字符串，量化字段统一返回默认中间值。
+        7. `careDifficultyDescription`、`humidityDescription`、`diseaseRiskDescription` 必须返回与量化等级一致、可直接展示的简洁中文说明。
+        8. `light`、`water`、`temperature`、`fertilizer`、`tips` 必须给出可直接展示给用户的内容。
+        9. 如果图里不是植物，`isPlant` 返回 false，植物相关字段统一返回 null 或空字符串，量化字段统一返回默认中间值。
 
         返回 JSON，字段必须完整，格式如下：
         {
@@ -426,24 +490,124 @@ private extension DoubaoPlantRecognitionService {
           "isPlant": true,
           "overview": "一种常见观叶植物，叶片有自然裂口。",
           "careDifficulty": "moderate",
+          "careDifficultyDescription": "适合能稳定进行日常养护的用户。",
           "lightLevel": "medium",
           "summary": "图片中是一盆龟背竹，叶片开裂明显。",
           "light": "明亮散射光，避免长时间暴晒。",
           "waterLevel": "medium",
           "water": "土壤表层 2 到 3 厘米变干后再浇透。",
           "humidityLevel": "high",
+          "humidityDescription": "偏好持续湿润的空气环境，适当增湿会更有利。",
           "temperature": "18 到 30 摄氏度。",
           "diseaseRiskLevel": "medium",
+          "diseaseRiskDescription": "如果光照、浇水或通风偏离日常节奏，请留意早期受压迹象。",
           "fertilizerLevel": "medium",
           "fertilizer": "生长期每月施一次稀薄观叶肥。",
           "tips": "保持通风和一定空气湿度，能让叶片状态更好。"
         }
         """
+        }
     }
 
     static func combinedImageAnalysisPrompt() -> String {
-        """
+        switch AppLanguage.current {
+        case .english:
+            """
+            You are a plant identification and health diagnosis assistant. Analyze the image and complete both plant recognition and health diagnosis. Return exactly one JSON object, with no markdown and no extra explanation.
+            Preferred response language: \(AppLanguage.current.apiLanguageCode)
+
+            General requirements:
+            1. Determine whether the main subject is a plant.
+            2. If it is a plant, return the plant identity, practical care information, and a health diagnosis based on this image.
+            3. If the exact species is unclear, return the most likely common name or genus.
+            4. If the image is not a plant, set `recognition.isPlant` to false; return null or empty strings for recognition text fields; keep diagnosis low risk and do not invent severe problems.
+            5. `recognition.confidence` and `diagnosis.confidence` must both be integers from 0 to 100.
+            6. All natural-language fields in both `recognition` and `diagnosis` must be concise English.
+
+            `recognition` requirements:
+            1. Quantized fields must use only these enums:
+               `careDifficulty`: easy | moderate | hard
+               `lightLevel`: low | medium | high
+               `waterLevel`: low | medium | high
+               `humidityLevel`: low | medium | high
+               `diseaseRiskLevel`: low | medium | high
+               `fertilizerLevel`: low | medium | high
+
+            `diagnosis` requirements:
+            1. `urgency` must be `low`, `medium`, or `high`.
+            2. `healthStatus` must be `healthy`, `warning`, or `critical`.
+            3. `primaryIssueType` must be one of these or null:
+               `underwatered` `overwatered` `pestInfestation` `nutrientDeficiency` `rootRot` `sunburn` `insufficientLight` `fungalDisease` `other`
+            4. `primaryIssueSeverity` must be `mild`, `moderate`, `severe`, or null.
+            5. `observedSignals` must contain 2 to 4 items. Each `systemImage` must be one of:
+               `leaf` `drop` `sun.max` `ladybug` `wind` `thermometer` `eye` `sparkles` `exclamationmark.triangle`
+            6. `possibleCauses` must contain 2 to 4 items.
+            7. `carePlan` must contain 2 to 4 items, each with `title`, `detail`, and `timing`.
+            8. `watchItems` must contain 2 items.
+            9. `preventionTip` must contain 1 concise tip.
+
+            Return JSON in this shape with every field present:
+            {
+              "recognition": {
+                "commonName": "Swiss Cheese Plant" | null,
+                "species": "Monstera deliciosa" | null,
+                "confidence": 0,
+                "isPlant": true,
+                "overview": "A common foliage plant with naturally split leaves.",
+                "careDifficulty": "moderate",
+                "careDifficultyDescription": "Best for steady plant care routines.",
+                "lightLevel": "medium",
+                "summary": "The photo shows a Monstera with mature split leaves.",
+                "light": "Bright indirect light, avoid long periods of harsh sun.",
+                "waterLevel": "medium",
+                "water": "Water thoroughly after the top 2 to 3 cm of soil dries.",
+                "humidityLevel": "high",
+                "humidityDescription": "Prefers consistently humid air and benefits from added moisture.",
+                "temperature": "18 to 30 degrees Celsius.",
+                "diseaseRiskLevel": "medium",
+                "diseaseRiskDescription": "Watch for early stress signs if light, water, or airflow drift off routine.",
+                "fertilizerLevel": "medium",
+                "fertilizer": "Feed monthly with a diluted foliage fertilizer during the growing season.",
+                "tips": "Good airflow and moderate humidity help the leaves stay healthy."
+              },
+              "diagnosis": {
+                "speciesName": "Monstera deliciosa",
+                "title": "Overwatering with root stress risk",
+                "summary": "The photo suggests persistent moisture stress with yellowing and soft droop.",
+                "confidence": 91,
+                "urgency": "high",
+                "healthStatus": "critical",
+                "primaryIssueType": "rootRot",
+                "primaryIssueSeverity": "severe",
+                "primaryIssueNote": "Yellow patches and drooping suggest likely root stress.",
+                "observedSignals": [
+                  {
+                    "title": "Yellowing zones",
+                    "detail": "Older leaves are losing color first.",
+                    "systemImage": "drop"
+                  }
+                ],
+                "possibleCauses": [
+                  "Watering happened before the soil had dried."
+                ],
+                "carePlan": [
+                  {
+                    "title": "Pause watering",
+                    "detail": "Let the top layer dry before watering again.",
+                    "timing": "Immediately"
+                  }
+                ],
+                "watchItems": [
+                  "A sour smell from the pot can point to root rot."
+                ],
+                "preventionTip": "Check soil dryness before every watering."
+              }
+            }
+            """
+        case .simplifiedChinese:
+            """
         你是一名植物识别与病害诊断助手。请根据图片同时完成“植物识别”和“健康诊断”，并且只能输出一个 JSON 对象，不要输出 markdown，不要输出解释性前后缀。
+        语言要求：请使用 \(AppLanguage.current.apiLanguageCode) 对应的简体中文返回自然语言字段。
 
         总要求：
         1. 先判断图片主体是否是一株植物。
@@ -452,7 +616,7 @@ private extension DoubaoPlantRecognitionService {
         4. 如果图里不是植物，`recognition.isPlant` 返回 false；植物识别字段返回 null 或空字符串；诊断部分默认按低风险返回，不要编造严重病害。
         5. `recognition.confidence` 和 `diagnosis.confidence` 都必须是 0 到 100 的整数。
         6. `recognition` 中所有自然语言字段使用简洁中文。
-        7. `diagnosis` 中所有自然语言字段使用简洁英文，方便当前页面直接展示。
+        7. `diagnosis` 中所有自然语言字段使用简洁中文。
 
         `recognition` 要求：
         1. 量化字段只能从固定枚举中选择：
@@ -485,57 +649,111 @@ private extension DoubaoPlantRecognitionService {
             "isPlant": true,
             "overview": "一种常见观叶植物，叶片有自然裂口。",
             "careDifficulty": "moderate",
+            "careDifficultyDescription": "适合能稳定进行日常养护的用户。",
             "lightLevel": "medium",
             "summary": "图片中是一盆龟背竹，叶片开裂明显。",
             "light": "明亮散射光，避免长时间暴晒。",
             "waterLevel": "medium",
             "water": "土壤表层 2 到 3 厘米变干后再浇透。",
             "humidityLevel": "high",
+            "humidityDescription": "偏好持续湿润的空气环境，适当增湿会更有利。",
             "temperature": "18 到 30 摄氏度。",
             "diseaseRiskLevel": "medium",
+            "diseaseRiskDescription": "如果光照、浇水或通风偏离日常节奏，请留意早期受压迹象。",
             "fertilizerLevel": "medium",
             "fertilizer": "生长期每月施一次稀薄观叶肥。",
             "tips": "保持通风和一定空气湿度，能让叶片状态更好。"
           },
           "diagnosis": {
             "speciesName": "Monstera deliciosa",
-            "title": "Overwatering with root stress risk",
-            "summary": "The photo suggests persistent moisture stress with yellowing and soft droop.",
+            "title": "浇水过多并伴随根系受压风险",
+            "summary": "照片显示叶片发黄且轻微软塌，存在持续湿害迹象。",
             "confidence": 91,
             "urgency": "high",
             "healthStatus": "critical",
             "primaryIssueType": "rootRot",
             "primaryIssueSeverity": "severe",
-            "primaryIssueNote": "Yellow patches and drooping suggest likely root stress.",
+            "primaryIssueNote": "叶片发黄和下垂提示根系可能已经受压。",
             "observedSignals": [
               {
-                "title": "Yellowing zones",
-                "detail": "Older leaves are losing color first.",
+                "title": "叶片发黄区域",
+                "detail": "老叶先开始失去绿色。",
                 "systemImage": "drop"
               }
             ],
             "possibleCauses": [
-              "Watering happened before the soil had dried."
+              "盆土未干就再次浇水。"
             ],
             "carePlan": [
               {
-                "title": "Pause watering",
-                "detail": "Let the top layer dry before watering again.",
-                "timing": "Immediately"
+                "title": "暂停浇水",
+                "detail": "等待盆土表层变干后再补水。",
+                "timing": "立即执行"
               }
             ],
             "watchItems": [
-              "A sour smell from the pot can point to root rot."
+              "盆土出现酸臭味可能提示烂根。"
             ],
-            "preventionTip": "Check soil dryness before every watering."
+            "preventionTip": "每次浇水前先确认盆土干湿度。"
           }
         }
         """
+        }
     }
 
     static func nameLookupPrompt(plantName: String) -> String {
-        """
+        switch AppLanguage.current {
+        case .english:
+            """
+            You are a plant reference assistant. The user entered this plant name: \(plantName)
+            Preferred response language: \(AppLanguage.current.apiLanguageCode)
+
+            Return one JSON object only. Do not output markdown or any extra explanation.
+
+            Requirements:
+            1. Identify the most common English common name and scientific name if possible.
+            2. If the name is ambiguous, return the most likely plant and briefly explain the ambiguity in `summary`.
+            3. `confidence` must be an integer from 0 to 100.
+            4. All natural-language fields must be concise English.
+            5. The following fields must use only these enums:
+               `careDifficulty`: easy | moderate | hard
+               `lightLevel`: low | medium | high
+               `waterLevel`: low | medium | high
+               `humidityLevel`: low | medium | high
+               `diseaseRiskLevel`: low | medium | high
+               `fertilizerLevel`: low | medium | high
+            6. `careDifficultyDescription`, `humidityDescription`, and `diseaseRiskDescription` must be short UI-ready explanations that match their enum levels.
+            7. `light`, `water`, `temperature`, `fertilizer`, and `tips` must be directly usable in the app UI.
+            8. If the input is clearly not a plant name, set `isPlant` to false, return null or empty strings for plant fields, and use the middle enum value as fallback.
+
+            Return JSON in this shape with every field present:
+            {
+              "commonName": "Swiss Cheese Plant" | null,
+              "species": "Monstera deliciosa" | null,
+              "confidence": 0,
+              "isPlant": true,
+              "overview": "A common foliage plant with naturally split leaves.",
+              "careDifficulty": "moderate",
+              "careDifficultyDescription": "Best for steady plant care routines.",
+              "lightLevel": "medium",
+              "summary": "Monstera is a common indoor foliage plant that prefers bright indirect light.",
+              "light": "Bright indirect light, avoid long periods of harsh sun.",
+              "waterLevel": "medium",
+              "water": "Water thoroughly after the top 2 to 3 cm of soil dries.",
+              "humidityLevel": "high",
+              "humidityDescription": "Prefers consistently humid air and benefits from added moisture.",
+              "temperature": "18 to 30 degrees Celsius.",
+              "diseaseRiskLevel": "medium",
+              "diseaseRiskDescription": "Watch for early stress signs if light, water, or airflow drift off routine.",
+              "fertilizerLevel": "medium",
+              "fertilizer": "Feed monthly with a diluted foliage fertilizer during the growing season.",
+              "tips": "Good airflow and moderate humidity help the leaves stay healthy."
+            }
+            """
+        case .simplifiedChinese:
+            """
         你是一名植物资料整理助手。用户输入了一个植物名称：\(plantName)
+        语言要求：请使用 \(AppLanguage.current.apiLanguageCode) 对应的简体中文返回自然语言字段。
 
         请根据这个名称返回一个 JSON 对象，不要输出 markdown，不要输出解释性前后缀。
 
@@ -551,8 +769,9 @@ private extension DoubaoPlantRecognitionService {
            `humidityLevel`: low | medium | high
            `diseaseRiskLevel`: low | medium | high
            `fertilizerLevel`: low | medium | high
-        6. `light`、`water`、`temperature`、`fertilizer`、`tips` 必须给出可直接展示给用户的内容。
-        7. 如果输入明显不是植物名称，`isPlant` 返回 false，植物相关字段统一返回 null 或空字符串，量化字段统一返回默认中间值。
+        6. `careDifficultyDescription`、`humidityDescription`、`diseaseRiskDescription` 必须返回与量化等级一致、可直接展示的简洁中文说明。
+        7. `light`、`water`、`temperature`、`fertilizer`、`tips` 必须给出可直接展示给用户的内容。
+        8. 如果输入明显不是植物名称，`isPlant` 返回 false，植物相关字段统一返回 null 或空字符串，量化字段统一返回默认中间值。
 
         返回 JSON，字段必须完整，格式如下：
         {
@@ -562,19 +781,23 @@ private extension DoubaoPlantRecognitionService {
           "isPlant": true,
           "overview": "一种常见观叶植物，叶片有自然裂口。",
           "careDifficulty": "moderate",
+          "careDifficultyDescription": "适合能稳定进行日常养护的用户。",
           "lightLevel": "medium",
           "summary": "龟背竹是常见室内观叶植物，适合明亮散射光环境。",
           "light": "明亮散射光，避免长时间暴晒。",
           "waterLevel": "medium",
           "water": "土壤表层 2 到 3 厘米变干后再浇透。",
           "humidityLevel": "high",
+          "humidityDescription": "偏好持续湿润的空气环境，适当增湿会更有利。",
           "temperature": "18 到 30 摄氏度。",
           "diseaseRiskLevel": "medium",
+          "diseaseRiskDescription": "如果光照、浇水或通风偏离日常节奏，请留意早期受压迹象。",
           "fertilizerLevel": "medium",
           "fertilizer": "生长期每月施一次稀薄观叶肥。",
           "tips": "保持通风和一定空气湿度，能让叶片状态更好。"
         }
         """
+        }
     }
 
     static func nonEmpty(_ value: String?) -> String? {
