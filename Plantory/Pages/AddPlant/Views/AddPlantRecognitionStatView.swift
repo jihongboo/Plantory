@@ -16,12 +16,11 @@ struct AddPlantRecognitionStatView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(Color.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .background(.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 }
 
 #Preview {
     AddPlantRecognitionStatView(title: "Confidence", value: "96%")
         .padding()
-        .background(Color(.systemGroupedBackground))
 }

@@ -67,9 +67,10 @@ struct HomePage: View {
                         if plants.isEmpty {
                             VStack(spacing: 32) {
                                 Text("Add your first plant\nand start tracking its growth")
-                                AddPlantMenuView()
                             }
                         }
+                    } actions: {
+                        AddPlantMenuView()
                     }
                     .background(.background)
                 }

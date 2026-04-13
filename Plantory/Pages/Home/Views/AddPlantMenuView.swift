@@ -34,6 +34,7 @@ struct AddPlantMenuView: View {
                 Label("Add Plant", systemImage: "plus")
             }
         }
+        .compositingGroup()
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
         .disabled(isPreparingImage)

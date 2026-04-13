@@ -3,7 +3,6 @@ import SwiftData
 
 struct PlantPage: View {
     let plant: Plant
-    @State private var isPresentingAddCareRecord = false
     @State private var isPresentingAddLog = false
     
     private var sortedRecords: [PlantRecord] {
@@ -18,8 +17,6 @@ struct PlantPage: View {
                 CardView {
                     PlantHeaderView(plant: plant)
                 }
-
-                AIDiagnosisEntryCard(plant: plant)
                          
                 CardView(title: "Status") {
                     PlantStatusView(plant: plant)
@@ -54,45 +51,16 @@ struct PlantPage: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem {
-                Menu {
-                    Button {
-                        isPresentingAddCareRecord = true
-                    } label: {
-                        Label("Add Care Record", systemImage: "cross.case.fill")
-                    }
-                    
-                    Button {
-                        isPresentingAddLog = true
-                    } label: {
-                        Label("Add Log", systemImage: "text.badge.plus")
-                    }
+                Button {
+                    isPresentingAddLog = true
                 } label: {
-                    Label("Add", systemImage: "plus.circle.fill")
+                    Label("Add Log", systemImage: "plus")
                 }
             }
-            
-            ToolbarItem {
-                
-            }
-        }
-        .sheet(isPresented: $isPresentingAddCareRecord) {
-            AddCareRecordPage(plant: plant)
         }
         .sheet(isPresented: $isPresentingAddLog) {
             AddLogPage(plant: plant)
         }
-        .background(
-            LinearGradient(
-                colors: [
-                    Color(red: 0.95, green: 0.98, blue: 0.95),
-                    Color(red: 0.98, green: 0.97, blue: 0.93),
-                    Color.white
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
-        )
     }
 }
 

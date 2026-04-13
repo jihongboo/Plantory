@@ -113,7 +113,6 @@ private extension AddPlantView {
         return trimmed.isEmpty ? nil : trimmed
     }
 
-    @MainActor
     func identifyPlant() async {
         isLoading = true
         diagnosisState = .analyzing
