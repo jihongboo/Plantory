@@ -82,9 +82,7 @@ struct DebugNotificationsPage: View {
             }
         }
         .navigationTitle("Debug Notifications")
-#if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
-#endif
         .task {
             await loadPendingRequests()
         }

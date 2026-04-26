@@ -1,6 +1,5 @@
 import Foundation
 
-#if canImport(UIKit) || canImport(AppKit)
 enum DoubaoPlantRecognitionService {
     private static let endpoint = URL(string: "https://ark.cn-beijing.volces.com/api/v3/responses")!
     private static let apiKey = "c2620045-55b5-45ce-9e8d-0d517846c643"
@@ -1031,4 +1030,3 @@ private extension KeyedDecodingContainer where Key == DoubaoPlantRecognitionServ
         return value
     }
 }
-#endif

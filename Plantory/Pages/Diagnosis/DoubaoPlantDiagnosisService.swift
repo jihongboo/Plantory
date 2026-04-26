@@ -78,6 +78,16 @@ enum DoubaoPlantDiagnosisService {
         plant: Plant,
         image: PlatformImage
     ) async throws -> PlantDiagnosisReport {
+        try await analyze(image: image, prompt: diagnosisPrompt(for: plant))
+    }
+
+    static func analyze(image: PlatformImage) async throws -> PlantDiagnosisReport {
+        try await analyze(image: image, prompt: temporaryDiagnosisPrompt())
+    }
+}
+
+private extension DoubaoPlantDiagnosisService {
+    static func analyze(image: PlatformImage, prompt: String) async throws -> PlantDiagnosisReport {
         guard let compressedImageData = ImageCompression.compressedJPEGData(
             from: image,
             profile: ImageCompression.diagnosisUploadProfile
@@ -99,7 +109,7 @@ enum DoubaoPlantDiagnosisService {
                         InputContent(
                             type: "input_text",
                             imageURL: nil,
-                            text: diagnosisPrompt(for: plant)
+                            text: prompt
                         )
                     ]
                 )
@@ -344,6 +354,30 @@ private extension DoubaoPlantDiagnosisService {
         let commonName = plant.information?.commonName ?? plant.displayName
         let note = plant.note.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        return diagnosisPrompt(
+            language: language,
+            commonName: commonName,
+            species: species,
+            note: note
+        )
+    }
+
+    static func temporaryDiagnosisPrompt() -> String {
+        let language = AppLanguage.current
+        return diagnosisPrompt(
+            language: language,
+            commonName: language.unknownPlantValue,
+            species: language.unknownPlantValue,
+            note: String(localized: "Temporary diagnosis without a saved plant profile.")
+        )
+    }
+
+    static func diagnosisPrompt(
+        language: AppLanguage,
+        commonName: String,
+        species: String,
+        note: String
+    ) -> String {
         switch language {
         case .english:
             return """

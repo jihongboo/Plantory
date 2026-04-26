@@ -4,52 +4,62 @@ struct PlantCardView: View {
     let plant: Plant
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            plantPhoto
-                .frame(height: 150)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(plant.displayName)
-                    .font(.subheadline.weight(.semibold))
-                    .lineLimit(1)
-
-                Label(plant.healthStatus.label, systemImage: plant.healthStatus.systemImage)
-                    .font(.caption)
-                    .foregroundStyle(statusColor(for: plant.healthStatus))
-                    .labelIconToTitleSpacing(4)
+        VStack {
+            Rectangle()
+                .fill(.clear)
+                .frame(height: 100)
+            
+            VStack(alignment: .leading, spacing: 0) {
+                Rectangle()
+                    .fill(.clear)
+                    .frame(height: 80)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(plant.displayName)
+                        .font(.body.weight(.semibold))
+                        .lineLimit(1)
+                    
+                    Text(plant.information?.commonName ?? " ")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 10)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 10)
+            .overlay(alignment: .topTrailing) {
+                Label(plant.healthStatus.label, systemImage: plant.healthStatus.systemImage)
+                    .font(.title)
+                    .labelStyle(.iconOnly)
+                    .foregroundStyle(statusColor(for: plant.healthStatus))
+                    .padding(8)
+            }
+            .background {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.background)
+            }
+            .shadow(color: .gray.opacity(0.2), radius: 20)
         }
-        .background(.background)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-        .shadow(color: .black.opacity(0.06), radius: 8, y: 2)
+        .overlay(alignment: .top) {
+            plantPhoto
+                .frame(height: 200)
+                .frame(maxWidth: .infinity)
+        }
     }
 
     @ViewBuilder
     private var plantPhoto: some View {
         ZStack {
-            LinearGradient(
-                colors: [.primary.opacity(0.08), .clear],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            
             if let photoData = plant.photoData,
                let image = Image(data: photoData) {
                 image
                     .resizable()
                     .scaledToFit()
             } else {
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 48))
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [.green, .mint],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
+                Image(.defaultPlant)
+                    .resizable()
+                    .scaledToFit()
             }
         }
     }
@@ -66,7 +76,7 @@ struct PlantCardView: View {
 #Preview {
     HStack {
         PlantCardView(plant: {
-            let p = Plant(nickname: "My Monstera", imageData: PlatformImageData.named("Monstera deliciosa"))
+            let p = Plant(nickname: "My Monstera", imageData: PlatformImageData.named("Monstera deliciosa"), information: .init(species: "", commonName: "Plant", light: "", water: "", temperature: "", fertilizer: "", tips: ""))
             return p
         }())
 

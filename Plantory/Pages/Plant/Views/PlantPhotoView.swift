@@ -11,11 +11,9 @@ struct PlantPhotoView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             } else {
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 72))
-                    .foregroundStyle(
-                        LinearGradient(colors: [.green, .mint], startPoint: .top, endPoint: .bottom)
-                    )
+                Image(.defaultPlant)
+                    .resizable()
+                    .scaledToFit()
             }
         }
     }

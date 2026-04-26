@@ -92,9 +92,7 @@ struct AddPlantView: View {
                 await identifyPlant()
             }
             .navigationTitle("Add Plant")
-#if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
-#endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {

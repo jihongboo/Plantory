@@ -183,9 +183,7 @@ private struct EditPlantDetailsSheet: View {
                 }
             }
             .navigationTitle("Edit Details")
-#if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
-#endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {

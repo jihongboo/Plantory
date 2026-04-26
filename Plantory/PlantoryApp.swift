@@ -37,6 +37,7 @@ struct PlantoryApp: App {
     var body: some Scene {
         WindowGroup {
             HomePage()
+                .tint(.green)
         }
         .environment(navigationCoordinator)
         .modelContainer(container)

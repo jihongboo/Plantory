@@ -47,9 +47,7 @@ struct AddLogPage: View {
                 }
             }
             .navigationTitle("Add Log")
-#if !os(macOS)
             .navigationBarTitleDisplayMode(.inline)
-#endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {

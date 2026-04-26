@@ -1,11 +1,7 @@
 import CoreImage
 import ImageIO
 import Vision
-#if canImport(UIKit)
 import UIKit
-#elseif canImport(AppKit)
-import AppKit
-#endif
 
 enum PlantForegroundIsolation {
     enum IsolationError: LocalizedError {
@@ -100,14 +96,10 @@ enum PlantForegroundIsolation {
             throw IsolationError.failedToRender
         }
 
-        #if canImport(UIKit)
         return PlatformImage(
             cgImage: outputCGImage,
             scale: image.renderScale,
             orientation: image.renderOrientation
         )
-        #elseif canImport(AppKit)
-        return PlatformImage(cgImage: outputCGImage, size: ciImage.extent.size)
-        #endif
     }
 }

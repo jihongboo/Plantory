@@ -1,8 +1,6 @@
 import SwiftUI
 import SwiftData
-#if canImport(UIKit)
 import UIKit
-#endif
 
 struct PlantNotificationsPage: View {
     @Bindable var plant: Plant
@@ -55,9 +53,7 @@ struct PlantNotificationsPage: View {
             }
         }
         .navigationTitle("Notifications")
-#if !os(macOS)
         .navigationBarTitleDisplayMode(.inline)
-#endif
         .onAppear {
             ensureDefaultSettings()
         }
@@ -71,13 +67,11 @@ struct PlantNotificationsPage: View {
                     title: Text("Notifications Disabled"),
                     message: Text("Enable notifications for LeafAid in Settings to receive care reminders."),
                     primaryButton: .default(Text("Open Settings")) {
-#if canImport(UIKit)
                         if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
                             openURL(url)
                         } else if let fallbackURL = URL(string: UIApplication.openSettingsURLString) {
                             openURL(fallbackURL)
                         }
-#endif
                     },
                     secondaryButton: .cancel()
                 )

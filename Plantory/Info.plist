@@ -6,6 +6,8 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Take a photo of your plant to identify it and track its health.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Use your current location to show today's local weather for plant care.</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>

@@ -17,6 +17,7 @@ struct HomePage: View {
     @State private var filter: PlantFilter = .all
     @State private var path = NavigationPath()
     @State private var plantPendingDeletion: Plant?
+    @State private var temporaryDiagnosisImageData: Data?
     @Namespace private var heroNamespace
     
     enum PlantFilter: String, CaseIterable {
@@ -60,42 +61,48 @@ struct HomePage: View {
     var body: some View {
         NavigationStack(path: $path) {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 12) {
-                    ForEach(filteredPlants) { plant in
-                        NavigationLink(value: HomeDestination.plant(plant.persistentModelID)) {
-                            PlantCardView(plant: plant)
-                                .matchedTransitionSource(id: plant.persistentModelID, in: heroNamespace)
+                VStack(spacing: 20) {
+                    HomeTodayOverviewBanner(plants: plants)
+                        .padding(.top, 8)
+
+                    quickActions
+
+                    if filteredPlants.isEmpty {
+                        ContentUnavailableView {
+                            Label(
+                                plants.isEmpty ? "No Plants Yet" : filter.emptyStateTitle,
+                                systemImage: "leaf.fill"
+                            )
+                        } description: {
+                            if plants.isEmpty {
+                                VStack(spacing: 32) {
+                                    Text("Add your first plant\nand start tracking its growth")
+                                }
+                            }
+                        } actions: {
+                            AddPlantMenuView()
                         }
-                        .contextMenu {
-                            Button(role: .destructive) {
-                                plantPendingDeletion = plant
-                            } label: {
-                                Label("Delete Plant", systemImage: "trash")
+                        .padding(.vertical, 56)
+                    } else {
+                        LazyVGrid(columns: columns, spacing: 12) {
+                            ForEach(filteredPlants) { plant in
+                                NavigationLink(value: HomeDestination.plant(plant.persistentModelID)) {
+                                    PlantCardView(plant: plant)
+                                        .matchedTransitionSource(id: plant.persistentModelID, in: heroNamespace)
+                                }
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        plantPendingDeletion = plant
+                                    } label: {
+                                        Label("Delete Plant", systemImage: "trash")
+                                    }
+                                }
+                                .buttonStyle(.plain)
                             }
                         }
-                        .buttonStyle(.plain)
                     }
                 }
                 .padding(.horizontal)
-            }
-            .overlay {
-                if filteredPlants.isEmpty {
-                    ContentUnavailableView {
-                        Label(
-                            plants.isEmpty ? "No Plants Yet" : filter.emptyStateTitle,
-                            systemImage: "leaf.fill"
-                        )
-                    } description: {
-                        if plants.isEmpty {
-                            VStack(spacing: 32) {
-                                Text("Add your first plant\nand start tracking its growth")
-                            }
-                        }
-                    } actions: {
-                        AddPlantMenuView()
-                    }
-                    .background(.background)
-                }
             }
             .navigationTitle("My Plants")
             .navigationSubtitle("\(filteredPlants.count) plants")
@@ -113,6 +120,11 @@ struct HomePage: View {
                 Button("Cancel", role: .cancel) {}
             } message: { plant in
                 Text("This will also remove its care records and AI diagnosis history.")
+            }
+            .sheet(item: $temporaryDiagnosisImageData) { imageData in
+                NavigationStack {
+                    TemporaryDiagnosisPage(imageData: imageData)
+                }
             }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -182,6 +194,29 @@ struct HomePage: View {
         )
     }
 
+    private var quickActions: some View {
+        LazyVGrid(columns: columns, spacing: 14) {
+            AddPlantMenuView(presentation: .actionCard)
+
+            PlantImageImportMenu(purpose: .diagnosis) { preparedImageData in
+                temporaryDiagnosisImageData = preparedImageData
+            } label: { isPreparingImage in
+                HomeActionCardLabel(
+                    title: "Diagnose",
+                    subtitle: "Check a plant's health",
+                    systemImage: isPreparingImage ? "hourglass" : "stethoscope",
+                    foregroundStyle: .primary,
+                    backgroundStyle: AnyShapeStyle(.green.opacity(0.12)),
+                    borderStyle: AnyShapeStyle(.green),
+                    accessorySystemImage: "leaf"
+                )
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Diagnose")
+            .accessibilityHint("Take or choose a plant photo for temporary diagnosis.")
+        }
+    }
+
     private func icon(for filter: PlantFilter) -> String {
         switch filter {
         case .all:
@@ -219,9 +254,11 @@ private enum HomeDestination: Hashable {
 #Preview {
     HomePage()
         .modelContainer(.preview)
+        .environment(PlantNavigationCoordinator())
 }
 
 #Preview("Empty") {
     HomePage()
         .modelContainer(.empty)
+        .environment(PlantNavigationCoordinator())
 }
