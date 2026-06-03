@@ -61,30 +61,18 @@ struct HomePage: View {
     var body: some View {
         NavigationStack(path: $path) {
             ScrollView {
-                VStack(spacing: 20) {
+                LazyVStack {
+                    homeHeader
+                        .padding(.top, 10)
+
                     HomeTodayOverviewBanner(plants: plants)
-                        .padding(.top, 8)
 
                     quickActions
 
                     if filteredPlants.isEmpty {
-                        ContentUnavailableView {
-                            Label(
-                                plants.isEmpty ? "No Plants Yet" : filter.emptyStateTitle,
-                                systemImage: "leaf.fill"
-                            )
-                        } description: {
-                            if plants.isEmpty {
-                                VStack(spacing: 32) {
-                                    Text("Add your first plant\nand start tracking its growth")
-                                }
-                            }
-                        } actions: {
-                            AddPlantMenuView()
-                        }
-                        .padding(.vertical, 56)
+                        emptyState
                     } else {
-                        LazyVGrid(columns: columns, spacing: 12) {
+                        LazyVGrid(columns: columns, spacing: 14) {
                             ForEach(filteredPlants) { plant in
                                 NavigationLink(value: HomeDestination.plant(plant.id)) {
                                     PlantCardView(plant: plant)
@@ -102,10 +90,12 @@ struct HomePage: View {
                         }
                     }
                 }
-                .padding(.horizontal)
+                .scenePadding()
             }
-            .navigationTitle("My Plants")
-            .navigationSubtitle("\(filteredPlants.count) plants")
+            .background {
+                PixelHomeBackground()
+            }
+            .toolbar(.hidden, for: .navigationBar)
             .confirmationDialog(
                 "Delete this plant?",
                 isPresented: deletionBinding,
@@ -124,29 +114,6 @@ struct HomePage: View {
             .sheet(item: $temporaryDiagnosisImageData) { imageData in
                 NavigationStack {
                     TemporaryDiagnosisPage(imageData: imageData)
-                }
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Menu {
-                        ForEach(PlantFilter.allCases, id: \.self) { option in
-                            Button {
-                                filter = option
-                            } label: {
-                                Label(option.title, systemImage: icon(for: option))
-                            }
-                        }
-                    } label: {
-                        Label(filter.title, systemImage: "line.3.horizontal.decrease.circle")
-                    }
-
-#if DEBUG
-                    NavigationLink(value: HomeDestination.debugNotifications) {
-                        Label("Debug", systemImage: "ladybug")
-                    }
-#endif
-
-                    AddPlantMenuView()
                 }
             }
             .navigationDestination(for: HomeDestination.self) { destination in
@@ -189,6 +156,55 @@ struct HomePage: View {
         )
     }
 
+    private var homeHeader: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image("PixelDoctorTip")
+                .pixelArt()
+                .resizable()
+                .scaledToFit()
+                .frame(width: 62, height: 62)
+                .background(PixelTheme.cream, in: .rect(cornerRadius: 5))
+                .overlay {
+                    Rectangle()
+                        .stroke(PixelTheme.wood, lineWidth: 2)
+                }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text("My Plants")
+                    .font(.largeTitle.weight(.black))
+                    .foregroundStyle(.white)
+                    .shadow(color: PixelTheme.ink, radius: 0, x: 2, y: 2)
+
+                Text("\(filteredPlants.count) plants")
+                    .font(.subheadline.weight(.black))
+                    .foregroundStyle(PixelTheme.cream)
+                    .shadow(color: PixelTheme.ink, radius: 0, x: 1, y: 1)
+            }
+
+            Spacer(minLength: 8)
+
+            HStack(spacing: 8) {
+                Menu {
+                    ForEach(PlantFilter.allCases, id: \.self) { option in
+                        Button {
+                            filter = option
+                        } label: {
+                            Label(option.title, systemImage: icon(for: option))
+                        }
+                    }
+                } label: {
+                    PixelIconButtonLabel(systemImage: "line.3.horizontal.decrease.circle")
+                }
+
+#if DEBUG
+                NavigationLink(value: HomeDestination.debugNotifications) {
+                    PixelIconButtonLabel(systemImage: "ladybug")
+                }
+#endif
+            }
+        }
+    }
+
     private var quickActions: some View {
         LazyVGrid(columns: columns, spacing: 14) {
             AddPlantMenuView(presentation: .actionCard)
@@ -200,9 +216,9 @@ struct HomePage: View {
                     title: "Diagnose",
                     subtitle: "Check a plant's health",
                     systemImage: isPreparingImage ? "hourglass" : "stethoscope",
-                    foregroundStyle: .primary,
-                    backgroundStyle: AnyShapeStyle(.green.opacity(0.12)),
-                    borderStyle: AnyShapeStyle(.green),
+                    foregroundStyle: PixelTheme.ink,
+                    backgroundStyle: AnyShapeStyle(PixelTheme.paper),
+                    borderStyle: AnyShapeStyle(PixelTheme.paperShadow),
                     accessorySystemImage: "leaf"
                 )
             }
@@ -210,6 +226,36 @@ struct HomePage: View {
             .accessibilityLabel("Diagnose")
             .accessibilityHint("Take or choose a plant photo for temporary diagnosis.")
         }
+    }
+
+    private var emptyState: some View {
+        PixelPanel {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack(alignment: .center, spacing: 12) {
+                    Image("PixelMonsteraHealthy")
+                        .pixelArt()
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 88, height: 88)
+
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(plants.isEmpty ? "No Plants Yet" : filter.emptyStateTitle)
+                            .font(.title3.weight(.black))
+                            .foregroundStyle(PixelTheme.ink)
+
+                        if plants.isEmpty {
+                            Text("Add your first plant and start tracking its growth.")
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundStyle(PixelTheme.ink.opacity(0.74))
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                }
+
+                AddPlantMenuView()
+            }
+        }
+        .padding(.vertical, 28)
     }
 
     private func icon(for filter: PlantFilter) -> String {

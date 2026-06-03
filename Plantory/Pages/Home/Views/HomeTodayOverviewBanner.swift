@@ -16,7 +16,7 @@ struct HomeTodayOverviewBanner: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 12) {
             HomeWeatherOverviewCard(initialState: initialWeatherState)
             
             HomeCareOverviewCard(plants: plants)
@@ -33,11 +33,7 @@ private struct HomeWeatherOverviewCard: View {
     
     var body: some View {
         weatherContent
-            .padding(16)
-            .frame(maxWidth: .infinity, alignment: .topLeading)
-            .background(.background)
-            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-            .shadow(color: .gray.opacity(0.2), radius: 14, y: 7)
+            .modifier(PixelCardShell())
             .task {
                 await loadWeatherIfAlreadyAuthorized()
             }
@@ -50,7 +46,7 @@ private struct HomeWeatherOverviewCard: View {
             VStack(alignment: .leading, spacing: 10) {
                 Image(systemName: "location.circle.fill")
                     .font(.system(size: 30, weight: .semibold))
-                    .foregroundStyle(.green)
+                    .foregroundStyle(PixelTheme.leaf)
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Today")
@@ -66,11 +62,9 @@ private struct HomeWeatherOverviewCard: View {
                             await loadWeatherOverview()
                         }
                     } label: {
-                        Label("Show Weather", systemImage: "location.fill")
+                        PixelButtonLabel(title: "Show Weather", systemImage: "location.fill")
                     }
-                    .font(.caption.weight(.semibold))
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.small)
+                    .buttonStyle(.plain)
                 }
             }
             
@@ -136,7 +130,7 @@ private struct HomeWeatherOverviewCard: View {
             VStack(alignment: .leading, spacing: 10) {
                 Image(systemName: "cloud.sun.fill")
                     .font(.system(size: 30, weight: .semibold))
-                    .foregroundStyle(.yellow, .blue)
+                    .foregroundStyle(PixelTheme.sun, PixelTheme.water)
                 
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Today")
@@ -152,11 +146,9 @@ private struct HomeWeatherOverviewCard: View {
                             await loadWeatherOverview()
                         }
                     } label: {
-                        Label("Retry", systemImage: "arrow.clockwise")
+                        PixelButtonLabel(title: "Retry", systemImage: "arrow.clockwise", fill: PixelTheme.wood)
                     }
-                    .font(.caption.weight(.semibold))
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
+                    .buttonStyle(.plain)
                 }
             }
         }
@@ -205,7 +197,8 @@ private struct HomeCareOverviewCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Today's Tasks")
-                .font(.title3.bold())
+                .font(.title3.weight(.black))
+                .foregroundStyle(PixelTheme.ink)
             
             HStack(spacing: 8) {
                 HomeCareCountPill(
@@ -224,14 +217,10 @@ private struct HomeCareOverviewCard: View {
             }
             
             Text(careTasks.isEmpty ? "No care due" : "\(careTasks.count) due today")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(PixelTheme.ink.opacity(0.68))
         }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(.background)
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .shadow(color: .gray.opacity(0.2), radius: 14, y: 7)
+        .modifier(PixelCardShell())
     }
     
     private func todayCareTasks(for plant: Plant) -> [HomeCareTask] {
@@ -338,7 +327,11 @@ private struct HomeCareCountPill: View {
         .frame(maxWidth: .infinity)
         .padding(8)
         .background(tint.opacity(0.12))
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .clipShape(.rect(cornerRadius: 4))
+        .overlay {
+            Rectangle()
+                .stroke(tint.opacity(0.45), lineWidth: 1.5)
+        }
     }
 }
 
@@ -371,7 +364,19 @@ private struct HomeWeatherMetricTile: View {
         .padding(10)
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 78, alignment: .leading)
         .background(level.color.opacity(0.12))
-        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .clipShape(.rect(cornerRadius: 4))
+        .overlay {
+            Rectangle()
+                .stroke(level.color.opacity(0.35), lineWidth: 1.5)
+        }
+    }
+}
+
+private struct PixelCardShell: ViewModifier {
+    func body(content: Content) -> some View {
+        PixelPanel {
+            content
+        }
     }
 }
 

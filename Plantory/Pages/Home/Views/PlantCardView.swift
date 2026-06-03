@@ -4,47 +4,48 @@ struct PlantCardView: View {
     let plant: Plant
 
     var body: some View {
-        VStack {
-            Rectangle()
-                .fill(.clear)
-                .frame(height: 100)
-            
-            VStack(alignment: .leading, spacing: 0) {
-                Rectangle()
-                    .fill(.clear)
-                    .frame(height: 80)
-                
-                VStack(alignment: .leading, spacing: 4) {
+        PixelPanel(padding: 10) {
+            VStack(alignment: .leading, spacing: 10) {
+                ZStack(alignment: .topTrailing) {
+                    Rectangle()
+                        .fill(PixelTheme.cream)
+                        .frame(height: 132)
+                        .overlay {
+                            plantPhoto
+                                .padding(8)
+                        }
+                        .overlay {
+                            Rectangle()
+                                .stroke(PixelTheme.paperShadow.opacity(0.55), lineWidth: 2)
+                        }
+
+                    Image(systemName: plant.healthStatus.systemImage)
+                        .font(.headline.weight(.black))
+                        .foregroundStyle(statusColor(for: plant.healthStatus))
+                        .padding(7)
+                        .background(PixelTheme.paper, in: .rect(cornerRadius: 3))
+                        .overlay {
+                            Rectangle()
+                                .stroke(PixelTheme.paperShadow, lineWidth: 1.5)
+                        }
+                        .padding(8)
+                }
+
+                VStack(alignment: .leading, spacing: 6) {
                     Text(plant.displayName)
-                        .font(.body.weight(.semibold))
+                        .font(.headline.weight(.black))
+                        .foregroundStyle(PixelTheme.ink)
                         .lineLimit(1)
                     
-                    Text(plant.information?.commonName ?? " ")
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
+                    Text(plant.information?.commonName ?? "Houseplant")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(PixelTheme.ink.opacity(0.64))
                         .lineLimit(1)
+
+                    PixelStatusBadge(status: plant.healthStatus)
                 }
-                .padding(.horizontal, 12)
-                .padding(.vertical, 10)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .overlay(alignment: .topTrailing) {
-                Label(plant.healthStatus.label, systemImage: plant.healthStatus.systemImage)
-                    .font(.title)
-                    .labelStyle(.iconOnly)
-                    .foregroundStyle(statusColor(for: plant.healthStatus))
-                    .padding(8)
-            }
-            .background {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(.background)
-            }
-            .shadow(color: .gray.opacity(0.2), radius: 20)
-        }
-        .overlay(alignment: .top) {
-            plantPhoto
-                .frame(height: 200)
-                .frame(maxWidth: .infinity)
         }
     }
 
@@ -56,11 +57,22 @@ struct PlantCardView: View {
                 image
                     .resizable()
                     .scaledToFit()
+                    .clipShape(.rect(cornerRadius: 4))
             } else {
-                Image(.defaultPlant)
+                Image(fallbackSpriteName)
+                    .pixelArt()
                     .resizable()
                     .scaledToFit()
             }
+        }
+    }
+
+    private var fallbackSpriteName: String {
+        switch plant.healthStatus {
+        case .healthy:
+            "PixelMonsteraHealthy"
+        case .warning, .critical:
+            "PixelSucculentWarning"
         }
     }
 
