@@ -4,6 +4,7 @@ import SwiftUI
 
 @Model
 final class Plant {
+    var id: UUID = UUID()
     var nickname: String?         // 可选别名，例如"我的小绿"
     // 存于 SwiftData 外部文件，CloudKit 同步时自动转为 CKAsset
     @Attribute(.externalStorage) var photoData: Data?
@@ -38,12 +39,14 @@ final class Plant {
     var notificationSettings: [PlantNotificationSetting]?
 
     init(
+        id: UUID = UUID(),
         nickname: String? = nil,
         imageData: Data? = nil,
         createdAt: Date = .now,
         note: String = "",
         information: PlantInformation? = nil
     ) {
+        self.id = id
         self.nickname = nickname
         self.photoData = imageData
         self.createdAt = createdAt

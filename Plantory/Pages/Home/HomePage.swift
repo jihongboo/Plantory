@@ -86,9 +86,9 @@ struct HomePage: View {
                     } else {
                         LazyVGrid(columns: columns, spacing: 12) {
                             ForEach(filteredPlants) { plant in
-                                NavigationLink(value: HomeDestination.plant(plant.persistentModelID)) {
+                                NavigationLink(value: HomeDestination.plant(plant.id)) {
                                     PlantCardView(plant: plant)
-                                        .matchedTransitionSource(id: plant.persistentModelID, in: heroNamespace)
+                                        .matchedTransitionSource(id: plant.id, in: heroNamespace)
                                 }
                                 .contextMenu {
                                     Button(role: .destructive) {
@@ -151,13 +151,8 @@ struct HomePage: View {
             }
             .navigationDestination(for: HomeDestination.self) { destination in
                 switch destination {
-                case .plant(let identifier):
-                    if let plant = plants.first(where: { $0.persistentModelID == identifier }) {
-                        PlantPage(plant: plant)
-                            .navigationTransition(.zoom(sourceID: plant.persistentModelID, in: heroNamespace))
-                    } else {
-                        ContentUnavailableView("Plant Not Found", systemImage: "leaf")
-                    }
+                case .plant(let plantID):
+                    PlantDestinationView(plantID: plantID, heroNamespace: heroNamespace)
 
                 case .debugNotifications:
                     DebugNotificationsPage()
@@ -242,13 +237,45 @@ struct HomePage: View {
             return
         }
         navigationCoordinator.clearTargetPlantIdentifierPrefix()
-        path.append(HomeDestination.plant(plant.persistentModelID))
+        path.append(HomeDestination.plant(plant.id))
     }
 }
 
 private enum HomeDestination: Hashable {
-    case plant(PersistentIdentifier)
+    case plant(UUID)
     case debugNotifications
+}
+
+private struct PlantDestinationView: View {
+    let plantID: UUID
+    let heroNamespace: Namespace.ID
+
+    @Query(sort: \Plant.createdAt, order: .reverse) private var plants: [Plant]
+    @State private var hasFinishedInitialLookup = false
+
+    private var plant: Plant? {
+        plants.first { $0.id == plantID }
+    }
+
+    var body: some View {
+        Group {
+            if let plant {
+                PlantPage(plant: plant)
+                    .navigationTransition(.zoom(sourceID: plant.id, in: heroNamespace))
+            } else if hasFinishedInitialLookup {
+                ContentUnavailableView("Plant Not Found", systemImage: "leaf")
+            } else {
+                ProgressView("Loading Plant")
+                    .navigationTitle("Plant")
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+        }
+        .task(id: plantID) {
+            hasFinishedInitialLookup = false
+            try? await Task.sleep(for: .milliseconds(350))
+            hasFinishedInitialLookup = true
+        }
+    }
 }
 
 #Preview {
