@@ -102,7 +102,7 @@ struct PlantNotificationsPage: View {
     }
 
     private func handleToggleChange(_ isEnabled: Bool, for setting: PlantNotificationSetting) {
-        Task { @MainActor in
+        Task {
             let status = await PlantNotificationScheduler.shared.syncNotifications(
                 for: plant,
                 requestAuthorization: isEnabled
@@ -121,7 +121,7 @@ struct PlantNotificationsPage: View {
     }
 
     private func handleConfigurationChange() {
-        Task { @MainActor in
+        Task {
             try? modelContext.save()
             _ = await PlantNotificationScheduler.shared.syncNotifications(for: plant)
         }
@@ -215,7 +215,7 @@ private extension PlantNotificationKind {
 
 #Preview {
     NavigationStack {
-        PlantNotificationsPage(plant: PreviewData.healthyPlant)
+        PlantNotificationsPage(plant: Plant.healthy)
     }
     .modelContainer(.preview)
 }

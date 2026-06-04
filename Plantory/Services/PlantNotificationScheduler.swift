@@ -2,7 +2,6 @@ import Foundation
 import SwiftData
 import UserNotifications
 
-@MainActor
 final class PlantNotificationScheduler {
     static let shared = PlantNotificationScheduler()
     static let notificationCategoryIdentifier = "PLANT_CARE_REMINDER"

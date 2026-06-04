@@ -30,8 +30,7 @@ struct PixelRoundedRectangleButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(PixelTheme.font(size: size.fontSize, weight: .bold, relativeTo: .title3))
-            .fontWeight(.bold)
+            .font(.pixel(size: size.fontSize, relativeTo: .title3))
             .foregroundStyle(foreground)
             .padding(size.padding)
             .frame(maxWidth: width == .expanded ? .infinity : nil)
@@ -73,7 +72,7 @@ extension ButtonStyle where Self == PixelRoundedRectangleButtonStyle {
         Image(systemName: "chevron.left")
             .frame(width: 40, height: 40)
     }
-    .buttonStyle(.pixelRoundedRectangle(size: .small, fill: PixelTheme.wood))
+    .buttonStyle(.pixelRoundedRectangle(size: .small, fill: Color(.pixelWood)))
 
     Button("Button", systemImage: "plus") {
         

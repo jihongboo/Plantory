@@ -32,6 +32,6 @@ struct PixelRoundedRectangleCard<Content: View>: View {
     PixelRoundedRectangleCard {
         Text("Content 内容")
             .padding()
-            .font(PixelTheme.font(size: 24))
+            .font(.pixel(size: 24))
     }
 }

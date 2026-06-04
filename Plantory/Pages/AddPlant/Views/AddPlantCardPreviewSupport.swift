@@ -3,7 +3,7 @@ import SwiftUI
 enum AddPlantCardPreviewSupport {
     static let imageData = PlatformImageData.named("Monstera deliciosa") ?? Data()
 
-    static let plantInformation = PreviewData.healthyPlant.information ?? PlantInformation.catalog
+    static let plantInformation = Plant.healthy.information ?? PlantInformation.catalog
 
     static let recognition = DoubaoPlantRecognitionService.IdentificationResult(
         plantInformation: plantInformation,

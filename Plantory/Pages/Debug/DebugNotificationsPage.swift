@@ -45,7 +45,7 @@ struct DebugNotificationsPage: View {
                         PlantReminderDebugSection(
                             plant: plant,
                             onScheduled: { message in
-                                Task { @MainActor in
+                                Task {
                                     statusMessage = message
                                     await loadPendingRequests()
                                 }
@@ -127,7 +127,7 @@ private struct PlantReminderDebugSection: View {
     }
 
     private func schedule(_ setting: PlantNotificationSetting) {
-        Task { @MainActor in
+        Task {
             let success = await PlantNotificationScheduler.shared.scheduleDebugPlantNotification(
                 for: plant,
                 setting: setting
@@ -160,7 +160,7 @@ private extension PlantNotificationKind {
 
 private extension DebugNotificationsPage {
     func sendTestNotification() {
-        Task { @MainActor in
+        Task {
             let granted = await PlantNotificationScheduler.shared.scheduleDebugNotification()
             statusMessage = granted
                 ? String(localized: "Scheduled a test notification for 10 seconds later.")
@@ -170,14 +170,14 @@ private extension DebugNotificationsPage {
     }
 
     func reloadPendingNotifications() {
-        Task { @MainActor in
+        Task {
             await loadPendingRequests()
             statusMessage = String(localized: "Reloaded pending notification requests.")
         }
     }
 
     func resyncPlantNotifications() {
-        Task { @MainActor in
+        Task {
             await PlantNotificationScheduler.shared.syncNotifications(for: plants)
             await loadPendingRequests()
             statusMessage = String(localized: "Resynced all plant notification schedules.")
@@ -186,7 +186,7 @@ private extension DebugNotificationsPage {
 
     func clearAllPendingNotifications() {
         PlantNotificationScheduler.shared.removeAllPendingNotifications()
-        Task { @MainActor in
+        Task {
             await loadPendingRequests()
             statusMessage = String(localized: "Removed all pending and delivered notifications.")
         }

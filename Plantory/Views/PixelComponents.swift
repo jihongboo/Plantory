@@ -11,8 +11,8 @@ struct PageBackground: View {
                 LinearGradient(
                     colors: [
                         .black.opacity(0.04),
-                        PixelTheme.ink.opacity(0.22),
-                        PixelTheme.leafDark.opacity(0.48)
+                        Color(.pixelInk).opacity(0.22),
+                        Color(.pixelLeafDark).opacity(0.48)
                     ],
                     startPoint: .top,
                     endPoint: .bottom

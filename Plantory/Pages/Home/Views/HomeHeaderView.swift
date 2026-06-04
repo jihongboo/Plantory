@@ -18,22 +18,22 @@ struct HomeHeaderView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 62, height: 62)
-                .background(PixelTheme.cream, in: .rect(cornerRadius: 5))
+                .background(Color(.pixelCream), in: .rect(cornerRadius: 5))
                 .overlay {
                     Rectangle()
-                        .stroke(PixelTheme.wood, lineWidth: 3)
+                        .stroke(Color(.pixelWood), lineWidth: 3)
                 }
             
             VStack(alignment: .leading, spacing: 0) {
                 Text("My Plants")
-                    .font(PixelTheme.font(size: 34, weight: .bold, relativeTo: .largeTitle))
+                    .font(.pixel(size: 34, relativeTo: .largeTitle))
                     .foregroundStyle(.white)
-                    .shadow(color: PixelTheme.ink, radius: 0, x: 2, y: 2)
+                    .shadow(color: Color(.pixelInk), radius: 0, x: 2, y: 2)
                 
                 Text("\(plants.count) plants")
-                    .font(PixelTheme.font(size: 15, weight: .bold, relativeTo: .subheadline))
-                    .foregroundStyle(PixelTheme.cream)
-                    .shadow(color: PixelTheme.ink, radius: 0, x: 1, y: 1)
+                    .font(.pixel(size: 15, relativeTo: .subheadline))
+                    .foregroundStyle(Color(.pixelCream))
+                    .shadow(color: Color(.pixelInk), radius: 0, x: 1, y: 1)
             }
             
             Spacer(minLength: 8)

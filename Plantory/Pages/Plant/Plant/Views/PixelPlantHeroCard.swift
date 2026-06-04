@@ -83,11 +83,11 @@ struct PixelCareMoodIcon: View {
     private var statusColor: Color {
         switch status {
         case .healthy:
-            PixelTheme.leaf
+            Color(.pixelLeaf)
         case .warning:
-            PixelTheme.sun
+            Color(.pixelSun)
         case .critical:
-            PixelTheme.danger
+            Color(.pixelDanger)
         }
     }
 }
@@ -102,19 +102,19 @@ private struct PixelMiniStat: View {
             VStack(spacing: 8) {
                 Image(systemName: systemImage)
                     .font(.title2.weight(.black))
-                    .foregroundStyle(PixelTheme.leaf)
+                    .foregroundStyle(Color(.pixelLeaf))
                     .frame(height: 20)
 
                 VStack(spacing: 0) {
                     Text(value)
-                        .font(PixelTheme.font(size: 20, weight: .bold, relativeTo: .headline))
-                        .foregroundStyle(PixelTheme.ink)
+                        .font(.pixel(size: 20, relativeTo: .headline))
+                        .foregroundStyle(Color(.pixelInk))
                         .lineLimit(1)
                         .minimumScaleFactor(0.65)
 
                     Text(title)
-                        .font(PixelTheme.font(size: 12, weight: .bold, relativeTo: .caption))
-                        .foregroundStyle(PixelTheme.ink.opacity(0.6))
+                        .font(.pixel(size: 12, relativeTo: .caption))
+                        .foregroundStyle(Color(.pixelInk).opacity(0.6))
                         .lineLimit(1)
                 }
             }
@@ -125,6 +125,6 @@ private struct PixelMiniStat: View {
 }
 
 #Preview {
-    PixelPlantHeroCard(plant: PreviewData.healthyPlant)
+    PixelPlantHeroCard(plant: Plant.healthy)
         .padding()
 }

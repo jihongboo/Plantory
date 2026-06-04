@@ -13,14 +13,14 @@ struct HomeWeatherCard: View {
             HStack {
                 VStack {
                     image
-                        .font(.system(size: 36, weight: .semibold))
+                        .font(.system(size: 36))
                         .frame(width: 52, height: 52)
                     
                     Text("Today")
-                        .font(PixelTheme.font(size: 17, weight: .semibold, relativeTo: .headline))
+                        .font(.pixel(size: 17, relativeTo: .headline))
                     
                     Text(condition)
-                        .font(PixelTheme.font(size: 12, relativeTo: .caption))
+                        .font(.pixel(size: 12, relativeTo: .caption))
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
@@ -127,12 +127,12 @@ private struct HomeWeatherMetricTile: View {
     var body: some View {
         VStack {
             Label(title, systemImage: systemImage)
-                .font(PixelTheme.font(size: 14, weight: .semibold, relativeTo: .caption2))
+                .font(.pixel(size: 14, relativeTo: .caption2))
                 .foregroundStyle(level.color)
                 .labelIconToTitleSpacing(4)
             
             Text(value)
-                .font(PixelTheme.font(size: 28, weight: .bold, relativeTo: .title3))
+                .font(.pixel(size: 28, relativeTo: .title3))
                 .foregroundStyle(level.color)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)

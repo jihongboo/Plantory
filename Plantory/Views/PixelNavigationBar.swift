@@ -25,9 +25,9 @@ struct PixelNavigationBar<Trailing: View>: View {
             .buttonStyle(.pixelRectangle)
             
             Text(title)
-                .font(PixelTheme.font(size: 30, weight: .bold, relativeTo: .largeTitle))
+                .font(.pixel(size: 30, relativeTo: .largeTitle))
                 .foregroundStyle(.white)
-                .shadow(color: PixelTheme.ink, radius: 0, x: 2, y: 2)
+                .shadow(color: Color(.pixelInk), radius: 0, x: 2, y: 2)
                 .lineLimit(1)
                 .minimumScaleFactor(0.72)
             
@@ -60,7 +60,7 @@ extension PixelNavigationBar where Trailing == EmptyView {
             }
             .buttonStyle(.pixelRectangle)
         }
-        .background(PixelTheme.leafDark)
+        .background(Color(.pixelLeafDark))
     }
     .padding()
 }

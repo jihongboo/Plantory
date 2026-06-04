@@ -8,20 +8,20 @@ struct PlantHeaderView: View {
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(plant.displayName)
-                        .font(PixelTheme.font(size: 28, weight: .bold, relativeTo: .title))
-                        .foregroundStyle(PixelTheme.ink)
+                        .font(.pixel(size: 28, relativeTo: .title))
+                        .foregroundStyle(Color(.pixelInk))
                         .lineLimit(2)
 
                     if let commonName = plant.information?.commonName {
                         Text(commonName)
-                            .font(PixelTheme.font(size: 18, weight: .bold, relativeTo: .headline))
-                            .foregroundStyle(PixelTheme.leaf)
+                            .font(.pixel(size: 18, relativeTo: .headline))
+                            .foregroundStyle(Color(.pixelLeaf))
                     }
 
                     if let species = plant.information?.species {
                         Text(species)
-                            .font(PixelTheme.font(size: 15, relativeTo: .subheadline))
-                            .foregroundStyle(PixelTheme.ink.opacity(0.58))
+                            .font(.pixel(size: 15, relativeTo: .subheadline))
+                            .foregroundStyle(Color(.pixelInk).opacity(0.58))
                             .italic()
                             .lineLimit(2)
                     }
@@ -37,7 +37,7 @@ struct PlantHeaderView: View {
                             .font(.headline.weight(.black))
                             .foregroundStyle(.white)
                             .frame(width: 42, height: 42)
-                            .background(PixelTheme.leaf)
+                            .background(Color(.pixelLeaf))
                             .overlay {
                                 Rectangle()
                                     .stroke(.white.opacity(0.55), lineWidth: 2)
@@ -45,7 +45,7 @@ struct PlantHeaderView: View {
                             }
                             .overlay {
                                 Rectangle()
-                                    .stroke(PixelTheme.ink.opacity(0.65), lineWidth: 3)
+                                    .stroke(Color(.pixelInk).opacity(0.65), lineWidth: 3)
                             }
                     }
                     .buttonStyle(.plain)
@@ -55,23 +55,23 @@ struct PlantHeaderView: View {
             HStack(spacing: 8) {
                 Image(systemName: "calendar")
                     .font(.caption.weight(.black))
-                    .foregroundStyle(PixelTheme.paperShadow)
+                    .foregroundStyle(Color(.pixelPaperShadow))
 
                 Text("Added \(plant.createdAt.formatted(date: .abbreviated, time: .omitted))")
-                    .font(PixelTheme.font(size: 15, weight: .bold, relativeTo: .footnote))
-                    .foregroundStyle(PixelTheme.ink.opacity(0.62))
+                    .font(.pixel(size: 15, relativeTo: .footnote))
+                    .foregroundStyle(Color(.pixelInk).opacity(0.62))
             }
 
             Text(plant.note.isEmpty ? String(localized: "No notes yet") : plant.note)
-                .font(PixelTheme.font(size: 17, relativeTo: .body))
-                .foregroundStyle(PixelTheme.ink.opacity(plant.note.isEmpty ? 0.48 : 0.82))
+                .font(.pixel(size: 17, relativeTo: .body))
+                .foregroundStyle(Color(.pixelInk).opacity(plant.note.isEmpty ? 0.48 : 0.82))
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(10)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(PixelTheme.cream, in: .rect(cornerRadius: 4))
+                .background(Color(.pixelCream), in: .rect(cornerRadius: 4))
                 .overlay {
                     Rectangle()
-                        .stroke(PixelTheme.paperShadow.opacity(0.62), lineWidth: 2)
+                        .stroke(Color(.pixelPaperShadow).opacity(0.62), lineWidth: 2)
                 }
         }
     }

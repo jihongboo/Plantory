@@ -202,7 +202,6 @@ private extension AddLogPage {
         }
     }
 
-    @MainActor
     func diagnoseCurrentImage() async {
         guard isAIDiagnosisEnabled else {
             diagnosisState = .idle
@@ -309,6 +308,6 @@ private extension AddLogPage {
 }
 
 #Preview {
-    AddLogPage(plant: PreviewData.healthyPlant)
+    AddLogPage(plant: Plant.healthy)
         .modelContainer(.preview)
 }

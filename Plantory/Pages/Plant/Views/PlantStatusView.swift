@@ -13,27 +13,27 @@ struct PlantStatusView: View {
                     .background(statusColor(for: plant.healthStatus))
                     .overlay {
                         Rectangle()
-                            .stroke(PixelTheme.ink.opacity(0.62), lineWidth: 2)
+                            .stroke(Color(.pixelInk).opacity(0.62), lineWidth: 2)
                     }
 
                 Text(plant.healthStatus.label)
-                    .font(PixelTheme.font(size: 24, weight: .bold, relativeTo: .title3))
-                    .foregroundStyle(PixelTheme.ink)
+                    .font(.pixel(size: 24, relativeTo: .title3))
+                    .foregroundStyle(Color(.pixelInk))
 
                 Spacer()
             }
 
             if plant.activeIssues.isEmpty {
                 Text("No active issues right now. Keep following the regular care routine.")
-                    .font(PixelTheme.font(size: 17, relativeTo: .body))
-                    .foregroundStyle(PixelTheme.ink.opacity(0.7))
+                    .font(.pixel(size: 17, relativeTo: .body))
+                    .foregroundStyle(Color(.pixelInk).opacity(0.7))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(12)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(PixelTheme.cream, in: .rect(cornerRadius: 4))
+                    .background(Color(.pixelCream), in: .rect(cornerRadius: 4))
                     .overlay {
                         Rectangle()
-                            .stroke(PixelTheme.paperShadow.opacity(0.55), lineWidth: 2)
+                            .stroke(Color(.pixelPaperShadow).opacity(0.55), lineWidth: 2)
                     }
             } else {
                 ForEach(plant.activeIssues) { issue in
@@ -45,22 +45,22 @@ struct PlantStatusView: View {
                             .background(statusColor(for: plant.healthStatus))
                             .overlay {
                                 Rectangle()
-                                    .stroke(PixelTheme.ink.opacity(0.55), lineWidth: 2)
+                                    .stroke(Color(.pixelInk).opacity(0.55), lineWidth: 2)
                             }
 
                         VStack(alignment: .leading, spacing: 2) {
                             Text(issue.type.label)
-                                .font(PixelTheme.font(size: 18, weight: .bold, relativeTo: .subheadline))
-                                .foregroundStyle(PixelTheme.ink)
+                                .font(.pixel(size: 18, relativeTo: .subheadline))
+                                .foregroundStyle(Color(.pixelInk))
 
                             Text(issue.severity.label)
-                                .font(PixelTheme.font(size: 14, weight: .bold, relativeTo: .caption))
+                                .font(.pixel(size: 14, relativeTo: .caption))
                                 .foregroundStyle(statusColor(for: plant.healthStatus))
 
                             if !issue.note.isEmpty {
                                 Text(issue.note)
-                                    .font(PixelTheme.font(size: 15, relativeTo: .footnote))
-                                    .foregroundStyle(PixelTheme.ink.opacity(0.68))
+                                    .font(.pixel(size: 15, relativeTo: .footnote))
+                                    .foregroundStyle(Color(.pixelInk).opacity(0.68))
                                     .fixedSize(horizontal: false, vertical: true)
                             }
                         }
@@ -68,10 +68,10 @@ struct PlantStatusView: View {
                         Spacer(minLength: 0)
                     }
                     .padding(10)
-                    .background(PixelTheme.cream, in: .rect(cornerRadius: 4))
+                    .background(Color(.pixelCream), in: .rect(cornerRadius: 4))
                     .overlay {
                         Rectangle()
-                            .stroke(PixelTheme.paperShadow.opacity(0.55), lineWidth: 2)
+                            .stroke(Color(.pixelPaperShadow).opacity(0.55), lineWidth: 2)
                     }
                 }
             }

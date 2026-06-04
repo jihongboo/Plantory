@@ -96,7 +96,7 @@ struct HomePage: View {
         }
         .onChange(of: scenePhase) { _, phase in
             guard phase == .active else { return }
-            Task { @MainActor in
+            Task {
                 await PlantNotificationScheduler.shared.syncNotifications(for: plants)
                 openPendingPlantIfNeeded()
             }
@@ -132,13 +132,13 @@ struct HomePage: View {
 
                     VStack(alignment: .leading, spacing: 6) {
                         Text("No Plants Yet")
-                            .font(PixelTheme.font(size: 20, weight: .bold, relativeTo: .title3))
-                            .foregroundStyle(PixelTheme.ink)
+                            .font(.pixel(size: 20, relativeTo: .title3))
+                            .foregroundStyle(Color(.pixelInk))
 
                         if plants.isEmpty {
                             Text("Add your first plant and start tracking its growth.")
-                                .font(PixelTheme.font(size: 15, weight: .semibold, relativeTo: .subheadline))
-                                .foregroundStyle(PixelTheme.ink.opacity(0.74))
+                                .font(.pixel(size: 15, relativeTo: .subheadline))
+                                .foregroundStyle(Color(.pixelInk).opacity(0.74))
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                     }

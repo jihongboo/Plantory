@@ -27,7 +27,7 @@ struct PlantPage: View {
 
                 PixelPlantHeroCard(plant: plant)
 
-                PixelRoundedRectangleCard(fill: PixelTheme.paper) {
+                PixelRoundedRectangleCard(fill: Color(.pixelPaper)) {
                     PlantHeaderView(plant: plant)
                 }
 
@@ -83,15 +83,15 @@ struct PlantPage: View {
             VStack(spacing: 10) {
                 Image(systemName: "clock.arrow.circlepath")
                     .font(.title2.weight(.black))
-                    .foregroundStyle(PixelTheme.leaf)
+                    .foregroundStyle(Color(.pixelLeaf))
 
                 Text("No Records Yet")
-                    .font(PixelTheme.font(size: 22, weight: .bold, relativeTo: .headline))
-                    .foregroundStyle(PixelTheme.ink)
+                    .font(.pixel(size: 22, relativeTo: .headline))
+                    .foregroundStyle(Color(.pixelInk))
 
                 Text("Watering, fertilizing, pest control, and photo records will appear here.")
-                    .font(PixelTheme.font(size: 16, relativeTo: .subheadline))
-                    .foregroundStyle(PixelTheme.ink.opacity(0.68))
+                    .font(.pixel(size: 16, relativeTo: .subheadline))
+                    .foregroundStyle(Color(.pixelInk).opacity(0.68))
                     .multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
@@ -114,7 +114,7 @@ struct PlantPage: View {
         modelContext.insert(record)
         try? modelContext.save()
 
-        Task { @MainActor in
+        Task {
             _ = await PlantNotificationScheduler.shared.syncNotifications(for: plant)
         }
     }
@@ -137,9 +137,9 @@ private struct PixelPlantDetailBackground: View {
             .overlay {
                 LinearGradient(
                     colors: [
-                        PixelTheme.leafDark.opacity(0.72),
-                        PixelTheme.leafDark.opacity(0.9),
-                        PixelTheme.ink.opacity(0.88)
+                        Color(.pixelLeafDark).opacity(0.72),
+                        Color(.pixelLeafDark).opacity(0.9),
+                        Color(.pixelInk).opacity(0.88)
                     ],
                     startPoint: .top,
                     endPoint: .bottom
@@ -155,11 +155,11 @@ private struct PixelSectionCard<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        PixelRoundedRectangleCard(fill: PixelTheme.paper) {
+        PixelRoundedRectangleCard(fill: Color(.pixelPaper)) {
             VStack(alignment: .leading, spacing: 14) {
                 Label(title, systemImage: systemImage)
-                    .font(PixelTheme.font(size: 22, weight: .bold, relativeTo: .title3))
-                    .foregroundStyle(PixelTheme.ink)
+                    .font(.pixel(size: 22, relativeTo: .title3))
+                    .foregroundStyle(Color(.pixelInk))
                     .labelIconToTitleSpacing(8)
 
                 PixelDashedDivider()
@@ -174,26 +174,26 @@ private struct PixelReminderRow: View {
     let summary: String
 
     var body: some View {
-        PixelRoundedRectangleCard(fill: PixelTheme.paper) {
+        PixelRoundedRectangleCard(fill: Color(.pixelPaper)) {
             HStack(spacing: 12) {
                 Image(systemName: "bell.badge.fill")
                     .font(.title2.weight(.black))
-                    .foregroundStyle(PixelTheme.sun)
+                    .foregroundStyle(Color(.pixelSun))
                     .frame(width: 42, height: 42)
-                    .background(PixelTheme.cream, in: .rect(cornerRadius: 4))
+                    .background(Color(.pixelCream), in: .rect(cornerRadius: 4))
                     .overlay {
                         Rectangle()
-                            .stroke(PixelTheme.paperShadow, lineWidth: 2)
+                            .stroke(Color(.pixelPaperShadow), lineWidth: 2)
                     }
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Care Reminders")
-                        .font(PixelTheme.font(size: 22, weight: .bold, relativeTo: .headline))
-                        .foregroundStyle(PixelTheme.ink)
+                        .font(.pixel(size: 22, relativeTo: .headline))
+                        .foregroundStyle(Color(.pixelInk))
 
                     Text(summary)
-                        .font(PixelTheme.font(size: 15, relativeTo: .subheadline))
-                        .foregroundStyle(PixelTheme.ink.opacity(0.68))
+                        .font(.pixel(size: 15, relativeTo: .subheadline))
+                        .foregroundStyle(Color(.pixelInk).opacity(0.68))
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
@@ -201,7 +201,7 @@ private struct PixelReminderRow: View {
 
                 Image(systemName: "chevron.right")
                     .font(.headline.weight(.black))
-                    .foregroundStyle(PixelTheme.ink.opacity(0.64))
+                    .foregroundStyle(Color(.pixelInk).opacity(0.64))
             }
         }
     }
@@ -210,13 +210,13 @@ private struct PixelReminderRow: View {
 private struct PixelDashedDivider: View {
     var body: some View {
         Rectangle()
-            .fill(PixelTheme.paperShadow.opacity(0.42))
+            .fill(Color(.pixelPaperShadow).opacity(0.42))
             .frame(height: 2)
             .overlay(alignment: .leading) {
                 HStack(spacing: 6) {
                     ForEach(0..<36, id: \.self) { _ in
                         Rectangle()
-                            .fill(PixelTheme.paper)
+                            .fill(Color(.pixelPaper))
                             .frame(width: 4, height: 2)
                     }
                 }
@@ -308,7 +308,7 @@ private struct EditPlantDetailsSheet: View {
 private struct HeroPlantPagePreview: View {
     var body: some View {
         NavigationStack {
-            PlantPage(plant: PreviewData.healthyPlant)
+            PlantPage(plant: Plant.healthy)
         }
         .modelContainer(.preview)
     }

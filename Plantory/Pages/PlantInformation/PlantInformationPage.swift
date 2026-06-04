@@ -19,7 +19,7 @@ struct PlantInformationPage: View {
 
 #Preview {
     NavigationStack {
-        PlantInformationPage(info: PreviewData.healthyPlant.information!)
+        PlantInformationPage(info: Plant.healthy.information!)
     }
     .modelContainer(.preview)
 }

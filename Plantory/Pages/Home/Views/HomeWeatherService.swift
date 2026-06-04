@@ -23,7 +23,6 @@ extension HomeWeatherSnapshot {
     )
 }
 
-@MainActor
 final class HomeWeatherService: NSObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private var authorizationContinuation: CheckedContinuation<Void, Error>?

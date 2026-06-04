@@ -6,7 +6,7 @@ struct PixelBottomActionBarModifier<Buttons: View>: ViewModifier {
     let buttons: Buttons
 
     init(
-        fill: Color = PixelTheme.wood,
+        fill: Color = Color(.pixelWood),
         spacing: CGFloat = 12,
         @ViewBuilder buttons: () -> Buttons
     ) {
@@ -33,7 +33,7 @@ struct PixelBottomActionBarModifier<Buttons: View>: ViewModifier {
 
 extension View {
     func pixelBottomActionBar<Buttons: View>(
-        fill: Color = PixelTheme.wood,
+        fill: Color = Color(.pixelWood),
         spacing: CGFloat = 12,
         @ViewBuilder buttons: () -> Buttons
     ) -> some View {
