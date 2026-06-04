@@ -37,6 +37,7 @@ struct PlantoryApp: App {
     var body: some Scene {
         WindowGroup {
             HomePage()
+                .font(PixelTheme.font(size: 17, relativeTo: .body))
                 .tint(.green)
         }
         .environment(navigationCoordinator)

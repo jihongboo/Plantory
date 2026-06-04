@@ -4,45 +4,31 @@ struct PlantCardView: View {
     let plant: Plant
 
     var body: some View {
-        PixelPanel(padding: 10) {
-            VStack(alignment: .leading, spacing: 10) {
+        PixelCard {
+            VStack {
                 ZStack(alignment: .topTrailing) {
                     Rectangle()
-                        .fill(PixelTheme.cream)
+                        .fill(.clear)
                         .frame(height: 132)
                         .overlay {
                             plantPhoto
-                                .padding(8)
-                        }
-                        .overlay {
-                            Rectangle()
-                                .stroke(PixelTheme.paperShadow.opacity(0.55), lineWidth: 2)
                         }
 
                     Image(systemName: plant.healthStatus.systemImage)
-                        .font(.headline.weight(.black))
+                        .font(.title.weight(.black))
                         .foregroundStyle(statusColor(for: plant.healthStatus))
-                        .padding(7)
-                        .background(PixelTheme.paper, in: .rect(cornerRadius: 3))
-                        .overlay {
-                            Rectangle()
-                                .stroke(PixelTheme.paperShadow, lineWidth: 1.5)
-                        }
-                        .padding(8)
                 }
 
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 0) {
                     Text(plant.displayName)
-                        .font(.headline.weight(.black))
+                        .font(PixelTheme.font(size: 22, weight: .bold, relativeTo: .headline))
                         .foregroundStyle(PixelTheme.ink)
                         .lineLimit(1)
                     
                     Text(plant.information?.commonName ?? "Houseplant")
-                        .font(.caption.weight(.semibold))
+                        .font(PixelTheme.font(size: 16, weight: .semibold, relativeTo: .caption))
                         .foregroundStyle(PixelTheme.ink.opacity(0.64))
                         .lineLimit(1)
-
-                    PixelStatusBadge(status: plant.healthStatus)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -57,7 +43,6 @@ struct PlantCardView: View {
                 image
                     .resizable()
                     .scaledToFit()
-                    .clipShape(.rect(cornerRadius: 4))
             } else {
                 Image(fallbackSpriteName)
                     .pixelArt()

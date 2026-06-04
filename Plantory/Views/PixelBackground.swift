@@ -8,169 +8,122 @@
 import SwiftUI
 
 struct PixelBackground: View {
-    let fill: Color
-    let border: Color
+    let strokeColor: Color
+    let fillColor: Color
+    let cornerRadius: CGFloat
+    let pixelSize: CGFloat
+    let lineWidth: CGFloat
+    let innerBorderColor: Color
+    let innerBorderWidth: CGFloat
     
-    init(fill: Color = .cardBackground, border: Color = .cardBorder) {
-        self.fill = fill
-        self.border = border
+    init(
+        fillColor: Color,
+        strokeColor: Color = .black.opacity(0.8),
+        cornerRadius: CGFloat = 28,
+        pixelSize: CGFloat = 4,
+        lineWidth: CGFloat = 4,
+        innerBorderColor: Color = .white.opacity(0.6),
+        innerBorderWidth: CGFloat = 4
+    ) {
+        self.cornerRadius = cornerRadius
+        self.pixelSize = pixelSize
+        self.lineWidth = lineWidth
+        self.strokeColor = strokeColor
+        self.fillColor = fillColor
+        self.innerBorderColor = innerBorderColor
+        self.innerBorderWidth = innerBorderWidth
     }
-    
+
     var body: some View {
-        Background()
-            .fill(fill)
-            .overlay {
-                Highlight()
-                    .stroke(.white.opacity(0.6), lineWidth: 3)
-            }
-            .overlay {
-                Background()
-                    .stroke(border, lineWidth: 3)
-            }
-    }
-}
+        Canvas { context, size in
+            let rect = CGRect(origin: .zero, size: size)
+            let outerRadius = min(cornerRadius, min(size.width, size.height) / 2)
 
-private extension PixelBackground {
-    private struct Background: Shape {
-        var step: CGFloat = 4
-        var levels: Int = 3
-        
-        func path(in rect: CGRect) -> Path {
-            let s = step
-            let n = CGFloat(levels)
-            
-            var p = Path()
-            
-            p.move(to: CGPoint(x: s * n, y: 0))
-            
-            // top
-            p.addLine(to: CGPoint(x: rect.width - s * n, y: 0))
-            
-            // top-right: 横、竖、横、竖、横、竖
-            for i in 0..<levels {
-                let fi = CGFloat(i + 1)
-                p.addLine(to: CGPoint(x: rect.width - s * (n - fi), y: s * CGFloat(i)))
-                p.addLine(to: CGPoint(x: rect.width - s * (n - fi), y: s * fi))
-            }
-            
-            // right
-            p.addLine(to: CGPoint(x: rect.width, y: rect.height - s * n))
-            
-            // bottom-right
-            for i in 0..<levels {
-                let fi = CGFloat(i + 1)
-                p.addLine(to: CGPoint(x: rect.width - s * CGFloat(i), y: rect.height - s * (n - fi)))
-                p.addLine(to: CGPoint(x: rect.width - s * fi, y: rect.height - s * (n - fi)))
-            }
-            
-            // bottom
-            p.addLine(to: CGPoint(x: s * n, y: rect.height))
-            
-            // bottom-left
-            for i in 0..<levels {
-                let fi = CGFloat(i + 1)
-                p.addLine(to: CGPoint(x: s * (n - fi), y: rect.height - s * CGFloat(i)))
-                p.addLine(to: CGPoint(x: s * (n - fi), y: rect.height - s * fi))
-            }
-            
-            // left
-            p.addLine(to: CGPoint(x: 0, y: s * n))
-            
-            // top-left
-            for i in 0..<levels {
-                let fi = CGFloat(i + 1)
-                p.addLine(to: CGPoint(x: s * CGFloat(i), y: s * (n - fi)))
-                p.addLine(to: CGPoint(x: s * fi, y: s * (n - fi)))
-            }
-            
-            p.closeSubpath()
-            return p
-        }
-    }
-    
-    private struct Highlight: Shape {
-        let step: CGFloat
-        let levels: Int
-        let inset: CGFloat
-        
-        init(step: CGFloat = 4, levels: Int = 3, inset: CGFloat = 3) {
-            self.step = step
-            self.levels = levels
-            self.inset = inset
-        }
+            let contentRect = rect.insetBy(dx: lineWidth, dy: lineWidth)
+            let contentRadius = max(0, outerRadius - lineWidth)
 
-        func path(in rect: CGRect) -> Path {
-            
-            let rect = rect.insetBy(
-                dx: inset,
-                dy: inset
+            let innerCutoutRect = contentRect.insetBy(
+                dx: innerBorderWidth,
+                dy: innerBorderWidth
             )
-            
-            let s = step
-            let n = CGFloat(levels)
-            
-            var p = Path()
-            
-            // 左下
-            p.move(to: CGPoint(
-                x: rect.minX,
-                y: rect.maxY
-            ))
-            
-            // left
-            p.addLine(to: CGPoint(
-                x: rect.minX,
-                y: rect.minY + s * n
-            ))
-            
-            // top-left
-            for i in 0..<levels {
-                let fi = CGFloat(i + 1)
-                
-                p.addLine(to: CGPoint(
-                    x: rect.minX + s * CGFloat(i),
-                    y: rect.minY + s * (n - fi)
-                ))
-                
-                p.addLine(to: CGPoint(
-                    x: rect.minX + s * fi,
-                    y: rect.minY + s * (n - fi)
-                ))
+            let innerCutoutRadius = max(0, contentRadius - innerBorderWidth)
+
+            let cols = Int(ceil(size.width / pixelSize))
+            let rows = Int(ceil(size.height / pixelSize))
+
+            for row in 0..<rows {
+                for col in 0..<cols {
+                    let cell = CGRect(
+                        x: CGFloat(col) * pixelSize,
+                        y: CGFloat(row) * pixelSize,
+                        width: pixelSize,
+                        height: pixelSize
+                    )
+
+                    let center = CGPoint(x: cell.midX, y: cell.midY)
+
+                    let inOuter = isInsideRoundedRect(
+                        point: center,
+                        rect: rect,
+                        radius: outerRadius
+                    )
+
+                    let inContent = isInsideRoundedRect(
+                        point: center,
+                        rect: contentRect,
+                        radius: contentRadius
+                    )
+
+                    let inInnerCutout = isInsideRoundedRect(
+                        point: center,
+                        rect: innerCutoutRect,
+                        radius: innerCutoutRadius
+                    )
+
+                    if inContent {
+                        context.fill(Path(cell), with: .color(fillColor))
+                    } else if inOuter {
+                        context.fill(Path(cell), with: .color(strokeColor))
+                    }
+
+                    let isInnerBorderBand = inContent && !inInnerCutout
+
+                    // Draw the full inner rounded border band, but remove only
+                    // the bottom strip. This keeps the rounded corner pixels.
+                    let isBottomStrip = center.y >= contentRect.maxY - innerBorderWidth
+
+                    if isInnerBorderBand && !isBottomStrip {
+                        context.fill(Path(cell), with: .color(innerBorderColor))
+                    }
+                }
             }
-            
-            // top
-            p.addLine(to: CGPoint(
-                x: rect.maxX - s * n,
-                y: rect.minY
-            ))
-            
-            // top-right
-            for i in 0..<levels {
-                let fi = CGFloat(i + 1)
-                
-                p.addLine(to: CGPoint(
-                    x: rect.maxX - s * (n - fi),
-                    y: rect.minY + s * CGFloat(i)
-                ))
-                
-                p.addLine(to: CGPoint(
-                    x: rect.maxX - s * (n - fi),
-                    y: rect.minY + s * fi
-                ))
-            }
-            
-            // right
-            p.addLine(to: CGPoint(
-                x: rect.maxX,
-                y: rect.maxY
-            ))
-            
-            return p
         }
+    }
+
+    private func isInsideRoundedRect(
+        point: CGPoint,
+        rect: CGRect,
+        radius: CGFloat
+    ) -> Bool {
+        guard rect.contains(point) else { return false }
+
+        let radius = min(radius, min(rect.width, rect.height) / 2)
+
+        let halfWidth = rect.width / 2
+        let halfHeight = rect.height / 2
+
+        let dx = abs(point.x - rect.midX) - (halfWidth - radius)
+        let dy = abs(point.y - rect.midY) - (halfHeight - radius)
+
+        let clampedX = max(dx, 0)
+        let clampedY = max(dy, 0)
+
+        return clampedX * clampedX + clampedY * clampedY <= radius * radius
     }
 }
 
 #Preview {
-    PixelBackground()
+    PixelBackground(fillColor: .buttonBackground)
+        .frame(width: 200, height: 100)
         .padding()
 }

@@ -9,7 +9,7 @@ struct PixelPanel<Content: View>: View {
 
     var body: some View {
         content
-            .font(.title3.bold())
+            .font(PixelTheme.font(size: 20, weight: .bold, relativeTo: .title3))
             .foregroundStyle(.white)
             .padding(.vertical, 12)
             .padding(.horizontal)
@@ -196,7 +196,7 @@ struct PixelButtonLabel: View {
 
     var body: some View {
         Label(title, systemImage: systemImage)
-            .font(.headline.weight(.black))
+            .font(PixelTheme.font(size: 17, weight: .bold, relativeTo: .headline))
             .labelIconToTitleSpacing(8)
             .foregroundStyle(foreground)
             .padding(.horizontal, 16)
@@ -245,7 +245,7 @@ struct PixelStatusBadge: View {
             Image(systemName: status.systemImage)
                 .font(.caption.weight(.black))
             Text(status.label)
-                .font(.caption.weight(.black))
+                .font(PixelTheme.font(size: 12, weight: .bold, relativeTo: .caption))
                 .lineLimit(1)
         }
         .foregroundStyle(statusColor)

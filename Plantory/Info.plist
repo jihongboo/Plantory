@@ -21,5 +21,9 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FusionPixel10pxProportionalZH_Hans.ttf</string>
+	</array>
 </dict>
 </plist>

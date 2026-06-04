@@ -7,32 +7,31 @@
 
 import SwiftUI
 
-struct Card<Content: View>: View {
+struct PixelCard<Content: View>: View {
     let fill: Color
-    let border: Color
     @ViewBuilder var content: Content
     
     init(
         fill: Color = .cardBackground,
-        border: Color = .cardBorder,
         @ViewBuilder content: () -> Content
     ) {
         self.fill = fill
-        self.border = border
         self.content = content()
     }
     
     var body: some View {
         content
+            .padding()
             .background {
-                PixelBackground(fill: fill, border: border)
+                PixelBackground(fillColor: fill)
             }
     }
 }
 
 #Preview {
-    Card {
-        Text("Content")
+    PixelCard {
+        Text("Content 内容")
             .padding()
-        .font(.custom("Menlo", size: 18))    }
+            .font(PixelTheme.font(size: 24))
+    }
 }
