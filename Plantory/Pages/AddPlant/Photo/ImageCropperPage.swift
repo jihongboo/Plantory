@@ -353,7 +353,7 @@ private enum CropHandle: CaseIterable, Identifiable {
 
 #Preview {
     NavigationStack {
-        if let imageData = PlatformImageData.named("Monstera deliciosa"),
+        if let imageData = PlatformImageData.monstera,
            let image = PlatformImage(data: imageData) {
             ImageCropperPage(
                 sourceImage: image,

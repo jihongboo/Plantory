@@ -166,17 +166,4 @@ extension PlantInformation {
 
         return "\(commonName) is a popular houseplant in the \(species) family. It does best when its light, water, and temperature stay consistent."
     }
-
-    static var catalog: PlantInformation {
-        PlantInformation(
-            species: "Monstera deliciosa",
-            commonName: "Monstera",
-            overview: "Monstera is a tropical climbing plant loved for its large split leaves. It grows quickly indoors when it has bright filtered light and steady humidity.",
-            light: "Bright indirect light, avoid direct sun",
-            water: "Water every 7–10 days, let the top inch of soil dry out first",
-            temperature: "18–30°C (64–86°F)",
-            fertilizer: "Fertilize monthly during growing season, stop in winter",
-            tips: "hahahYellowing leaves usually mean overwatering; ensure good air circulation"
-        )
-    }
 }

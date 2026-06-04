@@ -215,7 +215,7 @@ private extension PlantNotificationKind {
 
 #Preview {
     NavigationStack {
-        PlantNotificationsPage(plant: Plant.healthy)
+        PlantNotificationsPage(plant: .monstera)
     }
     .modelContainer(.preview)
 }

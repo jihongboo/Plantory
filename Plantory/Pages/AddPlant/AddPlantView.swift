@@ -246,7 +246,7 @@ private extension AddPlantView {
     }
 
     func previewMockResult() -> DoubaoPlantRecognitionService.CombinedAnalysisResult {
-        let info = Plant.healthy.information ?? PlantInformation.catalog
+        let info = Plant.monstera.information ?? PlantInformation.monstera
         let recognition = DoubaoPlantRecognitionService.StructuredPlantRecognition(
             commonName: info.commonName,
             species: info.species,
@@ -330,5 +330,5 @@ private extension AddPlantView {
 }
 
 enum PreviewAssets {
-    static let samplePlantPhotoData: Data? = PlatformImageData.named("Monstera deliciosa")
+    static let samplePlantPhotoData: Data? = PlatformImageData.monstera
 }

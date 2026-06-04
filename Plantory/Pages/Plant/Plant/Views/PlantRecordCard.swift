@@ -142,7 +142,7 @@ private struct PlantRecordDiagnosisTag: View {
             record: PlantRecord(
                 createdAt: .now.addingTimeInterval(-3 * 86_400),
                 note: "Checked yellowing on older leaves near the edge.",
-                photoData: PlatformImageData.named("Monstera deliciosa"),
+                photoData: PlatformImageData.monstera,
                 diagnosis: DiagnosisMetadata(
                     result: DiagnosisResult(
                         species: "Monstera deliciosa",

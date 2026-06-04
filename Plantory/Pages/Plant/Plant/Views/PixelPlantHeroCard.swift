@@ -125,6 +125,6 @@ private struct PixelMiniStat: View {
 }
 
 #Preview {
-    PixelPlantHeroCard(plant: Plant.healthy)
+    PixelPlantHeroCard(plant: .monstera)
         .padding()
 }

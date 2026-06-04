@@ -73,7 +73,7 @@ struct PlantCardView: View {
 #Preview {
     HStack {
         PlantCardView(plant: {
-            let p = Plant(nickname: "My Monstera", imageData: PlatformImageData.named("Monstera deliciosa"), information: .init(species: "", commonName: "Plant", light: "", water: "", temperature: "", fertilizer: "", tips: ""))
+            let p = Plant(nickname: "My Monstera", imageData: PlatformImageData.monstera, information: .init(species: "", commonName: "Plant", light: "", water: "", temperature: "", fertilizer: "", tips: ""))
             return p
         }())
 

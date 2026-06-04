@@ -308,6 +308,6 @@ private extension AddLogPage {
 }
 
 #Preview {
-    AddLogPage(plant: Plant.healthy)
+    AddLogPage(plant: .monstera)
         .modelContainer(.preview)
 }

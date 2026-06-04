@@ -44,7 +44,7 @@ final class Plant {
         imageData: Data? = nil,
         createdAt: Date = .now,
         note: String = "",
-        information: PlantInformation? = nil
+        information: PlantInformation? = nil,
     ) {
         self.id = id
         self.nickname = nickname

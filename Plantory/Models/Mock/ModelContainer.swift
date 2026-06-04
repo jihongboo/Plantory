@@ -34,24 +34,10 @@ extension ModelContainer {
 
 enum PreviewData {
     static func populate(into context: ModelContext) {
-        let monstera = PlantInformation.monstera
-        let pothos = PlantInformation.goldenPothos
-        let cactus = PlantInformation.cactus
-        context.insert(monstera)
-        context.insert(pothos)
-        context.insert(cactus)
+        context.insert(PlantInformation.monstera)
+        context.insert(PlantInformation.succulent)
 
-        let p1 = Plant.healthy(information: monstera)
-        let p2 = Plant.pothos(information: pothos)
-        let p3 = Plant.warning(information: cactus)
-        let p4 = Plant.critical
-
-        p1.records = PlantRecord.monsteraRecords(for: p1)
-        p3.records = [PlantRecord.cactusWatering(for: p3)]
-
-        context.insert(p1)
-        context.insert(p2)
-        context.insert(p3)
-        context.insert(p4)
+        context.insert(Plant.monstera)
+        context.insert(Plant.succulent)
     }
 }

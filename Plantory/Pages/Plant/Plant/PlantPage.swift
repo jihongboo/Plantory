@@ -308,7 +308,7 @@ private struct EditPlantDetailsSheet: View {
 private struct HeroPlantPagePreview: View {
     var body: some View {
         NavigationStack {
-            PlantPage(plant: Plant.healthy)
+            PlantPage(plant: .monstera)
         }
         .modelContainer(.preview)
     }
