@@ -33,16 +33,50 @@ Plantory/
 │   └── PRD.markdown              # 产品需求文档
 ├── Plantory/                     # 主 App Target
 │   ├── PlantoryApp.swift         # App 入口，ModelContainer 配置
-│   ├── ContentView.swift         # 根视图
-│   ├── Item.swift                # 占位模型（待替换）
-│   ├── Assets.xcassets/
+│   ├── Fundation/                # App 环境、通用状态、Mock 数据
+│   ├── Models/                   # SwiftData 模型
+│   ├── Navigation/               # 导航协调器
+│   ├── Pages/                    # 页面模块
+│   ├── Resources/                # 资源、字体、本地化
+│   ├── Services/                 # 跨页面业务服务
+│   ├── Utilities/                # 通用工具与扩展
+│   ├── Views/                    # 全局可复用 UI 组件
 │   ├── Info.plist
 │   └── Plantory.entitlements     # CloudKit 等权限
 ├── PlantoryTests/
 └── PlantoryUITests/
 ```
 
-> 当前代码为 Xcode 默认模板，`Item.swift` 是占位模型，需替换为真实数据模型。
+> 当前工程已从 Xcode 默认模板演进为模块化结构。新增页面时优先放入 `Plantory/Pages/`，共享组件才放入 `Plantory/Views/`。
+
+### Pages 目录约定
+
+页面按业务域分组，再按具体页面分组：
+
+```
+Plantory/Pages/
+├── Home/
+│   └── Home/
+│       ├── HomePage.swift
+│       └── Views/               # HomePage 私有/局部子视图
+├── Plant/
+│   ├── Plant/
+│   │   ├── PlantPage.swift
+│   │   └── Views/               # PlantPage 私有/局部子视图
+│   └── Notifications/
+│       └── PlantNotificationsPage.swift
+├── AddPlant/
+├── AddRecord/
+├── Diagnosis/
+├── PlantInformation/
+└── Debug/
+```
+
+- `Pages/<Feature>/<PageName>/<PageName>Page.swift` 放页面入口，例如 `Pages/Home/Home/HomePage.swift`。
+- 只服务于某个页面的组件放在该页面旁的 `Views/` 下，例如 `Pages/Plant/Plant/Views/PlantStatusView.swift`。
+- 同一业务域下的独立页面放在同一个 feature 文件夹下，例如 `Pages/Plant/Plant/` 和 `Pages/Plant/Notifications/`。
+- 多个页面共享、或跨业务域复用的组件放入根级 `Plantory/Views/`。
+- 页面文件命名保留 `Page` 后缀，局部组件使用清晰的语义名，不要把大型子视图继续嵌套在页面文件里。
 
 ---
 
