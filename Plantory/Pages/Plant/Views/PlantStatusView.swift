@@ -5,35 +5,73 @@ struct PlantStatusView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Label(plant.healthStatus.label, systemImage: plant.healthStatus.systemImage)
-                .font(.headline)
-                .foregroundStyle(plant.healthStatus.themeColor)
+            HStack(spacing: 10) {
+                Image(systemName: plant.healthStatus.systemImage)
+                    .font(.headline.weight(.black))
+                    .foregroundStyle(.white)
+                    .frame(width: 38, height: 38)
+                    .background(statusColor(for: plant.healthStatus))
+                    .overlay {
+                        Rectangle()
+                            .stroke(PixelTheme.ink.opacity(0.62), lineWidth: 2)
+                    }
+
+                Text(plant.healthStatus.label)
+                    .font(PixelTheme.font(size: 24, weight: .bold, relativeTo: .title3))
+                    .foregroundStyle(PixelTheme.ink)
+
+                Spacer()
+            }
 
             if plant.activeIssues.isEmpty {
                 Text("No active issues right now. Keep following the regular care routine.")
-                    .foregroundStyle(.secondary)
+                    .font(PixelTheme.font(size: 17, relativeTo: .body))
+                    .foregroundStyle(PixelTheme.ink.opacity(0.7))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(PixelTheme.cream, in: .rect(cornerRadius: 4))
+                    .overlay {
+                        Rectangle()
+                            .stroke(PixelTheme.paperShadow.opacity(0.55), lineWidth: 2)
+                    }
             } else {
                 ForEach(plant.activeIssues) { issue in
                     HStack(alignment: .top, spacing: 10) {
                         Image(systemName: issue.type.systemImage)
-                            .foregroundStyle(statusColor(for: plant.healthStatus))
-                            .frame(width: 18)
+                            .font(.subheadline.weight(.black))
+                            .foregroundStyle(.white)
+                            .frame(width: 30, height: 30)
+                            .background(statusColor(for: plant.healthStatus))
+                            .overlay {
+                                Rectangle()
+                                    .stroke(PixelTheme.ink.opacity(0.55), lineWidth: 2)
+                            }
 
                         VStack(alignment: .leading, spacing: 2) {
                             Text(issue.type.label)
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(.primary)
+                                .font(PixelTheme.font(size: 18, weight: .bold, relativeTo: .subheadline))
+                                .foregroundStyle(PixelTheme.ink)
 
                             Text(issue.severity.label)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .font(PixelTheme.font(size: 14, weight: .bold, relativeTo: .caption))
+                                .foregroundStyle(statusColor(for: plant.healthStatus))
 
                             if !issue.note.isEmpty {
                                 Text(issue.note)
-                                    .font(.footnote)
-                                    .foregroundStyle(.secondary)
+                                    .font(PixelTheme.font(size: 15, relativeTo: .footnote))
+                                    .foregroundStyle(PixelTheme.ink.opacity(0.68))
+                                    .fixedSize(horizontal: false, vertical: true)
                             }
                         }
+
+                        Spacer(minLength: 0)
+                    }
+                    .padding(10)
+                    .background(PixelTheme.cream, in: .rect(cornerRadius: 4))
+                    .overlay {
+                        Rectangle()
+                            .stroke(PixelTheme.paperShadow.opacity(0.55), lineWidth: 2)
                     }
                 }
             }
@@ -95,4 +133,3 @@ struct PlantStatusView: View {
     return PlantStatusView(plant: plant)
         .padding()
 }
-

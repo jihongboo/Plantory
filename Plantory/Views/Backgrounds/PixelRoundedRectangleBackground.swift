@@ -1,5 +1,5 @@
 //
-//  PixelBackground.swift
+//  PixelRoundedRectangleBackground.swift
 //  Plantory
 //
 //  Created by 纪洪波 on 2026/6/4.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PixelBackground: View {
+struct PixelRoundedRectangleBackground: View {
     let strokeColor: Color
     let fillColor: Color
     let cornerRadius: CGFloat
@@ -123,7 +123,7 @@ struct PixelBackground: View {
 }
 
 #Preview {
-    PixelBackground(fillColor: .buttonBackground)
+    PixelRoundedRectangleBackground(fillColor: .buttonBackground)
         .frame(width: 200, height: 100)
         .padding()
 }

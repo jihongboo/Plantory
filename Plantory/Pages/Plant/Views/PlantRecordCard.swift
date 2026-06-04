@@ -5,17 +5,35 @@ struct PlantRecordCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label(record.type.label, systemImage: record.type.systemImage)
-                .font(.headline)
-                .foregroundStyle(record.type.themeColor)
+            HStack(spacing: 10) {
+                Image(systemName: record.type.systemImage)
+                    .font(.subheadline.weight(.black))
+                    .foregroundStyle(.white)
+                    .frame(width: 34, height: 34)
+                    .background(record.type.themeColor)
+                    .overlay {
+                        Rectangle()
+                            .stroke(PixelTheme.ink.opacity(0.58), lineWidth: 2)
+                    }
 
-            Text(record.createdAt.formatted(date: .abbreviated, time: .shortened))
-                .font(.caption)
-                .foregroundStyle(.tertiary)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(record.type.label)
+                        .font(PixelTheme.font(size: 20, weight: .bold, relativeTo: .headline))
+                        .foregroundStyle(PixelTheme.ink)
+
+                    Text(record.createdAt.formatted(date: .abbreviated, time: .shortened))
+                        .font(PixelTheme.font(size: 13, weight: .bold, relativeTo: .caption))
+                        .foregroundStyle(PixelTheme.ink.opacity(0.54))
+                }
+
+                Spacer(minLength: 0)
+            }
 
             if !record.note.isEmpty {
                 Text(record.note)
-                    .foregroundStyle(.primary)
+                    .font(PixelTheme.font(size: 16, relativeTo: .body))
+                    .foregroundStyle(PixelTheme.ink.opacity(0.76))
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             if let photoData = record.photoData,
@@ -23,14 +41,20 @@ struct PlantRecordCard: View {
                 image
                     .resizable()
                     .scaledToFit()
-                    .frame(height: 200)
-                    .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .frame(maxHeight: 180)
+                    .padding(6)
+                    .background(PixelTheme.cream)
+                    .overlay {
+                        Rectangle()
+                            .stroke(PixelTheme.paperShadow.opacity(0.72), lineWidth: 2)
+                    }
             }
 
             if let result = record.diagnosis?.result {
                 PlantRecordDiagnosisView(result: result)
             }
         }
+        .padding(.vertical, 12)
     }
 }
 
@@ -40,11 +64,12 @@ private struct PlantRecordDiagnosisView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Label("Diagnosis", systemImage: "stethoscope")
-                .font(.headline)
-                .foregroundStyle(.green)
+                .font(PixelTheme.font(size: 19, weight: .bold, relativeTo: .headline))
+                .foregroundStyle(PixelTheme.leaf)
             Text(result.problem)
-                .font(.headline)
-                .foregroundStyle(.primary)
+                .font(PixelTheme.font(size: 17, weight: .bold, relativeTo: .subheadline))
+                .foregroundStyle(PixelTheme.ink)
+                .fixedSize(horizontal: false, vertical: true)
 
             PlantRecordDiagnosisTag(
                 title: "Possible Cause",
@@ -61,6 +86,12 @@ private struct PlantRecordDiagnosisView: View {
             )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(10)
+        .background(PixelTheme.cream, in: .rect(cornerRadius: 4))
+        .overlay {
+            Rectangle()
+                .stroke(PixelTheme.paperShadow.opacity(0.55), lineWidth: 2)
+        }
     }
 }
 
@@ -73,22 +104,23 @@ private struct PlantRecordDiagnosisTag: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Label(title, systemImage: systemImage)
-                .font(.caption.weight(.semibold))
+                .font(PixelTheme.font(size: 14, weight: .bold, relativeTo: .caption))
                 .foregroundStyle(tint)
 
             ForEach(contents, id: \.self) { content in
                 Text(content)
-                    .font(.subheadline)
-                    .foregroundStyle(.primary)
+                    .font(PixelTheme.font(size: 15, relativeTo: .subheadline))
+                    .foregroundStyle(PixelTheme.ink.opacity(0.75))
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
-        .background {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(tint.opacity(0.12))
+        .background(tint.opacity(0.12), in: .rect(cornerRadius: 3))
+        .overlay {
+            Rectangle()
+                .stroke(tint.opacity(0.36), lineWidth: 1.5)
         }
     }
 }

@@ -14,7 +14,7 @@ struct HomeHeaderView: View {
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             Image("PixelDoctorTip")
-                .pixelArt()
+                .pixelate()
                 .resizable()
                 .scaledToFit()
                 .frame(width: 62, height: 62)

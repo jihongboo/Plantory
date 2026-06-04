@@ -54,16 +54,11 @@ struct HomePage: View {
                 }
             }
             .background {
-                PixelHomeBackground()
+                PageBackground()
             }
             .toolbar(.hidden, for: .navigationBar)
-            .safeAreaBar(edge: .bottom) {
+            .pixelBottomActionBar {
                 AddPlantMenuView()
-                    .padding()
-                    .background {
-                        PixelBackground(fillColor: PixelTheme.wood)
-                            .ignoresSafeArea()
-                    }
             }
             .confirmationDialog(
                 "Delete this plant?",
@@ -126,11 +121,11 @@ struct HomePage: View {
     }
 
     private var emptyState: some View {
-        PixelPanel {
+        PixelRoundedRectangleCard {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(alignment: .center, spacing: 12) {
                     Image("PixelMonsteraHealthy")
-                        .pixelArt()
+                        .pixelate()
                         .resizable()
                         .scaledToFit()
                         .frame(width: 88, height: 88)

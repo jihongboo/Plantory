@@ -18,6 +18,13 @@ extension Image {
     }
 }
 
+extension Image {
+    func pixelate() -> Image {
+        interpolation(.none)
+            .antialiased(false)
+    }
+}
+
 extension PlatformImage {
     private static let processingCIContext = CIContext(options: nil)
 

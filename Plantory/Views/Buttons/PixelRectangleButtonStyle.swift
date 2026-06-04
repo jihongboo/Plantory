@@ -19,15 +19,8 @@ struct PixelRectangleButtonStyle: ButtonStyle {
             .foregroundStyle(foreground)
             .padding()
             .frame(maxWidth: width == .expanded ? .infinity : nil)
-            .background(fill)
-            .overlay {
-                Rectangle()
-                    .stroke(.white.opacity(0.5), lineWidth: 3)
-                    .padding(4)
-            }
-            .overlay {
-                Rectangle()
-                    .stroke(.black.opacity(0.6), lineWidth: 4)
+            .background {
+                PixelRectangleBackground(fill: fill)
             }
             .scaleEffect(configuration.isPressed ? 0.96 : 1)
             .opacity(configuration.isPressed ? 0.86 : 1)

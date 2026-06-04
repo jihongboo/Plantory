@@ -1,5 +1,5 @@
 //
-//  PixelPanel.swift
+//  PixelRectangleCard.swift
 //  Plantory
 //
 //  Created by 纪洪波 on 2026/6/4.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PixelCard<Content: View>: View {
+struct PixelRectangleCard<Content: View>: View {
     let fill: Color
     @ViewBuilder var content: Content
     
@@ -21,17 +21,15 @@ struct PixelCard<Content: View>: View {
     
     var body: some View {
         content
-            .padding()
             .background {
-                PixelBackground(fillColor: fill)
+                PixelRectangleBackground(fill: fill)
             }
     }
 }
 
 #Preview {
-    PixelCard {
-        Text("Content 内容")
+    PixelRectangleCard(fill: .cardBackground) {
+        Text("PixelRectangleCard")
             .padding()
-            .font(PixelTheme.font(size: 24))
     }
 }

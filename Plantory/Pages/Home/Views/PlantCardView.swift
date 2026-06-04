@@ -4,7 +4,7 @@ struct PlantCardView: View {
     let plant: Plant
 
     var body: some View {
-        PixelCard {
+        PixelRoundedRectangleCard {
             VStack {
                 ZStack(alignment: .topTrailing) {
                     Rectangle()
@@ -45,7 +45,7 @@ struct PlantCardView: View {
                     .scaledToFit()
             } else {
                 Image(fallbackSpriteName)
-                    .pixelArt()
+                    .pixelate()
                     .resizable()
                     .scaledToFit()
             }

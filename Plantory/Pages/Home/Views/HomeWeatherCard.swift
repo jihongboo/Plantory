@@ -9,7 +9,7 @@ struct HomeWeatherCard: View {
     }
     
     var body: some View {
-        PixelCard {
+        PixelRoundedRectangleCard {
             HStack {
                 VStack {
                     image

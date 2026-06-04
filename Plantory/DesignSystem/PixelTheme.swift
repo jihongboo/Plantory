@@ -6,12 +6,12 @@ enum PixelTheme {
         case medium
         case semibold
         case bold
-
+        
         fileprivate var postScriptName: String {
             "Fusion-Pixel-10px-Prop-zh_hans-Regular"
         }
     }
-
+    
     static let ink = Color(red: 0.16, green: 0.10, blue: 0.04)
     static let cream = Color(red: 0.98, green: 0.91, blue: 0.76)
     static let paper = Color(red: 1.00, green: 0.95, blue: 0.84)
@@ -22,19 +22,12 @@ enum PixelTheme {
     static let water = Color(red: 0.24, green: 0.56, blue: 0.84)
     static let sun = Color(red: 0.95, green: 0.62, blue: 0.12)
     static let danger = Color(red: 0.78, green: 0.22, blue: 0.16)
-
+    
     static func font(
         size: CGFloat,
         weight: FontWeight = .regular,
         relativeTo textStyle: Font.TextStyle = .body
     ) -> Font {
         .custom(weight.postScriptName, size: size, relativeTo: textStyle)
-    }
-}
-
-extension Image {
-    func pixelArt() -> Image {
-        interpolation(.none)
-            .antialiased(false)
     }
 }
