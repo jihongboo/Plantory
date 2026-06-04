@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct HomeWeatherCard: View {
-    @State private var weatherState: HomeWeatherState
+    @Environment(\.homeWeatherService) private var weatherService
+    @State private var viewState: ViewState<HomeWeatherSnapshot>
     
-    init(initialState: HomeWeatherState? = nil) {
-        _weatherState = State(initialValue: initialState ?? .loading)
+    init(_ initialState: ViewState<HomeWeatherSnapshot>? = nil) {
+        _viewState = State(initialValue: initialState ?? .loading)
     }
     
     var body: some View {
@@ -12,8 +13,8 @@ struct HomeWeatherCard: View {
             HStack {
                 VStack {
                     image
-                        .font(.system(size: 32, weight: .semibold))
-                        .frame(width: 50, height: 50)
+                        .font(.system(size: 36, weight: .semibold))
+                        .frame(width: 52, height: 52)
                     
                     Text("Today")
                         .font(PixelTheme.font(size: 17, weight: .semibold, relativeTo: .headline))
@@ -25,17 +26,14 @@ struct HomeWeatherCard: View {
                 }
                 .containerRelativeFrame(.horizontal, count: 4, spacing: 0)
                 
-                switch weatherState {
-                case .loading:
-                    Spacer()
-                case .loaded(let weather):
+                switch viewState {
+                case .loading, .loaded:
                     HStack {
                         HomeWeatherMetricTile(
                             title: "Temp",
-                            value: weather.temperatureText,
-                            detail: "Feels \(weather.apparentTemperatureText)",
+                            value: viewState.value?.temperatureText,
                             systemImage: "thermometer.medium",
-                            level: weather.temperatureLevel
+                            level: viewState.value?.temperatureLevel
                         )
                         
                         Rectangle()
@@ -44,10 +42,9 @@ struct HomeWeatherCard: View {
                         
                         HomeWeatherMetricTile(
                             title: "Humidity",
-                            value: weather.humidityText,
-                            detail: weather.humidityLevel.summary,
+                            value: viewState.value?.humidityText,
                             systemImage: "humidity.fill",
-                            level: weather.humidityLevel
+                            level: viewState.value?.humidityLevel
                         )
                         
                         Rectangle()
@@ -56,96 +53,92 @@ struct HomeWeatherCard: View {
                         
                         HomeWeatherMetricTile(
                             title: "UV",
-                            value: weather.uvIndexText,
-                            detail: weather.uvIndexLevel.summary,
+                            value: viewState.value?.uvIndexText,
                             systemImage: "sun.max.fill",
-                            level: weather.uvIndexLevel
+                            level: viewState.value?.uvIndexLevel
                         )
                     }
-                case .unavailable:
+                case .failed:
                     Button("Show Weather", systemImage: "location.fill") {
                         Task {
-                            await loadWeatherOverview()
+                            await loadWeather()
                         }
                     }
-                    .buttonStyle(.pixel)
+                    .buttonStyle(.pixelRoundedRectangle)
                 }
             }
         }
-        .task(loadWeatherOverview)
+        .task(loadWeather)
     }
     
     @ViewBuilder
     private var image: some View {
-        switch weatherState {
+        switch viewState {
         case .loading:
             ProgressView()
                 .controlSize(.large)
         case .loaded(let weather):
             Image(systemName: weather.symbolName)
                 .foregroundStyle(.yellow, .blue)
-        case .unavailable:
+        case .failed:
             Image(systemName: "cloud.sun.fill")
                 .foregroundStyle(.yellow, .blue)
         }
     }
     
     private var condition: String {
-        switch weatherState {
+        switch viewState {
         case .loading:
             "Loading weather"
         case .loaded(let weather):
             weather.condition
-        case .unavailable(let string):
-            string
+        case .failed(let error):
+            error.localizedDescription
         }
     }
     
-    private func loadWeatherOverview() async {
+    private func loadWeather() async {
         do {
-            weatherState = .loaded(try await HomeWeatherService.shared.currentWeather())
+            viewState = .loaded(try await weatherService.currentWeather())
         } catch {
-            let message = (error as? LocalizedError)?.errorDescription
-            ?? String(localized: "Weather is unavailable right now.")
-            weatherState = .unavailable(message)
+            viewState = .failed(error)
         }
     }
-}
-
-enum HomeWeatherState: Equatable {
-    case loading
-    case loaded(HomeWeatherSnapshot)
-    case unavailable(String)
 }
 
 private struct HomeWeatherMetricTile: View {
     let title: LocalizedStringKey
     let value: String
-    let detail: String
     let systemImage: String
     let level: HomeWeatherMetricLevel
     
+    init(
+        title: LocalizedStringKey,
+        value: String?,
+        systemImage: String,
+        level: HomeWeatherMetricLevel?
+    ) {
+        self.title = title
+        self.value = value ?? "00"
+        self.systemImage = systemImage
+        self.level = level ?? .ideal
+    }
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack {
             Label(title, systemImage: systemImage)
-                .font(PixelTheme.font(size: 12, weight: .semibold, relativeTo: .caption2))
+                .font(PixelTheme.font(size: 14, weight: .semibold, relativeTo: .caption2))
                 .foregroundStyle(level.color)
                 .labelIconToTitleSpacing(4)
             
             Text(value)
-                .font(PixelTheme.font(size: 20, weight: .bold, relativeTo: .title3))
+                .font(PixelTheme.font(size: 28, weight: .bold, relativeTo: .title3))
                 .foregroundStyle(level.color)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
-            
-            Text(detail)
-                .font(PixelTheme.font(size: 12, relativeTo: .caption2))
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
         }
-        .padding(10)
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 78, alignment: .leading)
+        .padding(4)
+        .frame(maxWidth: .infinity)
     }
 }
 
@@ -160,7 +153,7 @@ private enum HomeWeatherMetricLevel: Hashable {
         case .low:
                 .blue
         case .ideal:
-                .green
+                .buttonBackground
         case .high:
                 .orange
         case .extreme:
@@ -261,26 +254,9 @@ private extension HomeWeatherSnapshot {
 
 #Preview {
     VStack {
-        HomeWeatherCard(
-            initialState: .loading,
-        )
-        HomeWeatherCard(
-            initialState: .loaded(.previewComfortable),
-        )
-        HomeWeatherCard(
-            initialState: .unavailable("Location access is needed for today's weather."),
-        )
+        HomeWeatherCard(.loading)
+        HomeWeatherCard(.loaded(.previewComfortable))
+        HomeWeatherCard(.failed(AppError.custom("error")))
     }
     .padding()
-}
-
-private extension HomeWeatherSnapshot {
-    static let previewComfortable = HomeWeatherSnapshot(
-        temperature: Measurement(value: 24, unit: UnitTemperature.celsius),
-        apparentTemperature: Measurement(value: 26, unit: UnitTemperature.celsius),
-        humidity: 0.68,
-        uvIndex: 4,
-        symbolName: "cloud.sun.fill",
-        condition: "Partly Cloudy"
-    )
 }

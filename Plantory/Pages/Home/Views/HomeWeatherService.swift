@@ -1,5 +1,6 @@
 import CoreLocation
 import Foundation
+import SwiftUI
 import WeatherKit
 
 struct HomeWeatherSnapshot: Equatable {
@@ -11,10 +12,19 @@ struct HomeWeatherSnapshot: Equatable {
     var condition: String
 }
 
+extension HomeWeatherSnapshot {
+    static let previewComfortable = HomeWeatherSnapshot(
+        temperature: Measurement(value: 24, unit: UnitTemperature.celsius),
+        apparentTemperature: Measurement(value: 26, unit: UnitTemperature.celsius),
+        humidity: 0.68,
+        uvIndex: 4,
+        symbolName: "cloud.sun.fill",
+        condition: "Partly Cloudy"
+    )
+}
+
 @MainActor
 final class HomeWeatherService: NSObject, CLLocationManagerDelegate {
-    static let shared = HomeWeatherService()
-
     private let locationManager = CLLocationManager()
     private var authorizationContinuation: CheckedContinuation<Void, Error>?
     private var locationContinuation: CheckedContinuation<CLLocation, Error>?
@@ -103,6 +113,10 @@ final class HomeWeatherService: NSObject, CLLocationManagerDelegate {
         locationContinuation?.resume(throwing: error)
         locationContinuation = nil
     }
+}
+
+extension EnvironmentValues {
+    @Entry var homeWeatherService = HomeWeatherService()
 }
 
 enum HomeWeatherServiceError: LocalizedError {

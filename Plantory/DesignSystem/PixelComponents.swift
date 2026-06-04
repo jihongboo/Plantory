@@ -212,31 +212,6 @@ struct PixelButtonLabel: View {
     }
 }
 
-struct PixelIconButtonLabel: View {
-    let systemImage: String
-    var fill: Color = PixelTheme.wood
-    var foreground: Color = .white
-
-    var body: some View {
-        Image(systemName: systemImage)
-            .font(.headline.weight(.black))
-            .foregroundStyle(foreground)
-            .frame(width: 42, height: 42)
-            .background(fill)
-            .clipShape(.rect(cornerRadius: 5))
-            .overlay {
-                Rectangle()
-                    .stroke(PixelTheme.cream.opacity(0.55), lineWidth: 2)
-                    .padding(2)
-            }
-            .overlay {
-                Rectangle()
-                    .stroke(PixelTheme.ink.opacity(0.45), lineWidth: 2)
-            }
-            .shadow(color: PixelTheme.ink.opacity(0.28), radius: 0, y: 3)
-    }
-}
-
 struct PixelStatusBadge: View {
     let status: HealthStatus
 

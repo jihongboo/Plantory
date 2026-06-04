@@ -1,0 +1,62 @@
+//
+//  PixelRectangleButtonStyle.swift
+//  Plantory
+//
+//  Created by 纪洪波 on 2026/6/4.
+//
+
+import SwiftUI
+
+struct PixelRectangleButtonStyle: ButtonStyle {
+    var fill: Color = .buttonBackground
+    var foreground: Color = .white
+    var width: PixelButtonWidth = .automatic
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(PixelTheme.font(size: 24, weight: .bold, relativeTo: .title3))
+            .fontWeight(.bold)
+            .foregroundStyle(foreground)
+            .padding()
+            .frame(maxWidth: width == .expanded ? .infinity : nil)
+            .background(fill)
+            .overlay {
+                Rectangle()
+                    .stroke(.white.opacity(0.5), lineWidth: 3)
+                    .padding(4)
+            }
+            .overlay {
+                Rectangle()
+                    .stroke(.black.opacity(0.6), lineWidth: 4)
+            }
+            .scaleEffect(configuration.isPressed ? 0.96 : 1)
+            .opacity(configuration.isPressed ? 0.86 : 1)
+            .animation(.snappy(duration: 0.12), value: configuration.isPressed)
+    }
+}
+
+extension ButtonStyle where Self == PixelRectangleButtonStyle {
+    static var pixelRectangle: PixelRectangleButtonStyle {
+        pixelRectangle()
+    }
+
+    static func pixelRectangle(
+        fill: Color = .buttonBackground,
+        foreground: Color = .white,
+        width: PixelButtonWidth = .automatic
+    ) -> PixelRectangleButtonStyle {
+        PixelRectangleButtonStyle(fill: fill, foreground: foreground, width: width)
+    }
+}
+
+#Preview {
+    Button("Add", systemImage: "plus") {
+        
+    }
+    .buttonStyle(.pixelRectangle)
+    
+    Button("Add", systemImage: "plus") {
+        
+    }
+    .buttonStyle(.pixelRectangle(width: .expanded))
+}

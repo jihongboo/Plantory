@@ -1,5 +1,5 @@
 //
-//  PixelButton.swift
+//  PixelRoundedRectangleButtonStyle.swift
 //  Plantory
 //
 //  Created by 纪洪波 on 2026/6/4.
@@ -12,7 +12,7 @@ enum PixelButtonWidth {
     case expanded
 }
 
-struct PixelButtonStyle: ButtonStyle {
+struct PixelRoundedRectangleButtonStyle: ButtonStyle {
     var fill: Color = .buttonBackground
     var foreground: Color = .white
     var width: PixelButtonWidth = .automatic
@@ -33,17 +33,17 @@ struct PixelButtonStyle: ButtonStyle {
     }
 }
 
-extension ButtonStyle where Self == PixelButtonStyle {
-    static var pixel: PixelButtonStyle {
-        pixel()
+extension ButtonStyle where Self == PixelRoundedRectangleButtonStyle {
+    static var pixelRoundedRectangle: PixelRoundedRectangleButtonStyle {
+        pixelRoundedRectangle()
     }
     
-    static func pixel(
+    static func pixelRoundedRectangle(
         fill: Color = .buttonBackground,
         foreground: Color = .white,
         width: PixelButtonWidth = .expanded
-    ) -> PixelButtonStyle {
-        PixelButtonStyle(
+    ) -> PixelRoundedRectangleButtonStyle {
+        PixelRoundedRectangleButtonStyle(
             fill: fill,
             foreground: foreground,
             width: width
@@ -55,10 +55,10 @@ extension ButtonStyle where Self == PixelButtonStyle {
     Button("Button") {
         
     }
-    .buttonStyle(.pixel(width: .automatic))
+    .buttonStyle(.pixelRoundedRectangle(width: .automatic))
     
     Button("Expanded Button") {
         
     }
-    .buttonStyle(.pixel(width: .expanded))
+    .buttonStyle(.pixelRoundedRectangle(width: .expanded))
 }

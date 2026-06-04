@@ -16,7 +16,7 @@ struct AddPlantMenuView: View {
         } label: { isPreparingImage in
             Label("Add Plant", systemImage: "plus")
         }
-        .buttonStyle(.pixel)
+        .buttonStyle(.pixelRoundedRectangle)
         .accessibilityLabel("Identify")
         .accessibilityHint("Recognize a plant from a photo and add it to your collection.")
         .sheet(item: $imageData) { imageData in

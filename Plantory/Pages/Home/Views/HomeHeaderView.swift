@@ -21,7 +21,7 @@ struct HomeHeaderView: View {
                 .background(PixelTheme.cream, in: .rect(cornerRadius: 5))
                 .overlay {
                     Rectangle()
-                        .stroke(PixelTheme.wood, lineWidth: 2)
+                        .stroke(PixelTheme.wood, lineWidth: 3)
                 }
             
             VStack(alignment: .leading, spacing: 0) {
@@ -40,8 +40,10 @@ struct HomeHeaderView: View {
             
 #if DEBUG
             NavigationLink(value: HomeDestination.debugNotifications) {
-                PixelIconButtonLabel(systemImage: "ladybug")
+                Image(systemName: "ladybug")
+                    .font(.body)
             }
+            .buttonStyle(.pixelRectangle)
 #endif
         }
     }

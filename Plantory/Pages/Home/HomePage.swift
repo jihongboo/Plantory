@@ -14,39 +14,10 @@ struct HomePage: View {
     @Environment(PlantNavigationCoordinator.self) private var navigationCoordinator
     @Query(sort: \Plant.createdAt, order: .reverse) private var plants: [Plant]
     
-    @State private var filter: PlantFilter = .all
     @State private var path = NavigationPath()
     @State private var plantPendingDeletion: Plant?
     @State private var temporaryDiagnosisImageData: Data?
     @Namespace private var heroNamespace
-    
-    enum PlantFilter: String, CaseIterable {
-        case all = "All"
-        case healthy = "Healthy"
-        case warning = "Needs Attention"
-
-        var title: LocalizedStringKey {
-            switch self {
-            case .all:
-                "All"
-            case .healthy:
-                "Healthy"
-            case .warning:
-                "Needs Attention"
-            }
-        }
-
-        var emptyStateTitle: LocalizedStringKey {
-            switch self {
-            case .all:
-                "No Plants Yet"
-            case .healthy:
-                "No healthy plants"
-            case .warning:
-                "No plants needing attention"
-            }
-        }
-    }
 
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
@@ -165,7 +136,7 @@ struct HomePage: View {
                         .frame(width: 88, height: 88)
 
                     VStack(alignment: .leading, spacing: 6) {
-                        Text(plants.isEmpty ? "No Plants Yet" : filter.emptyStateTitle)
+                        Text("No Plants Yet")
                             .font(PixelTheme.font(size: 20, weight: .bold, relativeTo: .title3))
                             .foregroundStyle(PixelTheme.ink)
 
@@ -182,17 +153,6 @@ struct HomePage: View {
             }
         }
         .padding(.vertical, 28)
-    }
-
-    private func icon(for filter: PlantFilter) -> String {
-        switch filter {
-        case .all:
-            "square.grid.2x2"
-        case .healthy:
-            "checkmark.circle"
-        case .warning:
-            "exclamationmark.triangle"
-        }
     }
 
     private func deletePlant(_ plant: Plant) {
