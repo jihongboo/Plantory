@@ -17,7 +17,7 @@ struct PlantStatusView: View {
                     }
 
                 Text(plant.healthStatus.label)
-                    .font(.pixel(size: 24, relativeTo: .title3))
+                    .font(.pixel(.title2))
                     .foregroundStyle(Color(.pixelInk))
 
                 Spacer()
@@ -25,7 +25,7 @@ struct PlantStatusView: View {
 
             if plant.activeIssues.isEmpty {
                 Text("No active issues right now. Keep following the regular care routine.")
-                    .font(.pixel(size: 17, relativeTo: .body))
+                    .font(.pixel(.body))
                     .foregroundStyle(Color(.pixelInk).opacity(0.7))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(12)
@@ -50,16 +50,16 @@ struct PlantStatusView: View {
 
                         VStack(alignment: .leading, spacing: 2) {
                             Text(issue.type.label)
-                                .font(.pixel(size: 18, relativeTo: .subheadline))
+                                .font(.pixel(.body))
                                 .foregroundStyle(Color(.pixelInk))
 
                             Text(issue.severity.label)
-                                .font(.pixel(size: 14, relativeTo: .caption))
+                                .font(.pixel(.footnote))
                                 .foregroundStyle(statusColor(for: plant.healthStatus))
 
                             if !issue.note.isEmpty {
                                 Text(issue.note)
-                                    .font(.pixel(size: 15, relativeTo: .footnote))
+                                    .font(.pixel(.subheadline))
                                     .foregroundStyle(Color(.pixelInk).opacity(0.68))
                                     .fixedSize(horizontal: false, vertical: true)
                             }

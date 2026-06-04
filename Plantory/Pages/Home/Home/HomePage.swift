@@ -54,7 +54,7 @@ struct HomePage: View {
                 }
             }
             .background {
-                PageBackground()
+                PixelPageBackground()
             }
             .toolbar(.hidden, for: .navigationBar)
             .pixelBottomActionBar {
@@ -132,12 +132,12 @@ struct HomePage: View {
 
                     VStack(alignment: .leading, spacing: 6) {
                         Text("No Plants Yet")
-                            .font(.pixel(size: 20, relativeTo: .title3))
+                            .font(.pixel(.title3))
                             .foregroundStyle(Color(.pixelInk))
 
                         if plants.isEmpty {
                             Text("Add your first plant and start tracking its growth.")
-                                .font(.pixel(size: 15, relativeTo: .subheadline))
+                                .font(.pixel(.subheadline))
                                 .foregroundStyle(Color(.pixelInk).opacity(0.74))
                                 .fixedSize(horizontal: false, vertical: true)
                         }

@@ -39,7 +39,7 @@ struct PlantoryApp: App {
     var body: some Scene {
         WindowGroup {
             HomePage()
-                .font(.pixel(size: 17, relativeTo: .body))
+                .font(.pixel(.body))
                 .tint(.green)
         }
         .environment(navigationCoordinator)

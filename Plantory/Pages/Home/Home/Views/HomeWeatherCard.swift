@@ -17,10 +17,10 @@ struct HomeWeatherCard: View {
                         .frame(width: 52, height: 52)
                     
                     Text("Today")
-                        .font(.pixel(size: 17, relativeTo: .headline))
+                        .font(.pixel(.headline))
                     
                     Text(condition)
-                        .font(.pixel(size: 12, relativeTo: .caption))
+                        .font(.pixel(.caption))
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
@@ -127,12 +127,12 @@ private struct HomeWeatherMetricTile: View {
     var body: some View {
         VStack {
             Label(title, systemImage: systemImage)
-                .font(.pixel(size: 14, relativeTo: .caption2))
+                .font(.pixel(.footnote))
                 .foregroundStyle(level.color)
                 .labelIconToTitleSpacing(4)
             
             Text(value)
-                .font(.pixel(size: 28, relativeTo: .title3))
+                .font(.pixel(.title))
                 .foregroundStyle(level.color)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)

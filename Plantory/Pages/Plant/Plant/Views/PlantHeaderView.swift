@@ -8,19 +8,19 @@ struct PlantHeaderView: View {
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(plant.displayName)
-                        .font(.pixel(size: 28, relativeTo: .title))
+                        .font(.pixel(.title))
                         .foregroundStyle(Color(.pixelInk))
                         .lineLimit(2)
 
                     if let commonName = plant.information?.commonName {
                         Text(commonName)
-                            .font(.pixel(size: 18, relativeTo: .headline))
+                            .font(.pixel(.headline))
                             .foregroundStyle(Color(.pixelLeaf))
                     }
 
                     if let species = plant.information?.species {
                         Text(species)
-                            .font(.pixel(size: 15, relativeTo: .subheadline))
+                            .font(.pixel(.subheadline))
                             .foregroundStyle(Color(.pixelInk).opacity(0.58))
                             .italic()
                             .lineLimit(2)
@@ -58,12 +58,12 @@ struct PlantHeaderView: View {
                     .foregroundStyle(Color(.pixelPaperShadow))
 
                 Text("Added \(plant.createdAt.formatted(date: .abbreviated, time: .omitted))")
-                    .font(.pixel(size: 15, relativeTo: .footnote))
+                    .font(.pixel(.subheadline))
                     .foregroundStyle(Color(.pixelInk).opacity(0.62))
             }
 
             Text(plant.note.isEmpty ? String(localized: "No notes yet") : plant.note)
-                .font(.pixel(size: 17, relativeTo: .body))
+                .font(.pixel(.body))
                 .foregroundStyle(Color(.pixelInk).opacity(plant.note.isEmpty ? 0.48 : 0.82))
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(10)

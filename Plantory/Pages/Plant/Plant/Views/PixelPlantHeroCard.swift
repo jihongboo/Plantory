@@ -107,13 +107,13 @@ private struct PixelMiniStat: View {
 
                 VStack(spacing: 0) {
                     Text(value)
-                        .font(.pixel(size: 20, relativeTo: .headline))
+                        .font(.pixel(.title3))
                         .foregroundStyle(Color(.pixelInk))
                         .lineLimit(1)
                         .minimumScaleFactor(0.65)
 
                     Text(title)
-                        .font(.pixel(size: 12, relativeTo: .caption))
+                        .font(.pixel(.caption))
                         .foregroundStyle(Color(.pixelInk).opacity(0.6))
                         .lineLimit(1)
                 }

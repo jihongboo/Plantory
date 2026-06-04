@@ -8,6 +8,6 @@
 import Foundation
 
 extension PlatformImageData {
-    static let monstera = named("MonsteraHealthy")
-    static let succulent = named("SucculentHealthy")
+    static let monstera = named("Plants/MonsteraHealthy")
+    static let succulent = named("Plants/SucculentHealthy")
 }

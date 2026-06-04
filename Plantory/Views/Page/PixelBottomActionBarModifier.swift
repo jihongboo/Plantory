@@ -17,7 +17,7 @@ struct PixelBottomActionBarModifier<Buttons: View>: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .safeAreaBar(edge: .bottom) {
+            .safeAreaBar(edge: .bottom, spacing: 0) {
                 HStack(spacing: spacing) {
                     buttons
                 }
@@ -45,4 +45,14 @@ extension View {
             )
         )
     }
+}
+
+#Preview {
+    Color.clear
+        .pixelBottomActionBar {
+            Button("Button") {
+                
+            }
+            .buttonStyle(.pixelRoundedRectangle(width: .expanded))
+        }
 }

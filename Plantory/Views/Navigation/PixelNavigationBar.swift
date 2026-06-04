@@ -25,7 +25,7 @@ struct PixelNavigationBar<Trailing: View>: View {
             .buttonStyle(.pixelRectangle)
             
             Text(title)
-                .font(.pixel(size: 30, relativeTo: .largeTitle))
+                .font(.pixel(.title))
                 .foregroundStyle(.white)
                 .shadow(color: Color(.pixelInk), radius: 0, x: 2, y: 2)
                 .lineLimit(1)
@@ -39,10 +39,7 @@ struct PixelNavigationBar<Trailing: View>: View {
 }
 
 extension PixelNavigationBar where Trailing == EmptyView {
-    init(
-        title: String,
-        backAction: (() -> Void)? = nil
-    ) {
+    init(title: String) {
         self.init(title: title) {
             EmptyView()
         }

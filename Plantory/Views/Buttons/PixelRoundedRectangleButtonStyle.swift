@@ -30,7 +30,7 @@ struct PixelRoundedRectangleButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.pixel(size: size.fontSize, relativeTo: .title3))
+            .font(.pixel(size.font))
             .foregroundStyle(foreground)
             .padding(size.padding)
             .frame(maxWidth: width == .expanded ? .infinity : nil)

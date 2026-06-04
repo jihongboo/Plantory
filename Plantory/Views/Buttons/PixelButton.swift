@@ -5,7 +5,7 @@
 //  Created by 纪洪波 on 2026/6/4.
 //
 
-import Foundation
+import SwiftUI
 
 enum PixelButtonWidth {
     case automatic
@@ -16,12 +16,12 @@ enum PixelButtonSize {
     case large
     case small
     
-    var fontSize: CGFloat {
+    var font: Font.Size {
         switch self {
         case .large:
-            24
+            .title2
         case .small:
-            18
+            .headline
         }
     }
     

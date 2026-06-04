@@ -13,47 +13,43 @@ struct PlantPage: View {
     }
     
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 16) {
-                PixelNavigationBar(title: plant.displayName) {
-                    Button {
-                        isPresentingEditDetails = true
-                    } label: {
-                        Image(systemName: "square.and.pencil")
-                            .frame(width: 16, height: 16)
+        PixelPage {
+            ScrollView {
+                LazyVStack(spacing: 16) {
+                    PixelNavigationBar(title: plant.displayName) {
+                        Button {
+                            isPresentingEditDetails = true
+                        } label: {
+                            Image(systemName: "square.and.pencil")
+                                .frame(width: 16, height: 16)
+                        }
+                        .buttonStyle(.pixelRectangle)
                     }
-                    .buttonStyle(.pixelRectangle)
-                }
 
-                PixelPlantHeroCard(plant: plant)
+                    PixelPlantHeroCard(plant: plant)
 
-                PixelRoundedRectangleCard(fill: Color(.pixelPaper)) {
-                    PlantHeaderView(plant: plant)
-                }
+                    PixelRoundedRectangleCard(fill: Color(.pixelPaper)) {
+                        PlantHeaderView(plant: plant)
+                    }
 
-                PixelSectionCard(title: "Plant Status", systemImage: "heart.text.square.fill") {
-                    PlantStatusView(plant: plant)
-                }
+                    PixelSectionCard(title: "Plant Status", systemImage: "heart.text.square.fill") {
+                        PlantStatusView(plant: plant)
+                    }
 
-                NavigationLink {
-                    PlantNotificationsPage(plant: plant)
-                } label: {
-                    PixelReminderRow(summary: notificationSummary)
-                }
-                .buttonStyle(.plain)
+                    NavigationLink {
+                        PlantNotificationsPage(plant: plant)
+                    } label: {
+                        PixelReminderRow(summary: notificationSummary)
+                    }
+                    .buttonStyle(.plain)
 
-                PixelSectionCard(title: "Care Records", systemImage: "list.clipboard.fill") {
-                    careRecordsContent
+                    PixelSectionCard(title: "Care Records", systemImage: "list.clipboard.fill") {
+                        careRecordsContent
+                    }
+                    .animation(.smooth, value: sortedRecords)
                 }
-                .animation(.smooth, value: sortedRecords)
             }
-            .scenePadding()
-            .padding(.bottom, 92)
         }
-        .background {
-            PixelPlantDetailBackground()
-        }
-        .toolbar(.hidden, for: .navigationBar)
         .pixelBottomActionBar {
             Button("Add Log", systemImage: "camera.fill", action: {
                 isPresentingAddLog = true
@@ -86,11 +82,11 @@ struct PlantPage: View {
                     .foregroundStyle(Color(.pixelLeaf))
 
                 Text("No Records Yet")
-                    .font(.pixel(size: 22, relativeTo: .headline))
+                    .font(.pixel(.title2))
                     .foregroundStyle(Color(.pixelInk))
 
                 Text("Watering, fertilizing, pest control, and photo records will appear here.")
-                    .font(.pixel(size: 16, relativeTo: .subheadline))
+                    .font(.pixel(.callout))
                     .foregroundStyle(Color(.pixelInk).opacity(0.68))
                     .multilineTextAlignment(.center)
             }
@@ -131,24 +127,6 @@ struct PlantPage: View {
     }
 }
 
-private struct PixelPlantDetailBackground: View {
-    var body: some View {
-        PageBackground()
-            .overlay {
-                LinearGradient(
-                    colors: [
-                        Color(.pixelLeafDark).opacity(0.72),
-                        Color(.pixelLeafDark).opacity(0.9),
-                        Color(.pixelInk).opacity(0.88)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-            }
-    }
-}
-
 private struct PixelSectionCard<Content: View>: View {
     let title: LocalizedStringKey
     let systemImage: String
@@ -158,7 +136,7 @@ private struct PixelSectionCard<Content: View>: View {
         PixelRoundedRectangleCard(fill: Color(.pixelPaper)) {
             VStack(alignment: .leading, spacing: 14) {
                 Label(title, systemImage: systemImage)
-                    .font(.pixel(size: 22, relativeTo: .title3))
+                    .font(.pixel(.title2))
                     .foregroundStyle(Color(.pixelInk))
                     .labelIconToTitleSpacing(8)
 
@@ -188,11 +166,11 @@ private struct PixelReminderRow: View {
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Care Reminders")
-                        .font(.pixel(size: 22, relativeTo: .headline))
+                        .font(.pixel(.title2))
                         .foregroundStyle(Color(.pixelInk))
 
                     Text(summary)
-                        .font(.pixel(size: 15, relativeTo: .subheadline))
+                        .font(.pixel(.subheadline))
                         .foregroundStyle(Color(.pixelInk).opacity(0.68))
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -204,100 +182,6 @@ private struct PixelReminderRow: View {
                     .foregroundStyle(Color(.pixelInk).opacity(0.64))
             }
         }
-    }
-}
-
-private struct PixelDashedDivider: View {
-    var body: some View {
-        Rectangle()
-            .fill(Color(.pixelPaperShadow).opacity(0.42))
-            .frame(height: 2)
-            .overlay(alignment: .leading) {
-                HStack(spacing: 6) {
-                    ForEach(0..<36, id: \.self) { _ in
-                        Rectangle()
-                            .fill(Color(.pixelPaper))
-                            .frame(width: 4, height: 2)
-                    }
-                }
-            }
-    }
-}
-
-private struct EditPlantDetailsSheet: View {
-    let plant: Plant
-
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var modelContext
-
-    @State private var nickname: String
-    @State private var note: String
-
-    init(plant: Plant) {
-        self.plant = plant
-        _nickname = State(initialValue: plant.nickname ?? "")
-        _note = State(initialValue: plant.note)
-    }
-
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section("Plant Details") {
-                    TextField("Nickname", text: $nickname)
-                        .textInputAutocapitalization(.words)
-                        .autocorrectionDisabled()
-
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Note")
-                            .font(.headline)
-
-                        TextField(
-                            "Add a note about this plant",
-                            text: $note,
-                            axis: .vertical
-                        )
-                        .lineLimit(4...8)
-                    }
-                }
-
-                if let commonName = plant.information?.commonName {
-                    Section("Plant") {
-                        LabeledContent("Recognized As", value: commonName)
-
-                        if let species = plant.information?.species {
-                            LabeledContent("Species", value: species)
-                        }
-                    }
-                }
-            }
-            .navigationTitle("Edit Details")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        saveChanges()
-                    }
-                    .bold()
-                }
-            }
-        }
-    }
-
-    private func saveChanges() {
-        let trimmedNickname = nickname.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedNote = note.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        plant.nickname = trimmedNickname.isEmpty ? nil : trimmedNickname
-        plant.note = trimmedNote
-
-        try? modelContext.save()
-        dismiss()
     }
 }
 

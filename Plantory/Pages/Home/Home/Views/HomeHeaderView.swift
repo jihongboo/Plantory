@@ -26,12 +26,12 @@ struct HomeHeaderView: View {
             
             VStack(alignment: .leading, spacing: 0) {
                 Text("My Plants")
-                    .font(.pixel(size: 34, relativeTo: .largeTitle))
+                    .font(.pixel(.largeTitle))
                     .foregroundStyle(.white)
                     .shadow(color: Color(.pixelInk), radius: 0, x: 2, y: 2)
                 
                 Text("\(plants.count) plants")
-                    .font(.pixel(size: 15, relativeTo: .subheadline))
+                    .font(.pixel(.subheadline))
                     .foregroundStyle(Color(.pixelCream))
                     .shadow(color: Color(.pixelInk), radius: 0, x: 1, y: 1)
             }

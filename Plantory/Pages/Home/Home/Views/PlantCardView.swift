@@ -21,12 +21,12 @@ struct PlantCardView: View {
 
                 VStack(alignment: .leading, spacing: 0) {
                     Text(plant.displayName)
-                        .font(.pixel(size: 22, relativeTo: .headline))
+                        .font(.pixel(.title2))
                         .foregroundStyle(Color(.pixelInk))
                         .lineLimit(1)
                     
                     Text(plant.information?.commonName ?? "Houseplant")
-                        .font(.pixel(size: 16, relativeTo: .caption))
+                        .font(.pixel(.callout))
                         .foregroundStyle(Color(.pixelInk).opacity(0.64))
                         .lineLimit(1)
                 }

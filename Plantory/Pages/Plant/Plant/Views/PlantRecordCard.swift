@@ -18,11 +18,11 @@ struct PlantRecordCard: View {
 
                 VStack(alignment: .leading, spacing: 3) {
                     Text(record.type.label)
-                        .font(.pixel(size: 20, relativeTo: .headline))
+                        .font(.pixel(.title3))
                         .foregroundStyle(Color(.pixelInk))
 
                     Text(record.createdAt.formatted(date: .abbreviated, time: .shortened))
-                        .font(.pixel(size: 13, relativeTo: .caption))
+                        .font(.pixel(.footnote))
                         .foregroundStyle(Color(.pixelInk).opacity(0.54))
                 }
 
@@ -31,7 +31,7 @@ struct PlantRecordCard: View {
 
             if !record.note.isEmpty {
                 Text(record.note)
-                    .font(.pixel(size: 16, relativeTo: .body))
+                    .font(.pixel(.callout))
                     .foregroundStyle(Color(.pixelInk).opacity(0.76))
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -64,10 +64,10 @@ private struct PlantRecordDiagnosisView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Label("Diagnosis", systemImage: "stethoscope")
-                .font(.pixel(size: 19, relativeTo: .headline))
+                .font(.pixel(.title3))
                 .foregroundStyle(Color(.pixelLeaf))
             Text(result.problem)
-                .font(.pixel(size: 17, relativeTo: .subheadline))
+                .font(.pixel(.body))
                 .foregroundStyle(Color(.pixelInk))
                 .fixedSize(horizontal: false, vertical: true)
 
@@ -104,12 +104,12 @@ private struct PlantRecordDiagnosisTag: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Label(title, systemImage: systemImage)
-                .font(.pixel(size: 14, relativeTo: .caption))
+                .font(.pixel(.footnote))
                 .foregroundStyle(tint)
 
             ForEach(contents, id: \.self) { content in
                 Text(content)
-                    .font(.pixel(size: 15, relativeTo: .subheadline))
+                    .font(.pixel(.subheadline))
                     .foregroundStyle(Color(.pixelInk).opacity(0.75))
                     .fixedSize(horizontal: false, vertical: true)
             }

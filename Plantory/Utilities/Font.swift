@@ -77,13 +77,6 @@ extension Font {
     }
     
     static func pixel(_ size: Size) -> Font {
-        pixel(size: size.pointSize, relativeTo: size.textStyle)
-    }
-    
-    static func pixel(
-        size: CGFloat,
-        relativeTo textStyle: Font.TextStyle = .body
-    ) -> Font {
-        .custom("Fusion-Pixel-10px-Prop-zh_hans-Regular", size: size, relativeTo: textStyle)
+        .custom("Fusion-Pixel-10px-Prop-zh_hans-Regular", size: size.pointSize, relativeTo: size.textStyle)
     }
 }
