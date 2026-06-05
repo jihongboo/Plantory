@@ -73,7 +73,7 @@ struct PixelTextFieldStyle: TextFieldStyle {
             .frame(minHeight: minHeight, alignment: alignment)
             .background {
                 PixelRoundedRectangleBackground(
-                    fillColor: fill,
+                    fill: fill,
                     strokeColor: stroke,
                     cornerRadius: cornerRadius,
                     pixelSize: 4,

@@ -114,7 +114,7 @@ struct PixelContentUnavailableSymbol: View {
             .frame(width: 78, height: 78)
             .background {
                 PixelRoundedRectangleBackground(
-                    fillColor: .pixelCream,
+                    fill: .pixelCream,
                     strokeColor: Color.pixelInk.opacity(0.82),
                     cornerRadius: 18,
                     pixelSize: 4,

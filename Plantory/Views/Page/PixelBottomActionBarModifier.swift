@@ -24,7 +24,7 @@ struct PixelBottomActionBarModifier<Buttons: View>: ViewModifier {
                 .padding(.horizontal)
                 .padding(.top)
                 .background {
-                    PixelRoundedRectangleBackground(fillColor: fill)
+                    PixelRoundedRectangleBackground(fill: fill)
                         .ignoresSafeArea()
                 }
             }

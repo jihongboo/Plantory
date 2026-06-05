@@ -40,7 +40,7 @@ struct PixelRoundedRectangleCard<Content: View>: View {
         }
         .padding()
         .background {
-            PixelRoundedRectangleBackground(fillColor: fill)
+            PixelRoundedRectangleBackground(fill: fill)
         }
     }
 }

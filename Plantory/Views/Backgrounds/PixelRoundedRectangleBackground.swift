@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PixelRoundedRectangleBackground: View {
+    let fill: Color
     let strokeColor: Color
-    let fillColor: Color
     let cornerRadius: CGFloat
     let pixelSize: CGFloat
     let lineWidth: CGFloat
@@ -17,7 +17,7 @@ struct PixelRoundedRectangleBackground: View {
     let innerBorderWidth: CGFloat
     
     init(
-        fillColor: Color,
+        fill: Color,
         strokeColor: Color = .black.opacity(0.8),
         cornerRadius: CGFloat = 28,
         pixelSize: CGFloat = 4,
@@ -29,7 +29,7 @@ struct PixelRoundedRectangleBackground: View {
         self.pixelSize = pixelSize
         self.lineWidth = lineWidth
         self.strokeColor = strokeColor
-        self.fillColor = fillColor
+        self.fill = fill
         self.innerBorderColor = innerBorderColor
         self.innerBorderWidth = innerBorderWidth
     }
@@ -81,7 +81,7 @@ struct PixelRoundedRectangleBackground: View {
                     )
 
                     if inContent {
-                        context.fill(Path(cell), with: .color(fillColor))
+                        context.fill(Path(cell), with: .color(fill))
                     } else if inOuter {
                         context.fill(Path(cell), with: .color(strokeColor))
                     }
@@ -103,7 +103,7 @@ struct PixelRoundedRectangleBackground: View {
 }
 
 #Preview {
-    PixelRoundedRectangleBackground(fillColor: .buttonBackground)
+    PixelRoundedRectangleBackground(fill: .buttonBackground)
         .frame(width: 200, height: 100)
         .padding()
 }

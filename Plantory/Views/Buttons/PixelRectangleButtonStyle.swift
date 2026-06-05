@@ -11,12 +11,13 @@ struct PixelRectangleButtonStyle: ButtonStyle {
     var fill: Color = .buttonBackground
     var foreground: Color = .white
     var width: PixelButtonWidth = .automatic
+    var padding: CGFloat? = nil
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.pixel(.title2))
             .foregroundStyle(foreground)
-            .padding()
+            .padding(.all, padding)
             .frame(maxWidth: width == .expanded ? .infinity : nil)
             .background {
                 PixelRectangleBackground(fill: fill)
@@ -35,9 +36,15 @@ extension ButtonStyle where Self == PixelRectangleButtonStyle {
     static func pixelRectangle(
         fill: Color = .buttonBackground,
         foreground: Color = .white,
-        width: PixelButtonWidth = .automatic
+        width: PixelButtonWidth = .automatic,
+        padding: CGFloat? = nil
     ) -> PixelRectangleButtonStyle {
-        PixelRectangleButtonStyle(fill: fill, foreground: foreground, width: width)
+        PixelRectangleButtonStyle(
+            fill: fill,
+            foreground: foreground,
+            width: width,
+            padding: padding
+        )
     }
 }
 

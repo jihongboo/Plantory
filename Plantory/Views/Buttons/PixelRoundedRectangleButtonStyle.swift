@@ -35,7 +35,7 @@ struct PixelRoundedRectangleButtonStyle: ButtonStyle {
             .padding(size.padding)
             .frame(maxWidth: width == .expanded ? .infinity : nil)
             .background {
-                PixelRoundedRectangleBackground(fillColor: fill, cornerRadius: cornerRadius)
+                PixelRoundedRectangleBackground(fill: fill, cornerRadius: cornerRadius)
             }
             .scaleEffect(configuration.isPressed ? 0.98 : 1)
             .opacity(configuration.isPressed ? 0.86 : 1)

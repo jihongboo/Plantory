@@ -4,45 +4,56 @@ import UIKit
 
 struct PlantNotificationsPage: View {
     @Bindable var plant: Plant
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @Environment(\.modelContext) private var modelContext
     @State private var permissionAlert: NotificationPermissionAlert?
 
     var body: some View {
-        Form {
-            Section {
-                VStack(alignment: .leading, spacing: 10) {
-                    Label("Care Reminders", systemImage: "bell.badge")
-                        .font(.headline)
-
-                    Text("Set reminders for watering, fertilizing, pest checks, pruning, and repotting.")
-                        .foregroundStyle(.secondary)
-
-                    Text("\(enabledCount) of \(settings.count) reminders enabled")
-                        .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.tint)
-                }
-                .padding(.vertical, 4)
-            }
-
-            ForEach(settings) { setting in
-                Section {
-                    PlantNotificationSettingEditor(
-                        setting: setting,
-                        onToggleChanged: { isEnabled in
-                            handleToggleChange(isEnabled, for: setting)
-                        },
-                        onConfigurationChanged: {
-                            handleConfigurationChange()
-                        }
+        PixelPage {
+            ScrollView {
+                LazyVStack(spacing: 16) {
+                    PixelNavigationBar(title: "Notifications")
+                    
+                    PixelNotificationsOverviewCard(
+                        enabledCount: enabledCount,
+                        settingsCount: settings.count
                     )
-                } footer: {
-                    Text(setting.kind.recommendationText(for: plant))
+                    
+                    PixelRoundedRectangleCard(title: "Reminder Settings", systemImage: "bell.badge.fill") {
+                        VStack(spacing: 0) {
+                            ForEach(Array(settings.enumerated()), id: \.element.id) { index, setting in
+                                PlantNotificationSettingEditor(
+                                    setting: setting,
+                                    isEnabled: Binding(
+                                        get: { setting.isEnabled },
+                                        set: { isEnabled in
+                                            setting.isEnabled = isEnabled
+                                            handleToggleChange(isEnabled, for: setting)
+                                        }
+                                    ),
+                                    recommendation: setting.kind.recommendationText(for: plant),
+                                    onConfigurationChanged: {
+                                        handleConfigurationChange()
+                                    }
+                                )
+                                
+                                if index < settings.count - 1 {
+                                    PixelDashedDivider()
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
-        .navigationTitle("Notifications")
-        .navigationBarTitleDisplayMode(.inline)
+        .pixelBottomActionBar {
+            Button("Save", systemImage: "checkmark") {
+                try? modelContext.save()
+                dismiss()
+            }
+            .buttonStyle(.pixelRoundedRectangle(width: .expanded))
+        }
         .onAppear {
             ensureDefaultSettings()
         }
@@ -66,55 +77,6 @@ struct PlantNotificationsPage: View {
                 )
             }
         }
-    }
-
-}
-
-private struct PlantNotificationSettingEditor: View {
-    @Bindable var setting: PlantNotificationSetting
-    let onToggleChanged: (Bool) -> Void
-    let onConfigurationChanged: () -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Toggle(isOn: $setting.isEnabled) {
-                Label(setting.kind.title, systemImage: setting.kind.systemImage)
-                    .foregroundStyle(setting.kind.tint)
-            }
-            .toggleStyle(.switch)
-            .onChange(of: setting.isEnabled) { _, isEnabled in
-                onToggleChanged(isEnabled)
-            }
-
-            VStack(alignment: .leading, spacing: 10) {
-                Stepper(value: $setting.intervalDays, in: setting.kind.intervalRange) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Interval")
-                        Text(intervalDescription)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                }
-
-                DatePicker(
-                    "Reminder Time",
-                    selection: reminderDateBinding,
-                    displayedComponents: .hourAndMinute
-                )
-            }
-            .disabled(!setting.isEnabled)
-            .opacity(setting.isEnabled ? 1 : 0.45)
-            .onChange(of: setting.intervalDays) { _, _ in
-                onConfigurationChanged()
-            }
-            .onChange(of: setting.reminderHour) { _, _ in
-                onConfigurationChanged()
-            }
-            .onChange(of: setting.reminderMinute) { _, _ in
-                onConfigurationChanged()
-            }
-        }
-        .padding(.vertical, 4)
     }
 
 }
@@ -207,21 +169,5 @@ private extension PlantNotificationsPage {
             try? modelContext.save()
             _ = await PlantNotificationScheduler.shared.syncNotifications(for: plant)
         }
-    }
-}
-
-private extension PlantNotificationSettingEditor {
-    var intervalDescription: LocalizedStringKey {
-        if setting.intervalDays == 1 {
-            return "Every day"
-        }
-        return "Every \(setting.intervalDays) days"
-    }
-
-    var reminderDateBinding: Binding<Date> {
-        Binding(
-            get: { setting.reminderDate },
-            set: { setting.reminderDate = $0 }
-        )
     }
 }
