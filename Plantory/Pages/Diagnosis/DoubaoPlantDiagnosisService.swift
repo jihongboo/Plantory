@@ -350,8 +350,8 @@ private extension DoubaoPlantDiagnosisService {
 
     static func diagnosisPrompt(for plant: Plant) -> String {
         let language = AppLanguage.current
-        let species = plant.information?.species ?? ""
-        let commonName = plant.information?.commonName ?? plant.displayName
+        let species = plant.informationSpecies ?? ""
+        let commonName = plant.informationCommonName ?? plant.displayName
         let note = plant.note.trimmingCharacters(in: .whitespacesAndNewlines)
 
         return diagnosisPrompt(

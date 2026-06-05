@@ -10,19 +10,19 @@ struct PlantHeaderView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         Text(plant.displayName)
                             .font(.pixel(.title))
-                            .foregroundStyle(Color(.pixelInk))
+                            .foregroundStyle(.pixelInk)
                             .lineLimit(2)
 
-                        if let commonName = plant.information?.commonName {
+                        if let commonName = plant.informationCommonName {
                             Text(commonName)
                                 .font(.pixel(.headline))
-                                .foregroundStyle(Color(.pixelLeaf))
+                                .foregroundStyle(.pixelLeaf)
                         }
 
-                        if let species = plant.information?.species {
+                        if let species = plant.informationSpecies {
                             Text(species)
                                 .font(.pixel(.subheadline))
-                                .foregroundStyle(Color(.pixelInk).opacity(0.58))
+                                .foregroundStyle(Color.pixelInk.opacity(0.58))
                                 .italic()
                                 .lineLimit(2)
                         }
@@ -30,15 +30,15 @@ struct PlantHeaderView: View {
 
                     Spacer(minLength: 8)
 
-                    if let information = plant.information {
+                    if let catalogID = plant.informationCatalogID {
                         NavigationLink {
-                            PlantInformationPage(info: information)
+                            PlantInformationPage(catalogID: catalogID)
                         } label: {
                             Image(systemName: "book.pages.fill")
                                 .font(.headline.weight(.black))
                                 .foregroundStyle(.white)
                                 .frame(width: 42, height: 42)
-                                .background(Color(.pixelLeaf))
+                                .background(.pixelLeaf)
                                 .overlay {
                                     Rectangle()
                                         .stroke(.white.opacity(0.55), lineWidth: 2)
@@ -46,7 +46,7 @@ struct PlantHeaderView: View {
                                 }
                                 .overlay {
                                     Rectangle()
-                                        .stroke(Color(.pixelInk).opacity(0.65), lineWidth: 3)
+                                        .stroke(Color.pixelInk.opacity(0.65), lineWidth: 3)
                                 }
                         }
                         .buttonStyle(.plain)
@@ -56,23 +56,23 @@ struct PlantHeaderView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "calendar")
                         .font(.caption.weight(.black))
-                        .foregroundStyle(Color(.pixelPaperShadow))
+                        .foregroundStyle(.pixelPaperShadow)
 
                     Text("Added \(plant.createdAt.formatted(date: .abbreviated, time: .omitted))")
                         .font(.pixel(.subheadline))
-                        .foregroundStyle(Color(.pixelInk).opacity(0.62))
+                        .foregroundStyle(Color.pixelInk.opacity(0.62))
                 }
 
                 Text(plant.note.isEmpty ? String(localized: "No notes yet") : plant.note)
                     .font(.pixel(.body))
-                    .foregroundStyle(Color(.pixelInk).opacity(plant.note.isEmpty ? 0.48 : 0.82))
+                    .foregroundStyle(Color.pixelInk.opacity(plant.note.isEmpty ? 0.48 : 0.82))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(10)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color(.pixelCream), in: .rect(cornerRadius: 4))
+                    .background(.pixelCream, in: .rect(cornerRadius: 4))
                     .overlay {
                         Rectangle()
-                            .stroke(Color(.pixelPaperShadow).opacity(0.62), lineWidth: 2)
+                            .stroke(Color.pixelPaperShadow.opacity(0.62), lineWidth: 2)
                     }
             }
         }

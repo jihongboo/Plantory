@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "nephrolepis-exaltata"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Boston Fern"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Nephrolepis exaltata"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Boston Fern has soft arching fronds and a lush texture. It prefers evenly moist soil, filtered light, and higher humidity than most common houseplants."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "nephrolepis-exaltata.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "hard"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Needs consistent moisture and humidity to avoid crispy fronds."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Medium to bright indirect light, away from harsh direct sun."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "high"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Keep soil lightly moist; water before it dries completely."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "high"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "High humidity is important for healthy fronds."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "16-24°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Dry air and missed watering cause browning, shedding, and crispy tips."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed monthly during spring and summer with diluted fertilizer."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "A bright bathroom or humid corner is often better than a dry sunny shelf."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 100
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "nephrolepis-exaltata.png"
+  }
+}

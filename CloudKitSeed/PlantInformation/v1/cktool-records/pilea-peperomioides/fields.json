@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "pilea-peperomioides"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Chinese Money Plant"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Pilea peperomioides"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Chinese Money Plant has round coin-shaped leaves on slender stems. It stays compact, grows quickly in bright light, and often produces small offsets."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "pilea-peperomioides.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "easy"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Simple to grow with bright light and careful watering."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Bright indirect light; rotate often for a balanced shape."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water when the top 2-3 cm of soil dries."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Average indoor humidity is usually enough."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "16-27°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Drooping or cupped leaves can reflect watering stress or low light."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed monthly in spring and summer."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Separate offsets once they have their own small roots."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 90
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "pilea-peperomioides.png"
+  }
+}

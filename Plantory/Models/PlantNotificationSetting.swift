@@ -124,7 +124,7 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
     func defaultIntervalDays(for plant: Plant) -> Int {
         switch self {
         case .watering:
-            switch plant.information?.waterLevel {
+            switch plant.informationWaterLevel {
             case "low":
                 14
             case "high":
@@ -133,7 +133,7 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
                 7
             }
         case .fertilizing:
-            switch plant.information?.fertilizerLevel {
+            switch plant.informationFertilizerLevel {
             case "low":
                 60
             case "high":
@@ -142,7 +142,7 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
                 30
             }
         case .pestCheck:
-            switch plant.information?.diseaseRiskLevel {
+            switch plant.informationDiseaseRiskLevel {
             case "low":
                 30
             case "high":
@@ -151,7 +151,7 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
                 14
             }
         case .pruning:
-            switch plant.information?.careDifficulty {
+            switch plant.informationCareDifficulty {
             case "easy":
                 45
             case "hard":
@@ -160,7 +160,7 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
                 30
             }
         case .repotting:
-            switch plant.information?.careDifficulty {
+            switch plant.informationCareDifficulty {
             case "easy":
                 240
             case "hard":
@@ -189,10 +189,10 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
     func recommendationText(for plant: Plant) -> String {
         switch self {
         case .watering:
-            let basis = plant.information?.water.isEmpty == false ? plant.information?.water : nil
+            let basis = plant.informationWater.isEmpty ? nil : plant.informationWater
             return basis ?? String(localized: "Recommended from the plant's watering level.")
         case .fertilizing:
-            let basis = plant.information?.fertilizer.isEmpty == false ? plant.information?.fertilizer : nil
+            let basis = plant.informationFertilizer.isEmpty ? nil : plant.informationFertilizer
             return basis ?? String(localized: "Recommended from the plant's fertilizer needs.")
         case .pestCheck:
             return String(localized: "Based on the current disease risk level for this plant.")

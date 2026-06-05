@@ -85,6 +85,9 @@ struct HomePage: View {
                 case .plant(let plantID):
                     PlantDestinationView(plantID: plantID, heroNamespace: heroNamespace)
 
+                case .plantInformationLibrary:
+                    PlantInformationLibraryPage()
+
                 case .debugNotifications:
                     DebugNotificationsPage()
                 }
@@ -113,6 +116,7 @@ struct HomePage: View {
 
 enum HomeDestination: Hashable {
     case plant(UUID)
+    case plantInformationLibrary
     case debugNotifications
 }
 

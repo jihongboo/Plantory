@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "ficus-elastica"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Rubber Plant"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Ficus elastica"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Rubber Plant has broad glossy leaves and a strong upright shape. It becomes a bold indoor tree when given bright filtered light and consistent watering."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "ficus-elastica.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "moderate"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Generally sturdy, but leaf drop can happen after sudden changes."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Bright indirect light; some gentle morning sun is helpful."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water when the top 3-5 cm of soil dries."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Average humidity works, but moderate humidity keeps leaves cleaner and softer."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "18-29°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Watch for leaf drop from overwatering, drafts, or abrupt relocation."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed monthly during active growth."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Dust the large leaves often and rotate the pot for even growth."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 70
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "ficus-elastica.png"
+  }
+}

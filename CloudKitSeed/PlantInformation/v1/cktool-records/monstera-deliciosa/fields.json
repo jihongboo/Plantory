@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "monstera-deliciosa"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Monstera"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Monstera deliciosa"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Monstera is a tropical climbing houseplant known for its split leaves. It grows best with steady warmth, bright filtered light, and a chunky, well-draining potting mix."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "monstera-deliciosa.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "moderate"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Forgiving once light and watering are balanced, but sensitive to soggy soil."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Bright indirect light; avoid harsh afternoon sun."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water when the top 2-3 cm of soil feels dry, usually every 7-10 days indoors."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Prefers moderate to high humidity, but adapts to average indoor air."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "18-30°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Overwatering can cause yellow leaves, root rot, and fungus gnats."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed monthly during spring and summer with a balanced diluted fertilizer."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Give it a moss pole or support if you want larger, more mature leaves."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 10
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "monstera-deliciosa.png"
+  }
+}

@@ -12,8 +12,15 @@ final class Plant {
     var note: String = ""
 
     // 该植物对应的种类基础信息
-    @Relationship(deleteRule: .nullify, inverse: \PlantInformation.plants)
-    var information: PlantInformation?
+    var informationCatalogID: String?
+    var informationCommonName: String?
+    var informationSpecies: String?
+    var informationWaterLevel: String = "medium"
+    var informationWater: String = ""
+    var informationFertilizerLevel: String = "medium"
+    var informationFertilizer: String = ""
+    var informationDiseaseRiskLevel: String = "medium"
+    var informationCareDifficulty: String = "moderate"
 
     // 当前存在的健康问题列表（可并发多个）
     var activeIssues: [PlantIssue] = []
@@ -29,7 +36,11 @@ final class Plant {
     // 展示名称：优先用别名，否则读种类通用名，最后兜底
     var displayName: String {
         if let nickname, !nickname.isEmpty { return nickname }
-        return information?.commonName ?? String(localized: "Unknown Plant")
+        return informationCommonName ?? String(localized: "Unknown Plant")
+    }
+
+    var hasCloudInformation: Bool {
+        informationCatalogID?.isEmpty == false
     }
 
     @Relationship(deleteRule: .cascade, inverse: \PlantRecord.plant)
@@ -51,7 +62,21 @@ final class Plant {
         self.photoData = imageData
         self.createdAt = createdAt
         self.note = note
-        self.information = information
+        applyInformationSnapshot(information)
+    }
+}
+
+extension Plant {
+    func applyInformationSnapshot(_ information: PlantInformation?) {
+        informationCatalogID = information?.catalogID
+        informationCommonName = information?.commonName
+        informationSpecies = information?.species
+        informationWaterLevel = information?.waterLevel ?? "medium"
+        informationWater = information?.water ?? ""
+        informationFertilizerLevel = information?.fertilizerLevel ?? "medium"
+        informationFertilizer = information?.fertilizer ?? ""
+        informationDiseaseRiskLevel = information?.diseaseRiskLevel ?? "medium"
+        informationCareDifficulty = information?.careDifficulty ?? "moderate"
     }
 }
 

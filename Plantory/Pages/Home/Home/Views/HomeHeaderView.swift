@@ -37,6 +37,12 @@ struct HomeHeaderView: View {
             }
             
             Spacer(minLength: 8)
+
+            NavigationLink(value: HomeDestination.plantInformationLibrary) {
+                Image(systemName: "book.pages.fill")
+                    .font(.body)
+            }
+            .buttonStyle(.pixelRectangle)
             
 #if DEBUG
             NavigationLink(value: HomeDestination.debugNotifications) {

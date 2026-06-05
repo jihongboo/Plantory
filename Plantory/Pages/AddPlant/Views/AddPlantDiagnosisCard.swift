@@ -18,10 +18,10 @@ struct AddPlantDiagnosisCard: View {
                     .foregroundStyle(.secondary)
 
             case .analyzing:
-                HStack(spacing: 14) {
-                    ProgressView()
-                        .controlSize(.large)
-
+                VStack(alignment: .leading, spacing: 12) {
+                    PixelProgressView(activeColor: .pixelSun)
+                        .frame(maxWidth: .infinity)
+                    
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Analyzing plant health")
                             .font(.headline)

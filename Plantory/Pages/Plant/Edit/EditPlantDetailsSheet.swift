@@ -52,17 +52,17 @@ struct EditPlantDetailsSheet: View {
                             }
                         }
 
-                        if plant.information?.commonName != nil {
+                        if plant.informationCommonName != nil {
                             PixelRoundedRectangleCard(
                                 title: "Plant",
                                 systemImage: "leaf.fill"
                             ) {
                                 VStack(alignment: .leading, spacing: 16) {
-                                    if let commonName = plant.information?.commonName {
+                                    if let commonName = plant.informationCommonName {
                                         PixelInfoRow(title: "Recognized As", value: commonName)
                                     }
 
-                                    if let species = plant.information?.species {
+                                    if let species = plant.informationSpecies {
                                         PixelInfoRow(title: "Species", value: species)
                                     }
                                 }

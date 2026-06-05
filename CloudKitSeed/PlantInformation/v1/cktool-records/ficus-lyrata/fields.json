@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "ficus-lyrata"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Fiddle Leaf Fig"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Ficus lyrata"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Fiddle Leaf Fig is an indoor tree with large violin-shaped leaves. It rewards stable bright light and steady watering but dislikes frequent movement."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "ficus-lyrata.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "hard"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Beautiful but sensitive to light shifts, overwatering, and dry drafts."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "high"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Very bright indirect light, ideally near a large window."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water deeply when the top 5 cm of soil dries, then drain fully."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Prefers moderate humidity and stable air."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "18-27°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "high"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Brown spots may indicate root stress, inconsistent watering, or low light."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed monthly in spring and summer with a foliage fertilizer."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Avoid moving it often; choose a bright spot and let it settle."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 80
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "ficus-lyrata.png"
+  }
+}

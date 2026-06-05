@@ -1,0 +1,2320 @@
+Creating monstera-deliciosa
+{
+  "record" : {
+    "modified" : {
+      "timestamp" : "2026-06-05T12:15:58.403Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "fields" : {
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Give it a moss pole or support if you want larger, more mature leaves."
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Forgiving once light and watering are balanced, but sensitive to soggy soil."
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "18-30°C"
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Monstera"
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Bright indirect light; avoid harsh afternoon sun."
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "monstera-deliciosa"
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed monthly during spring and summer with a balanced diluted fertilizer."
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "moderate"
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Monstera deliciosa"
+      },
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Prefers moderate to high humidity, but adapts to average indoor air."
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AbRgSLiNT4Oaboe59uei3XpmhfEi\/${f}?o=Aqwtw0SgoJki6wXSV1a-j02p9NIsX02OHjNpHQbpRCQJ9nenbhQpJx297L2SH_Hshw&v=1&x=3&a=CAogPIW5H3mZEn_8-TKaUNk2sLkC6u5D2_v38KgCLcb8kA8SiQEQs9TYvekzGNPLj77pMyIBAFIEZoXxImo3lf6PrBsHAoCUNMj2u9zKR3T0EuRT1-ckIZXDoM7MQVqbvYVPP09Gyo4ovIhvyBXQTszJ_u7673I3rG6Js7yZ9kZjh_6TsYImR4s-SKMYaUGegSNhjxNNua-T9AQaUQqWLNZg9RfJGhm-LgXxDOCpiQ&e=1780662658&fl=&r=94fba14d-7497-4718-a041-9bb3aec3b61b-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=fIenuhdWXKyq0Buemj9FK5Ug1PU",
+          "size" : 14914,
+          "fileChecksum" : "AbRgSLiNT4Oaboe59uei3XpmhfEi"
+        }
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Water when the top 2-3 cm of soil feels dry, usually every 7-10 days indoors."
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "monstera-deliciosa.png"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Monstera is a tropical climbing houseplant known for its split leaves. It grows best with steady warmth, bright filtered light, and a chunky, well-draining potting mix."
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Overwatering can cause yellow leaves, root rot, and fungus gnats."
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 10
+      }
+    },
+    "recordChangeTag" : "mq0w1a44",
+    "created" : {
+      "timestamp" : "2026-06-05T12:15:58.403Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "recordName" : "8881462A-6B88-40C8-80BF-FA2992560C3A",
+    "recordType" : "PlantInformation"
+  }
+}
+Creating epipremnum-aureum
+{
+  "record" : {
+    "recordName" : "CE6D5582-5B87-4490-A46D-56D8C633739E",
+    "recordChangeTag" : "mq0w1dri",
+    "modified" : {
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:16:03.147Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "recordType" : "PlantInformation",
+    "created" : {
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:16:03.147Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "fields" : {
+      "light" : {
+        "type" : "stringType",
+        "value" : "Low to bright indirect light; brighter light keeps variegation stronger."
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "epipremnum-aureum.png"
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Pothos"
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed every 6-8 weeks in the growing season."
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Pothos is a fast-growing trailing plant with heart-shaped leaves. It is one of the easiest indoor plants for beginners and tolerates a wide range of rooms."
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Handles normal home humidity well."
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Very forgiving and quick to recover from missed watering."
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "epipremnum-aureum"
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Water when the top half of the soil dries out."
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "18-29°C"
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Main risks are root rot from standing water and leggy growth in very low light."
+      },
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Epipremnum aureum"
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "size" : 14730,
+          "fileChecksum" : "AfRWGOcUwjT4Bsh7Qr1WeuSGZKUM",
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AfRWGOcUwjT4Bsh7Qr1WeuSGZKUM\/${f}?o=AqwbAzJ75NJD9VoEfS_HdyTtspXjDHdyB0lV7ubAMQ93txzhC0dePs8tfeV0uOF_Rw&v=1&x=3&a=CAogmSbgGVVWg5YOZqP1IVODnTrWZZEOkd7OcIlOUKj5T4cSiQEQovnYvekzGMLwj77pMyIBAFIEhmSlDGo38Cu4RLQTaxpcR79hAqoOwe7jpYhN7rkYZ0kC9aBPRXI2WZjj88LCY-MvT_x2uX6XTzfQzzjpJ3I32krEx4VDUMiJioMcwJ6y7sNKcRAgj4mgXE3zrtKiseohU90x3QCqWCBZ1_f1QMYjVzesTVh_Zg&e=1780662663&fl=&r=31e9a1bb-44f5-4b24-a51d-b9c0b5f9315e-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=cb4ufukXvYggbaHvzi1v6ZmeTog"
+        }
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 20
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "easy"
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Trim long vines to encourage fuller growth and root cuttings in water."
+      }
+    }
+  }
+}
+Creating dracaena-trifasciata
+{
+  "record" : {
+    "created" : {
+      "timestamp" : "2026-06-05T12:16:06.714Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "fields" : {
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "dracaena-trifasciata.png"
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Dracaena trifasciata"
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Comfortable in dry indoor air."
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "16-29°C"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Snake Plant has upright sword-like leaves and stores water in thick foliage. It is highly drought tolerant and works well in bedrooms, offices, and low-maintenance spaces."
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "dracaena-trifasciata"
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Soft leaf bases usually mean overwatering or cold damage."
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Let soil dry completely before watering, often every 2-4 weeks."
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Low to bright indirect light; avoid sudden intense direct sun."
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Snake Plant"
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "fileChecksum" : "Aeuw43LxT+S0mizl6ljKcEqaWh\/J",
+          "size" : 13771,
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/Aeuw43LxT-S0mizl6ljKcEqaWh_J\/${f}?o=AgTA1k3ulh7871kvfcisCrE3Yhr55evvoQyWzbCDl9f7JHKM0z3UMjrO8y083o-4QQ&v=1&x=3&a=CAogHnTmhndh55lOKvbvP13WBY1HDKImdvfheR5nRRoqZsISiQEQppXZvekzGMaMkL7pMyIBAFIEmlofyWo3aXI0jOuwX9M3YxsND1i_dz30lFglaDeVy-BRx6Tp6zlT2ye91TwghqmtggAwlPABuW_z65EQJHI3EmTLv5xk-BLat4SsVZeoBYlmvDngg__HhHIz_ouex43QdpzYlJ-fWbluSIrEp3ITXiI1I6FAOQ&e=1780662666&fl=&r=262b75cd-1c27-4263-ad4f-e309ec9f0dd7-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=Wa-aGjHozGDPOnF_H5ccoYPYNQo"
+        }
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "easy"
+      },
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Needs little attention and prefers being slightly neglected."
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 30
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Use a pot with drainage and avoid watering into the center of the rosette."
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed once or twice in spring and summer with diluted fertilizer."
+      }
+    },
+    "modified" : {
+      "timestamp" : "2026-06-05T12:16:06.714Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "recordType" : "PlantInformation",
+    "recordName" : "6E82635D-C605-437A-A68A-5FA40E5C0748",
+    "recordChangeTag" : "mq0w1gi0"
+  }
+}
+Creating zamioculcas-zamiifolia
+{
+  "record" : {
+    "recordName" : "D6E8F62A-7A0B-4880-8BEA-C7F5536CDB7C",
+    "created" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "timestamp" : "2026-06-05T12:16:09.874Z",
+      "deviceId" : "2"
+    },
+    "modified" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "timestamp" : "2026-06-05T12:16:09.874Z",
+      "deviceId" : "2"
+    },
+    "recordType" : "PlantInformation",
+    "recordChangeTag" : "mq0w1iz7",
+    "fields" : {
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "diseaseRiskDescription" : {
+        "value" : "Yellowing stems are commonly caused by overwatering.",
+        "type" : "stringType"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Very tolerant of missed care, but slow to show stress.",
+        "type" : "stringType"
+      },
+      "waterLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "careDifficulty" : {
+        "value" : "easy",
+        "type" : "stringType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "value" : "ZZ Plant has glossy upright leaves and thick rhizomes that store water. It is a reliable choice for lower-light spaces and irregular watering routines.",
+        "type" : "stringType"
+      },
+      "image" : {
+        "value" : {
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AQt61bHMTKBMsMT7Dj2z6RmRfqL1\/${f}?o=ArZ7P8R2JnY7W2upsZ27ZvWfUOA60v5MuR_HHsqlHFCCVupJBXCqXhfde1qAynCP_A&v=1&x=3&a=CAogxrdIUJgNiQ8yK2ljLL3dY6kUR9kuTWS2R5w4SwxrNygSiQEQg67ZvekzGKOlkL7pMyIBAFIEkX6i9Wo3r8Em_o7khzw7RAHJ9o95zsuZ7fugp7MtIMDZ2cWXydt5DHBXv3QVlg7YkqBtCVVGyXoac8DCpnI3rhW6fEC-ATh1g5J7NaCI1FIzZGAQNp8q-NY_HgCFrGnQ_XUoVqGDi4xviVFTq08GL-w98BHMyg&e=1780662669&fl=&r=ca68498c-551e-4d5b-a2eb-9838feddf1e3-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=mqesk1qQkGDC5lMl20zSiDT5kqk",
+          "fileChecksum" : "AQt61bHMTKBMsMT7Dj2z6RmRfqL1",
+          "size" : 13230
+        },
+        "type" : "assetType"
+      },
+      "humidityDescription" : {
+        "value" : "Average indoor humidity is fine.",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "ZZ Plant",
+        "type" : "stringType"
+      },
+      "light" : {
+        "value" : "Low to bright indirect light; avoid strong direct sun.",
+        "type" : "stringType"
+      },
+      "fertilizerLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "fertilizer" : {
+        "value" : "Feed lightly every 2-3 months during active growth.",
+        "type" : "stringType"
+      },
+      "lightLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "value" : 40,
+        "type" : "int64Type"
+      },
+      "catalogID" : {
+        "value" : "zamioculcas-zamiifolia",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "18-30°C",
+        "type" : "stringType"
+      },
+      "imageFileName" : {
+        "value" : "zamioculcas-zamiifolia.png",
+        "type" : "stringType"
+      },
+      "tips" : {
+        "value" : "Rotate the pot occasionally so stems grow evenly toward the light.",
+        "type" : "stringType"
+      },
+      "species" : {
+        "value" : "Zamioculcas zamiifolia",
+        "type" : "stringType"
+      },
+      "diseaseRiskLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "water" : {
+        "value" : "Water only after the soil is fully dry, usually every 2-3 weeks.",
+        "type" : "stringType"
+      }
+    }
+  }
+}
+Creating spathiphyllum-wallisii
+{
+  "record" : {
+    "created" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:16:13.298Z"
+    },
+    "fields" : {
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 50
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Peace Lily is a leafy indoor plant with white spathes that appear above dark green foliage. It prefers evenly moist soil and stable indoor conditions."
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed monthly in spring and summer at half strength."
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Brown tips can come from dry air, salts, or inconsistent watering."
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Spathiphyllum wallisii"
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "moderate"
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Peace Lily"
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "spathiphyllum-wallisii.png"
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Wipe leaves regularly so the plant can photosynthesize efficiently."
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Appreciates moderate humidity and clean leaves."
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "18-27°C"
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Water when the top 2 cm of soil dries or leaves begin to soften."
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Easy to read because it droops when thirsty, but dislikes dry soil for too long."
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AeJaCFr9VsYBDFbfXYF_vPrCW1Se\/${f}?o=AkY8UFkqi8oKoKcfsHySO62zQAc5xfL_7ktsIOhetVQYfe2pKT0PJXjcDRKwn7q95Q&v=1&x=3&a=CAogDZqESMLYXOoMW-SSmvXt1frwISuFt-v1V4WiHQ81ewoSiQEQ78jZvekzGI_AkL7pMyIBAFIEwltUnmo34hwGquY_4xN-GKKaLh4t6Rlj1bd7VOK4Ld-axRlPwSOJQPJXXOwk2jkCEO8R_jX-wDy2QGQid3I3XPKZi-HwIICMkw5jNfKW2tkt4YRS3KegC5V_dv9tFi5OobZ3Z_AVf7foxpNEJpAqD7ymqyqqdA&e=1780662673&fl=&r=dd02923a-ce1c-4b26-8fee-c668252edffa-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=lHC4Oed7KRshuAfRexu0wYCFaQA",
+          "size" : 12944,
+          "fileChecksum" : "AeJaCFr9VsYBDFbfXYF\/vPrCW1Se"
+        }
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Medium to bright indirect light; too little light reduces blooms."
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "spathiphyllum-wallisii"
+      },
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      }
+    },
+    "recordName" : "A4F66D5D-DA73-43FA-BDBE-0E26D3C66623",
+    "modified" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:16:13.298Z"
+    },
+    "recordType" : "PlantInformation",
+    "recordChangeTag" : "mq0w1llg"
+  }
+}
+Creating chlorophytum-comosum
+{
+  "record" : {
+    "fields" : {
+      "water" : {
+        "type" : "stringType",
+        "value" : "Water when the top 2-3 cm of soil dries."
+      },
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Bright indirect light for best stripes and compact growth."
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Tolerates average indoor humidity."
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Hardy and beginner-friendly, with visible signs when thirsty."
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Spider Plant"
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed monthly during spring and summer."
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "easy"
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "chlorophytum-comosum.png"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Spider Plant forms arching striped leaves and baby plantlets on long stems. It is adaptable, fast-growing, and simple to propagate."
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Plantlets can be rooted while still attached or clipped and rooted separately."
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Brown tips may appear from dry soil, salts, or very hard water."
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "16-27°C"
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Chlorophytum comosum"
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "chlorophytum-comosum"
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "fileChecksum" : "AaNNcXo1sFDdzJiKGkjjrXacna9V",
+          "size" : 12837,
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AaNNcXo1sFDdzJiKGkjjrXacna9V\/${f}?o=AnzxBh093nXic0cUhwyoE2t9I3qntyHIAIgZ435M956QQhR365UWfdIKmpZqwiDcww&v=1&x=3&a=CAoggr_q1I4Ri17nwh8aNXyj5bmUGo8iFdIjw3MX9z4MRCsSiQEQ0OrZvekzGPDhkL7pMyIBAFIEnJ2vVWo3FjiVdsG9dOaEQ0ct_-EZMg2G_KsV2tZrHRdi3QerVJErTaaqd-HqqwaSO_acwl7009YqvGlciHI3o-z5_SSLFTKGC3aA1cgWgiyBKBf6GnJvUhAZH3jumOSlalF2zUlibaxilAIBV_eQyBQabzSu8g&e=1780662677&fl=&r=6ba678d7-81a9-45d5-a8f7-78a18a824326-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=HM5A6SeigFpyGPgv-tdBZwuoZY0"
+        }
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 60
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      }
+    },
+    "recordName" : "19A08882-F16F-4375-BBD6-FD4A2529524C",
+    "recordType" : "PlantInformation",
+    "recordChangeTag" : "mq0w1oxy",
+    "created" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "timestamp" : "2026-06-05T12:16:17.619Z",
+      "deviceId" : "2"
+    },
+    "modified" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "timestamp" : "2026-06-05T12:16:17.619Z",
+      "deviceId" : "2"
+    }
+  }
+}
+Creating ficus-elastica
+{
+  "record" : {
+    "recordName" : "3F2134D8-92EF-4FC3-A4BE-77D384545E69",
+    "recordType" : "PlantInformation",
+    "recordChangeTag" : "mq0w1rli",
+    "created" : {
+      "timestamp" : "2026-06-05T12:16:21.065Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "modified" : {
+      "timestamp" : "2026-06-05T12:16:21.065Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "fields" : {
+      "water" : {
+        "value" : "Water when the top 3-5 cm of soil dries.",
+        "type" : "stringType"
+      },
+      "diseaseRiskLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "species" : {
+        "value" : "Ficus elastica",
+        "type" : "stringType"
+      },
+      "catalogID" : {
+        "value" : "ficus-elastica",
+        "type" : "stringType"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Generally sturdy, but leaf drop can happen after sudden changes.",
+        "type" : "stringType"
+      },
+      "lightLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "humidityDescription" : {
+        "value" : "Average humidity works, but moderate humidity keeps leaves cleaner and softer.",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "18-29°C",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Rubber Plant",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "value" : "Rubber Plant has broad glossy leaves and a strong upright shape. It becomes a bold indoor tree when given bright filtered light and consistent watering.",
+        "type" : "stringType"
+      },
+      "waterLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "value" : 70,
+        "type" : "int64Type"
+      },
+      "diseaseRiskDescription" : {
+        "value" : "Watch for leaf drop from overwatering, drafts, or abrupt relocation.",
+        "type" : "stringType"
+      },
+      "careDifficulty" : {
+        "value" : "moderate",
+        "type" : "stringType"
+      },
+      "tips" : {
+        "value" : "Dust the large leaves often and rotate the pot for even growth.",
+        "type" : "stringType"
+      },
+      "imageFileName" : {
+        "value" : "ficus-elastica.png",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "light" : {
+        "value" : "Bright indirect light; some gentle morning sun is helpful.",
+        "type" : "stringType"
+      },
+      "fertilizerLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "fertilizer" : {
+        "value" : "Feed monthly during active growth.",
+        "type" : "stringType"
+      },
+      "image" : {
+        "value" : {
+          "fileChecksum" : "AUbOm0Wza18iUXO1p8K2jLU3gmNs",
+          "size" : 12771,
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AUbOm0Wza18iUXO1p8K2jLU3gmNs\/${f}?o=An96Hy1p3NCOzea7F9Bi9fehVoGXuOTX9EMzdR0m9p_cjFMJPzY9Dca6ryOHCgt3_Q&v=1&x=3&a=CAogT2GymZ_B3GuoWNsucGh-nMwYDvslrjzrXQzGCekj9r4SiQEQuIXavekzGNj8kL7pMyIBAFIEN4JjbGo3WoV9btbjD5uZA58Rf8FaRhU67qWU1cIpJRPkqCBVUlElk8uITeQjq3njSG03D8xNQgZ2bAeDYnI3xDbgfBlhDbdwYgqYJs7HxC94t3DnsxOM3HnmefiLogMCe0KXaETOQV6L6XO9fR2192kNMh0YSg&e=1780662681&fl=&r=16263eb7-64d5-48fe-828c-e13a121e7a17-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=1tqU3gza95ExIridEyu4vrplTLA"
+        },
+        "type" : "assetType"
+      }
+    }
+  }
+}
+Creating ficus-lyrata
+{
+  "record" : {
+    "recordType" : "PlantInformation",
+    "recordChangeTag" : "mq0w1uo5",
+    "recordName" : "C45F9950-C11C-43AB-B2B5-7D552FA0A5F2",
+    "modified" : {
+      "timestamp" : "2026-06-05T12:16:25.054Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "created" : {
+      "timestamp" : "2026-06-05T12:16:25.054Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "fields" : {
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "ficus-lyrata.png"
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Water deeply when the top 5 cm of soil dries, then drain fully."
+      },
+      "humidityDescription" : {
+        "value" : "Prefers moderate humidity and stable air.",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Fiddle Leaf Fig",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Fiddle Leaf Fig is an indoor tree with large violin-shaped leaves. It rewards stable bright light and steady watering but dislikes frequent movement."
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "ficus-lyrata"
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Ficus lyrata"
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Brown spots may indicate root stress, inconsistent watering, or low light."
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Beautiful but sensitive to light shifts, overwatering, and dry drafts."
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "18-27°C"
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Avoid moving it often; choose a bright spot and let it settle."
+      },
+      "fertilizer" : {
+        "value" : "Feed monthly in spring and summer with a foliage fertilizer.",
+        "type" : "stringType"
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "hard"
+      },
+      "fertilizerLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 80
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "size" : 13095,
+          "fileChecksum" : "Acyuiaw6w2cPArXd7bHmQKBXXZgv",
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/Acyuiaw6w2cPArXd7bHmQKBXXZgv\/${f}?o=AjxUx4pvr1X6XkkYKrCxSzyH4jAAxPOVnGnH_ZCLD-BmK3zhw3vlvqzqUBslbAGI9g&v=1&x=3&a=CAogs26ZEvyjS5Nuw7N2Xd-EKsSDA3dn9-tGAb_5e7o-SsUSiQEQsqTavekzGNKbkb7pMyIBAFIEV12YL2o3bMWEpnKb0iCFxluiBkoLMF1YnL6ZpJx_ATMhangBM_dsBBdDsNTK3h1o_wV6kyrC4nlmp-0jM3I3vUrz_GrjFfxX318rsUvhvgYk83A_lbQDd3chC_QzRFTgEWxlQXK_qvB969e_QHq93A1I0dwbiQ&e=1780662685&fl=&r=1b13b365-e6b3-4f4e-aee9-a89950818be9-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=of2JvER4AMjE_B2ox-XOl7qygCM"
+        }
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "high"
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Very bright indirect light, ideally near a large window."
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "high"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      }
+    }
+  }
+}
+Creating pilea-peperomioides
+{
+  "record" : {
+    "recordType" : "PlantInformation",
+    "recordName" : "CD1436BB-1AAD-4D7B-9378-E45740E03D34",
+    "created" : {
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:16:28.508Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "modified" : {
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:16:28.508Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "fields" : {
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "light" : {
+        "value" : "Bright indirect light; rotate often for a balanced shape.",
+        "type" : "stringType"
+      },
+      "diseaseRiskLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 90
+      },
+      "humidityLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "waterLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "fertilizer" : {
+        "value" : "Feed monthly in spring and summer.",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Chinese Money Plant",
+        "type" : "stringType"
+      },
+      "imageFileName" : {
+        "value" : "pilea-peperomioides.png",
+        "type" : "stringType"
+      },
+      "species" : {
+        "value" : "Pilea peperomioides",
+        "type" : "stringType"
+      },
+      "careDifficulty" : {
+        "value" : "easy",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "16-27°C",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "value" : "Chinese Money Plant has round coin-shaped leaves on slender stems. It stays compact, grows quickly in bright light, and often produces small offsets.",
+        "type" : "stringType"
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Separate offsets once they have their own small roots."
+      },
+      "catalogID" : {
+        "value" : "pilea-peperomioides",
+        "type" : "stringType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Simple to grow with bright light and careful watering.",
+        "type" : "stringType"
+      },
+      "diseaseRiskDescription" : {
+        "value" : "Drooping or cupped leaves can reflect watering stress or low light.",
+        "type" : "stringType"
+      },
+      "water" : {
+        "value" : "Water when the top 2-3 cm of soil dries.",
+        "type" : "stringType"
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Average indoor humidity is usually enough."
+      },
+      "image" : {
+        "value" : {
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AQEShT8JTfnIWrb_8zyv8YyemkmM\/${f}?o=AoCx-wOLGkLIA5xvpz9zlSKaTMtXmvk1j5AYXru0f4PH-5i3jV4qapxtBp_Ey0jiRw&v=1&x=3&a=CAogT5louBtkOBt-uoQYuTVwH8Vt6sGE2fbAtFKJ2nYVLKoSiQEQrb_avekzGM22kb7pMyIBAFIEnppJjGo3HWp2aRFczNfe9oabKFuViUEMUjxcDU5PHe9l4-xSFnQ1lecDZhDCCt2NsmDNdmX8Dix3RC1em3I3Dxznv0rmNN9pJHLczKspGiCHx_-AjiE2wC2xzEJNGL5vL1Ko00lY5wvUPyOPde1Yi9e8FGdAeQ&e=1780662688&fl=&r=fb1fb006-6eb2-4421-97c8-e6dfc353662a-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=l6z092EDEGe140TnmoS2bi-oxuY",
+          "size" : 11349,
+          "fileChecksum" : "AQEShT8JTfnIWrb\/8zyv8YyemkmM"
+        },
+        "type" : "assetType"
+      },
+      "fertilizerLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      }
+    },
+    "recordChangeTag" : "mq0w1xc1"
+  }
+}
+Creating nephrolepis-exaltata
+{
+  "record" : {
+    "modified" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "timestamp" : "2026-06-05T12:16:32.697Z",
+      "deviceId" : "2"
+    },
+    "recordChangeTag" : "mq0w20l6",
+    "created" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "timestamp" : "2026-06-05T12:16:32.697Z",
+      "deviceId" : "2"
+    },
+    "fields" : {
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed monthly during spring and summer with diluted fertilizer."
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Dry air and missed watering cause browning, shedding, and crispy tips."
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "A bright bathroom or humid corner is often better than a dry sunny shelf."
+      },
+      "overview" : {
+        "value" : "Boston Fern has soft arching fronds and a lush texture. It prefers evenly moist soil, filtered light, and higher humidity than most common houseplants.",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "high"
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "nephrolepis-exaltata.png"
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "nephrolepis-exaltata"
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "high"
+      },
+      "light" : {
+        "value" : "Medium to bright indirect light, away from harsh direct sun.",
+        "type" : "stringType"
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Nephrolepis exaltata"
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Needs consistent moisture and humidity to avoid crispy fronds."
+      },
+      "humidityDescription" : {
+        "value" : "High humidity is important for healthy fronds.",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Boston Fern",
+        "type" : "stringType"
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "fertilizerLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 100
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Keep soil lightly moist; water before it dries completely."
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "16-24°C"
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "careDifficulty" : {
+        "value" : "hard",
+        "type" : "stringType"
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "fileChecksum" : "AZ6oGb8uiTyVhiARWdKjGneWbVA3",
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AZ6oGb8uiTyVhiARWdKjGneWbVA3\/${f}?o=At7vBG8QCD7SzFstqKtK-GIFMEbJoY_OGfjzAAHQQKNf-0Vp29CcpIArQkILXrj14Q&v=1&x=3&a=CAogOJC-MfiW6fRTlphPKo2vEFuFFVOih9wy9U4tbIa8MLkSiQEQi-DavekzGKvXkb7pMyIBAFIElm1QN2o37H1y15SAfev6CIalEvEfSLZ4FXS7llVslp2JQW2BzbjsO1MrtXLrG1AC3URD_fwwUo8AqfnEe3I36yaEuvB0IZ7o8lQBJEJbiaqVrYSBi9pG-IDvLKei-u-OzqMWI0Fzc6hxmL18B3-DbbBzG6BIRQ&e=1780662692&fl=&r=ba4dc6ab-56df-4331-b45b-10ced80e544a-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=IUYoG34j3Bydt6X94Aw4KTORkk0",
+          "size" : 14733
+        }
+      }
+    },
+    "recordType" : "PlantInformation",
+    "recordName" : "705B0772-0B89-44F1-9547-4213F4F7AA75"
+  }
+}
+Creating goeppertia-orbifolia
+{
+  "record" : {
+    "fields" : {
+      "light" : {
+        "value" : "Medium indirect light; avoid direct sun that can fade or burn leaves.",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "18-27°C",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Calathea is grown for broad patterned leaves with pale striping. It prefers soft filtered light, stable warmth, and consistently moist soil."
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed lightly every 6-8 weeks in spring and summer."
+      },
+      "diseaseRiskDescription" : {
+        "value" : "Brown edges often come from low humidity, dry soil, or water quality.",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "value" : "high",
+        "type" : "stringType"
+      },
+      "tips" : {
+        "value" : "Use filtered or rested water if leaf edges brown despite good humidity.",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Calathea",
+        "type" : "stringType"
+      },
+      "image" : {
+        "value" : {
+          "fileChecksum" : "AYsv3Mb8jGRz\/vxXeY4nqh2HF22S",
+          "size" : 13468,
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AYsv3Mb8jGRz_vxXeY4nqh2HF22S\/${f}?o=AkXpHL15HLeiy4cvc3qSKm5VCaNIG56mTaxVmvjCkAQ8vfWC9dqfRw4JE71bo8XP2w&v=1&x=3&a=CAogipBdZSTm9a3qnS0SrVrkAqfRZKn8bpNTfSn3K6v9YZoSiQEQ0PzavekzGPDzkb7pMyIBAFIEhxdtkmo31zxwWn-dH3NvF_xHPqNVarg3TKGCn7qls0plSo3GIk0g88BscUCFZiV_y5Go6ybhJAXTaKY1kXI3XrNM6-5HlcMsGiMzsx0IK7IWhjfsixwWvri8NgWrSQy4dNXttnAy2T23vn-0oKnLiw-5-SZsrw&e=1780662696&fl=&r=46371a33-7526-4706-b842-151ec03b65b5-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=x8C-7bBipk3hhnido2P0kuZq4U8"
+        },
+        "type" : "assetType"
+      },
+      "lightLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "goeppertia-orbifolia.png"
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 110
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "High humidity helps prevent curling leaves and brown edges."
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Goeppertia orbifolia"
+      },
+      "careDifficulty" : {
+        "value" : "hard",
+        "type" : "stringType"
+      },
+      "fertilizerLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "water" : {
+        "value" : "Keep soil evenly moist but not soggy.",
+        "type" : "stringType"
+      },
+      "waterLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Sensitive to dry air, mineral-heavy water, and inconsistent watering.",
+        "type" : "stringType"
+      },
+      "catalogID" : {
+        "value" : "goeppertia-orbifolia",
+        "type" : "stringType"
+      }
+    },
+    "recordChangeTag" : "mq0w23d7",
+    "modified" : {
+      "timestamp" : "2026-06-05T12:16:36.313Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "recordName" : "D4B96E8E-348F-4D66-B191-052F29E2BC88",
+    "created" : {
+      "timestamp" : "2026-06-05T12:16:36.313Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "recordType" : "PlantInformation"
+  }
+}
+Creating philodendron-hederaceum
+{
+  "record" : {
+    "recordType" : "PlantInformation",
+    "fields" : {
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Heartleaf Philodendron"
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed monthly during active growth."
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Philodendron hederaceum"
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Pinch back long vines to keep the plant full."
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Water when the top third of the soil dries."
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Yellow leaves are usually linked to overwatering or low light."
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "philodendron-hederaceum"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Heartleaf Philodendron is a trailing plant with soft heart-shaped leaves. It is adaptable, fast-growing, and works well in hanging pots or on shelves."
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Low to bright indirect light; brighter light makes fuller vines."
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Forgiving and reliable in common indoor conditions."
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "18-29°C"
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "philodendron-hederaceum.png"
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 120
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "size" : 14640,
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AU2Toe1XUVD4pSPPUJX5oMWbSC_8\/${f}?o=AmMCtG8r85-bCTUrMuBeW5l7w0-_k_oJqlQUP4kw4SoiLwiS6MvkRb80gUiTVVsB7A&v=1&x=3&a=CAogpKSt7lbEQiEFD9s3gjRjeYgsQ4jpU84l0rvinwOJbN4SiQEQvJvbvekzGNySkr7pMyIBAFIEm0gv_Go3tphxlvlRPTIbUJDa_PR9sfkPMD6lvNZCQRu6dLMOBT67SH_xn58W4R7Yz-Z0RmhG4cVmImQoLHI3U6akCYNovDd5fNX6Tm4io0x9rcyALpI9PtKIEuJGcbc43rDQpulJN67OvQDk0mGu6pR6PVt3XA&e=1780662700&fl=&r=8aad7828-15ea-4443-a499-b2e0f6d3a5d5-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=bljp0xZIdrZUXoHlrRgDgNtvljg",
+          "fileChecksum" : "AU2Toe1XUVD4pSPPUJX5oMWbSC\/8"
+        }
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Average indoor humidity is acceptable."
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "easy"
+      }
+    },
+    "modified" : {
+      "timestamp" : "2026-06-05T12:16:40.293Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "recordName" : "EF460275-F499-4BEA-AB77-99D3495E121B",
+    "created" : {
+      "timestamp" : "2026-06-05T12:16:40.293Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "recordChangeTag" : "mq0w26g2"
+  }
+}
+Creating aloe-barbadensis-miller
+{
+  "record" : {
+    "modified" : {
+      "timestamp" : "2026-06-05T12:16:44.855Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "fields" : {
+      "lightLevel" : {
+        "value" : "high",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "value" : "Aloe Vera is a succulent with thick water-storing leaves. It needs strong light, fast-draining soil, and long dry periods between watering.",
+        "type" : "stringType"
+      },
+      "water" : {
+        "value" : "Water deeply, then let soil dry completely before watering again.",
+        "type" : "stringType"
+      },
+      "imageFileName" : {
+        "value" : "aloe-barbadensis-miller.png",
+        "type" : "stringType"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "image" : {
+        "value" : {
+          "size" : 14111,
+          "fileChecksum" : "AQDzLyGKl1F+lQtpYEYwfLyBDJYp",
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AQDzLyGKl1F-lQtpYEYwfLyBDJYp\/${f}?o=Ar-CEIe_nIjN-pNPJfs1_ZvFjBgCUkM9heU3qdmo6OPgthAhxJmh19G3mEWzeY2M1Q&v=1&x=3&a=CAogRjZIwRQ7ZoivVa3jTukl_KBjYKkmMkEW1QEN9NhJMR0SiQEQ2b_bvekzGPm2kr7pMyIBAFIEgQyWKWo3XS1vLG6Sr7aTJEoqCDQXwJiv-0I8LtVkSk1dDer-6iwzaBDXwU4rbjnLh_804F2jUegkl_WLLHI3JKs9UxMVJeG6IZi1jyUUI-xwRd3jCrQQo734G6NI-kPT6jgy4mfAW-gH3p7hq_PeewQbhXHtEA&e=1780662705&fl=&r=e82cc39a-79e7-4fab-9eba-7f0917fb23ef-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=IxCDlhliPeMl-Hcx3YthCphXzkM"
+        },
+        "type" : "assetType"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Easy if treated like a succulent rather than a leafy tropical plant.",
+        "type" : "stringType"
+      },
+      "humidityDescription" : {
+        "value" : "Prefers dry air and dislikes humid, stagnant conditions.",
+        "type" : "stringType"
+      },
+      "species" : {
+        "value" : "Aloe barbadensis miller",
+        "type" : "stringType"
+      },
+      "careDifficulty" : {
+        "value" : "easy",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "16-29°C",
+        "type" : "stringType"
+      },
+      "light" : {
+        "value" : "Bright light with several hours of gentle direct sun.",
+        "type" : "stringType"
+      },
+      "waterLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "catalogID" : {
+        "value" : "aloe-barbadensis-miller",
+        "type" : "stringType"
+      },
+      "tips" : {
+        "value" : "A gritty cactus mix and drainage hole are more important than frequent watering.",
+        "type" : "stringType"
+      },
+      "diseaseRiskDescription" : {
+        "value" : "Mushy leaves and black spots usually mean excess water or poor drainage.",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "diseaseRiskLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Aloe Vera",
+        "type" : "stringType"
+      },
+      "fertilizer" : {
+        "value" : "Feed once in spring with diluted succulent fertilizer.",
+        "type" : "stringType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "fertilizerLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "value" : 130,
+        "type" : "int64Type"
+      }
+    },
+    "recordName" : "E8C9FD0F-79E7-4D4C-8C85-8D7F48A5D3B8",
+    "recordChangeTag" : "mq0w29y3",
+    "created" : {
+      "timestamp" : "2026-06-05T12:16:44.855Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "recordType" : "PlantInformation"
+  }
+}
+Creating echeveria-elegans
+{
+  "record" : {
+    "recordChangeTag" : "mq0w2exk",
+    "fields" : {
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed once or twice during spring and summer with diluted succulent fertilizer."
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Echeveria"
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Prefers dry air and good airflow."
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "echeveria-elegans.png"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Echeveria is a compact rosette succulent with powdery leaves. It needs strong light and dry soil to stay colorful and symmetrical."
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "If the rosette stretches upward, it needs more light."
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Very bright light with gentle direct sun."
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "high"
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Simple in strong light, but stretches quickly in dim rooms."
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "size" : 10391,
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AVCnwZcPUFYRRek_LI2zRVnsaaNb\/${f}?o=Ap4MQQhppq1rdbKCaLg4Bedjg02RRRx7rX1bKxOarv8EyiGzxxxOFBiU2aJG6tsncA&v=1&x=3&a=CAogBcRQFNlqIhr_TXNg4iBBRWCfnfW9Dandnf9YdFJLRDwSiQEQ4PHbvekzGIDpkr7pMyIBAFIE7GmjW2o3HWJlMFT82f-Dy1h0ECiQQqFvSl2rBHqyE8QJIlKXHjAH7QcQUvrhALVBdN_a51sadLhMrxdMn3I3BV-xvy5e7Tc5So6yrC1ZQpRZw521T36nXbt_o37oID1qGr2uVM6xtEZXO57VWdBSIUKS43gPnQ&e=1780662711&fl=&r=d8c4c1a1-1b17-449b-a54b-fd1a738745c9-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=7aS8a8cKj4XQAivxmuIJb2v0bWg",
+          "fileChecksum" : "AVCnwZcPUFYRRek\/LI2zRVnsaaNb"
+        }
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "echeveria-elegans"
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Echeveria elegans"
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 140
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Overwatering and water trapped in the rosette can cause rot."
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Water only when soil is completely dry, usually every 2-3 weeks."
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "15-28°C"
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "moderate"
+      }
+    },
+    "recordName" : "6EBDCFE9-D10A-430E-A7CD-BAF2EF2CD914",
+    "recordType" : "PlantInformation",
+    "created" : {
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:16:51.318Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "modified" : {
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:16:51.318Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    }
+  }
+}
+Creating crassula-ovata
+{
+  "record" : {
+    "recordName" : "B89ABC7E-5F46-42EF-BEE9-75C3A7DA19DD",
+    "modified" : {
+      "timestamp" : "2026-06-05T12:16:56.368Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "fields" : {
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "18-27°C"
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Prune lightly to keep a compact tree-like shape."
+      },
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "crassula-ovata"
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Crassula ovata"
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Leaf drop or soft stems often point to excess water."
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Jade Plant"
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "fileChecksum" : "AekTVQGUmskv3PAPlP10K\/HYgPyl",
+          "size" : 11040,
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AekTVQGUmskv3PAPlP10K_HYgPyl\/${f}?o=AvQcyAcPvDYyf7ISDhu-MUiw8zh6zbmCONyN0IafKfhhinP8LnflYl0Z0lEuIaFJaw&v=1&x=3&a=CAogjPB8bEVsBg2Ucq7Som_FjftjlfKbhbU3zaDgWUSdlWYSiQEQl5ncvekzGLeQk77pMyIBAFIE2ID8pWo3XQuA_YxAR3O_aFyd2OiT8eWAOtuwXO49BIiMk57QbZUOW-U5COdlWRziUiDTif7R8zcvdw0TwXI34F-ViZMVDkl5IwQLyYEaVDmZOYAD05LqjPNhEo_cQe-obBPvxQJtWv3yA4_vjF_LK-b_ltMtNw&e=1780662716&fl=&r=3a703344-3b05-4920-b0a2-b2b5e59e10bd-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=0JG3U9PkyzPe5mpIdcir9mQ8eVI"
+        }
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "easy"
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Let soil dry fully before watering, often every 2-3 weeks."
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Bright light with some direct sun."
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "crassula-ovata.png"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Jade Plant is a woody succulent with thick oval leaves. It grows slowly, lives for many years, and prefers bright light with dry soil cycles."
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Low-maintenance when kept bright and not overwatered."
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "high"
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Dry indoor air is fine."
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 150
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed lightly every 2-3 months during active growth."
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      }
+    },
+    "created" : {
+      "timestamp" : "2026-06-05T12:16:56.368Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "recordType" : "PlantInformation",
+    "recordChangeTag" : "mq0w2iu9"
+  }
+}
+Creating mammillaria-elongata
+{
+  "record" : {
+    "recordName" : "4B88C816-A898-4C0E-9455-EC741EB57AD1",
+    "recordChangeTag" : "mq0w2nmh",
+    "fields" : {
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "commonName" : {
+        "type" : "stringType",
+        "value" : "Ladyfinger Cactus"
+      },
+      "imageFileName" : {
+        "type" : "stringType",
+        "value" : "mammillaria-elongata.png"
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Ladyfinger Cactus forms clusters of narrow cylindrical stems covered in small spines. It is compact, drought tolerant, and ideal for bright windowsills."
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Rot is the main risk when soil stays wet."
+      },
+      "photoURL" : {
+        "type" : "stringType",
+        "value" : ""
+      },
+      "humidityLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "fertilizer" : {
+        "type" : "stringType",
+        "value" : "Feed once in spring or early summer with cactus fertilizer."
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Mammillaria elongata"
+      },
+      "careDifficulty" : {
+        "type" : "stringType",
+        "value" : "easy"
+      },
+      "temperature" : {
+        "type" : "stringType",
+        "value" : "15-30°C"
+      },
+      "careDifficultyDescription" : {
+        "type" : "stringType",
+        "value" : "Very low care if kept dry and bright."
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "high"
+      },
+      "light" : {
+        "type" : "stringType",
+        "value" : "Bright direct or very bright indirect light."
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "sortOrder" : {
+        "type" : "int64Type",
+        "value" : 160
+      },
+      "humidityDescription" : {
+        "type" : "stringType",
+        "value" : "Prefers dry air and excellent airflow."
+      },
+      "water" : {
+        "type" : "stringType",
+        "value" : "Water sparingly only when soil is bone dry."
+      },
+      "image" : {
+        "type" : "assetType",
+        "value" : {
+          "fileChecksum" : "AVoeGkHSu1dUDo1WTbXS0pJd8iRF",
+          "size" : 11827,
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AVoeGkHSu1dUDo1WTbXS0pJd8iRF\/${f}?o=AuCq5_0MFTHKi3uNtevMJNm99pzD9XaPSGHUAS1l_Cta4HQy68_KnI8IelygG8BGYw&v=1&x=3&a=CAogPGTBnY6GNXa5kqrxnfJMtIM4zLOlzvBVYe6bpqtxKycSiQEQwsncvekzGOLAk77pMyIBAFIEXfIkRWo3lAb3C2KVKFnHt3goHQignCw9Sn8OKPC5ptGHAO3gK01NinH_zbAlA4UmTU-RJVm34iGxonwL-HI3X8d0IEPVhz6DfSv0m2Vq6nfsETfKBZEI34Z9uIl-K7QkWiuXJ9iBxA6yJb4YaQbCPHJlOSAruA&e=1780662722&fl=&r=5671d62d-8c7c-4a02-93c7-c919f822159c-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=MXRXSr8x2eNkMwbQL00D66fVhPk"
+        }
+      },
+      "catalogID" : {
+        "type" : "stringType",
+        "value" : "mammillaria-elongata"
+      },
+      "fertilizerLevel" : {
+        "type" : "stringType",
+        "value" : "low"
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Use a gritty mineral-heavy mix and never let the pot sit in water."
+      },
+      "isPublished" : {
+        "type" : "int64Type",
+        "value" : 1
+      }
+    },
+    "recordType" : "PlantInformation",
+    "modified" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:17:02.565Z"
+    },
+    "created" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:17:02.565Z"
+    }
+  }
+}
+Creating phalaenopsis-amabilis
+{
+  "record" : {
+    "modified" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "timestamp" : "2026-06-05T12:17:06.076Z",
+      "deviceId" : "2"
+    },
+    "recordName" : "F570174C-90C2-46F3-8EF4-8A832E039340",
+    "recordChangeTag" : "mq0w2qbi",
+    "fields" : {
+      "imageFileName" : {
+        "value" : "phalaenopsis-amabilis.png",
+        "type" : "stringType"
+      },
+      "diseaseRiskLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "light" : {
+        "value" : "Bright indirect light; avoid hot direct sun.",
+        "type" : "stringType"
+      },
+      "tips" : {
+        "value" : "Keep the crown dry and let excess water drain fully after watering.",
+        "type" : "stringType"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "fertilizerLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "fertilizer" : {
+        "value" : "Feed weakly every 2-4 weeks while actively growing.",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "value" : "Moth Orchid is a common indoor orchid with long-lasting blooms. It grows in bark mix, prefers filtered light, and needs roots that can breathe.",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "value" : 170,
+        "type" : "int64Type"
+      },
+      "lightLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "humidityDescription" : {
+        "value" : "Prefers moderate humidity and gentle airflow.",
+        "type" : "stringType"
+      },
+      "careDifficulty" : {
+        "value" : "moderate",
+        "type" : "stringType"
+      },
+      "species" : {
+        "value" : "Phalaenopsis amabilis",
+        "type" : "stringType"
+      },
+      "waterLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Manageable once watering and root airflow are understood.",
+        "type" : "stringType"
+      },
+      "image" : {
+        "value" : {
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AdrqxUMJcWbC-F7we4msExDUOh-2\/${f}?o=AtdGewoRF-KpUQVE5CHLA1V4Y_221uwXev9M2aYlMGaaimp3BI17RbRnvKfUMw1FoA&v=1&x=3&a=CAogDNJHHOwpyuskzL2MckYQ2wwa6G9oBgOqwGcaO4CwDCQSiQEQleXcvekzGLXck77pMyIBAFIE1Doftmo3_FYfB2Fo6WTd86eXOarRmslAV-m5bKKK2pDTEhVGqBmseyBwsQOFKOQXCymzeCn6xVPGrO1cSXI3o6M_YsrGmm68sqvbNFHtqbBgxkqJuFuN0x5z9FTL8piIBF2_Z3aBAq9QnjGI8EhM85ZhHkn4nw&e=1780662726&fl=&r=7db6e17a-be58-4990-bb02-a8b391d041cb-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=rDkxqM9ZwjL_RcZrRLyak3fuksc",
+          "fileChecksum" : "AdrqxUMJcWbC+F7we4msExDUOh+2",
+          "size" : 12667
+        },
+        "type" : "assetType"
+      },
+      "water" : {
+        "value" : "Water when bark is nearly dry and roots turn silvery.",
+        "type" : "stringType"
+      },
+      "catalogID" : {
+        "value" : "phalaenopsis-amabilis",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "18-27°C",
+        "type" : "stringType"
+      },
+      "diseaseRiskDescription" : {
+        "value" : "Crown rot can occur if water sits in the center of the leaves.",
+        "type" : "stringType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Moth Orchid",
+        "type" : "stringType"
+      }
+    },
+    "created" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "timestamp" : "2026-06-05T12:17:06.076Z",
+      "deviceId" : "2"
+    },
+    "recordType" : "PlantInformation"
+  }
+}
+Creating anthurium-andraeanum
+{
+  "record" : {
+    "recordType" : "PlantInformation",
+    "fields" : {
+      "catalogID" : {
+        "value" : "anthurium-andraeanum",
+        "type" : "stringType"
+      },
+      "humidityDescription" : {
+        "value" : "Higher humidity supports larger leaves and better flowers.",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "value" : "high",
+        "type" : "stringType"
+      },
+      "diseaseRiskDescription" : {
+        "type" : "stringType",
+        "value" : "Yellow leaves and root stress can come from dense wet soil."
+      },
+      "overview" : {
+        "type" : "stringType",
+        "value" : "Anthurium has glossy heart-shaped leaves and colorful waxy spathes. It prefers bright filtered light, airy soil, and warm humid conditions."
+      },
+      "sortOrder" : {
+        "value" : 180,
+        "type" : "int64Type"
+      },
+      "light" : {
+        "value" : "Bright indirect light for steady blooms.",
+        "type" : "stringType"
+      },
+      "diseaseRiskLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "tips" : {
+        "type" : "stringType",
+        "value" : "Use an airy mix with bark or perlite instead of dense potting soil."
+      },
+      "image" : {
+        "value" : {
+          "fileChecksum" : "Ac4dF629yAHlfxYAngGO6X9cBDy2",
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/Ac4dF629yAHlfxYAngGO6X9cBDy2\/${f}?o=Ajk82oLpwUk2v9TvdASUt4oAXZdUIMUEVmDE1dU4G8wI91woP9eP7dvtI1b6cnKGJg&v=1&x=3&a=CAogpmXp5AcJ729GnlgrNv8Rp6PBhqb8O9rjb9AGkuLxnOcSiQEQ_obdvekzGJ7-k77pMyIBAFIEXAQ8tmo3PFntctu674aacnWag9sMMjwYEwdAV8GNky8O_S2JxkeF_4tCjzucMKYUoZ1d701yWgOJIxws1XI3YkhXXCcAFLM1B01CRq4g_Si0anUjW6NAqEmioKQJsv30jVnpIOCUMNX_teO2HIMXSkzrcAEWdg&e=1780662730&fl=&r=28ca60f6-137a-43dd-b504-c75d8393735f-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=hQBXleWr0lgf81fZ39-BLUZXWak",
+          "size" : 13292
+        },
+        "type" : "assetType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "species" : {
+        "type" : "stringType",
+        "value" : "Anthurium andraeanum"
+      },
+      "careDifficulty" : {
+        "value" : "moderate",
+        "type" : "stringType"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Needs moisture and humidity, but roots must still breathe.",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "18-28°C",
+        "type" : "stringType"
+      },
+      "lightLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "waterLevel" : {
+        "type" : "stringType",
+        "value" : "medium"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "fertilizer" : {
+        "value" : "Feed monthly at half strength during active growth.",
+        "type" : "stringType"
+      },
+      "imageFileName" : {
+        "value" : "anthurium-andraeanum.png",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Anthurium",
+        "type" : "stringType"
+      },
+      "fertilizerLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "water" : {
+        "value" : "Water when the top 2-3 cm of soil dries.",
+        "type" : "stringType"
+      }
+    },
+    "recordName" : "98A51808-CA73-469B-B45B-778EF00D3DD8",
+    "recordChangeTag" : "mq0w2tp4",
+    "created" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:17:10.439Z"
+    },
+    "modified" : {
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2",
+      "timestamp" : "2026-06-05T12:17:10.439Z"
+    }
+  }
+}
+Creating dracaena-sanderiana
+{
+  "record" : {
+    "created" : {
+      "timestamp" : "2026-06-05T12:17:14.807Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "fields" : {
+      "waterLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "diseaseRiskDescription" : {
+        "value" : "Yellow stems can come from direct sun, poor water quality, or old water.",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "value" : 190,
+        "type" : "int64Type"
+      },
+      "catalogID" : {
+        "value" : "dracaena-sanderiana",
+        "type" : "stringType"
+      },
+      "image" : {
+        "value" : {
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AbJolXfhAwKLnDxNZuTO68yH1qyG\/${f}?o=ApXxbuClYyI4DH8HloIiLAOH39ZINqlvK1mZZ4x8QJUD-HS5ban6vzKRrfsMgAlOjQ&v=1&x=3&a=CAogEbygeXKEs5-bvFbv_Akgsys8LdhtkbWL1yEuZx5deEcSiQEQnqndvekzGL6glL7pMyIBAFIEh9ashmo3DUT_DL1H7C5NZpnRYVXb7RSo1VNbs6Kw3CzcfCKYvOgbqaojddXHF0lj23ViIv733LadKOvKXHI3CW7Dd7g-HUUzIMgKGbs4grtnZk0T4WifhjNqUKp6iUraB4zO4aOJAKX6CO8fVaDoQ5WrjXTX9g&e=1780662734&fl=&r=f295d2af-b644-4f92-a714-92f13935120c-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=wziuv8ZijzuqmpEeGh6ATvxbOls",
+          "size" : 12449,
+          "fileChecksum" : "AbJolXfhAwKLnDxNZuTO68yH1qyG"
+        },
+        "type" : "assetType"
+      },
+      "humidityDescription" : {
+        "value" : "Average indoor humidity is enough.",
+        "type" : "stringType"
+      },
+      "light" : {
+        "value" : "Low to medium indirect light; avoid direct sun.",
+        "type" : "stringType"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Simple if water quality and light are kept stable.",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "value" : "Lucky Bamboo is a Dracaena often grown in water or a light potting mix. It is compact, decorative, and tolerant of indoor light.",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "Lucky Bamboo",
+        "type" : "stringType"
+      },
+      "lightLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "fertilizer" : {
+        "value" : "Use very diluted fertilizer every 2-3 months.",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "18-29°C",
+        "type" : "stringType"
+      },
+      "careDifficulty" : {
+        "value" : "easy",
+        "type" : "stringType"
+      },
+      "fertilizerLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "tips" : {
+        "value" : "Use filtered water if leaf tips brown or stems yellow.",
+        "type" : "stringType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "imageFileName" : {
+        "value" : "dracaena-sanderiana.png",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      },
+      "species" : {
+        "value" : "Dracaena sanderiana",
+        "type" : "stringType"
+      },
+      "water" : {
+        "value" : "If grown in water, refresh weekly; if in soil, keep lightly moist.",
+        "type" : "stringType"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "diseaseRiskLevel" : {
+        "value" : "low",
+        "type" : "stringType"
+      }
+    },
+    "recordChangeTag" : "mq0w2x1i",
+    "recordName" : "6D652BD4-C5F0-4762-9BBD-A3A32868D00F",
+    "modified" : {
+      "timestamp" : "2026-06-05T12:17:14.807Z",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d",
+      "deviceId" : "2"
+    },
+    "recordType" : "PlantInformation"
+  }
+}
+Creating hedera-helix
+{
+  "record" : {
+    "modified" : {
+      "timestamp" : "2026-06-05T12:17:19.377Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "recordType" : "PlantInformation",
+    "recordChangeTag" : "mq0w30ky",
+    "created" : {
+      "timestamp" : "2026-06-05T12:17:19.377Z",
+      "deviceId" : "2",
+      "userRecordName" : "_179ea322b3c6cce40809a84c1a46511d"
+    },
+    "recordName" : "0D96A40C-7229-4888-9DCA-D11E4B8ECFFF",
+    "fields" : {
+      "diseaseRiskDescription" : {
+        "value" : "Spider mites are more likely in hot, dry indoor air.",
+        "type" : "stringType"
+      },
+      "photoURL" : {
+        "value" : "",
+        "type" : "stringType"
+      },
+      "catalogID" : {
+        "value" : "hedera-helix",
+        "type" : "stringType"
+      },
+      "overview" : {
+        "value" : "English Ivy is a trailing vine with lobed leaves. Indoors it prefers cool rooms, bright filtered light, and evenly moist soil.",
+        "type" : "stringType"
+      },
+      "imageFileName" : {
+        "value" : "hedera-helix.png",
+        "type" : "stringType"
+      },
+      "humidityDescription" : {
+        "value" : "Moderate humidity helps reduce crispy leaf edges.",
+        "type" : "stringType"
+      },
+      "humidityLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "isPublished" : {
+        "value" : 1,
+        "type" : "int64Type"
+      },
+      "diseaseRiskLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "species" : {
+        "value" : "Hedera helix",
+        "type" : "stringType"
+      },
+      "careDifficulty" : {
+        "value" : "moderate",
+        "type" : "stringType"
+      },
+      "light" : {
+        "value" : "Bright indirect light; variegated forms need more brightness.",
+        "type" : "stringType"
+      },
+      "commonName" : {
+        "value" : "English Ivy",
+        "type" : "stringType"
+      },
+      "fertilizer" : {
+        "value" : "Feed monthly during spring and summer.",
+        "type" : "stringType"
+      },
+      "sortOrder" : {
+        "value" : 200,
+        "type" : "int64Type"
+      },
+      "image" : {
+        "value" : {
+          "fileChecksum" : "AaimCNbu6gCPv2MWpzNqyCdKt8HJ",
+          "downloadUrl" : "https:\/\/cvws.icloud-content.com\/B\/AaimCNbu6gCPv2MWpzNqyCdKt8HJ\/${f}?o=AnodvRfyDcJ6hb7LyjZOhkUK8uKYSKfwCteTy4LYOVFst8F-80URge81l3IjS-9GYA&v=1&x=3&a=CAog22qU4GXJR_g1vu7xwaIM4hv3BmaAAhIGZAxjzw_ky9kSiQEQgs3dvekzGKLElL7pMyIBAFIESrfByWo3W6T7dV5P3jaFY0lXJdUQsj_QNiMx_ZtFC3hLOJ9iJIthtzTRZH4F16jowGDbA6KFQ1AcVulVkHI3WlFolTFmmge1SqjTwAp8d6600FNHFPJKBzzNFvPrl7DhqLZbBHOj9b-ot_YRPXP9riaijDKnbQ&e=1780662739&fl=&r=cd84c63a-f800-4219-b37b-20dea1a5657d-1&k=_&ckc=iCloud.com.hongbo.Plantory&ckz=_defaultZone&p=55&s=6cSzvSJvOo6Buc1H0NlNG76G1DQ",
+          "size" : 14732
+        },
+        "type" : "assetType"
+      },
+      "waterLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "temperature" : {
+        "value" : "12-24°C",
+        "type" : "stringType"
+      },
+      "lightLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "water" : {
+        "value" : "Water when the top 2 cm of soil dries.",
+        "type" : "stringType"
+      },
+      "fertilizerLevel" : {
+        "value" : "medium",
+        "type" : "stringType"
+      },
+      "careDifficultyDescription" : {
+        "value" : "Adaptable, but dislikes hot dry rooms and very dry soil.",
+        "type" : "stringType"
+      },
+      "tips" : {
+        "value" : "Trim vines regularly for a denser, less tangled plant.",
+        "type" : "stringType"
+      }
+    }
+  }
+}

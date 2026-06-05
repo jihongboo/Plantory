@@ -125,6 +125,8 @@ species, light, water, temperature, fertilizer
 - 遵循苹果 HIG 设计规范
 - 支持 Dynamic Type 和 Dark Mode
 - 像素主题颜色直接使用 `.pixelPaper`、`.pixelInk`、`.pixelLeaf` 等简写，禁止写成 `Color(.pixelPaper)` 这类包装形式。
+- `Page` 页面有加载/成功/失败等异步状态时，必须统一使用 `ViewState<T>` 管理状态；页面初始化器需要支持外部传入初始 `ViewState` 来控制状态，`#Preview` 必须 mock 出 `.loading`、`.loaded`、`.failed` 三种状态。
+- 页面失败/空内容状态必须使用 `PixelContentUnavailableView` 表达，必要操作通过其 `actions` 区域提供；不要在页面里临时拼普通错误 `Text` 卡片。
 - SwiftUI 类型的私有方法统一放在 `private extension` 中，并将该 extension 放在 `#Preview` 后面。
 
 ### 数据持久化

@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "phalaenopsis-amabilis"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Moth Orchid"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Phalaenopsis amabilis"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Moth Orchid is a common indoor orchid with long-lasting blooms. It grows in bark mix, prefers filtered light, and needs roots that can breathe."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "phalaenopsis-amabilis.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "moderate"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Manageable once watering and root airflow are understood."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Bright indirect light; avoid hot direct sun."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water when bark is nearly dry and roots turn silvery."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Prefers moderate humidity and gentle airflow."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "18-27°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Crown rot can occur if water sits in the center of the leaves."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed weakly every 2-4 weeks while actively growing."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Keep the crown dry and let excess water drain fully after watering."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 170
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "phalaenopsis-amabilis.png"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "epipremnum-aureum"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Pothos"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Epipremnum aureum"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Pothos is a fast-growing trailing plant with heart-shaped leaves. It is one of the easiest indoor plants for beginners and tolerates a wide range of rooms."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "epipremnum-aureum.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "easy"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Very forgiving and quick to recover from missed watering."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Low to bright indirect light; brighter light keeps variegation stronger."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water when the top half of the soil dries out."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Handles normal home humidity well."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "18-29°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Main risks are root rot from standing water and leggy growth in very low light."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed every 6-8 weeks in the growing season."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Trim long vines to encourage fuller growth and root cuttings in water."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 20
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "epipremnum-aureum.png"
+  }
+}

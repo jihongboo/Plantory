@@ -7,7 +7,8 @@ struct PixelPlantInformationHero: View {
         PixelRoundedRectangleCard(fill: .buttonBackground) {
             VStack(alignment: .leading, spacing: 14) {
                 HStack(spacing: 16) {
-                    PixelTag(systemName: "leaf.fill", fill: .pixelLeafDark)
+                    plantImage
+                        .frame(width: 88, height: 88)
 
                     VStack(alignment: .leading, spacing: 0) {
                         Text(info.commonName)
@@ -46,4 +47,22 @@ struct PixelPlantInformationHero: View {
     PixelPlantInformationHero(info: .monstera)
         .padding()
         .background(.pixelPaper)
+}
+
+private extension PixelPlantInformationHero {
+    @ViewBuilder
+    var plantImage: some View {
+        if let imageData = info.imageData,
+           let image = Image(data: imageData) {
+            image
+                .pixelate()
+                .resizable()
+                .scaledToFit()
+        } else {
+            Image("PixelMonsteraHealthy")
+                .pixelate()
+                .resizable()
+                .scaledToFit()
+        }
+    }
 }

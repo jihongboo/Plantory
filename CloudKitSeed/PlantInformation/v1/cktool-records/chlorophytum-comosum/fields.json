@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "chlorophytum-comosum"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Spider Plant"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Chlorophytum comosum"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Spider Plant forms arching striped leaves and baby plantlets on long stems. It is adaptable, fast-growing, and simple to propagate."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "chlorophytum-comosum.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "easy"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Hardy and beginner-friendly, with visible signs when thirsty."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Bright indirect light for best stripes and compact growth."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water when the top 2-3 cm of soil dries."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Tolerates average indoor humidity."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "16-27°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Brown tips may appear from dry soil, salts, or very hard water."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed monthly during spring and summer."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Plantlets can be rooted while still attached or clipped and rooted separately."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 60
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "chlorophytum-comosum.png"
+  }
+}

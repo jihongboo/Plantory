@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "zamioculcas-zamiifolia"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "ZZ Plant"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Zamioculcas zamiifolia"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "ZZ Plant has glossy upright leaves and thick rhizomes that store water. It is a reliable choice for lower-light spaces and irregular watering routines."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "zamioculcas-zamiifolia.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "easy"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Very tolerant of missed care, but slow to show stress."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Low to bright indirect light; avoid strong direct sun."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water only after the soil is fully dry, usually every 2-3 weeks."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Average indoor humidity is fine."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "18-30°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Yellowing stems are commonly caused by overwatering."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed lightly every 2-3 months during active growth."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Rotate the pot occasionally so stems grow evenly toward the light."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 40
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "zamioculcas-zamiifolia.png"
+  }
+}

@@ -46,6 +46,7 @@ struct PixelContentUnavailableView<Icon: View, Actions: View>: View {
             }
 
             actions
+                .buttonStyle(.pixelRoundedRectangle(size: .small))
         }
         .frame(maxWidth: 360)
         .frame(maxWidth: .infinity)
@@ -150,7 +151,6 @@ struct PixelContentUnavailableSymbol: View {
                     .accessibilityHidden(true)
             } actions: {
                 Button("Add Plant", systemImage: "plus") {}
-                    .buttonStyle(.pixelRoundedRectangle(size: .small))
             }
         }
     }

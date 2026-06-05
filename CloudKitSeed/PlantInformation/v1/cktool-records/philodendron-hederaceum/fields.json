@@ -1,0 +1,94 @@
+{
+  "catalogID": {
+    "type": "stringType",
+    "value": "philodendron-hederaceum"
+  },
+  "commonName": {
+    "type": "stringType",
+    "value": "Heartleaf Philodendron"
+  },
+  "species": {
+    "type": "stringType",
+    "value": "Philodendron hederaceum"
+  },
+  "overview": {
+    "type": "stringType",
+    "value": "Heartleaf Philodendron is a trailing plant with soft heart-shaped leaves. It is adaptable, fast-growing, and works well in hanging pots or on shelves."
+  },
+  "photoURL": {
+    "type": "stringType",
+    "value": ""
+  },
+  "imageFileName": {
+    "type": "stringType",
+    "value": "philodendron-hederaceum.png"
+  },
+  "careDifficulty": {
+    "type": "stringType",
+    "value": "easy"
+  },
+  "careDifficultyDescription": {
+    "type": "stringType",
+    "value": "Forgiving and reliable in common indoor conditions."
+  },
+  "lightLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "light": {
+    "type": "stringType",
+    "value": "Low to bright indirect light; brighter light makes fuller vines."
+  },
+  "waterLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "water": {
+    "type": "stringType",
+    "value": "Water when the top third of the soil dries."
+  },
+  "humidityLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "humidityDescription": {
+    "type": "stringType",
+    "value": "Average indoor humidity is acceptable."
+  },
+  "temperature": {
+    "type": "stringType",
+    "value": "18-29°C"
+  },
+  "diseaseRiskLevel": {
+    "type": "stringType",
+    "value": "low"
+  },
+  "diseaseRiskDescription": {
+    "type": "stringType",
+    "value": "Yellow leaves are usually linked to overwatering or low light."
+  },
+  "fertilizerLevel": {
+    "type": "stringType",
+    "value": "medium"
+  },
+  "fertilizer": {
+    "type": "stringType",
+    "value": "Feed monthly during active growth."
+  },
+  "tips": {
+    "type": "stringType",
+    "value": "Pinch back long vines to keep the plant full."
+  },
+  "sortOrder": {
+    "type": "int64Type",
+    "value": 120
+  },
+  "isPublished": {
+    "type": "int64Type",
+    "value": 1
+  },
+  "image": {
+    "type": "assetType",
+    "value": "philodendron-hederaceum.png"
+  }
+}

@@ -17,7 +17,6 @@ struct PlantoryApp: App {
             modelContainer = try ModelContainer(
                 for: Plant.self,
                 PlantRecord.self,
-                PlantInformation.self,
                 PlantNotificationSetting.self
             )
         } catch {

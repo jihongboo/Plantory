@@ -1,0 +1,47 @@
+DEFINE SCHEMA
+
+    RECORD TYPE PlantInformation (
+        "___createTime"           TIMESTAMP,
+        "___createdBy"            REFERENCE,
+        "___etag"                 STRING,
+        "___modTime"              TIMESTAMP,
+        "___modifiedBy"           REFERENCE,
+        "___recordID"             REFERENCE,
+        careDifficulty            STRING,
+        careDifficultyDescription STRING,
+        catalogID                 STRING,
+        commonName                STRING,
+        diseaseRiskDescription    STRING,
+        diseaseRiskLevel          STRING,
+        fertilizer                STRING,
+        fertilizerLevel           STRING,
+        humidityDescription       STRING,
+        humidityLevel             STRING,
+        image                     ASSET,
+        imageFileName             STRING,
+        isPublished               INT64,
+        light                     STRING,
+        lightLevel                STRING,
+        overview                  STRING,
+        photoURL                  STRING,
+        sortOrder                 INT64,
+        species                   STRING,
+        temperature               STRING,
+        tips                      STRING,
+        water                     STRING,
+        waterLevel                STRING,
+        GRANT WRITE TO "_creator",
+        GRANT READ TO "_world"
+    );
+
+    RECORD TYPE Users (
+        "___createTime" TIMESTAMP,
+        "___createdBy"  REFERENCE,
+        "___etag"       STRING,
+        "___modTime"    TIMESTAMP,
+        "___modifiedBy" REFERENCE,
+        "___recordID"   REFERENCE,
+        roles           LIST<INT64>,
+        GRANT WRITE TO "_creator",
+        GRANT READ TO "_world"
+    );

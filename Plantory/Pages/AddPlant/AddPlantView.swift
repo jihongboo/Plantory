@@ -188,19 +188,10 @@ private extension AddPlantView {
     func addPlant() {
         guard let plantInformation else { return }
 
-        let persistedInformation: PlantInformation
-        if let existing = existingPlantInformation(matching: plantInformation) {
-            existing.mergePreferredValues(from: plantInformation)
-            persistedInformation = existing
-        } else {
-            persistedInformation = plantInformation
-            modelContext.insert(persistedInformation)
-        }
-
         let plant = Plant(
             nickname: trimmedNickname(),
             imageData: imageData,
-            information: persistedInformation
+            information: plantInformation
         )
 
         if case .complete(let report) = diagnosisState {
@@ -226,27 +217,8 @@ private extension AddPlantView {
         dismiss()
     }
 
-    func existingPlantInformation(matching candidate: PlantInformation) -> PlantInformation? {
-        let normalizedSpecies = normalized(candidate.species)
-        let normalizedCommonName = normalized(candidate.commonName)
-
-        let descriptor = FetchDescriptor<PlantInformation>()
-        guard let infos = try? modelContext.fetch(descriptor) else { return nil }
-
-        return infos.first {
-            normalized($0.species) == normalizedSpecies ||
-            normalized($0.commonName) == normalizedCommonName
-        }
-    }
-
-    func normalized(_ value: String) -> String {
-        value
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
-    }
-
     func previewMockResult() -> DoubaoPlantRecognitionService.CombinedAnalysisResult {
-        let info = Plant.monstera.information ?? PlantInformation.monstera
+        let info = PlantInformation.monstera
         let recognition = DoubaoPlantRecognitionService.StructuredPlantRecognition(
             commonName: info.commonName,
             species: info.species,

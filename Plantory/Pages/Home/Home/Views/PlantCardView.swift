@@ -25,7 +25,7 @@ struct PlantCardView: View {
                         .foregroundStyle(Color(.pixelInk))
                         .lineLimit(1)
                     
-                    Text(plant.information?.commonName ?? "Houseplant")
+                    Text(plant.informationCommonName ?? "Houseplant")
                         .font(.pixel(.callout))
                         .foregroundStyle(Color(.pixelInk).opacity(0.64))
                         .lineLimit(1)
