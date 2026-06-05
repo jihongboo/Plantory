@@ -34,8 +34,11 @@ struct RecordPhotoButton: View {
         }
     }
 
+}
+
+private extension RecordPhotoButton {
     @ViewBuilder
-    private var photoPreview: some View {
+    var photoPreview: some View {
         if let selectedImage {
             selectedImage
                 .resizable()
@@ -63,12 +66,12 @@ struct RecordPhotoButton: View {
         }
     }
 
-    private var selectedImage: Image? {
+    var selectedImage: Image? {
         guard let image else { return nil }
         return Image(uiImage: image)
     }
 
-    private func handleTap() {
+    func handleTap() {
         if image == nil {
             showCameraPicker = true
         } else {

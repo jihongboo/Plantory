@@ -79,16 +79,6 @@ struct PlantStatusView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private func statusColor(for status: HealthStatus) -> Color {
-        switch status {
-        case .healthy:
-            .green
-        case .warning:
-            .orange
-        case .critical:
-            .red
-        }
-    }
 }
 #Preview("Healthy") {
     let info = PlantInformation(
@@ -132,4 +122,17 @@ struct PlantStatusView: View {
 
     return PlantStatusView(plant: plant)
         .padding()
+}
+
+private extension PlantStatusView {
+    func statusColor(for status: HealthStatus) -> Color {
+        switch status {
+        case .healthy:
+            .green
+        case .warning:
+            .orange
+        case .critical:
+            .red
+        }
+    }
 }

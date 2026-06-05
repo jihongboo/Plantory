@@ -8,17 +8,6 @@ struct PlantNotificationsPage: View {
     @Environment(\.modelContext) private var modelContext
     @State private var permissionAlert: NotificationPermissionAlert?
 
-    private var settings: [PlantNotificationSetting] {
-        let existing = plant.notificationSettings ?? []
-        return existing.sorted { lhs, rhs in
-            lhs.kind.sortOrder < rhs.kind.sortOrder
-        }
-    }
-
-    private var enabledCount: Int {
-        settings.count { $0.isEnabled }
-    }
-
     var body: some View {
         Form {
             Section {
@@ -79,53 +68,6 @@ struct PlantNotificationsPage: View {
         }
     }
 
-    private func ensureDefaultSettings() {
-        let existingKinds = Set((plant.notificationSettings ?? []).map(\.kind))
-
-        for kind in PlantNotificationKind.allCases where !existingKinds.contains(kind) {
-            let setting = PlantNotificationSetting(
-                kind: kind,
-                intervalDays: kind.defaultIntervalDays(for: plant),
-                reminderHour: kind.defaultReminderHour(for: plant),
-                plant: plant
-            )
-            modelContext.insert(setting)
-            if plant.notificationSettings == nil {
-                plant.notificationSettings = []
-            }
-            plant.notificationSettings?.append(setting)
-        }
-
-        if !(plant.notificationSettings ?? []).isEmpty {
-            try? modelContext.save()
-        }
-    }
-
-    private func handleToggleChange(_ isEnabled: Bool, for setting: PlantNotificationSetting) {
-        Task {
-            let status = await PlantNotificationScheduler.shared.syncNotifications(
-                for: plant,
-                requestAuthorization: isEnabled
-            )
-
-            if isEnabled, !status.canSchedule {
-                setting.isEnabled = false
-                try? modelContext.save()
-                permissionAlert = .notificationsDenied
-                _ = await PlantNotificationScheduler.shared.syncNotifications(for: plant)
-                return
-            }
-
-            try? modelContext.save()
-        }
-    }
-
-    private func handleConfigurationChange() {
-        Task {
-            try? modelContext.save()
-            _ = await PlantNotificationScheduler.shared.syncNotifications(for: plant)
-        }
-    }
 }
 
 private struct PlantNotificationSettingEditor: View {
@@ -175,19 +117,6 @@ private struct PlantNotificationSettingEditor: View {
         .padding(.vertical, 4)
     }
 
-    private var intervalDescription: LocalizedStringKey {
-        if setting.intervalDays == 1 {
-            return "Every day"
-        }
-        return "Every \(setting.intervalDays) days"
-    }
-
-    private var reminderDateBinding: Binding<Date> {
-        Binding(
-            get: { setting.reminderDate },
-            set: { setting.reminderDate = $0 }
-        )
-    }
 }
 
 private enum NotificationPermissionAlert: Identifiable {
@@ -218,4 +147,81 @@ private extension PlantNotificationKind {
         PlantNotificationsPage(plant: .monstera)
     }
     .modelContainer(.preview)
+}
+
+private extension PlantNotificationsPage {
+    var settings: [PlantNotificationSetting] {
+        let existing = plant.notificationSettings ?? []
+        return existing.sorted { lhs, rhs in
+            lhs.kind.sortOrder < rhs.kind.sortOrder
+        }
+    }
+
+    var enabledCount: Int {
+        settings.count { $0.isEnabled }
+    }
+
+    func ensureDefaultSettings() {
+        let existingKinds = Set((plant.notificationSettings ?? []).map(\.kind))
+
+        for kind in PlantNotificationKind.allCases where !existingKinds.contains(kind) {
+            let setting = PlantNotificationSetting(
+                kind: kind,
+                intervalDays: kind.defaultIntervalDays(for: plant),
+                reminderHour: kind.defaultReminderHour(for: plant),
+                plant: plant
+            )
+            modelContext.insert(setting)
+            if plant.notificationSettings == nil {
+                plant.notificationSettings = []
+            }
+            plant.notificationSettings?.append(setting)
+        }
+
+        if !(plant.notificationSettings ?? []).isEmpty {
+            try? modelContext.save()
+        }
+    }
+
+    func handleToggleChange(_ isEnabled: Bool, for setting: PlantNotificationSetting) {
+        Task {
+            let status = await PlantNotificationScheduler.shared.syncNotifications(
+                for: plant,
+                requestAuthorization: isEnabled
+            )
+
+            if isEnabled, !status.canSchedule {
+                setting.isEnabled = false
+                try? modelContext.save()
+                permissionAlert = .notificationsDenied
+                _ = await PlantNotificationScheduler.shared.syncNotifications(for: plant)
+                return
+            }
+
+            try? modelContext.save()
+        }
+    }
+
+    func handleConfigurationChange() {
+        Task {
+            try? modelContext.save()
+            _ = await PlantNotificationScheduler.shared.syncNotifications(for: plant)
+        }
+    }
+}
+
+private extension PlantNotificationSettingEditor {
+    var intervalDescription: LocalizedStringKey {
+        if setting.intervalDays == 1 {
+            return "Every day"
+        }
+        return "Every \(setting.intervalDays) days"
+    }
+
+    var reminderDateBinding: Binding<Date> {
+        Binding(
+            get: { setting.reminderDate },
+            set: { setting.reminderDate = $0 }
+        )
+    }
 }

@@ -109,63 +109,6 @@ struct HomePage: View {
         }
     }
 
-    private var deletionBinding: Binding<Bool> {
-        Binding(
-            get: { plantPendingDeletion != nil },
-            set: { isPresented in
-                if !isPresented {
-                    plantPendingDeletion = nil
-                }
-            }
-        )
-    }
-
-    private var emptyState: some View {
-        PixelRoundedRectangleCard {
-            VStack(alignment: .leading, spacing: 16) {
-                HStack(alignment: .center, spacing: 12) {
-                    Image("PixelMonsteraHealthy")
-                        .pixelate()
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 88, height: 88)
-
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("No Plants Yet")
-                            .font(.pixel(.title3))
-                            .foregroundStyle(Color(.pixelInk))
-
-                        if plants.isEmpty {
-                            Text("Add your first plant and start tracking its growth.")
-                                .font(.pixel(.subheadline))
-                                .foregroundStyle(Color(.pixelInk).opacity(0.74))
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
-                }
-
-                AddPlantMenuView()
-            }
-        }
-        .padding(.vertical, 28)
-    }
-
-    private func deletePlant(_ plant: Plant) {
-        let notificationPrefix = PlantNotificationScheduler.identifierPrefix(for: plant)
-        plantPendingDeletion = nil
-        PlantNotificationScheduler.shared.cancelNotifications(forPlantIdentifierPrefix: notificationPrefix)
-        modelContext.delete(plant)
-        try? modelContext.save()
-    }
-
-    private func openPendingPlantIfNeeded() {
-        guard let targetPrefix = navigationCoordinator.targetPlantIdentifierPrefix else { return }
-        guard let plant = plants.first(where: { PlantNotificationScheduler.identifierPrefix(for: $0) == targetPrefix }) else {
-            return
-        }
-        navigationCoordinator.clearTargetPlantIdentifierPrefix()
-        path.append(HomeDestination.plant(plant.id))
-    }
 }
 
 enum HomeDestination: Hashable {
@@ -180,17 +123,17 @@ private struct PlantDestinationView: View {
     @Query(sort: \Plant.createdAt, order: .reverse) private var plants: [Plant]
     @State private var hasFinishedInitialLookup = false
 
-    private var plant: Plant? {
-        plants.first { $0.id == plantID }
-    }
-
     var body: some View {
         Group {
             if let plant {
                 PlantPage(plant: plant)
                     .navigationTransition(.zoom(sourceID: plant.id, in: heroNamespace))
             } else if hasFinishedInitialLookup {
-                ContentUnavailableView("Plant Not Found", systemImage: "leaf")
+                PixelContentUnavailableView(
+                    "Plant Not Found",
+                    systemImage: "leaf",
+                    description: "This plant may have been deleted."
+                )
             } else {
                 ProgressView("Loading Plant")
                     .navigationTitle("Plant")
@@ -215,4 +158,57 @@ private struct PlantDestinationView: View {
     HomePage()
         .modelContainer(.empty)
         .environment(PlantNavigationCoordinator())
+}
+
+private extension HomePage {
+    var deletionBinding: Binding<Bool> {
+        Binding(
+            get: { plantPendingDeletion != nil },
+            set: { isPresented in
+                if !isPresented {
+                    plantPendingDeletion = nil
+                }
+            }
+        )
+    }
+
+    var emptyState: some View {
+        PixelContentUnavailableView(
+            "No Plants Yet",
+            description: "Add your first plant and start tracking its growth."
+        ) {
+            Image("PixelMonsteraHealthy")
+                .pixelate()
+                .resizable()
+                .scaledToFit()
+                .frame(width: 88, height: 88)
+                .accessibilityHidden(true)
+        } actions: {
+            AddPlantMenuView()
+        }
+        .padding(.vertical, 28)
+    }
+
+    func deletePlant(_ plant: Plant) {
+        let notificationPrefix = PlantNotificationScheduler.identifierPrefix(for: plant)
+        plantPendingDeletion = nil
+        PlantNotificationScheduler.shared.cancelNotifications(forPlantIdentifierPrefix: notificationPrefix)
+        modelContext.delete(plant)
+        try? modelContext.save()
+    }
+
+    func openPendingPlantIfNeeded() {
+        guard let targetPrefix = navigationCoordinator.targetPlantIdentifierPrefix else { return }
+        guard let plant = plants.first(where: { PlantNotificationScheduler.identifierPrefix(for: $0) == targetPrefix }) else {
+            return
+        }
+        navigationCoordinator.clearTargetPlantIdentifierPrefix()
+        path.append(HomeDestination.plant(plant.id))
+    }
+}
+
+private extension PlantDestinationView {
+    var plant: Plant? {
+        plants.first { $0.id == plantID }
+    }
 }

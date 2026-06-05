@@ -67,30 +67,6 @@ struct CardView<Content: View>: View {
         .clipShape(.rect(cornerRadius: 28, style: .continuous))
     }
 
-    private var showsHeader: Bool {
-        title != nil || subtitle != nil || systemImage != nil
-    }
-
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 2) {
-                if let systemImage {
-                    Image(systemName: systemImage)
-                }
-                if let title {
-                    title
-                }
-            }
-            .font(.subheadline.weight(.semibold))
-            .foregroundStyle(iconTint)
-            
-            if let subtitle {
-                subtitle
-                    .font(.subheadline)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-    }
 }
 
 #Preview {
@@ -118,4 +94,31 @@ struct CardView<Content: View>: View {
         .padding()
     }
     .background(.background.secondary)
+}
+
+private extension CardView {
+    var showsHeader: Bool {
+        title != nil || subtitle != nil || systemImage != nil
+    }
+
+    var header: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 2) {
+                if let systemImage {
+                    Image(systemName: systemImage)
+                }
+                if let title {
+                    title
+                }
+            }
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(iconTint)
+            
+            if let subtitle {
+                subtitle
+                    .font(.subheadline)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
 }

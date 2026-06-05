@@ -71,39 +71,8 @@ struct HomeWeatherCard: View {
         .task(loadWeather)
     }
     
-    @ViewBuilder
-    private var image: some View {
-        switch viewState {
-        case .loading:
-            ProgressView()
-                .controlSize(.large)
-        case .loaded(let weather):
-            Image(systemName: weather.symbolName)
-                .foregroundStyle(.yellow, .blue)
-        case .failed:
-            Image(systemName: "cloud.sun.fill")
-                .foregroundStyle(.yellow, .blue)
-        }
-    }
     
-    private var condition: String {
-        switch viewState {
-        case .loading:
-            "Loading weather"
-        case .loaded(let weather):
-            weather.condition
-        case .failed(let error):
-            error.localizedDescription
-        }
-    }
     
-    private func loadWeather() async {
-        do {
-            viewState = .loaded(try await weatherService.currentWeather())
-        } catch {
-            viewState = .failed(error)
-        }
-    }
 }
 
 private struct HomeWeatherMetricTile: View {
@@ -259,4 +228,40 @@ private extension HomeWeatherSnapshot {
         HomeWeatherCard(.failed(AppError.custom("error")))
     }
     .padding()
+}
+
+private extension HomeWeatherCard {
+    @ViewBuilder
+    var image: some View {
+        switch viewState {
+        case .loading:
+            ProgressView()
+                .controlSize(.large)
+        case .loaded(let weather):
+            Image(systemName: weather.symbolName)
+                .foregroundStyle(.yellow, .blue)
+        case .failed:
+            Image(systemName: "cloud.sun.fill")
+                .foregroundStyle(.yellow, .blue)
+        }
+    }
+
+    var condition: String {
+        switch viewState {
+        case .loading:
+            "Loading weather"
+        case .loaded(let weather):
+            weather.condition
+        case .failed(let error):
+            error.localizedDescription
+        }
+    }
+
+    func loadWeather() async {
+        do {
+            viewState = .loaded(try await weatherService.currentWeather())
+        } catch {
+            viewState = .failed(error)
+        }
+    }
 }

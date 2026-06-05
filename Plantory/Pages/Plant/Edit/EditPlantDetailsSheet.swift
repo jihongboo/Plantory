@@ -91,16 +91,6 @@ struct EditPlantDetailsSheet: View {
         }
     }
 
-    private func saveChanges() {
-        let trimmedNickname = nickname.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedNote = note.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        plant.nickname = trimmedNickname.isEmpty ? nil : trimmedNickname
-        plant.note = trimmedNote
-
-        try? modelContext.save()
-        dismiss()
-    }
 }
 
 private struct PixelInfoRow: View {
@@ -126,4 +116,17 @@ private struct PixelInfoRow: View {
 
 #Preview {
     EditPlantDetailsSheet(plant: .monstera)
+}
+
+private extension EditPlantDetailsSheet {
+    func saveChanges() {
+        let trimmedNickname = nickname.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedNote = note.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        plant.nickname = trimmedNickname.isEmpty ? nil : trimmedNickname
+        plant.note = trimmedNote
+
+        try? modelContext.save()
+        dismiss()
+    }
 }

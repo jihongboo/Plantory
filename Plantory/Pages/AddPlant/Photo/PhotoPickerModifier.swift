@@ -33,7 +33,16 @@ private struct PhotoPickerModifier: ViewModifier {
             }
     }
 
-    private func loadPlatformImage(from item: PhotosPickerItem) async -> PlatformImage? {
+}
+
+extension View {
+    func plantPhotoPicker(isPresented: Binding<Bool>, image: Binding<PlatformImage?>) -> some View {
+        modifier(PhotoPickerModifier(isPresented: isPresented, image: image))
+    }
+}
+
+private extension PhotoPickerModifier {
+    func loadPlatformImage(from item: PhotosPickerItem) async -> PlatformImage? {
         let selectedData = try? await item.loadTransferable(type: Data.self)
         if let selectedData,
            let image = PlatformImage(data: selectedData) {
@@ -48,7 +57,7 @@ private struct PhotoPickerModifier: ViewModifier {
         return nil
     }
 
-    private func requestImage(for itemIdentifier: String) async -> PlatformImage? {
+    func requestImage(for itemIdentifier: String) async -> PlatformImage? {
         let assets = PHAsset.fetchAssets(withLocalIdentifiers: [itemIdentifier], options: nil)
         guard let asset = assets.firstObject else { return nil }
 
@@ -68,11 +77,5 @@ private struct PhotoPickerModifier: ViewModifier {
                 continuation.resume(returning: image)
             }
         }
-    }
-}
-
-extension View {
-    func plantPhotoPicker(isPresented: Binding<Bool>, image: Binding<PlatformImage?>) -> some View {
-        modifier(PhotoPickerModifier(isPresented: isPresented, image: image))
     }
 }

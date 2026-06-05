@@ -35,39 +35,6 @@ struct PlantCardView: View {
         }
     }
 
-    @ViewBuilder
-    private var plantPhoto: some View {
-        ZStack {
-            if let photoData = plant.photoData,
-               let image = Image(data: photoData) {
-                image
-                    .resizable()
-                    .scaledToFit()
-            } else {
-                Image(fallbackSpriteName)
-                    .pixelate()
-                    .resizable()
-                    .scaledToFit()
-            }
-        }
-    }
-
-    private var fallbackSpriteName: String {
-        switch plant.healthStatus {
-        case .healthy:
-            "PixelMonsteraHealthy"
-        case .warning, .critical:
-            "PixelSucculentWarning"
-        }
-    }
-
-    private func statusColor(for status: HealthStatus) -> Color {
-        switch status {
-        case .healthy: .green
-        case .warning: .orange
-        case .critical: .red
-        }
-    }
 }
 
 #Preview {
@@ -84,4 +51,40 @@ struct PlantCardView: View {
         }())
     }
     .padding()
+}
+
+private extension PlantCardView {
+    @ViewBuilder
+    var plantPhoto: some View {
+        ZStack {
+            if let photoData = plant.photoData,
+               let image = Image(data: photoData) {
+                image
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                Image(fallbackSpriteName)
+                    .pixelate()
+                    .resizable()
+                    .scaledToFit()
+            }
+        }
+    }
+
+    var fallbackSpriteName: String {
+        switch plant.healthStatus {
+        case .healthy:
+            "PixelMonsteraHealthy"
+        case .warning, .critical:
+            "PixelSucculentWarning"
+        }
+    }
+
+    func statusColor(for status: HealthStatus) -> Color {
+        switch status {
+        case .healthy: .green
+        case .warning: .orange
+        case .critical: .red
+        }
+    }
 }

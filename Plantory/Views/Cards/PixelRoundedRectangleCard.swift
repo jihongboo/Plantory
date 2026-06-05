@@ -14,19 +14,9 @@ struct PixelRoundedRectangleCard<Content: View>: View {
     @ViewBuilder var content: Content
     
     init(
-        fill: Color = .cardBackground,
-        @ViewBuilder content: () -> Content
-    ) {
-        self.fill = fill
-        self.title = nil
-        self.systemImage = nil
-        self.content = content()
-    }
-    
-    init(
         fill: Color = .pixelPaper,
-        title: LocalizedStringKey,
-        systemImage: String,
+        title: LocalizedStringKey? = nil,
+        systemImage: String? = nil,
         @ViewBuilder content: () -> Content
     ) {
         self.fill = fill

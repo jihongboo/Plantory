@@ -50,8 +50,11 @@ struct CareTileView: View {
         .background(Color.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
     }
 
+}
+
+private extension CareTileView {
     @ViewBuilder
-    private var indicatorView: some View {
+    var indicatorView: some View {
         switch indicator {
         case let .level(level):
             LevelMeterView(level: level, tint: tint)

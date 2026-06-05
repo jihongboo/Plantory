@@ -22,14 +22,24 @@ struct PlantInfoInformationCard: View {
         }
     }
 
-    private var overviewBlock: some View {
+}
+
+#Preview {
+    ScrollView {
+        PlantInfoInformationCard(info: AddPlantCardPreviewSupport.plantInformation)
+            .padding()
+    }
+}
+
+private extension PlantInfoInformationCard {
+    var overviewBlock: some View {
         Text(info.displayOverview)
             .font(.subheadline)
             .foregroundStyle(.secondary)
             .fixedSize(horizontal: false, vertical: true)
     }
 
-    private var careGrid: some View {
+    var careGrid: some View {
         VStack(alignment: .leading, spacing: 12) {
             CareTileView(
                 title: "Tips",
@@ -93,12 +103,12 @@ struct PlantInfoInformationCard: View {
         }
     }
 
-    private func displayDetail(_ preferred: String, fallback: String) -> String {
+    func displayDetail(_ preferred: String, fallback: String) -> String {
         let trimmed = preferred.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? fallback : trimmed
     }
 
-    private func meterLevel(_ value: String) -> Int {
+    func meterLevel(_ value: String) -> Int {
         switch value {
         case "low":
             1
@@ -109,7 +119,7 @@ struct PlantInfoInformationCard: View {
         }
     }
 
-    private func difficultyMeterLevel(_ value: String) -> Int {
+    func difficultyMeterLevel(_ value: String) -> Int {
         switch value {
         case "easy":
             1
@@ -120,7 +130,7 @@ struct PlantInfoInformationCard: View {
         }
     }
 
-    private func temperatureBands(_ temperature: String) -> Set<TemperatureBand> {
+    func temperatureBands(_ temperature: String) -> Set<TemperatureBand> {
         guard let range = celsiusRange(from: temperature) else {
             return [.moderate]
         }
@@ -140,7 +150,7 @@ struct PlantInfoInformationCard: View {
         return bands.isEmpty ? [.moderate] : bands
     }
 
-    private func celsiusRange(from temperature: String) -> ClosedRange<Double>? {
+    func celsiusRange(from temperature: String) -> ClosedRange<Double>? {
         let matches = temperature.matches(of: /-?\d+(\.\d+)?/).compactMap {
             Double($0.0)
         }
@@ -163,7 +173,7 @@ struct PlantInfoInformationCard: View {
         return minimum ... maximum
     }
 
-    private var difficultyColor: Color {
+    var difficultyColor: Color {
         switch info.careDifficulty {
         case "easy":
             .green
@@ -174,7 +184,7 @@ struct PlantInfoInformationCard: View {
         }
     }
 
-    private func diseaseRiskColor(_ value: String) -> Color {
+    func diseaseRiskColor(_ value: String) -> Color {
         switch value {
         case "low":
             .green
@@ -183,12 +193,5 @@ struct PlantInfoInformationCard: View {
         default:
             .orange
         }
-    }
-}
-
-#Preview {
-    ScrollView {
-        PlantInfoInformationCard(info: AddPlantCardPreviewSupport.plantInformation)
-            .padding()
     }
 }

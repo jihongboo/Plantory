@@ -48,29 +48,6 @@ struct PixelPlantHeroCard: View {
         }
     }
 
-    @ViewBuilder
-    private var plantPhoto: some View {
-        if let photoData = plant.photoData,
-           let image = Image(data: photoData) {
-            image
-                .resizable()
-                .scaledToFit()
-        } else {
-            Image(fallbackSpriteName)
-                .pixelate()
-                .resizable()
-                .scaledToFit()
-        }
-    }
-
-    private var fallbackSpriteName: String {
-        switch plant.healthStatus {
-        case .healthy:
-            "PixelMonsteraHealthy"
-        case .warning, .critical:
-            "PixelSucculentWarning"
-        }
-    }
 }
 
 struct PixelCareMoodIcon: View {
@@ -80,16 +57,6 @@ struct PixelCareMoodIcon: View {
         PixelTag(systemName: status.systemImage, fill: statusColor)
     }
 
-    private var statusColor: Color {
-        switch status {
-        case .healthy:
-            Color(.pixelLeaf)
-        case .warning:
-            Color(.pixelSun)
-        case .critical:
-            Color(.pixelDanger)
-        }
-    }
 }
 
 private struct PixelMiniStat: View {
@@ -127,4 +94,43 @@ private struct PixelMiniStat: View {
 #Preview {
     PixelPlantHeroCard(plant: .monstera)
         .padding()
+}
+
+private extension PixelPlantHeroCard {
+    @ViewBuilder
+    var plantPhoto: some View {
+        if let photoData = plant.photoData,
+           let image = Image(data: photoData) {
+            image
+                .resizable()
+                .scaledToFit()
+        } else {
+            Image(fallbackSpriteName)
+                .pixelate()
+                .resizable()
+                .scaledToFit()
+        }
+    }
+
+    var fallbackSpriteName: String {
+        switch plant.healthStatus {
+        case .healthy:
+            "PixelMonsteraHealthy"
+        case .warning, .critical:
+            "PixelSucculentWarning"
+        }
+    }
+}
+
+private extension PixelCareMoodIcon {
+    var statusColor: Color {
+        switch status {
+        case .healthy:
+            Color(.pixelLeaf)
+        case .warning:
+            Color(.pixelSun)
+        case .critical:
+            Color(.pixelDanger)
+        }
+    }
 }

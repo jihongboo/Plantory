@@ -15,7 +15,7 @@ struct PixelRectangleBackground: View {
             .fill(fill)
             .overlay {
                 Rectangle()
-                    .stroke(.white.opacity(0.5), lineWidth: 3)
+                    .stroke(.white.opacity(0.2), lineWidth: 2)
                     .padding(4)
             }
             .overlay {

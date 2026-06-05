@@ -14,7 +14,10 @@ struct TemperatureMeterView: View {
         .padding(.vertical, 2)
     }
 
-    private func fillColor(for band: TemperatureBand) -> Color {
+}
+
+private extension TemperatureMeterView {
+    func fillColor(for band: TemperatureBand) -> Color {
         guard activeBands.contains(band) else {
             return Color.secondary.opacity(0.14)
         }

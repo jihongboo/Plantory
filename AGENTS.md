@@ -124,6 +124,8 @@ species, light, water, temperature, fertilizer
 - 使用 iOS 26 Liquid Glass 材质（`.glassEffect()`）
 - 遵循苹果 HIG 设计规范
 - 支持 Dynamic Type 和 Dark Mode
+- 像素主题颜色直接使用 `.pixelPaper`、`.pixelInk`、`.pixelLeaf` 等简写，禁止写成 `Color(.pixelPaper)` 这类包装形式。
+- SwiftUI 类型的私有方法统一放在 `private extension` 中，并将该 extension 放在 `#Preview` 后面。
 
 ### 数据持久化
 - 本地：SwiftData（SQLite 底层）

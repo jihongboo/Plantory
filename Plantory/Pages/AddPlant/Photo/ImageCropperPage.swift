@@ -80,156 +80,8 @@ private struct ImageCropperPage: View {
         }
     }
 
-    @ViewBuilder
-    private func cropOverlay(in imageFrame: CGRect) -> some View {
-        let activeRect = cropRect == .zero ? defaultCropRect(in: imageFrame) : cropRect
-
-        ZStack {
-            dimmingLayer(cropRect: activeRect, imageFrame: imageFrame)
-
-            Rectangle()
-                .stroke(.white, lineWidth: 2)
-                .shadow(color: .black.opacity(0.35), radius: 6)
-                .frame(width: activeRect.width, height: activeRect.height)
-                .position(x: activeRect.midX, y: activeRect.midY)
-                .contentShape(Rectangle())
-                .gesture(moveGesture(in: imageFrame))
-
-            ForEach(CropHandle.allCases) { handle in
-                ZStack {
-                    Circle()
-                        .fill(.white.opacity(0.001))
-                        .frame(width: Self.cropHandleHitLength, height: Self.cropHandleHitLength)
-
-                    Circle()
-                        .fill(.white)
-                        .frame(width: Self.cropHandleVisibleLength, height: Self.cropHandleVisibleLength)
-                        .overlay {
-                            Circle()
-                                .stroke(.green, lineWidth: 2)
-                        }
-                }
-                    .contentShape(Circle())
-                    .position(handle.point(in: activeRect))
-                    .highPriorityGesture(resizeGesture(handle: handle, in: imageFrame))
-                    .accessibilityElement()
-                    .accessibilityLabel(handle.accessibilityLabel)
-                    .accessibilityHint("Drag to resize the crop box.")
-            }
-        }
-    }
-
     private static let cropHandleVisibleLength: CGFloat = 32
     private static let cropHandleHitLength: CGFloat = 64
-
-    private func dimmingLayer(cropRect: CGRect, imageFrame: CGRect) -> some View {
-        Path { path in
-            path.addRect(imageFrame)
-            path.addRect(cropRect)
-        }
-        .fill(.black.opacity(0.42), style: FillStyle(eoFill: true))
-    }
-
-    private func moveGesture(in imageFrame: CGRect) -> some Gesture {
-        DragGesture()
-            .onChanged { value in
-                didUserAdjustCrop = true
-                if dragStartRect == .zero {
-                    dragStartRect = cropRect
-                }
-
-                let proposedRect = dragStartRect.offsetBy(
-                    dx: value.translation.width,
-                    dy: value.translation.height
-                )
-                cropRect = clamped(proposedRect, in: imageFrame)
-            }
-            .onEnded { _ in
-                dragStartRect = .zero
-            }
-    }
-
-    private func resizeGesture(handle: CropHandle, in imageFrame: CGRect) -> some Gesture {
-        DragGesture()
-            .onChanged { value in
-                didUserAdjustCrop = true
-                if dragStartRect == .zero {
-                    dragStartRect = cropRect
-                }
-
-                cropRect = resized(
-                    dragStartRect,
-                    handle: handle,
-                    translation: value.translation,
-                    in: imageFrame
-                )
-            }
-            .onEnded { _ in
-                dragStartRect = .zero
-            }
-    }
-
-    private func defaultCropRect(in imageFrame: CGRect) -> CGRect {
-        let width = imageFrame.width * 0.9
-        let height = imageFrame.height * 0.9
-
-        return CGRect(
-            x: imageFrame.midX - width / 2,
-            y: imageFrame.midY - height / 2,
-            width: width,
-            height: height
-        )
-    }
-
-    private func updateImageFrame(_ imageFrame: CGRect) {
-        guard imageFrame.width > 1, imageFrame.height > 1 else { return }
-
-        activeImageFrame = imageFrame
-        if !didInitializeCrop || !didUserAdjustCrop {
-            cropRect = defaultCropRect(in: imageFrame)
-            didInitializeCrop = true
-        } else {
-            cropRect = clamped(cropRect, in: imageFrame)
-        }
-    }
-
-    private func clamped(_ rect: CGRect, in imageFrame: CGRect) -> CGRect {
-        let width = min(max(rect.width, Self.minimumCropLength), imageFrame.width)
-        let height = min(max(rect.height, Self.minimumCropLength), imageFrame.height)
-        let minX = min(max(rect.minX, imageFrame.minX), imageFrame.maxX - width)
-        let minY = min(max(rect.minY, imageFrame.minY), imageFrame.maxY - height)
-
-        return CGRect(x: minX, y: minY, width: width, height: height)
-    }
-
-    private func resized(
-        _ rect: CGRect,
-        handle: CropHandle,
-        translation: CGSize,
-        in imageFrame: CGRect
-    ) -> CGRect {
-        var minX = rect.minX
-        var minY = rect.minY
-        var maxX = rect.maxX
-        var maxY = rect.maxY
-
-        switch handle {
-        case .topLeading:
-            minX = min(max(rect.minX + translation.width, imageFrame.minX), rect.maxX - Self.minimumCropLength)
-            minY = min(max(rect.minY + translation.height, imageFrame.minY), rect.maxY - Self.minimumCropLength)
-        case .topTrailing:
-            maxX = max(min(rect.maxX + translation.width, imageFrame.maxX), rect.minX + Self.minimumCropLength)
-            minY = min(max(rect.minY + translation.height, imageFrame.minY), rect.maxY - Self.minimumCropLength)
-        case .bottomLeading:
-            minX = min(max(rect.minX + translation.width, imageFrame.minX), rect.maxX - Self.minimumCropLength)
-            maxY = max(min(rect.maxY + translation.height, imageFrame.maxY), rect.minY + Self.minimumCropLength)
-        case .bottomTrailing:
-            maxX = max(min(rect.maxX + translation.width, imageFrame.maxX), rect.minX + Self.minimumCropLength)
-            maxY = max(min(rect.maxY + translation.height, imageFrame.maxY), rect.minY + Self.minimumCropLength)
-        }
-
-        return CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
-    }
 
     private static let minimumCropLength: CGFloat = 96
 }
@@ -361,5 +213,155 @@ private enum CropHandle: CaseIterable, Identifiable {
                 onCrop: { _ in }
             )
         }
+    }
+}
+
+private extension ImageCropperPage {
+    @ViewBuilder
+    func cropOverlay(in imageFrame: CGRect) -> some View {
+        let activeRect = cropRect == .zero ? defaultCropRect(in: imageFrame) : cropRect
+
+        ZStack {
+            dimmingLayer(cropRect: activeRect, imageFrame: imageFrame)
+
+            Rectangle()
+                .stroke(.white, lineWidth: 2)
+                .shadow(color: .black.opacity(0.35), radius: 6)
+                .frame(width: activeRect.width, height: activeRect.height)
+                .position(x: activeRect.midX, y: activeRect.midY)
+                .contentShape(Rectangle())
+                .gesture(moveGesture(in: imageFrame))
+
+            ForEach(CropHandle.allCases) { handle in
+                ZStack {
+                    Circle()
+                        .fill(.white.opacity(0.001))
+                        .frame(width: Self.cropHandleHitLength, height: Self.cropHandleHitLength)
+
+                    Circle()
+                        .fill(.white)
+                        .frame(width: Self.cropHandleVisibleLength, height: Self.cropHandleVisibleLength)
+                        .overlay {
+                            Circle()
+                                .stroke(.green, lineWidth: 2)
+                        }
+                }
+                    .contentShape(Circle())
+                    .position(handle.point(in: activeRect))
+                    .highPriorityGesture(resizeGesture(handle: handle, in: imageFrame))
+                    .accessibilityElement()
+                    .accessibilityLabel(handle.accessibilityLabel)
+                    .accessibilityHint("Drag to resize the crop box.")
+            }
+        }
+    }
+
+    func dimmingLayer(cropRect: CGRect, imageFrame: CGRect) -> some View {
+        Path { path in
+            path.addRect(imageFrame)
+            path.addRect(cropRect)
+        }
+        .fill(.black.opacity(0.42), style: FillStyle(eoFill: true))
+    }
+
+    func moveGesture(in imageFrame: CGRect) -> some Gesture {
+        DragGesture()
+            .onChanged { value in
+                didUserAdjustCrop = true
+                if dragStartRect == .zero {
+                    dragStartRect = cropRect
+                }
+
+                let proposedRect = dragStartRect.offsetBy(
+                    dx: value.translation.width,
+                    dy: value.translation.height
+                )
+                cropRect = clamped(proposedRect, in: imageFrame)
+            }
+            .onEnded { _ in
+                dragStartRect = .zero
+            }
+    }
+
+    func resizeGesture(handle: CropHandle, in imageFrame: CGRect) -> some Gesture {
+        DragGesture()
+            .onChanged { value in
+                didUserAdjustCrop = true
+                if dragStartRect == .zero {
+                    dragStartRect = cropRect
+                }
+
+                cropRect = resized(
+                    dragStartRect,
+                    handle: handle,
+                    translation: value.translation,
+                    in: imageFrame
+                )
+            }
+            .onEnded { _ in
+                dragStartRect = .zero
+            }
+    }
+
+    func defaultCropRect(in imageFrame: CGRect) -> CGRect {
+        let width = imageFrame.width * 0.9
+        let height = imageFrame.height * 0.9
+
+        return CGRect(
+            x: imageFrame.midX - width / 2,
+            y: imageFrame.midY - height / 2,
+            width: width,
+            height: height
+        )
+    }
+
+    func updateImageFrame(_ imageFrame: CGRect) {
+        guard imageFrame.width > 1, imageFrame.height > 1 else { return }
+
+        activeImageFrame = imageFrame
+        if !didInitializeCrop || !didUserAdjustCrop {
+            cropRect = defaultCropRect(in: imageFrame)
+            didInitializeCrop = true
+        } else {
+            cropRect = clamped(cropRect, in: imageFrame)
+        }
+    }
+
+    func clamped(_ rect: CGRect, in imageFrame: CGRect) -> CGRect {
+        let width = min(max(rect.width, Self.minimumCropLength), imageFrame.width)
+        let height = min(max(rect.height, Self.minimumCropLength), imageFrame.height)
+        let minX = min(max(rect.minX, imageFrame.minX), imageFrame.maxX - width)
+        let minY = min(max(rect.minY, imageFrame.minY), imageFrame.maxY - height)
+
+        return CGRect(x: minX, y: minY, width: width, height: height)
+    }
+
+    func resized(
+        _ rect: CGRect,
+        handle: CropHandle,
+        translation: CGSize,
+        in imageFrame: CGRect
+    ) -> CGRect {
+        var minX = rect.minX
+        var minY = rect.minY
+        var maxX = rect.maxX
+        var maxY = rect.maxY
+
+        switch handle {
+        case .topLeading:
+            minX = min(max(rect.minX + translation.width, imageFrame.minX), rect.maxX - Self.minimumCropLength)
+            minY = min(max(rect.minY + translation.height, imageFrame.minY), rect.maxY - Self.minimumCropLength)
+        case .topTrailing:
+            maxX = max(min(rect.maxX + translation.width, imageFrame.maxX), rect.minX + Self.minimumCropLength)
+            minY = min(max(rect.minY + translation.height, imageFrame.minY), rect.maxY - Self.minimumCropLength)
+        case .bottomLeading:
+            minX = min(max(rect.minX + translation.width, imageFrame.minX), rect.maxX - Self.minimumCropLength)
+            maxY = max(min(rect.maxY + translation.height, imageFrame.maxY), rect.minY + Self.minimumCropLength)
+        case .bottomTrailing:
+            maxX = max(min(rect.maxX + translation.width, imageFrame.maxX), rect.minX + Self.minimumCropLength)
+            maxY = max(min(rect.maxY + translation.height, imageFrame.maxY), rect.minY + Self.minimumCropLength)
+        }
+
+        return CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
     }
 }

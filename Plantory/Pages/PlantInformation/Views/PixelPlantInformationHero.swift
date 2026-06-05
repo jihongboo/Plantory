@@ -1,0 +1,49 @@
+import SwiftUI
+
+struct PixelPlantInformationHero: View {
+    let info: PlantInformation
+
+    var body: some View {
+        PixelRoundedRectangleCard(fill: .buttonBackground) {
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(spacing: 16) {
+                    PixelTag(systemName: "leaf.fill", fill: .pixelLeafDark)
+
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(info.commonName)
+                            .font(.pixel(.largeTitle))
+                            .foregroundStyle(.white)
+                            .shadow(color: .pixelInk, radius: 0, x: 2, y: 2)
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.76)
+
+                        Text(info.species)
+                            .font(.pixel(.title3))
+                            .foregroundStyle(.pixelCream)
+                            .shadow(color: .pixelInk.opacity(0.8), radius: 0, x: 1, y: 1)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+
+                    Spacer(minLength: 0)
+                }
+
+                PixelDashedDivider(
+                    color: .pixelCream.opacity(0.7),
+                    lineWidth: 3
+                )
+
+                HStack(spacing: 10) {
+                    PixelHeroBadge(title: "Light", value: info.lightLevel.capitalized)
+                    PixelHeroBadge(title: "Water", value: info.waterLevel.capitalized)
+                    PixelHeroBadge(title: "Care", value: info.careDifficulty.capitalized)
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    PixelPlantInformationHero(info: .monstera)
+        .padding()
+        .background(.pixelPaper)
+}

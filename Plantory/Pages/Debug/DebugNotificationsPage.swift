@@ -93,10 +93,6 @@ private struct PlantReminderDebugSection: View {
     let plant: Plant
     let onScheduled: (String) -> Void
 
-    private var settings: [PlantNotificationSetting] {
-        (plant.notificationSettings ?? []).sorted { $0.kind.rawValue < $1.kind.rawValue }
-    }
-
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(plant.displayName)
@@ -126,19 +122,6 @@ private struct PlantReminderDebugSection: View {
         .padding(.vertical, 4)
     }
 
-    private func schedule(_ setting: PlantNotificationSetting) {
-        Task {
-            let success = await PlantNotificationScheduler.shared.scheduleDebugPlantNotification(
-                for: plant,
-                setting: setting
-            )
-            let reminderName = setting.kind.debugName
-            let message = success
-                ? "Scheduled \(reminderName) for \(plant.displayName) in 10 seconds."
-                : "Unable to schedule \(reminderName) for \(plant.displayName)."
-            onScheduled(message)
-        }
-    }
 }
 
 private extension PlantNotificationKind {
@@ -155,6 +138,13 @@ private extension PlantNotificationKind {
         case .repotting:
             "Repotting Reminder"
         }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        DebugNotificationsPage()
+            .modelContainer(.preview)
     }
 }
 
@@ -216,9 +206,22 @@ private extension DebugNotificationsPage {
     }
 }
 
-#Preview {
-    NavigationStack {
-        DebugNotificationsPage()
-            .modelContainer(.preview)
+private extension PlantReminderDebugSection {
+    var settings: [PlantNotificationSetting] {
+        (plant.notificationSettings ?? []).sorted { $0.kind.rawValue < $1.kind.rawValue }
+    }
+
+    func schedule(_ setting: PlantNotificationSetting) {
+        Task {
+            let success = await PlantNotificationScheduler.shared.scheduleDebugPlantNotification(
+                for: plant,
+                setting: setting
+            )
+            let reminderName = setting.kind.debugName
+            let message = success
+                ? "Scheduled \(reminderName) for \(plant.displayName) in 10 seconds."
+                : "Unable to schedule \(reminderName) for \(plant.displayName)."
+            onScheduled(message)
+        }
     }
 }

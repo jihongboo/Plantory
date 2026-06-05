@@ -113,66 +113,6 @@ struct CameraPickerPage: View {
         }
     }
 
-    private var cameraChrome: some View {
-        VStack(spacing: 0) {
-            Spacer()
-
-            scanBadge
-            
-            Spacer()
-
-            bottomBar
-        }
-        .padding(.horizontal, 24)
-        .padding(.top, 18)
-        .padding(.bottom, 28)
-    }
-
-    private var scanBadge: some View {
-        Image(systemName: "viewfinder")
-            .symbolRenderingMode(.hierarchical)
-            .foregroundStyle(.white)
-            .font(.system(size: 300, weight: .thin))
-    }
-
-    private var bottomBar: some View {
-        ZStack {
-            HStack {
-                Button {
-                    camera.isPhotoLibraryPresented = true
-                } label: {
-                    Label("Photo Library", systemImage: "photo.on.rectangle")
-                        .padding(8)
-                        .labelStyle(.iconOnly)
-                        .font(.title2.weight(.semibold))
-                }
-                .buttonBorderShape(.circle)
-                .buttonStyle(.glass)
-                
-                Spacer()
-            }
-
-            Button {
-                camera.capturePhoto()
-            } label: {
-                Label(purpose.captureTitle, systemImage: "camera.fill")
-                    .font(.title.weight(.bold))
-                    .labelStyle(.iconOnly)
-                    .padding()
-            }
-            .buttonStyle(.glassProminent)
-            .tint(.green)
-            .buttonBorderShape(.circle)
-            .disabled(!camera.isReady)
-        }
-    }
-
-    private func loadImage(from item: PhotosPickerItem) async -> PlatformImage? {
-        guard let data = try? await item.loadTransferable(type: Data.self) else {
-            return nil
-        }
-        return PlatformImage(data: data)
-    }
 }
 
 private extension AVCaptureDevice.FlashMode {
@@ -223,4 +163,67 @@ extension View {
 
 #Preview {
     CameraPickerPage(isPresented: .constant(true), image: .constant(nil))
+}
+
+private extension CameraPickerPage {
+    var cameraChrome: some View {
+        VStack(spacing: 0) {
+            Spacer()
+
+            scanBadge
+            
+            Spacer()
+
+            bottomBar
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 18)
+        .padding(.bottom, 28)
+    }
+
+    var scanBadge: some View {
+        Image(systemName: "viewfinder")
+            .symbolRenderingMode(.hierarchical)
+            .foregroundStyle(.white)
+            .font(.system(size: 300, weight: .thin))
+    }
+
+    var bottomBar: some View {
+        ZStack {
+            HStack {
+                Button {
+                    camera.isPhotoLibraryPresented = true
+                } label: {
+                    Label("Photo Library", systemImage: "photo.on.rectangle")
+                        .padding(8)
+                        .labelStyle(.iconOnly)
+                        .font(.title2.weight(.semibold))
+                }
+                .buttonBorderShape(.circle)
+                .buttonStyle(.glass)
+                
+                Spacer()
+            }
+
+            Button {
+                camera.capturePhoto()
+            } label: {
+                Label(purpose.captureTitle, systemImage: "camera.fill")
+                    .font(.title.weight(.bold))
+                    .labelStyle(.iconOnly)
+                    .padding()
+            }
+            .buttonStyle(.glassProminent)
+            .tint(.green)
+            .buttonBorderShape(.circle)
+            .disabled(!camera.isReady)
+        }
+    }
+
+    func loadImage(from item: PhotosPickerItem) async -> PlatformImage? {
+        guard let data = try? await item.loadTransferable(type: Data.self) else {
+            return nil
+        }
+        return PlatformImage(data: data)
+    }
 }

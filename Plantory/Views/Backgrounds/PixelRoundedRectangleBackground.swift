@@ -100,7 +100,16 @@ struct PixelRoundedRectangleBackground: View {
         }
     }
 
-    private func isInsideRoundedRect(
+}
+
+#Preview {
+    PixelRoundedRectangleBackground(fillColor: .buttonBackground)
+        .frame(width: 200, height: 100)
+        .padding()
+}
+
+private extension PixelRoundedRectangleBackground {
+    func isInsideRoundedRect(
         point: CGPoint,
         rect: CGRect,
         radius: CGFloat
@@ -120,10 +129,4 @@ struct PixelRoundedRectangleBackground: View {
 
         return clampedX * clampedX + clampedY * clampedY <= radius * radius
     }
-}
-
-#Preview {
-    PixelRoundedRectangleBackground(fillColor: .buttonBackground)
-        .frame(width: 200, height: 100)
-        .padding()
 }

@@ -14,7 +14,10 @@ struct LevelMeterView: View {
         }
     }
 
-    private func fillColor(for index: Int) -> Color {
+}
+
+private extension LevelMeterView {
+    func fillColor(for index: Int) -> Color {
         guard index <= level else {
             return Color.secondary.opacity(0.14)
         }
