@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Lucky Bamboo"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "富贵竹"
+  },
   "species": {
     "type": "stringType",
     "value": "Dracaena sanderiana"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Lucky Bamboo is a Dracaena often grown in water or a light potting mix. It is compact, decorative, and tolerant of indoor light."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "dracaena-sanderiana.png"
+    "value": "富贵竹是常以水培或轻质介质栽培的龙血树属植物。它株型小巧、有装饰性，也能适应室内光线。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "easy"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Simple if water quality and light are kept stable."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Low to medium indirect light; avoid direct sun."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "If grown in water, refresh weekly; if in soil, keep lightly moist."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Average indoor humidity is enough."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "low"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Yellow stems can come from direct sun, poor water quality, or old water."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Use very diluted fertilizer every 2-3 months."
   },
   "tips": {
     "type": "stringType",
     "value": "Use filtered water if leaf tips brown or stems yellow."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 190
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "如果叶尖发黄或茎秆变黄，可以尝试使用过滤水。"
   },
   "image": {
     "type": "assetType",

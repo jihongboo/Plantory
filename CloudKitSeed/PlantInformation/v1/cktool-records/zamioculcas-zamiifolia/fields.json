@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "ZZ Plant"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "金钱树"
+  },
   "species": {
     "type": "stringType",
     "value": "Zamioculcas zamiifolia"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "ZZ Plant has glossy upright leaves and thick rhizomes that store water. It is a reliable choice for lower-light spaces and irregular watering routines."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "zamioculcas-zamiifolia.png"
+    "value": "金钱树有油亮直立的叶片和能储水的肥厚根茎。它适合光线偏弱的空间，也能容忍不规律浇水。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "easy"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Very tolerant of missed care, but slow to show stress."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Low to bright indirect light; avoid strong direct sun."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "low"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water only after the soil is fully dry, usually every 2-3 weeks."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Average indoor humidity is fine."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "low"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Yellowing stems are commonly caused by overwatering."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed lightly every 2-3 months during active growth."
   },
   "tips": {
     "type": "stringType",
     "value": "Rotate the pot occasionally so stems grow evenly toward the light."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 40
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "偶尔转动花盆，让枝叶均匀朝光生长。"
   },
   "image": {
     "type": "assetType",

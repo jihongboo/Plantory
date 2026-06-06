@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Peace Lily"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "白掌"
+  },
   "species": {
     "type": "stringType",
     "value": "Spathiphyllum wallisii"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Peace Lily is a leafy indoor plant with white spathes that appear above dark green foliage. It prefers evenly moist soil and stable indoor conditions."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "spathiphyllum-wallisii.png"
+    "value": "白掌有浓绿叶片和白色佛焰苞，花序高于叶丛。它喜欢土壤保持微湿和稳定的室内环境。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "moderate"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Easy to read because it droops when thirsty, but dislikes dry soil for too long."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Medium to bright indirect light; too little light reduces blooms."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water when the top 2 cm of soil dries or leaves begin to soften."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Appreciates moderate humidity and clean leaves."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "medium"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Brown tips can come from dry air, salts, or inconsistent watering."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed monthly in spring and summer at half strength."
   },
   "tips": {
     "type": "stringType",
     "value": "Wipe leaves regularly so the plant can photosynthesize efficiently."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 50
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "定期擦拭叶片能提高光合作用效率，也能让叶片更有光泽。"
   },
   "image": {
     "type": "assetType",

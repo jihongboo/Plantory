@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Boston Fern"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "波士顿蕨"
+  },
   "species": {
     "type": "stringType",
     "value": "Nephrolepis exaltata"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Boston Fern has soft arching fronds and a lush texture. It prefers evenly moist soil, filtered light, and higher humidity than most common houseplants."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "nephrolepis-exaltata.png"
+    "value": "波士顿蕨有柔软下垂的羽状叶，整体质感蓬松。相比多数常见室内植物，它更喜欢湿润土壤、过滤光和较高空气湿度。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "hard"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Needs consistent moisture and humidity to avoid crispy fronds."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Medium to bright indirect light, away from harsh direct sun."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "high"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Keep soil lightly moist; water before it dries completely."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "high"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "High humidity is important for healthy fronds."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "medium"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Dry air and missed watering cause browning, shedding, and crispy tips."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed monthly during spring and summer with diluted fertilizer."
   },
   "tips": {
     "type": "stringType",
     "value": "A bright bathroom or humid corner is often better than a dry sunny shelf."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 100
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "明亮的浴室或湿度较高的角落，通常比干燥晒台更适合它。"
   },
   "image": {
     "type": "assetType",

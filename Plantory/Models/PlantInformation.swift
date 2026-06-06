@@ -5,82 +5,56 @@ struct PlantInformation: Identifiable, Hashable {
     var id: String { catalogID }
 
     var catalogID: String
-    var recordName: String?
     var species: String
     var commonName: String
+    var commonNameZhHans: String?
     var overview: String
-    var photoURL: String?
-    var imageFileName: String
+    var overviewZhHans: String?
     var imageData: Data?
     var careDifficulty: String
-    var careDifficultyDescription: String
     var lightLevel: String
-    var light: String
     var waterLevel: String
-    var water: String
     var humidityLevel: String
-    var humidityDescription: String
     var temperature: String
     var diseaseRiskLevel: String
-    var diseaseRiskDescription: String
     var fertilizerLevel: String
-    var fertilizer: String
     var tips: String
-    var sortOrder: Int
-    var isPublished: Bool
+    var tipsZhHans: String?
 
     init(
         catalogID: String? = nil,
-        recordName: String? = nil,
         species: String,
         commonName: String,
+        commonNameZhHans: String? = nil,
         overview: String = "",
-        photoURL: String? = nil,
-        imageFileName: String = "",
+        overviewZhHans: String? = nil,
         imageData: Data? = nil,
         careDifficulty: String = "moderate",
-        careDifficultyDescription: String = "",
         lightLevel: String = "medium",
-        light: String,
         waterLevel: String = "medium",
-        water: String,
         humidityLevel: String = "medium",
-        humidityDescription: String = "",
         temperature: String,
         diseaseRiskLevel: String = "medium",
-        diseaseRiskDescription: String = "",
         fertilizerLevel: String? = nil,
-        fertilizer: String,
         tips: String,
-        sortOrder: Int = 0,
-        isPublished: Bool = true
+        tipsZhHans: String? = nil
     ) {
         self.catalogID = catalogID ?? Self.catalogID(commonName: commonName, species: species)
-        self.recordName = recordName
         self.species = species
         self.commonName = commonName
+        self.commonNameZhHans = Self.nonEmpty(commonNameZhHans)
         self.overview = overview
-        self.photoURL = photoURL
-        self.imageFileName = imageFileName
+        self.overviewZhHans = Self.nonEmpty(overviewZhHans)
         self.imageData = imageData
         self.careDifficulty = careDifficulty
-        self.careDifficultyDescription = careDifficultyDescription
         self.lightLevel = lightLevel
-        self.light = light
         self.waterLevel = waterLevel
-        self.water = water
         self.humidityLevel = humidityLevel
-        self.humidityDescription = humidityDescription
         self.temperature = temperature
         self.diseaseRiskLevel = diseaseRiskLevel
-        self.diseaseRiskDescription = diseaseRiskDescription
-        self.fertilizerLevel = Self.normalizedLevel(
-            fertilizerLevel ?? Self.inferredFertilizerLevel(from: fertilizer)
-        )
-        self.fertilizer = fertilizer
+        self.fertilizerLevel = Self.normalizedLevel(fertilizerLevel ?? "medium")
         self.tips = tips
-        self.sortOrder = sortOrder
-        self.isPublished = isPublished
+        self.tipsZhHans = Self.nonEmpty(tipsZhHans)
     }
 }
 
@@ -94,38 +68,142 @@ extension PlantInformation {
 
         self.init(
             catalogID: catalogID.isEmpty ? record.recordID.recordName : catalogID,
-            recordName: record.recordID.recordName,
             species: species,
             commonName: commonName,
+            commonNameZhHans: record.optionalStringValue(for: "commonNameZhHans"),
             overview: record.stringValue(for: "overview"),
-            photoURL: record.optionalStringValue(for: "photoURL"),
-            imageFileName: record.stringValue(for: "imageFileName"),
+            overviewZhHans: record.optionalStringValue(for: "overviewZhHans"),
             imageData: imageData,
             careDifficulty: record.stringValue(for: "careDifficulty", default: "moderate"),
-            careDifficultyDescription: record.stringValue(for: "careDifficultyDescription"),
             lightLevel: record.stringValue(for: "lightLevel", default: "medium"),
-            light: record.stringValue(for: "light"),
             waterLevel: record.stringValue(for: "waterLevel", default: "medium"),
-            water: record.stringValue(for: "water"),
             humidityLevel: record.stringValue(for: "humidityLevel", default: "medium"),
-            humidityDescription: record.stringValue(for: "humidityDescription"),
             temperature: record.stringValue(for: "temperature"),
             diseaseRiskLevel: record.stringValue(for: "diseaseRiskLevel", default: "medium"),
-            diseaseRiskDescription: record.stringValue(for: "diseaseRiskDescription"),
             fertilizerLevel: record.stringValue(for: "fertilizerLevel", default: "medium"),
-            fertilizer: record.stringValue(for: "fertilizer"),
             tips: record.stringValue(for: "tips"),
-            sortOrder: record.intValue(for: "sortOrder"),
-            isPublished: record.intValue(for: "isPublished") == 1
+            tipsZhHans: record.optionalStringValue(for: "tipsZhHans")
         )
     }
 
+    var displayCommonName: String {
+        localizedText(zhHans: commonNameZhHans, fallback: commonName)
+    }
+
     var displayOverview: String {
-        if !overview.isEmpty {
-            return overview
+        let fallback: String
+        if overview.isEmpty {
+            fallback = "\(commonName) is a popular houseplant in the \(species) family. It does best when its light, water, and temperature stay consistent."
+        } else {
+            fallback = overview
         }
 
-        return "\(commonName) is a popular houseplant in the \(species) family. It does best when its light, water, and temperature stay consistent."
+        return localizedText(zhHans: overviewZhHans, fallback: fallback)
+    }
+
+    var displayTips: String {
+        localizedText(zhHans: tipsZhHans, fallback: tips)
+    }
+
+    var careDifficultyDetail: String {
+        Self.careDifficultyDetail(for: careDifficulty)
+    }
+
+    var lightDetail: String {
+        Self.lightDetail(for: lightLevel)
+    }
+
+    var waterDetail: String {
+        Self.waterDetail(for: waterLevel)
+    }
+
+    var humidityDetail: String {
+        Self.humidityDetail(for: humidityLevel)
+    }
+
+    var diseaseRiskDetail: String {
+        Self.diseaseRiskDetail(for: diseaseRiskLevel)
+    }
+
+    var fertilizerDetail: String {
+        Self.fertilizerDetail(for: fertilizerLevel)
+    }
+
+    static func careDifficultyDetail(for level: String) -> String {
+        switch level {
+        case "easy":
+            String(localized: "Easy care. A good fit for beginners and flexible routines.")
+        case "hard":
+            String(localized: "Needs steady care and closer attention to changes.")
+        default:
+            String(localized: "Moderate care. Keep light, water, and timing consistent.")
+        }
+    }
+
+    static func lightDetail(for level: String) -> String {
+        switch level {
+        case "low":
+            String(localized: "Tolerates lower indirect light.")
+        case "high":
+            String(localized: "Prefers very bright indirect light or gentle direct sun.")
+        default:
+            String(localized: "Prefers bright indirect light.")
+        }
+    }
+
+    static func waterDetail(for level: String) -> String {
+        switch level {
+        case "low":
+            String(localized: "Let the soil dry well between waterings.")
+        case "high":
+            String(localized: "Keep the soil lightly moist and check it often.")
+        default:
+            String(localized: "Water when the top layer of soil dries.")
+        }
+    }
+
+    static func humidityDetail(for level: String) -> String {
+        switch level {
+        case "low":
+            String(localized: "Average dry indoor air is usually fine.")
+        case "high":
+            String(localized: "Prefers higher humidity and benefits from added moisture.")
+        default:
+            String(localized: "Comfortable with moderate indoor humidity.")
+        }
+    }
+
+    static func diseaseRiskDetail(for level: String) -> String {
+        switch level {
+        case "low":
+            String(localized: "Low risk. Check occasionally during routine care.")
+        case "high":
+            String(localized: "Higher risk. Watch leaves, roots, and soil closely.")
+        default:
+            String(localized: "Moderate risk. Check for early stress signs regularly.")
+        }
+    }
+
+    static func fertilizerDetail(for level: String) -> String {
+        switch level {
+        case "low":
+            String(localized: "Feed lightly during active growth.")
+        case "high":
+            String(localized: "Feed more regularly during active growth.")
+        default:
+            String(localized: "Feed monthly during the growing season.")
+        }
+    }
+
+    func matchesSearchText(_ searchText: String) -> Bool {
+        [
+            displayCommonName,
+            commonName,
+            commonNameZhHans,
+            species
+        ]
+        .compactMap { $0 }
+        .contains { $0.localizedCaseInsensitiveContains(searchText) }
     }
 }
 
@@ -140,6 +218,21 @@ private extension PlantInformation {
         return parts.joined(separator: "-").lowercased()
     }
 
+    static func nonEmpty(_ value: String?) -> String? {
+        guard let value else { return nil }
+        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
+
+    func localizedText(zhHans: String?, fallback: String) -> String {
+        if Locale.current.language.languageCode?.identifier == "zh",
+           let zhHans = Self.nonEmpty(zhHans) {
+            return zhHans
+        }
+
+        return fallback
+    }
+
     static func normalizedLevel(_ value: String) -> String {
         let normalized = value.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         switch normalized {
@@ -150,29 +243,6 @@ private extension PlantInformation {
         }
     }
 
-    static func inferredFertilizerLevel(from fertilizer: String) -> String {
-        let lowercased = fertilizer.lowercased()
-
-        if lowercased.contains("less is more")
-            || lowercased.contains("once in spring")
-            || lowercased.contains("every 3 months")
-            || lowercased.contains("every three months")
-            || lowercased.contains("every 2 months")
-            || lowercased.contains("every two months")
-            || lowercased.contains("slow-release")
-        {
-            return "low"
-        }
-
-        if lowercased.contains("every 2 weeks")
-            || lowercased.contains("every two weeks")
-            || lowercased.contains("biweekly")
-        {
-            return "high"
-        }
-
-        return "medium"
-    }
 }
 
 private extension CKRecord {
@@ -185,21 +255,5 @@ private extension CKRecord {
     func optionalStringValue(for key: String) -> String? {
         let value = stringValue(for: key)
         return value.isEmpty ? nil : value
-    }
-
-    func intValue(for key: String) -> Int {
-        if let value = self[key] as? Int {
-            return value
-        }
-
-        if let value = self[key] as? Int64 {
-            return Int(value)
-        }
-
-        if let value = self[key] as? NSNumber {
-            return value.intValue
-        }
-
-        return 0
     }
 }

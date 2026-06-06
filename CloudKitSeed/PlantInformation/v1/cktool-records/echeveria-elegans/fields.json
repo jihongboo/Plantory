@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Echeveria"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "拟石莲花"
+  },
   "species": {
     "type": "stringType",
     "value": "Echeveria elegans"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Echeveria is a compact rosette succulent with powdery leaves. It needs strong light and dry soil to stay colorful and symmetrical."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "echeveria-elegans.png"
+    "value": "拟石莲花是紧凑莲座状多肉，叶片带粉感。它需要强光和偏干土壤，才能保持颜色和对称株型。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "moderate"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Simple in strong light, but stretches quickly in dim rooms."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "high"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Very bright light with gentle direct sun."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "low"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water only when soil is completely dry, usually every 2-3 weeks."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Prefers dry air and good airflow."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "medium"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Overwatering and water trapped in the rosette can cause rot."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed once or twice during spring and summer with diluted succulent fertilizer."
   },
   "tips": {
     "type": "stringType",
     "value": "If the rosette stretches upward, it needs more light."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 140
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "如果莲座开始向上拉长，通常说明光照不足。"
   },
   "image": {
     "type": "assetType",

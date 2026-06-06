@@ -189,15 +189,13 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
     func recommendationText(for plant: Plant) -> String {
         switch self {
         case .watering:
-            let basis = plant.informationWater.isEmpty ? nil : plant.informationWater
-            return basis ?? String(localized: "Recommended from the plant's watering level.")
+            return PlantInformation.waterDetail(for: plant.informationWaterLevel)
         case .fertilizing:
-            let basis = plant.informationFertilizer.isEmpty ? nil : plant.informationFertilizer
-            return basis ?? String(localized: "Recommended from the plant's fertilizer needs.")
+            return PlantInformation.fertilizerDetail(for: plant.informationFertilizerLevel)
         case .pestCheck:
-            return String(localized: "Based on the current disease risk level for this plant.")
+            return PlantInformation.diseaseRiskDetail(for: plant.informationDiseaseRiskLevel)
         case .pruning:
-            return String(localized: "Use as a routine maintenance reminder and adjust by growth speed.")
+            return PlantInformation.careDifficultyDetail(for: plant.informationCareDifficulty)
         case .repotting:
             return String(localized: "Use as a long-cycle reminder and adjust when roots outgrow the pot.")
         }

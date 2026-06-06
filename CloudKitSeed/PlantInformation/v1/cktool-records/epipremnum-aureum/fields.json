@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Pothos"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "绿萝"
+  },
   "species": {
     "type": "stringType",
     "value": "Epipremnum aureum"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Pothos is a fast-growing trailing plant with heart-shaped leaves. It is one of the easiest indoor plants for beginners and tolerates a wide range of rooms."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "epipremnum-aureum.png"
+    "value": "绿萝是一种生长很快的垂吊植物，叶片呈心形。它非常适合新手，能适应多种室内光照和养护条件。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "easy"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Very forgiving and quick to recover from missed watering."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Low to bright indirect light; brighter light keeps variegation stronger."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water when the top half of the soil dries out."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Handles normal home humidity well."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "low"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Main risks are root rot from standing water and leggy growth in very low light."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed every 6-8 weeks in the growing season."
   },
   "tips": {
     "type": "stringType",
     "value": "Trim long vines to encourage fuller growth and root cuttings in water."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 20
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "定期修剪过长藤蔓可以让株型更丰满，剪下的枝条也能水培生根。"
   },
   "image": {
     "type": "assetType",

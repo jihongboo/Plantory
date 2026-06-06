@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Aloe Vera"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "芦荟"
+  },
   "species": {
     "type": "stringType",
     "value": "Aloe barbadensis miller"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Aloe Vera is a succulent with thick water-storing leaves. It needs strong light, fast-draining soil, and long dry periods between watering."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "aloe-barbadensis-miller.png"
+    "value": "芦荟是叶片肥厚、能储水的多肉植物。它需要充足光照、快速排水的土壤，以及两次浇水之间较长的干燥期。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "easy"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Easy if treated like a succulent rather than a leafy tropical plant."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "high"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Bright light with several hours of gentle direct sun."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "low"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water deeply, then let soil dry completely before watering again."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Prefers dry air and dislikes humid, stagnant conditions."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "low"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Mushy leaves and black spots usually mean excess water or poor drainage."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed once in spring with diluted succulent fertilizer."
   },
   "tips": {
     "type": "stringType",
     "value": "A gritty cactus mix and drainage hole are more important than frequent watering."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 130
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "颗粒感强的仙人掌介质和排水孔，比频繁浇水更重要。"
   },
   "image": {
     "type": "assetType",

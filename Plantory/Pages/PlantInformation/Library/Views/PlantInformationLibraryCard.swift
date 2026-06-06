@@ -27,17 +27,17 @@ struct PlantInformationLibraryCard: View {
                 .frame(height: 144)
 
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(info.commonName)
-                        .font(.pixel(.title2))
+                    Text(info.displayCommonName)
+                        .font(.pixel(.title3))
                         .foregroundStyle(.pixelInk)
-                        .lineLimit(2)
+                        .lineLimit(1)
                         .minimumScaleFactor(0.76)
 
                     Text(info.species)
                         .font(.pixel(.callout))
                         .foregroundStyle(Color.pixelInk.opacity(0.58))
                         .italic()
-                        .lineLimit(2)
+                        .lineLimit(1)
                         .minimumScaleFactor(0.78)
                 }
 

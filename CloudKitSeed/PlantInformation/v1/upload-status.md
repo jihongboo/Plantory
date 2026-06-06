@@ -1,6 +1,8 @@
 # Upload Status
 
-Last upload: 2026-06-05
+Last upload: 2026-06-06
+Last schema cleanup: 2026-06-06
+Last localization schema update: 2026-06-06
 
 Target:
 
@@ -13,12 +15,16 @@ Target:
 Result:
 
 - Schema imported with `PlantInformation`.
-- Query indexes added for `___recordID`, `catalogID`, `commonName`, and `isPublished`.
-- Sort index added for `sortOrder`.
+- Query indexes added for `___recordID`, `catalogID`, and `commonName`.
 - Duplicate records from earlier attempts were deleted.
 - Final upload completed successfully.
-- Verification dry-run found 20 published `PlantInformation` records.
-- A full query by `isPublished == 1` returned records with all expected fields and image assets.
+- Verification dry-run found 20 `PlantInformation` records.
+- A full query returned records with all expected fields and image assets.
+- Development records were rebuilt with Simplified Chinese values for `commonNameZhHans`, `overviewZhHans`, and `tipsZhHans`.
+- Development schema cleanup removed unused `photoURL`, `imageFileName`, `sortOrder`, and `isPublished` fields.
+- Development schema update added `commonNameZhHans`, `overviewZhHans`, and `tipsZhHans` for core Simplified Chinese catalog text.
+- Development schema cleanup removed long care-description fields: `careDifficultyDescription`, `light`, `water`, `humidityDescription`, `diseaseRiskDescription`, and `fertilizer`.
+- Care detail copy is now derived in the app from `careDifficulty`, `lightLevel`, `waterLevel`, `humidityLevel`, `diseaseRiskLevel`, and `fertilizerLevel`.
 
 Verification commands:
 
@@ -28,7 +34,6 @@ xcrun cktool delete-records \
   --environment development \
   --database-type public \
   --record-type PlantInformation \
-  --filters 'isPublished == 1' \
   --dry-run true
 ```
 
@@ -47,7 +52,6 @@ xcrun cktool query-records \
   --environment development \
   --database-type public \
   --record-type PlantInformation \
-  --filters 'isPublished == 1' \
   --limit 1
 ```
 

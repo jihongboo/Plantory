@@ -70,7 +70,7 @@ private extension PlantInformationLibraryPage {
         switch viewState {
         case .loading:
             PixelRoundedRectangleCard {
-                PixelProgressView("Loading CloudKit plants...")
+                PixelProgressView("Loading plants...")
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 24)
             }
@@ -121,14 +121,11 @@ private extension PlantInformationLibraryPage {
     var filteredInfos: [PlantInformation] {
         guard !trimmedSearchText.isEmpty else { return infos }
 
-        return infos.filter {
-            $0.commonName.localizedCaseInsensitiveContains(trimmedSearchText)
-                || $0.species.localizedCaseInsensitiveContains(trimmedSearchText)
-        }
+        return infos.filter { $0.matchesSearchText(trimmedSearchText) }
     }
 
     func loadInformation() async {
-        viewState = .loading
+        guard case .loading = viewState else { return }
 
         do {
             viewState = .loaded(try await service.fetchPlantInformations())

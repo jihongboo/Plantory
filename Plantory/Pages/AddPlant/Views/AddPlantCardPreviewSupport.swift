@@ -8,26 +8,20 @@ enum AddPlantCardPreviewSupport {
     static let recognition = DoubaoPlantRecognitionService.IdentificationResult(
         plantInformation: plantInformation,
         structuredResult: DoubaoPlantRecognitionService.StructuredPlantRecognition(
-            commonName: plantInformation.commonName,
+            commonName: plantInformation.displayCommonName,
             species: plantInformation.species,
             confidence: 96,
             isPlant: true,
             overview: plantInformation.displayOverview,
             careDifficulty: plantInformation.careDifficulty,
-            careDifficultyDescription: plantInformation.careDifficultyDescription,
             lightLevel: plantInformation.lightLevel,
-            summary: "\(plantInformation.commonName) recognized from preview mock data.",
-            light: plantInformation.light,
+            summary: "\(plantInformation.displayCommonName) recognized from preview mock data.",
             waterLevel: plantInformation.waterLevel,
-            water: plantInformation.water,
             humidityLevel: plantInformation.humidityLevel,
-            humidityDescription: plantInformation.humidityDescription,
             temperature: plantInformation.temperature,
             diseaseRiskLevel: plantInformation.diseaseRiskLevel,
-            diseaseRiskDescription: plantInformation.diseaseRiskDescription,
             fertilizerLevel: plantInformation.fertilizerLevel,
-            fertilizer: plantInformation.fertilizer,
-            tips: plantInformation.tips
+            tips: plantInformation.displayTips
         ),
         rawOutputText: "Preview mock recognition result"
     )

@@ -11,29 +11,19 @@ OUT = ROOT / "cktool-records"
 STRING_FIELDS = [
     "catalogID",
     "commonName",
+    "commonNameZhHans",
     "species",
     "overview",
-    "photoURL",
-    "imageFileName",
+    "overviewZhHans",
     "careDifficulty",
-    "careDifficultyDescription",
     "lightLevel",
-    "light",
     "waterLevel",
-    "water",
     "humidityLevel",
-    "humidityDescription",
     "temperature",
     "diseaseRiskLevel",
-    "diseaseRiskDescription",
     "fertilizerLevel",
-    "fertilizer",
     "tips",
-]
-
-INT64_FIELDS = [
-    "sortOrder",
-    "isPublished",
+    "tipsZhHans",
 ]
 
 
@@ -41,13 +31,12 @@ def ck_fields(item):
     fields = {}
     for key in STRING_FIELDS:
         fields[key] = {"type": "stringType", "value": item.get(key, "")}
-    for key in INT64_FIELDS:
-        fields[key] = {"type": "int64Type", "value": int(item[key])}
 
-    image_path = (IMAGES / item["imageFileName"]).resolve()
+    image_file_name = f"{item['catalogID']}.png"
+    image_path = (IMAGES / image_file_name).resolve()
     fields["image"] = {
         "type": "assetType",
-        "value": item["imageFileName"],
+        "value": image_file_name,
     }
     return fields, image_path
 
@@ -88,7 +77,7 @@ def main():
             "  --database-type public \\",
             "  --record-type PlantInformation \\",
             f"  --fields-file {record_dir / 'fields.json'} \\",
-            f"  --asset-files {item['imageFileName']}={image_path}",
+            f"  --asset-files {image_path.name}={image_path}",
             "",
         ])
 

@@ -20,19 +20,12 @@ struct PlantInformationCloudService {
     }
 
     func fetchPlantInformations() async throws -> [PlantInformation] {
-        let predicate = NSPredicate(format: "isPublished == 1")
+        let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "PlantInformation", predicate: predicate)
-        query.sortDescriptors = [NSSortDescriptor(key: "sortOrder", ascending: true)]
 
         return try await fetchRecords(matching: query)
             .map(PlantInformation.init(record:))
-            .sorted { lhs, rhs in
-                if lhs.sortOrder == rhs.sortOrder {
-                    lhs.commonName < rhs.commonName
-                } else {
-                    lhs.sortOrder < rhs.sortOrder
-                }
-            }
+            .sorted { $0.displayCommonName < $1.displayCommonName }
     }
 
     func fetchPlantInformation(catalogID: String) async throws -> PlantInformation {

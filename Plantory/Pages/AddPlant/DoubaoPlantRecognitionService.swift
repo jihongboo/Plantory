@@ -135,19 +135,13 @@ extension DoubaoPlantRecognitionService {
         let isPlant: Bool
         let overview: String
         let careDifficulty: String
-        let careDifficultyDescription: String
         let lightLevel: String
         let summary: String
-        let light: String
         let waterLevel: String
-        let water: String
         let humidityLevel: String
-        let humidityDescription: String
         let temperature: String
         let diseaseRiskLevel: String
-        let diseaseRiskDescription: String
         let fertilizerLevel: String
-        let fertilizer: String
         let tips: String
 
         enum CodingKeys: String, CodingKey {
@@ -157,19 +151,13 @@ extension DoubaoPlantRecognitionService {
             case isPlant
             case overview
             case careDifficulty
-            case careDifficultyDescription
             case lightLevel
             case summary
-            case light
             case waterLevel
-            case water
             case humidityLevel
-            case humidityDescription
             case temperature
             case diseaseRiskLevel
-            case diseaseRiskDescription
             case fertilizerLevel
-            case fertilizer
             case tips
         }
 
@@ -180,19 +168,13 @@ extension DoubaoPlantRecognitionService {
             isPlant: Bool,
             overview: String,
             careDifficulty: String,
-            careDifficultyDescription: String,
             lightLevel: String,
             summary: String,
-            light: String,
             waterLevel: String,
-            water: String,
             humidityLevel: String,
-            humidityDescription: String,
             temperature: String,
             diseaseRiskLevel: String,
-            diseaseRiskDescription: String,
             fertilizerLevel: String,
-            fertilizer: String,
             tips: String
         ) {
             self.commonName = commonName
@@ -201,19 +183,13 @@ extension DoubaoPlantRecognitionService {
             self.isPlant = isPlant
             self.overview = overview
             self.careDifficulty = careDifficulty
-            self.careDifficultyDescription = careDifficultyDescription
             self.lightLevel = lightLevel
             self.summary = summary
-            self.light = light
             self.waterLevel = waterLevel
-            self.water = water
             self.humidityLevel = humidityLevel
-            self.humidityDescription = humidityDescription
             self.temperature = temperature
             self.diseaseRiskLevel = diseaseRiskLevel
-            self.diseaseRiskDescription = diseaseRiskDescription
             self.fertilizerLevel = fertilizerLevel
-            self.fertilizer = fertilizer
             self.tips = tips
         }
 
@@ -226,18 +202,12 @@ extension DoubaoPlantRecognitionService {
             isPlant = try container.decodeIfPresent(Bool.self, forKey: .isPlant) ?? true
             overview = container.decodeTrimmedString(forKey: .overview)
             careDifficulty = container.decodeTrimmedString(forKey: .careDifficulty, default: "moderate")
-            careDifficultyDescription = container.decodeTrimmedString(forKey: .careDifficultyDescription)
             lightLevel = container.decodeTrimmedString(forKey: .lightLevel, default: "medium")
-            light = container.decodeTrimmedString(forKey: .light)
             waterLevel = container.decodeTrimmedString(forKey: .waterLevel, default: "medium")
-            water = container.decodeTrimmedString(forKey: .water)
             humidityLevel = container.decodeTrimmedString(forKey: .humidityLevel, default: "medium")
-            humidityDescription = container.decodeTrimmedString(forKey: .humidityDescription)
             temperature = container.decodeTrimmedString(forKey: .temperature)
             diseaseRiskLevel = container.decodeTrimmedString(forKey: .diseaseRiskLevel, default: "medium")
-            diseaseRiskDescription = container.decodeTrimmedString(forKey: .diseaseRiskDescription)
             fertilizerLevel = container.decodeTrimmedString(forKey: .fertilizerLevel, default: "medium")
-            fertilizer = container.decodeTrimmedString(forKey: .fertilizer)
             tips = container.decodeTrimmedString(forKey: .tips)
 
             let fallbackSummary = [
@@ -266,18 +236,12 @@ extension DoubaoPlantRecognitionService {
                 commonName: commonName,
                 overview: overview,
                 careDifficulty: normalizedLevel(careDifficulty, allowed: ["easy", "moderate", "hard"], fallback: "moderate"),
-                careDifficultyDescription: careDifficultyDescription,
                 lightLevel: normalizedLevel(lightLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
-                light: light,
                 waterLevel: normalizedLevel(waterLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
-                water: water,
                 humidityLevel: normalizedLevel(humidityLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
-                humidityDescription: humidityDescription,
                 temperature: temperature,
                 diseaseRiskLevel: normalizedLevel(diseaseRiskLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
-                diseaseRiskDescription: diseaseRiskDescription,
                 fertilizerLevel: normalizedLevel(fertilizerLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
-                fertilizer: fertilizer,
                 tips: tips
             )
         }
@@ -540,8 +504,7 @@ private extension DoubaoPlantRecognitionService {
                `humidityLevel`: low | medium | high
                `diseaseRiskLevel`: low | medium | high
                `fertilizerLevel`: low | medium | high
-            7. `careDifficultyDescription`, `humidityDescription`, and `diseaseRiskDescription` must be short UI-ready explanations that match their enum levels.
-            8. `light`, `water`, `temperature`, `fertilizer`, and `tips` must be directly usable in the app UI.
+            8. `temperature` and `tips` must be directly usable in the app UI.
             9. If the image is not a plant, set `isPlant` to false, return null or empty strings for plant fields, and use the middle enum value as fallback.
 
             Return JSON in this shape with every field present:
@@ -552,19 +515,13 @@ private extension DoubaoPlantRecognitionService {
               "isPlant": true,
               "overview": "A common foliage plant with naturally split leaves.",
               "careDifficulty": "moderate",
-              "careDifficultyDescription": "Best for steady plant care routines.",
               "lightLevel": "medium",
               "summary": "The photo shows a Monstera with mature split leaves.",
-              "light": "Bright indirect light, avoid long periods of harsh sun.",
               "waterLevel": "medium",
-              "water": "Water thoroughly after the top 2 to 3 cm of soil dries.",
               "humidityLevel": "high",
-              "humidityDescription": "Prefers consistently humid air and benefits from added moisture.",
               "temperature": "18 to 30 degrees Celsius.",
               "diseaseRiskLevel": "medium",
-              "diseaseRiskDescription": "Watch for early stress signs if light, water, or airflow drift off routine.",
               "fertilizerLevel": "medium",
-              "fertilizer": "Feed monthly with a diluted foliage fertilizer during the growing season.",
               "tips": "Good airflow and moderate humidity help the leaves stay healthy."
             }
             """
@@ -586,8 +543,7 @@ private extension DoubaoPlantRecognitionService {
            `humidityLevel`: low | medium | high
            `diseaseRiskLevel`: low | medium | high
            `fertilizerLevel`: low | medium | high
-        7. `careDifficultyDescription`、`humidityDescription`、`diseaseRiskDescription` 必须返回与量化等级一致、可直接展示的简洁中文说明。
-        8. `light`、`water`、`temperature`、`fertilizer`、`tips` 必须给出可直接展示给用户的内容。
+        8. `temperature` 和 `tips` 必须给出可直接展示给用户的内容。
         9. 如果图里不是植物，`isPlant` 返回 false，植物相关字段统一返回 null 或空字符串，量化字段统一返回默认中间值。
 
         返回 JSON，字段必须完整，格式如下：
@@ -598,19 +554,13 @@ private extension DoubaoPlantRecognitionService {
           "isPlant": true,
           "overview": "一种常见观叶植物，叶片有自然裂口。",
           "careDifficulty": "moderate",
-          "careDifficultyDescription": "适合能稳定进行日常养护的用户。",
           "lightLevel": "medium",
           "summary": "图片中是一盆龟背竹，叶片开裂明显。",
-          "light": "明亮散射光，避免长时间暴晒。",
           "waterLevel": "medium",
-          "water": "土壤表层 2 到 3 厘米变干后再浇透。",
           "humidityLevel": "high",
-          "humidityDescription": "偏好持续湿润的空气环境，适当增湿会更有利。",
           "temperature": "18 到 30 摄氏度。",
           "diseaseRiskLevel": "medium",
-          "diseaseRiskDescription": "如果光照、浇水或通风偏离日常节奏，请留意早期受压迹象。",
           "fertilizerLevel": "medium",
-          "fertilizer": "生长期每月施一次稀薄观叶肥。",
           "tips": "保持通风和一定空气湿度，能让叶片状态更好。"
         }
         """
@@ -663,19 +613,13 @@ private extension DoubaoPlantRecognitionService {
                 "isPlant": true,
                 "overview": "A common foliage plant with naturally split leaves.",
                 "careDifficulty": "moderate",
-                "careDifficultyDescription": "Best for steady plant care routines.",
                 "lightLevel": "medium",
                 "summary": "The photo shows a Monstera with mature split leaves.",
-                "light": "Bright indirect light, avoid long periods of harsh sun.",
                 "waterLevel": "medium",
-                "water": "Water thoroughly after the top 2 to 3 cm of soil dries.",
                 "humidityLevel": "high",
-                "humidityDescription": "Prefers consistently humid air and benefits from added moisture.",
                 "temperature": "18 to 30 degrees Celsius.",
                 "diseaseRiskLevel": "medium",
-                "diseaseRiskDescription": "Watch for early stress signs if light, water, or airflow drift off routine.",
                 "fertilizerLevel": "medium",
-                "fertilizer": "Feed monthly with a diluted foliage fertilizer during the growing season.",
                 "tips": "Good airflow and moderate humidity help the leaves stay healthy."
               },
               "diagnosis": {
@@ -757,19 +701,13 @@ private extension DoubaoPlantRecognitionService {
             "isPlant": true,
             "overview": "一种常见观叶植物，叶片有自然裂口。",
             "careDifficulty": "moderate",
-            "careDifficultyDescription": "适合能稳定进行日常养护的用户。",
             "lightLevel": "medium",
             "summary": "图片中是一盆龟背竹，叶片开裂明显。",
-            "light": "明亮散射光，避免长时间暴晒。",
             "waterLevel": "medium",
-            "water": "土壤表层 2 到 3 厘米变干后再浇透。",
             "humidityLevel": "high",
-            "humidityDescription": "偏好持续湿润的空气环境，适当增湿会更有利。",
             "temperature": "18 到 30 摄氏度。",
             "diseaseRiskLevel": "medium",
-            "diseaseRiskDescription": "如果光照、浇水或通风偏离日常节奏，请留意早期受压迹象。",
             "fertilizerLevel": "medium",
-            "fertilizer": "生长期每月施一次稀薄观叶肥。",
             "tips": "保持通风和一定空气湿度，能让叶片状态更好。"
           },
           "diagnosis": {
@@ -830,9 +768,8 @@ private extension DoubaoPlantRecognitionService {
                `humidityLevel`: low | medium | high
                `diseaseRiskLevel`: low | medium | high
                `fertilizerLevel`: low | medium | high
-            6. `careDifficultyDescription`, `humidityDescription`, and `diseaseRiskDescription` must be short UI-ready explanations that match their enum levels.
-            7. `light`, `water`, `temperature`, `fertilizer`, and `tips` must be directly usable in the app UI.
-            8. If the input is clearly not a plant name, set `isPlant` to false, return null or empty strings for plant fields, and use the middle enum value as fallback.
+            6. `temperature` and `tips` must be directly usable in the app UI.
+            7. If the input is clearly not a plant name, set `isPlant` to false, return null or empty strings for plant fields, and use the middle enum value as fallback.
 
             Return JSON in this shape with every field present:
             {
@@ -842,19 +779,13 @@ private extension DoubaoPlantRecognitionService {
               "isPlant": true,
               "overview": "A common foliage plant with naturally split leaves.",
               "careDifficulty": "moderate",
-              "careDifficultyDescription": "Best for steady plant care routines.",
               "lightLevel": "medium",
               "summary": "Monstera is a common indoor foliage plant that prefers bright indirect light.",
-              "light": "Bright indirect light, avoid long periods of harsh sun.",
               "waterLevel": "medium",
-              "water": "Water thoroughly after the top 2 to 3 cm of soil dries.",
               "humidityLevel": "high",
-              "humidityDescription": "Prefers consistently humid air and benefits from added moisture.",
               "temperature": "18 to 30 degrees Celsius.",
               "diseaseRiskLevel": "medium",
-              "diseaseRiskDescription": "Watch for early stress signs if light, water, or airflow drift off routine.",
               "fertilizerLevel": "medium",
-              "fertilizer": "Feed monthly with a diluted foliage fertilizer during the growing season.",
               "tips": "Good airflow and moderate humidity help the leaves stay healthy."
             }
             """
@@ -877,9 +808,8 @@ private extension DoubaoPlantRecognitionService {
            `humidityLevel`: low | medium | high
            `diseaseRiskLevel`: low | medium | high
            `fertilizerLevel`: low | medium | high
-        6. `careDifficultyDescription`、`humidityDescription`、`diseaseRiskDescription` 必须返回与量化等级一致、可直接展示的简洁中文说明。
-        7. `light`、`water`、`temperature`、`fertilizer`、`tips` 必须给出可直接展示给用户的内容。
-        8. 如果输入明显不是植物名称，`isPlant` 返回 false，植物相关字段统一返回 null 或空字符串，量化字段统一返回默认中间值。
+        6. `temperature` 和 `tips` 必须给出可直接展示给用户的内容。
+        7. 如果输入明显不是植物名称，`isPlant` 返回 false，植物相关字段统一返回 null 或空字符串，量化字段统一返回默认中间值。
 
         返回 JSON，字段必须完整，格式如下：
         {
@@ -889,19 +819,13 @@ private extension DoubaoPlantRecognitionService {
           "isPlant": true,
           "overview": "一种常见观叶植物，叶片有自然裂口。",
           "careDifficulty": "moderate",
-          "careDifficultyDescription": "适合能稳定进行日常养护的用户。",
           "lightLevel": "medium",
           "summary": "龟背竹是常见室内观叶植物，适合明亮散射光环境。",
-          "light": "明亮散射光，避免长时间暴晒。",
           "waterLevel": "medium",
-          "water": "土壤表层 2 到 3 厘米变干后再浇透。",
           "humidityLevel": "high",
-          "humidityDescription": "偏好持续湿润的空气环境，适当增湿会更有利。",
           "temperature": "18 到 30 摄氏度。",
           "diseaseRiskLevel": "medium",
-          "diseaseRiskDescription": "如果光照、浇水或通风偏离日常节奏，请留意早期受压迹象。",
           "fertilizerLevel": "medium",
-          "fertilizer": "生长期每月施一次稀薄观叶肥。",
           "tips": "保持通风和一定空气湿度，能让叶片状态更好。"
         }
         """

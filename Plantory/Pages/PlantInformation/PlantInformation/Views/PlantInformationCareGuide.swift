@@ -14,7 +14,7 @@ struct PlantInformationCareGuide: View {
                 systemImage: "figure.child",
                 tint: difficultyColor,
                 indicator: .level(difficultyMeterLevel(info.careDifficulty)),
-                detail: info.careDifficultyDescription
+                detail: info.careDifficultyDetail
             )
 
             PixelCareTile(
@@ -22,7 +22,7 @@ struct PlantInformationCareGuide: View {
                 systemImage: "sun.max.fill",
                 tint: .pixelSun,
                 indicator: .level(meterLevel(info.lightLevel)),
-                detail: info.light
+                detail: info.lightDetail
             )
 
             PixelCareTile(
@@ -30,7 +30,7 @@ struct PlantInformationCareGuide: View {
                 systemImage: "drop.fill",
                 tint: .pixelWater,
                 indicator: .level(meterLevel(info.waterLevel)),
-                detail: info.water
+                detail: info.waterDetail
             )
 
             PixelCareTile(
@@ -38,7 +38,7 @@ struct PlantInformationCareGuide: View {
                 systemImage: "humidity.fill",
                 tint: .pixelWater,
                 indicator: .level(meterLevel(info.humidityLevel)),
-                detail: info.humidityDescription
+                detail: info.humidityDetail
             )
 
             PixelCareTile(
@@ -54,7 +54,7 @@ struct PlantInformationCareGuide: View {
                 systemImage: "leaf.circle.fill",
                 tint: .pixelLeaf,
                 indicator: .level(meterLevel(info.fertilizerLevel)),
-                detail: info.fertilizer
+                detail: info.fertilizerDetail
             )
 
             PixelCareTile(
@@ -62,7 +62,7 @@ struct PlantInformationCareGuide: View {
                 systemImage: "cross.case.fill",
                 tint: diseaseRiskColor(info.diseaseRiskLevel),
                 indicator: .level(meterLevel(info.diseaseRiskLevel)),
-                detail: info.diseaseRiskDescription
+                detail: info.diseaseRiskDetail
             )
         }
     }

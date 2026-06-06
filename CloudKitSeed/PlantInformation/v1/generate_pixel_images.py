@@ -317,10 +317,11 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     catalog = json.loads(CATALOG.read_text())
     for item in catalog:
+        image_file_name = f"{item['catalogID']}.png"
         pixels = new_canvas()
         DRAWERS[item["catalogID"]](pixels)
-        write_png(OUT_DIR / item["imageFileName"], pixels)
-        print(item["imageFileName"])
+        write_png(OUT_DIR / image_file_name, pixels)
+        print(image_file_name)
 
 
 if __name__ == "__main__":

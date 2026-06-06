@@ -16,9 +16,7 @@ final class Plant {
     var informationCommonName: String?
     var informationSpecies: String?
     var informationWaterLevel: String = "medium"
-    var informationWater: String = ""
     var informationFertilizerLevel: String = "medium"
-    var informationFertilizer: String = ""
     var informationDiseaseRiskLevel: String = "medium"
     var informationCareDifficulty: String = "moderate"
 
@@ -49,6 +47,7 @@ final class Plant {
     @Relationship(deleteRule: .cascade, inverse: \PlantNotificationSetting.plant)
     var notificationSettings: [PlantNotificationSetting]?
 
+    @MainActor
     init(
         id: UUID = UUID(),
         nickname: String? = nil,
@@ -67,14 +66,13 @@ final class Plant {
 }
 
 extension Plant {
+    @MainActor
     func applyInformationSnapshot(_ information: PlantInformation?) {
         informationCatalogID = information?.catalogID
-        informationCommonName = information?.commonName
+        informationCommonName = information?.displayCommonName
         informationSpecies = information?.species
         informationWaterLevel = information?.waterLevel ?? "medium"
-        informationWater = information?.water ?? ""
         informationFertilizerLevel = information?.fertilizerLevel ?? "medium"
-        informationFertilizer = information?.fertilizer ?? ""
         informationDiseaseRiskLevel = information?.diseaseRiskLevel ?? "medium"
         informationCareDifficulty = information?.careDifficulty ?? "moderate"
     }

@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Moth Orchid"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "蝴蝶兰"
+  },
   "species": {
     "type": "stringType",
     "value": "Phalaenopsis amabilis"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Moth Orchid is a common indoor orchid with long-lasting blooms. It grows in bark mix, prefers filtered light, and needs roots that can breathe."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "phalaenopsis-amabilis.png"
+    "value": "蝴蝶兰是常见室内兰花，花期较长。它通常种在树皮介质中，喜欢过滤光和透气的根系环境。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "moderate"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Manageable once watering and root airflow are understood."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Bright indirect light; avoid hot direct sun."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water when bark is nearly dry and roots turn silvery."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Prefers moderate humidity and gentle airflow."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "medium"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Crown rot can occur if water sits in the center of the leaves."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed weakly every 2-4 weeks while actively growing."
   },
   "tips": {
     "type": "stringType",
     "value": "Keep the crown dry and let excess water drain fully after watering."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 170
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "浇水后让多余水分充分流走，并保持叶心干燥。"
   },
   "image": {
     "type": "assetType",

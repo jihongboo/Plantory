@@ -45,7 +45,7 @@ struct PixelCareTile: View {
         systemImage: "sun.max.fill",
         tint: .pixelSun,
         indicator: .level(2),
-        detail: PlantInformation.monstera.light
+        detail: PlantInformation.monstera.lightDetail
     )
     .padding()
     .background(.pixelPaper)

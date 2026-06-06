@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "English Ivy"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "常春藤"
+  },
   "species": {
     "type": "stringType",
     "value": "Hedera helix"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "English Ivy is a trailing vine with lobed leaves. Indoors it prefers cool rooms, bright filtered light, and evenly moist soil."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "hedera-helix.png"
+    "value": "常春藤是一种带裂叶的垂蔓植物。室内养护时，它更喜欢凉爽房间、明亮散射光和均匀微湿的土壤。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "moderate"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Adaptable, but dislikes hot dry rooms and very dry soil."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Bright indirect light; variegated forms need more brightness."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water when the top 2 cm of soil dries."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Moderate humidity helps reduce crispy leaf edges."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "medium"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Spider mites are more likely in hot, dry indoor air."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed monthly during spring and summer."
   },
   "tips": {
     "type": "stringType",
     "value": "Trim vines regularly for a denser, less tangled plant."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 200
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "定期修剪藤蔓，可以让株型更浓密，也不容易打结。"
   },
   "image": {
     "type": "assetType",

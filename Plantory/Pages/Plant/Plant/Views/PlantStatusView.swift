@@ -84,10 +84,7 @@ struct PlantStatusView: View {
     let info = PlantInformation(
         species: "Epipremnum aureum",
         commonName: "Golden Pothos",
-        light: "Bright indirect light",
-        water: "Water when top soil dries",
         temperature: "18-30C",
-        fertilizer: "Monthly in growing season",
         tips: "Trim long vines for fuller growth"
     )
     let plant = Plant(nickname: "Living Room Pothos", information: info)
@@ -100,10 +97,7 @@ struct PlantStatusView: View {
     let info = PlantInformation(
         species: "Monstera deliciosa",
         commonName: "Monstera",
-        light: "Bright indirect light",
-        water: "Every 7-10 days",
         temperature: "18-30C",
-        fertilizer: "Monthly",
         tips: "Ensure good drainage"
     )
     let plant = Plant(nickname: "Corner Monstera", information: info)

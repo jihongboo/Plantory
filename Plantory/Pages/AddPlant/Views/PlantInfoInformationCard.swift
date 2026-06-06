@@ -10,7 +10,7 @@ struct PlantInfoInformationCard: View {
 
     var body: some View {
         CardView(
-            info.commonName,
+            info.displayCommonName,
             subtitle: info.species,
             systemImage: "leaf.fill",
             iconTint: .green
@@ -46,7 +46,7 @@ private extension PlantInfoInformationCard {
                 icon: "sparkles",
                 tint: .pink,
                 usesFixedHeight: false,
-                detail: info.tips
+                detail: info.displayTips
             )
 
             LazyVGrid(columns: columns, spacing: 12) {
@@ -55,28 +55,28 @@ private extension PlantInfoInformationCard {
                     icon: "figure.child",
                     indicator: .level(difficultyMeterLevel(info.careDifficulty)),
                     tint: difficultyColor,
-                    detail: info.careDifficultyDescription
+                    detail: info.careDifficultyDetail
                 )
                 CareTileView(
                     title: "Light",
                     icon: "sun.max",
                     indicator: .level(meterLevel(info.lightLevel)),
                     tint: .yellow,
-                    detail: info.light
+                    detail: info.lightDetail
                 )
                 CareTileView(
                     title: "Water",
                     icon: "drop",
                     indicator: .level(meterLevel(info.waterLevel)),
                     tint: .blue,
-                    detail: info.water
+                    detail: info.waterDetail
                 )
                 CareTileView(
                     title: "Humidity",
                     icon: "humidity",
                     indicator: .level(meterLevel(info.humidityLevel)),
                     tint: .mint,
-                    detail: info.humidityDescription
+                    detail: info.humidityDetail
                 )
                 CareTileView(
                     title: "Temperature",
@@ -90,22 +90,17 @@ private extension PlantInfoInformationCard {
                     icon: "leaf.circle",
                     indicator: .level(meterLevel(info.fertilizerLevel)),
                     tint: .green,
-                    detail: info.fertilizer
+                    detail: info.fertilizerDetail
                 )
                 CareTileView(
                     title: "Disease Risk",
                     icon: "cross.case",
                     indicator: .level(meterLevel(info.diseaseRiskLevel)),
                     tint: diseaseRiskColor(info.diseaseRiskLevel),
-                    detail: info.diseaseRiskDescription
+                    detail: info.diseaseRiskDetail
                 )
             }
         }
-    }
-
-    func displayDetail(_ preferred: String, fallback: String) -> String {
-        let trimmed = preferred.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? fallback : trimmed
     }
 
     func meterLevel(_ value: String) -> Int {

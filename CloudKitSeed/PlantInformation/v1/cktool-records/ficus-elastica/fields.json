@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Rubber Plant"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "橡皮树"
+  },
   "species": {
     "type": "stringType",
     "value": "Ficus elastica"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Rubber Plant has broad glossy leaves and a strong upright shape. It becomes a bold indoor tree when given bright filtered light and consistent watering."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "ficus-elastica.png"
+    "value": "橡皮树有宽大油亮的叶片和挺拔株型。在明亮散射光和稳定浇水下，它能长成很有存在感的室内小树。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "moderate"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Generally sturdy, but leaf drop can happen after sudden changes."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Bright indirect light; some gentle morning sun is helpful."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water when the top 3-5 cm of soil dries."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Average humidity works, but moderate humidity keeps leaves cleaner and softer."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "medium"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Watch for leaf drop from overwatering, drafts, or abrupt relocation."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed monthly during active growth."
   },
   "tips": {
     "type": "stringType",
     "value": "Dust the large leaves often and rotate the pot for even growth."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 70
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "经常清洁大叶片，并定期转盆，让植株受光更均匀。"
   },
   "image": {
     "type": "assetType",

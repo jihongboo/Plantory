@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Heartleaf Philodendron"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "心叶蔓绿绒"
+  },
   "species": {
     "type": "stringType",
     "value": "Philodendron hederaceum"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Heartleaf Philodendron is a trailing plant with soft heart-shaped leaves. It is adaptable, fast-growing, and works well in hanging pots or on shelves."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "philodendron-hederaceum.png"
+    "value": "心叶蔓绿绒是一种垂吊植物，叶片柔软呈心形。它适应性强、生长快，适合吊盆或摆在架子上自然垂落。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "easy"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Forgiving and reliable in common indoor conditions."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Low to bright indirect light; brighter light makes fuller vines."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water when the top third of the soil dries."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Average indoor humidity is acceptable."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "low"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Yellow leaves are usually linked to overwatering or low light."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed monthly during active growth."
   },
   "tips": {
     "type": "stringType",
     "value": "Pinch back long vines to keep the plant full."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 120
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "适当摘心或修剪长藤，可以让植株保持丰满。"
   },
   "image": {
     "type": "assetType",

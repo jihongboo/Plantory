@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Calathea"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "圆叶竹芋"
+  },
   "species": {
     "type": "stringType",
     "value": "Goeppertia orbifolia"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Calathea is grown for broad patterned leaves with pale striping. It prefers soft filtered light, stable warmth, and consistently moist soil."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "goeppertia-orbifolia.png"
+    "value": "圆叶竹芋以宽大带浅色条纹的叶片为观赏重点。它喜欢柔和散射光、稳定温暖环境和持续微湿的土壤。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "hard"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Sensitive to dry air, mineral-heavy water, and inconsistent watering."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Medium indirect light; avoid direct sun that can fade or burn leaves."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Keep soil evenly moist but not soggy."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "high"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "High humidity helps prevent curling leaves and brown edges."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "medium"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Brown edges often come from low humidity, dry soil, or water quality."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed lightly every 6-8 weeks in spring and summer."
   },
   "tips": {
     "type": "stringType",
     "value": "Use filtered or rested water if leaf edges brown despite good humidity."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 110
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "如果湿度合适但叶缘仍发黄发焦，可以改用过滤水或静置后的水。"
   },
   "image": {
     "type": "assetType",

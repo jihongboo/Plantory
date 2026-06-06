@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Ladyfinger Cactus"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "金手指仙人掌"
+  },
   "species": {
     "type": "stringType",
     "value": "Mammillaria elongata"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Ladyfinger Cactus forms clusters of narrow cylindrical stems covered in small spines. It is compact, drought tolerant, and ideal for bright windowsills."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "mammillaria-elongata.png"
+    "value": "金手指仙人掌会形成一簇簇细长圆柱茎，表面布满小刺。它株型小巧、耐旱，适合明亮窗台。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "easy"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Very low care if kept dry and bright."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "high"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Bright direct or very bright indirect light."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "low"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water sparingly only when soil is bone dry."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Prefers dry air and excellent airflow."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "low"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Rot is the main risk when soil stays wet."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed once in spring or early summer with cactus fertilizer."
   },
   "tips": {
     "type": "stringType",
     "value": "Use a gritty mineral-heavy mix and never let the pot sit in water."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 160
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "使用颗粒和矿物质比例高的介质，避免花盆长期积水。"
   },
   "image": {
     "type": "assetType",

@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Anthurium"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "红掌"
+  },
   "species": {
     "type": "stringType",
     "value": "Anthurium andraeanum"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Anthurium has glossy heart-shaped leaves and colorful waxy spathes. It prefers bright filtered light, airy soil, and warm humid conditions."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "anthurium-andraeanum.png"
+    "value": "红掌有油亮心形叶片和彩色蜡质佛焰苞。它喜欢明亮散射光、透气介质和温暖湿润环境。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "moderate"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Needs moisture and humidity, but roots must still breathe."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Bright indirect light for steady blooms."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "medium"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Water when the top 2-3 cm of soil dries."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "high"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Higher humidity supports larger leaves and better flowers."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "medium"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Yellow leaves and root stress can come from dense wet soil."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed monthly at half strength during active growth."
   },
   "tips": {
     "type": "stringType",
     "value": "Use an airy mix with bark or perlite instead of dense potting soil."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 180
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "使用含树皮或珍珠岩的透气介质，不要用过于板结的土。"
   },
   "image": {
     "type": "assetType",

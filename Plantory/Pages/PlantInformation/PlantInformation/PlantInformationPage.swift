@@ -77,7 +77,7 @@ private extension PlantInformationPage {
                     title: "Care Tips",
                     systemImage: "sparkles"
                 ) {
-                    Text(info.tips)
+                    Text(info.displayTips)
                         .font(.pixel(.body))
                         .foregroundStyle(Color.pixelInk.opacity(0.78))
                         .fixedSize(horizontal: false, vertical: true)

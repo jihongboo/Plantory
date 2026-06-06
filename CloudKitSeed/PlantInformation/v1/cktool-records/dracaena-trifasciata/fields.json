@@ -7,6 +7,10 @@
     "type": "stringType",
     "value": "Snake Plant"
   },
+  "commonNameZhHans": {
+    "type": "stringType",
+    "value": "虎尾兰"
+  },
   "species": {
     "type": "stringType",
     "value": "Dracaena trifasciata"
@@ -15,45 +19,25 @@
     "type": "stringType",
     "value": "Snake Plant has upright sword-like leaves and stores water in thick foliage. It is highly drought tolerant and works well in bedrooms, offices, and low-maintenance spaces."
   },
-  "photoURL": {
+  "overviewZhHans": {
     "type": "stringType",
-    "value": ""
-  },
-  "imageFileName": {
-    "type": "stringType",
-    "value": "dracaena-trifasciata.png"
+    "value": "虎尾兰有直立剑形叶片，厚实叶片能储水。它非常耐旱，适合卧室、办公室和低维护空间。"
   },
   "careDifficulty": {
     "type": "stringType",
     "value": "easy"
   },
-  "careDifficultyDescription": {
-    "type": "stringType",
-    "value": "Needs little attention and prefers being slightly neglected."
-  },
   "lightLevel": {
     "type": "stringType",
     "value": "medium"
-  },
-  "light": {
-    "type": "stringType",
-    "value": "Low to bright indirect light; avoid sudden intense direct sun."
   },
   "waterLevel": {
     "type": "stringType",
     "value": "low"
   },
-  "water": {
-    "type": "stringType",
-    "value": "Let soil dry completely before watering, often every 2-4 weeks."
-  },
   "humidityLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "humidityDescription": {
-    "type": "stringType",
-    "value": "Comfortable in dry indoor air."
   },
   "temperature": {
     "type": "stringType",
@@ -63,29 +47,17 @@
     "type": "stringType",
     "value": "low"
   },
-  "diseaseRiskDescription": {
-    "type": "stringType",
-    "value": "Soft leaf bases usually mean overwatering or cold damage."
-  },
   "fertilizerLevel": {
     "type": "stringType",
     "value": "low"
-  },
-  "fertilizer": {
-    "type": "stringType",
-    "value": "Feed once or twice in spring and summer with diluted fertilizer."
   },
   "tips": {
     "type": "stringType",
     "value": "Use a pot with drainage and avoid watering into the center of the rosette."
   },
-  "sortOrder": {
-    "type": "int64Type",
-    "value": 30
-  },
-  "isPublished": {
-    "type": "int64Type",
-    "value": 1
+  "tipsZhHans": {
+    "type": "stringType",
+    "value": "使用带排水孔的花盆，浇水时尽量避免让水积在叶心。"
   },
   "image": {
     "type": "assetType",

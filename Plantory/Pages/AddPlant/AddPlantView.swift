@@ -130,7 +130,7 @@ private extension AddPlantView {
 
     var heroDisplayName: String? {
         let trimmed = trimmedNickname()
-        return trimmed ?? plantInformation?.commonName ?? recognitionResult?.structuredResult.displayName
+        return trimmed ?? plantInformation?.displayCommonName ?? recognitionResult?.structuredResult.displayName
     }
 
     func trimmedNickname() -> String? {
@@ -147,7 +147,7 @@ private extension AddPlantView {
             recognitionResult = mockResult.identification
             plantInformation = mockResult.identification.plantInformation
             if nickname.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                nickname = mockResult.identification.plantInformation?.commonName
+                nickname = mockResult.identification.plantInformation?.displayCommonName
                 ?? mockResult.identification.structuredResult.displayName
                 ?? ""
             }
@@ -162,7 +162,7 @@ private extension AddPlantView {
             recognitionResult = result.identification
             plantInformation = result.identification.plantInformation
             if nickname.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                nickname = result.identification.plantInformation?.commonName
+                nickname = result.identification.plantInformation?.displayCommonName
                 ?? result.identification.structuredResult.displayName
                 ?? ""
             }
@@ -220,26 +220,20 @@ private extension AddPlantView {
     func previewMockResult() -> DoubaoPlantRecognitionService.CombinedAnalysisResult {
         let info = PlantInformation.monstera
         let recognition = DoubaoPlantRecognitionService.StructuredPlantRecognition(
-            commonName: info.commonName,
+            commonName: info.displayCommonName,
             species: info.species,
             confidence: 96,
             isPlant: true,
             overview: info.displayOverview,
             careDifficulty: info.careDifficulty,
-            careDifficultyDescription: info.careDifficultyDescription,
             lightLevel: info.lightLevel,
-            summary: "\(info.commonName) recognized from preview mock data.",
-            light: info.light,
+            summary: "\(info.displayCommonName) recognized from preview mock data.",
             waterLevel: info.waterLevel,
-            water: info.water,
             humidityLevel: info.humidityLevel,
-            humidityDescription: info.humidityDescription,
             temperature: info.temperature,
             diseaseRiskLevel: info.diseaseRiskLevel,
-            diseaseRiskDescription: info.diseaseRiskDescription,
             fertilizerLevel: info.fertilizerLevel,
-            fertilizer: info.fertilizer,
-            tips: info.tips
+            tips: info.displayTips
         )
 
         let report = PlantDiagnosisReport(

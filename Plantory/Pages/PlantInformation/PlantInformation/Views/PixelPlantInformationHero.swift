@@ -11,7 +11,7 @@ struct PixelPlantInformationHero: View {
                         .frame(width: 88, height: 88)
 
                     VStack(alignment: .leading, spacing: 0) {
-                        Text(info.commonName)
+                        Text(info.displayCommonName)
                             .font(.pixel(.largeTitle))
                             .foregroundStyle(.white)
                             .shadow(color: .pixelInk, radius: 0, x: 2, y: 2)
