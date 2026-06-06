@@ -53,6 +53,12 @@ struct PlantInformationLibraryPage: View {
     }
 }
 
+#Preview("Remote") {
+    NavigationStack {
+        PlantInformationLibraryPage([])
+    }
+}
+
 private extension PlantInformationLibraryPage {
 
     var trimmedSearchText: String {

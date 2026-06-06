@@ -13,10 +13,6 @@ struct PlantCardView: View {
                         .overlay {
                             plantPhoto
                         }
-
-                    Image(systemName: plant.healthStatus.systemImage)
-                        .font(.title.weight(.black))
-                        .foregroundStyle(statusColor(for: plant.healthStatus))
                 }
 
                 VStack(alignment: .leading, spacing: 0) {
@@ -25,7 +21,7 @@ struct PlantCardView: View {
                         .foregroundStyle(Color(.pixelInk))
                         .lineLimit(1)
                     
-                    Text(plant.informationCommonName ?? "Houseplant")
+                    Text(plant.hasPlantInformation ? "Saved plant guide" : "Houseplant")
                         .font(.pixel(.callout))
                         .foregroundStyle(Color(.pixelInk).opacity(0.64))
                         .lineLimit(1)
@@ -43,12 +39,6 @@ struct PlantCardView: View {
             let p = Plant(nickname: "My Monstera", imageData: PlatformImageData.monstera, information: .init(species: "", commonName: "Plant", temperature: "", tips: ""))
             return p
         }())
-
-        PlantCardView(plant: {
-            let p = Plant()
-            p.activeIssues = [PlantIssue(type: .underwatered, severity: .moderate)]
-            return p
-        }())
     }
     .padding()
 }
@@ -63,28 +53,11 @@ private extension PlantCardView {
                     .resizable()
                     .scaledToFit()
             } else {
-                Image(fallbackSpriteName)
+                Image(.Plants.succulentHealthy)
                     .pixelate()
                     .resizable()
                     .scaledToFit()
             }
-        }
-    }
-
-    var fallbackSpriteName: String {
-        switch plant.healthStatus {
-        case .healthy:
-            "PixelMonsteraHealthy"
-        case .warning, .critical:
-            "PixelSucculentWarning"
-        }
-    }
-
-    func statusColor(for status: HealthStatus) -> Color {
-        switch status {
-        case .healthy: .green
-        case .warning: .orange
-        case .critical: .red
         }
     }
 }

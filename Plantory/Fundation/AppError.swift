@@ -15,7 +15,7 @@ enum AppError: LocalizedError {
         switch self {
         case .empty:
             "The content is empty."
-        case .custom(let string):
+        case .custom:
             "Failed"
         }
     }
@@ -23,7 +23,7 @@ enum AppError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .empty:
-            "The content is empty."
+            "Try to add one!"
         case .custom(let string):
             string
         }
@@ -33,7 +33,7 @@ enum AppError: LocalizedError {
         switch self {
         case .empty:
             "tray.fill"
-        case .custom(let string):
+        case .custom:
             "exclamationmark.circle.fill"
         }
     }

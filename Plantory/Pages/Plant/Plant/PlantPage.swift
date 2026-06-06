@@ -26,11 +26,11 @@ struct PlantPage: View {
             ScrollView {
                 if let plant {
                     LazyVStack(spacing: 16) {
-                        PixelPlantHeroCard(plant: plant)
+                        PlantHeroCard(plant: plant)
 
-                        PlantHeaderView(plant: plant)
+                        PlantSummaryView(plant: plant)
                         
-                        PixelReminderRow(plant: plant)
+                        PlantReminderRow(plant: plant)
                         
                         PlantRecordsView(records: records)
                     }

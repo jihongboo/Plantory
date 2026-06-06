@@ -37,7 +37,7 @@ struct PixelProgressMeter: View {
         self.accessibilityLabel = accessibilityLabel
     }
     
-    init(indicator: PixelCareIndicator) {
+    init(indicator: PixelProgressIndicator) {
         switch indicator {
         case let .level(level):
             self.init(value: level,

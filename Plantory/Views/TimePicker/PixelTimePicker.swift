@@ -50,7 +50,7 @@ struct PixelTimePicker: View {
             }
             .buttonStyle(.pixelRectangle(fill: .pixelLeafDark, padding: 4))
             .popover(isPresented: $isPickerPresented, arrowEdge: .trailing) {
-                PixelReminderTimePickerPanel(reminderDate: $reminderDate)
+                ReminderTimePickerPanel(reminderDate: $reminderDate)
                     .presentationCompactAdaptation(.popover)
             }
         }

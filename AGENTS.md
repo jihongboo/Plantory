@@ -84,8 +84,9 @@ Plantory/Pages/
 
 ### Plant（核心模型）
 ```swift
-id, name, species, photoData, createdAt, note, healthStatus
-// healthStatus: healthy | warning | critical
+id, nickname, plantInformationID, photoData, createdAt, note, activeIssues
+// plantInformationID 用于按需加载 PlantInformation 原始信息；不要在 Plant 中重复保存 species/commonName/care levels 等快照字段
+// healthStatus 从 activeIssues 派生：healthy | warning | critical
 ```
 
 ### Diagnosis（AI诊断记录）

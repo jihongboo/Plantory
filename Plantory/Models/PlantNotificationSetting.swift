@@ -124,50 +124,15 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
     func defaultIntervalDays(for plant: Plant) -> Int {
         switch self {
         case .watering:
-            switch plant.informationWaterLevel {
-            case "low":
-                14
-            case "high":
-                3
-            default:
-                7
-            }
+            7
         case .fertilizing:
-            switch plant.informationFertilizerLevel {
-            case "low":
-                60
-            case "high":
-                14
-            default:
-                30
-            }
+            30
         case .pestCheck:
-            switch plant.informationDiseaseRiskLevel {
-            case "low":
-                30
-            case "high":
-                7
-            default:
-                14
-            }
+            14
         case .pruning:
-            switch plant.informationCareDifficulty {
-            case "easy":
-                45
-            case "hard":
-                21
-            default:
-                30
-            }
+            30
         case .repotting:
-            switch plant.informationCareDifficulty {
-            case "easy":
-                240
-            case "hard":
-                120
-            default:
-                180
-            }
+            180
         }
     }
 
@@ -189,13 +154,13 @@ enum PlantNotificationKind: String, Codable, CaseIterable, Identifiable {
     func recommendationText(for plant: Plant) -> String {
         switch self {
         case .watering:
-            return PlantInformation.waterDetail(for: plant.informationWaterLevel)
+            return PlantInformation.waterDetail(for: "medium")
         case .fertilizing:
-            return PlantInformation.fertilizerDetail(for: plant.informationFertilizerLevel)
+            return PlantInformation.fertilizerDetail(for: "medium")
         case .pestCheck:
-            return PlantInformation.diseaseRiskDetail(for: plant.informationDiseaseRiskLevel)
+            return PlantInformation.diseaseRiskDetail(for: "medium")
         case .pruning:
-            return PlantInformation.careDifficultyDetail(for: plant.informationCareDifficulty)
+            return PlantInformation.careDifficultyDetail(for: "moderate")
         case .repotting:
             return String(localized: "Use as a long-cycle reminder and adjust when roots outgrow the pot.")
         }

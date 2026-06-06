@@ -7,14 +7,6 @@ struct PlantDiagnosisReport: Identifiable {
     let title: String
     let summary: String
     let confidence: Int
-    let urgency: DiagnosisUrgency
-    let healthStatus: HealthStatus
-    let primaryIssue: PlantIssue?
-    let observedSignals: [DiagnosisSignal]
-    let possibleCauses: [String]
-    let carePlan: [DiagnosisAction]
-    let watchItems: [String]
-    let preventionTip: String
 }
 
 struct DiagnosisSignal: Identifiable {
@@ -29,34 +21,6 @@ struct DiagnosisAction: Identifiable {
     let title: String
     let detail: String
     let timing: String
-}
-
-enum DiagnosisUrgency: String {
-    case low
-    case medium
-    case high
-
-    var title: LocalizedStringKey {
-        switch self {
-        case .low:
-            "Low urgency"
-        case .medium:
-            "Needs care today"
-        case .high:
-            "Act quickly"
-        }
-    }
-
-    var subtitle: LocalizedStringKey {
-        switch self {
-        case .low:
-            "Monitor and keep routine stable."
-        case .medium:
-            "Adjust care within the next 24 hours."
-        case .high:
-            "Treat this as the next care priority."
-        }
-    }
 }
 
 enum DoubaoPlantDiagnosisService {
@@ -205,16 +169,6 @@ private extension DoubaoPlantDiagnosisService {
         let title: String
         let summary: String
         let confidence: Int
-        let urgency: String
-        let healthStatus: String
-        let primaryIssueType: String?
-        let primaryIssueSeverity: String?
-        let primaryIssueNote: String?
-        let observedSignals: [StructuredSignal]
-        let possibleCauses: [String]
-        let carePlan: [StructuredAction]
-        let watchItems: [String]
-        let preventionTip: String
 
         var report: PlantDiagnosisReport {
             PlantDiagnosisReport(
@@ -222,37 +176,7 @@ private extension DoubaoPlantDiagnosisService {
                 title: title,
                 summary: summary,
                 confidence: min(max(confidence, 0), 100),
-                urgency: DiagnosisUrgency(rawValue: urgency) ?? .medium,
-                healthStatus: healthStatusValue,
-                primaryIssue: primaryIssueValue,
-                observedSignals: observedSignals.map(\.signal),
-                possibleCauses: possibleCauses,
-                carePlan: carePlan.map(\.action),
-                watchItems: watchItems,
-                preventionTip: preventionTip
             )
-        }
-
-        var healthStatusValue: HealthStatus {
-            switch healthStatus {
-            case "healthy":
-                .healthy
-            case "critical":
-                .critical
-            default:
-                .warning
-            }
-        }
-
-        var primaryIssueValue: PlantIssue? {
-            guard let primaryIssueType,
-                  let type = IssueType(rawValue: primaryIssueType),
-                  let primaryIssueSeverity,
-                  let severity = IssueSeverity(rawValue: primaryIssueSeverity) else {
-                return nil
-            }
-
-            return PlantIssue(type: type, severity: severity, note: primaryIssueNote ?? "")
         }
     }
 
@@ -340,14 +264,12 @@ private extension DoubaoPlantDiagnosisService {
 
     static func diagnosisPrompt(for plant: Plant) -> String {
         let language = AppLanguage.current
-        let species = plant.informationSpecies ?? ""
-        let commonName = plant.informationCommonName ?? plant.displayName
         let note = plant.note.trimmingCharacters(in: .whitespacesAndNewlines)
 
         return diagnosisPrompt(
             language: language,
-            commonName: commonName,
-            species: species,
+            commonName: plant.displayName,
+            species: plant.plantInformationID ?? "",
             note: note
         )
     }

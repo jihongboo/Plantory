@@ -29,20 +29,24 @@ struct HomePage: View {
                         LazyVStack {
                             HomeWeatherCard()
 
-                            LazyVGrid(columns: columns, spacing: 14) {
-                                ForEach(plants) { plant in
-                                    NavigationLink(value: HomeDestination.plant(plant.id)) {
-                                        PlantCardView(plant: plant)
-                                            .matchedTransitionSource(id: plant.id, in: heroNamespace)
-                                    }
-                                    .contextMenu {
-                                        Button(role: .destructive) {
-                                            plantPendingDeletion = plant
-                                        } label: {
-                                            Label("Delete Plant", systemImage: "trash")
+                            if plants.isEmpty {
+                                PixelContentUnavailableView(error: AppError.empty)
+                            } else {
+                                LazyVGrid(columns: columns, spacing: 14) {
+                                    ForEach(plants) { plant in
+                                        NavigationLink(value: HomeDestination.plant(plant.id)) {
+                                            PlantCardView(plant: plant)
+                                                .matchedTransitionSource(id: plant.id, in: heroNamespace)
                                         }
+                                        .contextMenu {
+                                            Button(role: .destructive) {
+                                                plantPendingDeletion = plant
+                                            } label: {
+                                                Label("Delete Plant", systemImage: "trash")
+                                            }
+                                        }
+                                        .buttonStyle(.plain)
                                     }
-                                    .buttonStyle(.plain)
                                 }
                             }
                         }

@@ -13,7 +13,7 @@ struct PlantNotificationsPage: View {
         PixelPage {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    PixelNotificationsOverviewCard(
+                    NotificationsOverviewCard(
                         enabledCount: enabledCount,
                         settingsCount: settings.count
                     )

@@ -4,7 +4,7 @@ struct PixelCareTile: View {
     let title: LocalizedStringKey
     let systemImage: String
     let tint: Color
-    let indicator: PixelCareIndicator
+    let indicator: PixelProgressIndicator
     let detail: String
 
     var body: some View {

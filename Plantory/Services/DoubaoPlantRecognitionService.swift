@@ -865,37 +865,7 @@ private extension DoubaoPlantRecognitionService {
                 title: title,
                 summary: summary,
                 confidence: min(max(confidence, 0), 100),
-                urgency: DiagnosisUrgency(rawValue: urgency) ?? .medium,
-                healthStatus: healthStatusValue,
-                primaryIssue: primaryIssueValue,
-                observedSignals: observedSignals.map(\.signal),
-                possibleCauses: possibleCauses,
-                carePlan: carePlan.map(\.action),
-                watchItems: watchItems,
-                preventionTip: preventionTip
             )
-        }
-
-        var healthStatusValue: HealthStatus {
-            switch healthStatus {
-            case "healthy":
-                .healthy
-            case "critical":
-                .critical
-            default:
-                .warning
-            }
-        }
-
-        var primaryIssueValue: PlantIssue? {
-            guard let primaryIssueType,
-                  let type = IssueType(rawValue: primaryIssueType),
-                  let primaryIssueSeverity,
-                  let severity = IssueSeverity(rawValue: primaryIssueSeverity) else {
-                return nil
-            }
-
-            return PlantIssue(type: type, severity: severity, note: primaryIssueNote ?? "")
         }
     }
 

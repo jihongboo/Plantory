@@ -17,7 +17,7 @@ struct PlantRecordsView: View {
             } else {
                 VStack(spacing: 0) {
                     ForEach(records) { record in
-                        PlantRecordCard(record: record)
+                        PlantRecordView(record: record)
                         
                         if record != records.last {
                             PixelDashedDivider()

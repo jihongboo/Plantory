@@ -3,28 +3,27 @@ import SwiftUI
 struct PlantInformationPage: View {
     private let id: String?
     private let service = PlantInformationCloudService()
-
+    
     @State private var plantInformation: PlantInformation?
-    @State private var isAddSheetPresented = false
-
+    
     init(plantInformation: PlantInformation) {
         id = nil
         _plantInformation = .init(initialValue: plantInformation)
     }
-
+    
     init(id: String) {
         self.id = id
         _plantInformation = .init(initialValue: nil)
     }
-
+    
     var body: some View {
         PixelPage {
             Group {
                 if let plantInformation {
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 16) {
-                            PixelPlantInformationHeader(info: plantInformation)
-
+                            PlantInformationHeader(info: plantInformation)
+                            
                             PixelRoundedRectangleCard(
                                 title: "Overview",
                                 systemImage: "text.book.closed.fill"
@@ -34,7 +33,7 @@ struct PlantInformationPage: View {
                                     .foregroundStyle(Color.pixelInk.opacity(0.78))
                                     .fixedSize(horizontal: false, vertical: true)
                             }
-
+                            
                             PixelRoundedRectangleCard(
                                 title: "Care Guide",
                                 systemImage: "leaf.fill"
@@ -56,17 +55,16 @@ struct PlantInformationPage: View {
             .pixelNavigationTitle(title: "Plant Info")
         }
         .pixelBottomActionBar {
-            Button("Add to my garden", systemImage: "plus") {
-                isAddSheetPresented = true
+            NavigationLink {
+                if let plantInformation {
+                    AddPlantPage(plantInformation: plantInformation)
+                }
+            } label: {
+                Label("Add to my garden", systemImage: "plus")
             }
             .buttonStyle(.pixelRoundedRectangle(width: .expanded))
             .disabled(plantInformation == nil)
         }
-        .sheet(isPresented: $isAddSheetPresented, content: {
-            if let plantInformation {
-                AddPlantPage(plantInformation: plantInformation)
-            }
-        })
     }
 }
 

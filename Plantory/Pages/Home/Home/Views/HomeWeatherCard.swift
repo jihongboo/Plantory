@@ -70,9 +70,7 @@ struct HomeWeatherCard: View {
         }
         .task(loadWeather)
     }
-    
-    
-    
+        
 }
 
 private struct HomeWeatherMetricTile: View {
@@ -96,7 +94,7 @@ private struct HomeWeatherMetricTile: View {
     var body: some View {
         VStack {
             Label(title, systemImage: systemImage)
-                .font(.pixel(.footnote))
+                .font(.pixel(.callout))
                 .foregroundStyle(level.color)
                 .labelIconToTitleSpacing(4)
             
