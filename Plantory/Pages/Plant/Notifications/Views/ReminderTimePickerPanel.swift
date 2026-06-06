@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PixelReminderTimePickerPanel: View {
+struct ReminderTimePickerPanel: View {
     @Binding var reminderDate: Date
     @Environment(\.dismiss) private var dismiss
     
@@ -62,7 +62,7 @@ struct PixelReminderTimePickerPanel: View {
 #Preview {
     @Previewable @State var reminderDate = Date.now
     
-    PixelReminderTimePickerPanel(reminderDate: $reminderDate)
+    ReminderTimePickerPanel(reminderDate: $reminderDate)
 }
 
 private struct PixelTimeStepperLabel: View {
@@ -91,7 +91,7 @@ private struct PixelTimeStepperLabel: View {
     }
 }
 
-private extension PixelReminderTimePickerPanel {
+private extension ReminderTimePickerPanel {
     var calendar: Calendar {
         .current
     }

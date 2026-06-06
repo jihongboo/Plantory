@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PixelReminderRow: View {
+struct PlantReminderRow: View {
     let plant: Plant
     
     var body: some View {
@@ -50,11 +50,11 @@ struct PixelReminderRow: View {
 }
 
 #Preview {
-    PixelReminderRow(plant: .monstera)
+    PlantReminderRow(plant: .monstera)
         .padding()
 }
 
-private extension PixelReminderRow {
+private extension PlantReminderRow {
     var summary: String {
         let enabledCount = plant.notificationSettings?.count(where: \.isEnabled) ?? 0
         let totalCount = plant.notificationSettings?.count ?? PlantNotificationKind.allCases.count

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PlantRecordCard: View {
+struct PlantRecordView: View {
     let record: PlantRecord
 
     var body: some View {
@@ -56,7 +56,7 @@ struct PlantRecordCard: View {
 
 #Preview {
     PixelRoundedRectangleCard {
-        PlantRecordCard(
+        PlantRecordView(
             record: PlantRecord(
                 actionType: .watering,
                 createdAt: .now.addingTimeInterval(-86_400)

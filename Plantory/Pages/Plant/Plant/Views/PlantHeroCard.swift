@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PixelPlantHeroCard: View {
+struct PlantHeroCard: View {
     let plant: Plant
 
     var body: some View {
@@ -19,9 +19,6 @@ struct PixelPlantHeroCard: View {
                             .frame(height: 300)
                             .frame(maxWidth: .infinity)
                     }
-
-                    PixelCareMoodIcon(status: plant.healthStatus)
-                        .padding(10)
                 }
 
                 HStack(spacing: 10) {
@@ -36,25 +33,10 @@ struct PixelPlantHeroCard: View {
                         value: "\(plant.records?.count ?? 0)",
                         systemImage: "list.bullet.clipboard"
                     )
-
-                    PixelMiniStat(
-                        title: "Issues",
-                        value: "\(plant.activeIssues.count)",
-                        systemImage: plant.healthStatus.systemImage
-                    )
                 }
             }
             .padding(4)
         }
-    }
-
-}
-
-struct PixelCareMoodIcon: View {
-    let status: HealthStatus
-
-    var body: some View {
-        PixelTag(systemName: status.systemImage, fill: statusColor)
     }
 
 }
@@ -92,11 +74,11 @@ private struct PixelMiniStat: View {
 }
 
 #Preview {
-    PixelPlantHeroCard(plant: .monstera)
+    PlantHeroCard(plant: .monstera)
         .padding()
 }
 
-private extension PixelPlantHeroCard {
+private extension PlantHeroCard {
     @ViewBuilder
     var plantPhoto: some View {
         if let photoData = plant.photoData,
@@ -105,32 +87,10 @@ private extension PixelPlantHeroCard {
                 .resizable()
                 .scaledToFit()
         } else {
-            Image(fallbackSpriteName)
+            Image(.Plants.monsteraHealthy)
                 .pixelate()
                 .resizable()
                 .scaledToFit()
-        }
-    }
-
-    var fallbackSpriteName: String {
-        switch plant.healthStatus {
-        case .healthy:
-            "PixelMonsteraHealthy"
-        case .warning, .critical:
-            "PixelSucculentWarning"
-        }
-    }
-}
-
-private extension PixelCareMoodIcon {
-    var statusColor: Color {
-        switch status {
-        case .healthy:
-            Color(.pixelLeaf)
-        case .warning:
-            Color(.pixelSun)
-        case .critical:
-            Color(.pixelDanger)
         }
     }
 }

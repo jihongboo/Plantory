@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PlantHeaderView: View {
+struct PlantSummaryView: View {
     let plant: Plant
 
     var body: some View {
@@ -12,27 +12,13 @@ struct PlantHeaderView: View {
                             .font(.pixel(.title))
                             .foregroundStyle(.pixelInk)
                             .lineLimit(2)
-
-                        if let commonName = plant.informationCommonName {
-                            Text(commonName)
-                                .font(.pixel(.headline))
-                                .foregroundStyle(.pixelLeaf)
-                        }
-
-                        if let species = plant.informationSpecies {
-                            Text(species)
-                                .font(.pixel(.subheadline))
-                                .foregroundStyle(Color.pixelInk.opacity(0.58))
-                                .italic()
-                                .lineLimit(2)
-                        }
                     }
 
                     Spacer(minLength: 8)
 
-                    if let catalogID = plant.informationCatalogID {
+                    if let plantInformationID = plant.plantInformationID {
                         NavigationLink {
-                            PlantInformationPage(id: catalogID)
+                            PlantInformationPage(id: plantInformationID)
                         } label: {
                             Image(systemName: "book.pages.fill")
                                 .font(.headline.weight(.black))
@@ -80,6 +66,6 @@ struct PlantHeaderView: View {
 }
 
 #Preview {
-    PlantHeaderView(plant: .monstera)
+    PlantSummaryView(plant: .monstera)
         .padding()
 }

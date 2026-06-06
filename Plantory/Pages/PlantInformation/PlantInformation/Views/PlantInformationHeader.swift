@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PixelPlantInformationHeader: View {
+struct PlantInformationHeader: View {
     let info: PlantInformation
 
     var body: some View {
@@ -44,12 +44,12 @@ struct PixelPlantInformationHeader: View {
 }
 
 #Preview {
-    PixelPlantInformationHeader(info: .monstera)
+    PlantInformationHeader(info: .monstera)
         .padding()
         .background(.pixelPaper)
 }
 
-private extension PixelPlantInformationHeader {
+private extension PlantInformationHeader {
     @ViewBuilder
     var plantImage: some View {
         PixelRectangleCard {

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct PixelNotificationsOverviewCard: View {
+struct NotificationsOverviewCard: View {
     let enabledCount: Int
     let settingsCount: Int
     
@@ -48,7 +48,7 @@ struct PixelNotificationsOverviewCard: View {
 }
 
 #Preview {
-    PixelNotificationsOverviewCard(enabledCount: 3, settingsCount: 5)
+    NotificationsOverviewCard(enabledCount: 3, settingsCount: 5)
         .padding()
         .background(.pixelPaper)
 }
