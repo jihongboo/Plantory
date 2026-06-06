@@ -4,6 +4,8 @@ import SwiftUI
 
 @Model
 final class Plant {
+    #Index<Plant>([\.id])
+
     var id: UUID = UUID()
     var nickname: String?         // 可选别名，例如"我的小绿"
     // 存于 SwiftData 外部文件，CloudKit 同步时自动转为 CKAsset

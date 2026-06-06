@@ -49,23 +49,6 @@ struct EditPlantDetailsSheet: View {
                                 )
                             }
                         }
-
-                        if plant.informationCommonName != nil {
-                            PixelRoundedRectangleCard(
-                                title: "Plant",
-                                systemImage: "leaf.fill"
-                            ) {
-                                VStack(alignment: .leading, spacing: 16) {
-                                    if let commonName = plant.informationCommonName {
-                                        PixelInfoRow(title: "Recognized As", value: commonName)
-                                    }
-
-                                    if let species = plant.informationSpecies {
-                                        PixelInfoRow(title: "Species", value: species)
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
                 .pixelNavigationTitle(title: "Edit Details")
@@ -90,27 +73,6 @@ struct EditPlantDetailsSheet: View {
         }
     }
 
-}
-
-private struct PixelInfoRow: View {
-    let title: LocalizedStringKey
-    let value: String
-
-    var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 12) {
-            Text(title)
-                .font(.pixel(.headline))
-                .foregroundStyle(Color.pixelInk.opacity(0.8))
-
-            Spacer(minLength: 12)
-
-            Text(value)
-                .font(.pixel(.title3))
-                .foregroundStyle(.pixelInk)
-                .multilineTextAlignment(.trailing)
-        }
-        .fixedSize(horizontal: false, vertical: true)
-    }
 }
 
 #Preview {
