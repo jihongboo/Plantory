@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct PixelPlantInformationHero: View {
+struct PixelPlantInformationHeader: View {
     let info: PlantInformation
 
     var body: some View {
-        PixelRoundedRectangleCard(fill: .buttonBackground) {
+        PixelRoundedRectangleCard(fill: .buttonBackground, padding: 24) {
             VStack(alignment: .leading, spacing: 14) {
                 HStack(spacing: 16) {
                     plantImage
@@ -44,25 +44,27 @@ struct PixelPlantInformationHero: View {
 }
 
 #Preview {
-    PixelPlantInformationHero(info: .monstera)
+    PixelPlantInformationHeader(info: .monstera)
         .padding()
         .background(.pixelPaper)
 }
 
-private extension PixelPlantInformationHero {
+private extension PixelPlantInformationHeader {
     @ViewBuilder
     var plantImage: some View {
-        if let imageData = info.imageData,
-           let image = Image(data: imageData) {
-            image
-                .pixelate()
-                .resizable()
-                .scaledToFit()
-        } else {
-            Image("PixelMonsteraHealthy")
-                .pixelate()
-                .resizable()
-                .scaledToFit()
+        PixelRectangleCard {
+            if let imageData = info.imageData,
+               let image = Image(data: imageData) {
+                image
+                    .pixelate()
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                Image("PixelMonsteraHealthy")
+                    .pixelate()
+                    .resizable()
+                    .scaledToFit()
+            }
         }
     }
 }

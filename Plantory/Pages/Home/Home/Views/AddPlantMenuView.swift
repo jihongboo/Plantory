@@ -1,19 +1,21 @@
 import SwiftUI
 
 struct AddPlantMenuView: View {
-    @State private var imageData: Data?
+    @State private var isPresentingLibrary = false
 
     var body: some View {
-        PlantImageImportMenu { preparedImageData in
-            imageData = preparedImageData
-        } label: { isPreparingImage in
+        Button {
+            isPresentingLibrary = true
+        } label: {
             Label("Add Plant", systemImage: "plus")
         }
         .buttonStyle(.pixelRoundedRectangle(width: .expanded))
-        .accessibilityLabel("Identify")
-        .accessibilityHint("Recognize a plant from a photo and add it to your collection.")
-        .sheet(item: $imageData) { imageData in
-            AddPlantView(imageData: imageData)
+        .accessibilityLabel("Add Plant")
+        .accessibilityHint("Open the plant encyclopedia and choose a plant to add.")
+        .sheet(isPresented: $isPresentingLibrary) {
+            NavigationStack {
+                PlantInformationLibraryPage()
+            }
         }
     }
 }

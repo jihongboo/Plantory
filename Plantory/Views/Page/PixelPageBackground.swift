@@ -33,14 +33,17 @@ struct PixelPageBackground: View {
     var style: Style = .primary
     
     var body: some View {
-        Image(.pixelHomeRoom)
-            .pixelate()
-            .resizable()
-            .scaledToFill()
-            .overlay {
-                style.gradient
-            }
-            .ignoresSafeArea()
+        GeometryReader { geometryProxy in
+            Image(.pixelHomeRoom)
+                .pixelate()
+                .resizable()
+                .scaledToFill()
+                .frame(width: geometryProxy.size.width, height: geometryProxy.size.height)
+        }
+        .overlay {
+            style.gradient
+        }
+        .ignoresSafeArea()
     }
 }
 

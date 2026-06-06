@@ -13,8 +13,6 @@ struct PlantNotificationsPage: View {
         PixelPage {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    PixelNavigationBar(title: "Notifications")
-                    
                     PixelNotificationsOverviewCard(
                         enabledCount: enabledCount,
                         settingsCount: settings.count
@@ -46,6 +44,7 @@ struct PlantNotificationsPage: View {
                     }
                 }
             }
+            .pixelNavigationTitle(title: "Notifications")
         }
         .pixelBottomActionBar {
             Button("Save", systemImage: "checkmark") {

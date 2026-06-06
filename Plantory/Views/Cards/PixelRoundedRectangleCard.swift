@@ -11,17 +11,20 @@ struct PixelRoundedRectangleCard<Content: View>: View {
     let fill: Color
     let title: LocalizedStringKey?
     let systemImage: String?
+    let padding: CGFloat?
     @ViewBuilder var content: Content
     
     init(
         fill: Color = .pixelPaper,
         title: LocalizedStringKey? = nil,
         systemImage: String? = nil,
+        padding: CGFloat? = nil,
         @ViewBuilder content: () -> Content
     ) {
         self.fill = fill
         self.title = title
         self.systemImage = systemImage
+        self.padding = padding
         self.content = content()
     }
     
@@ -38,7 +41,7 @@ struct PixelRoundedRectangleCard<Content: View>: View {
             
             content
         }
-        .padding()
+        .padding(.all, padding)
         .background {
             PixelRoundedRectangleBackground(fill: fill)
         }

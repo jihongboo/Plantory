@@ -7,29 +7,91 @@
 
 import SwiftUI
 
-struct PixelContentUnavailableView<Icon: View, Actions: View>: View {
+struct PixelContentUnavailableView<Actions: View>: View {
     let title: LocalizedStringKey
-    let description: LocalizedStringKey?
-    @ViewBuilder let icon: Icon
-    @ViewBuilder let actions: Actions
+    let systemImage: String?
+    let description: Text?
+    let style: Style?
+    let actions: Actions
+    
+    enum Style {
+        case plain
+        case card
+    }
 
     init(
         _ title: LocalizedStringKey,
+        systemImage: String? = nil,
         description: LocalizedStringKey? = nil,
-        @ViewBuilder icon: () -> Icon,
+        style: Style? = nil,
         @ViewBuilder actions: () -> Actions
     ) {
         self.title = title
-        self.description = description
-        self.icon = icon()
+        self.systemImage = systemImage
+        if let description {
+            self.description = Text(description)
+        } else {
+            self.description = nil
+        }
+        self.style = style
         self.actions = actions()
+    }
+    
+    @_disfavoredOverload
+    init<S: StringProtocol>(
+        _ title: LocalizedStringKey,
+        systemImage: String? = nil,
+        description: S? = nil,
+        style: Style? = nil,
+        @ViewBuilder actions: () -> Actions
+    ) {
+        self.title = title
+        self.systemImage = systemImage
+        if let description {
+            self.description = Text(description)
+        } else {
+            self.description = nil
+        }
+        self.style = style
+        self.actions = actions()
+    }
+    
+    init(
+        error: Error,
+        style: Style? = nil,
+        @ViewBuilder actions: () -> Actions
+    ) {
+        self.init(
+            error.title,
+            systemImage: error.systemImage,
+            description: error.localizedDescription,
+            style: style
+        ) {
+            actions()
+        }
     }
 
     var body: some View {
+        switch style {
+        case .plain:
+            content
+        case .card, .none:
+            PixelRoundedRectangleCard {
+                content
+            }
+        }
+    }
+    
+    private var content: some View {
         VStack(spacing: 16) {
-            icon
+            if let systemImage {
+                Image(systemName: systemImage)
+                    .font(.system(size: 60, weight: .black))
+                    .foregroundStyle(.pixelInk)
+                    .accessibilityHidden(true)
+            }
 
-            VStack(spacing: 8) {
+            VStack(spacing: 0) {
                 Text(title)
                     .font(.pixel(.title2))
                     .foregroundStyle(.pixelInk)
@@ -37,7 +99,7 @@ struct PixelContentUnavailableView<Icon: View, Actions: View>: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 if let description {
-                    Text(description)
+                    description
                         .font(.pixel(.subheadline))
                         .foregroundStyle(Color.pixelInk.opacity(0.74))
                         .multilineTextAlignment(.center)
@@ -50,108 +112,71 @@ struct PixelContentUnavailableView<Icon: View, Actions: View>: View {
         }
         .frame(maxWidth: 360)
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .padding(.vertical, 32)
         .accessibilityElement(children: .combine)
-    }
-}
-
-extension PixelContentUnavailableView where Icon == PixelContentUnavailableSymbol {
-    init(
-        _ title: LocalizedStringKey,
-        systemImage: String,
-        description: LocalizedStringKey? = nil,
-        @ViewBuilder actions: () -> Actions
-    ) {
-        self.init(
-            title,
-            description: description
-        ) {
-            PixelContentUnavailableSymbol(systemImage: systemImage)
-        } actions: {
-            actions()
-        }
     }
 }
 
 extension PixelContentUnavailableView where Actions == EmptyView {
     init(
         _ title: LocalizedStringKey,
+        systemImage: String? = nil,
         description: LocalizedStringKey? = nil,
-        @ViewBuilder icon: () -> Icon
-    ) {
-        self.init(
-            title,
-            description: description,
-            icon: icon
-        ) {
-            EmptyView()
-        }
-    }
-}
-
-extension PixelContentUnavailableView where Icon == PixelContentUnavailableSymbol, Actions == EmptyView {
-    init(
-        _ title: LocalizedStringKey,
-        systemImage: String,
-        description: LocalizedStringKey? = nil
+        style: Style? = nil,
     ) {
         self.init(
             title,
             systemImage: systemImage,
-            description: description
+            description: description,
+            style: style
         ) {
             EmptyView()
         }
     }
-}
-
-struct PixelContentUnavailableSymbol: View {
-    let systemImage: String
-
-    var body: some View {
-        Image(systemName: systemImage)
-            .font(.system(size: 34, weight: .black))
-            .foregroundStyle(.pixelLeafDark)
-            .frame(width: 78, height: 78)
-            .background {
-                PixelRoundedRectangleBackground(
-                    fill: .pixelCream,
-                    strokeColor: Color.pixelInk.opacity(0.82),
-                    cornerRadius: 18,
-                    pixelSize: 4,
-                    lineWidth: 3,
-                    innerBorderColor: Color.white.opacity(0.52),
-                    innerBorderWidth: 3
-                )
-            }
-            .accessibilityHidden(true)
+    
+    @_disfavoredOverload
+    init<S: StringProtocol>(
+        _ title: LocalizedStringKey,
+        systemImage: String? = nil,
+        description: S? = nil,
+        style: Style? = nil,
+    ) {
+        self.init(
+            title,
+            systemImage: systemImage,
+            description: description,
+            style: style
+        ) {
+            EmptyView()
+        }
+    }
+    
+    init(
+        error: Error,
+        style: Style? = nil,
+    ) {
+        self.init(
+            error.title,
+            systemImage: error.systemImage,
+            description: error.localizedDescription,
+            style: style
+        )
     }
 }
 
 #Preview {
     VStack(spacing: 20) {
-        PixelRoundedRectangleCard {
-            PixelContentUnavailableView(
-                "Plant Not Found",
-                systemImage: "leaf",
-                description: "This plant may have been deleted."
-            )
-        }
+        PixelContentUnavailableView(
+            "Plant Not Found",
+            systemImage: "leaf",
+            description: "This plant may have been deleted."
+        )
 
-        PixelRoundedRectangleCard {
-            PixelContentUnavailableView(
-                "No Plants Yet",
-                description: "Add your first plant and start tracking its growth."
-            ) {
-                Image(.Plants.monsteraHealthy)
-                    .pixelate()
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 88, height: 88)
-                    .accessibilityHidden(true)
-            } actions: {
-                Button("Add Plant", systemImage: "plus") {}
-            }
+        PixelContentUnavailableView(
+            "No Plants Yet",
+            description: "Add your first plant and start tracking its growth."
+        ){
+            Button("Add Plant", systemImage: "plus") {}
         }
     }
     .padding()

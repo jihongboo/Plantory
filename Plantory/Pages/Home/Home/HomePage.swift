@@ -16,102 +16,88 @@ struct HomePage: View {
     
     @State private var path = NavigationPath()
     @State private var plantPendingDeletion: Plant?
-    @State private var temporaryDiagnosisImageData: Data?
     @Namespace private var heroNamespace
 
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
         NavigationStack(path: $path) {
-            ScrollView {
-                LazyVStack {
+            PixelPage {
+                VStack {
                     HomeHeaderView()
+                    ScrollView {
+                        LazyVStack {
+                            HomeWeatherCard()
 
-                    HomeWeatherCard()
-
-                    LazyVGrid(columns: columns, spacing: 14) {
-                        ForEach(plants) { plant in
-                            NavigationLink(value: HomeDestination.plant(plant.id)) {
-                                PlantCardView(plant: plant)
-                                    .matchedTransitionSource(id: plant.id, in: heroNamespace)
-                            }
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    plantPendingDeletion = plant
-                                } label: {
-                                    Label("Delete Plant", systemImage: "trash")
+                            LazyVGrid(columns: columns, spacing: 14) {
+                                ForEach(plants) { plant in
+                                    NavigationLink(value: HomeDestination.plant(plant.id)) {
+                                        PlantCardView(plant: plant)
+                                            .matchedTransitionSource(id: plant.id, in: heroNamespace)
+                                    }
+                                    .contextMenu {
+                                        Button(role: .destructive) {
+                                            plantPendingDeletion = plant
+                                        } label: {
+                                            Label("Delete Plant", systemImage: "trash")
+                                        }
+                                    }
+                                    .buttonStyle(.plain)
                                 }
                             }
-                            .buttonStyle(.plain)
                         }
                     }
                 }
-                .scenePadding()
-            }
-            .overlay {
-                if plants.isEmpty {
-                    emptyState
+                .confirmationDialog(
+                    "Delete this plant?",
+                    isPresented: deletionBinding,
+                    presenting: plantPendingDeletion
+                ) { plant in
+                    Button(
+                        "Delete \(plant.displayName)",
+                        role: .destructive
+                    ) {
+                        deletePlant(plant)
+                    }
+                    Button("Cancel", role: .cancel) {}
+                } message: { plant in
+                    Text("This will also remove its care records and AI diagnosis history.")
+                }
+                .navigationDestination(for: HomeDestination.self) { destination in
+                    switch destination {
+                    case .plant(let plantID):
+                        PlantDestinationView(plantID: plantID, heroNamespace: heroNamespace)
+
+                    case .plantInformationLibrary:
+                        PlantInformationLibraryPage()
+
+                    case .debugNotifications:
+                        DebugNotificationsPage()
+                    }
                 }
             }
-            .background {
-                PixelPageBackground()
-            }
-            .toolbar(.hidden, for: .navigationBar)
             .pixelBottomActionBar {
                 AddPlantMenuView()
             }
-            .confirmationDialog(
-                "Delete this plant?",
-                isPresented: deletionBinding,
-                presenting: plantPendingDeletion
-            ) { plant in
-                Button(
-                    "Delete \(plant.displayName)",
-                    role: .destructive
-                ) {
-                    deletePlant(plant)
-                }
-                Button("Cancel", role: .cancel) {}
-            } message: { plant in
-                Text("This will also remove its care records and AI diagnosis history.")
-            }
-            .sheet(item: $temporaryDiagnosisImageData) { imageData in
-                NavigationStack {
-                    TemporaryDiagnosisPage(imageData: imageData)
-                }
-            }
-            .navigationDestination(for: HomeDestination.self) { destination in
-                switch destination {
-                case .plant(let plantID):
-                    PlantDestinationView(plantID: plantID, heroNamespace: heroNamespace)
-
-                case .plantInformationLibrary:
-                    PlantInformationLibraryPage()
-
-                case .debugNotifications:
-                    DebugNotificationsPage()
-                }
-            }
-        }
-        .task {
-            await PlantNotificationScheduler.shared.syncNotifications(for: plants)
-            openPendingPlantIfNeeded()
-        }
-        .onChange(of: scenePhase) { _, phase in
-            guard phase == .active else { return }
-            Task {
+            .task {
                 await PlantNotificationScheduler.shared.syncNotifications(for: plants)
                 openPendingPlantIfNeeded()
             }
-        }
-        .onChange(of: navigationCoordinator.targetPlantIdentifierPrefix) { _, _ in
-            openPendingPlantIfNeeded()
-        }
-        .onChange(of: plants.count) { _, _ in
-            openPendingPlantIfNeeded()
+            .onChange(of: scenePhase) { _, phase in
+                guard phase == .active else { return }
+                Task {
+                    await PlantNotificationScheduler.shared.syncNotifications(for: plants)
+                    openPendingPlantIfNeeded()
+                }
+            }
+            .onChange(of: navigationCoordinator.targetPlantIdentifierPrefix) { _, _ in
+                openPendingPlantIfNeeded()
+            }
+            .onChange(of: plants.count) { _, _ in
+                openPendingPlantIfNeeded()
+            }
         }
     }
-
 }
 
 enum HomeDestination: Hashable {
@@ -174,23 +160,6 @@ private extension HomePage {
                 }
             }
         )
-    }
-
-    var emptyState: some View {
-        PixelContentUnavailableView(
-            "No Plants Yet",
-            description: "Add your first plant and start tracking its growth."
-        ) {
-            Image("PixelMonsteraHealthy")
-                .pixelate()
-                .resizable()
-                .scaledToFit()
-                .frame(width: 88, height: 88)
-                .accessibilityHidden(true)
-        } actions: {
-            AddPlantMenuView()
-        }
-        .padding(.vertical, 28)
     }
 
     func deletePlant(_ plant: Plant) {

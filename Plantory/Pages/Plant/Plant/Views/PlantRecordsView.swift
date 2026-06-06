@@ -13,25 +13,18 @@ struct PlantRecordsView: View {
     var body: some View {
         PixelRoundedRectangleCard(title: "Care Records", systemImage: "list.clipboard.fill") {
             if records.isEmpty {
-                PixelContentUnavailableView(
-                    "No Records Yet",
-                    systemImage: "clock.arrow.circlepath",
-                    description: "Watering, fertilizing, pest control, and photo records will appear here.") {
-                        Button("Add Record", systemImage: "plus") {
-                            
-                        }
-                        .buttonStyle(.pixelRoundedRectangle)
-                    }
+                PixelContentUnavailableView(error: AppError.empty, style: .plain)
             } else {
                 VStack(spacing: 0) {
-                    ForEach(Array(records.enumerated()), id: \.element.id) { index, record in
+                    ForEach(records) { record in
                         PlantRecordCard(record: record)
                         
-                        if index < records.count - 1 {
+                        if record != records.last {
                             PixelDashedDivider()
                         }
                     }
                 }
+                .animation(.smooth, value: records)
             }
         }
     }

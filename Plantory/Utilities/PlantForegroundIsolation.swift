@@ -33,7 +33,7 @@ enum PlantForegroundIsolation {
         compressionRatio: CGFloat = ImageCompression.defaultScaleRatio
     ) async throws -> Data {
         let isolatedImage = try await isolatePlant(in: image)
-        guard let data = ImageCompression.compressedPNGData(
+        guard let data = try? ImageCompression.compressedPNGData(
             from: isolatedImage,
             maxPixelDimension: maxPixelDimension,
             compressionRatio: compressionRatio

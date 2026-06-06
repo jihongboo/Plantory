@@ -14,6 +14,8 @@ struct PixelRoundedRectangleButtonStyle: ButtonStyle {
     let width: PixelButtonWidth
     let cornerRadius: CGFloat
     
+    @Environment(\.isEnabled) private var isEnabled
+    
     init(
         size: PixelButtonSize?,
         fill: Color?,
@@ -35,7 +37,7 @@ struct PixelRoundedRectangleButtonStyle: ButtonStyle {
             .padding(size.padding)
             .frame(maxWidth: width == .expanded ? .infinity : nil)
             .background {
-                PixelRoundedRectangleBackground(fill: fill, cornerRadius: cornerRadius)
+                PixelRoundedRectangleBackground(fill: isEnabled ? fill : .gray, cornerRadius: cornerRadius)
             }
             .scaleEffect(configuration.isPressed ? 0.98 : 1)
             .opacity(configuration.isPressed ? 0.86 : 1)

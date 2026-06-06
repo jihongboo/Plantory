@@ -18,6 +18,7 @@ struct PixelPage<Content: View>: View {
             .background {
                 PixelPageBackground(style: .secondary)
             }
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .navigationBar)
     }
 }

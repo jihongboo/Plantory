@@ -3,7 +3,7 @@ import SwiftUI
 struct PixelNavigationBar<Trailing: View>: View {
     let title: String
     let subtitle: String?
-    @ViewBuilder var trailing: Trailing
+    let trailing: Trailing
     
     @Environment(\.dismiss) private var dismiss
     
@@ -25,7 +25,6 @@ struct PixelNavigationBar<Trailing: View>: View {
                 Image(systemName: "chevron.left")
                     .frame(width: 16, height: 16)
             }
-            .buttonStyle(.pixelRectangle)
             
             VStack(alignment: .leading, spacing: -6) {
                 Text(title)
@@ -44,6 +43,7 @@ struct PixelNavigationBar<Trailing: View>: View {
                         
             trailing
         }
+        .buttonStyle(.pixelRectangle)
     }
 }
 

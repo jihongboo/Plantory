@@ -15,16 +15,6 @@ struct PlantDiagnosisReport: Identifiable {
     let carePlan: [DiagnosisAction]
     let watchItems: [String]
     let preventionTip: String
-
-    var diagnosisResult: DiagnosisResult {
-        DiagnosisResult(
-            species: speciesName,
-            problem: title,
-            causes: possibleCauses,
-            suggestions: carePlan.map(\.title),
-            rawResponse: summary
-        )
-    }
 }
 
 struct DiagnosisSignal: Identifiable {

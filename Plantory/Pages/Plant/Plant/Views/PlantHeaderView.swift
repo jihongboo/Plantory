@@ -32,7 +32,7 @@ struct PlantHeaderView: View {
 
                     if let catalogID = plant.informationCatalogID {
                         NavigationLink {
-                            PlantInformationPage(catalogID: catalogID)
+                            PlantInformationPage(id: catalogID)
                         } label: {
                             Image(systemName: "book.pages.fill")
                                 .font(.headline.weight(.black))

@@ -97,7 +97,7 @@ enum ImageCompression {
         maxPixelDimension: CGFloat = maxPixelDimension,
         compressionRatio: CGFloat = defaultScaleRatio,
         maxBytes: Int = maxUploadBytes
-    ) -> Data? {
+    ) throws -> Data {
         let resizedImage = image.resizedToFit(maxPixelDimension: maxPixelDimension)
         let boundedRatio = min(max(compressionRatio, minimumScaleRatio), 1)
 
@@ -113,6 +113,10 @@ enum ImageCompression {
             bestData = candidateImage.pngDataRepresentation()
         }
 
-        return bestData
+        if let bestData {
+            return bestData
+        } else {
+            throw AppError.custom("The photo data is broken.")
+        }
     }
 }

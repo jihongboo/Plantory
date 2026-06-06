@@ -9,7 +9,6 @@ final class PlantRecord {
     var note: String = ""
     @Attribute(.externalStorage)
     var photoData: Data?
-    var diagnosis: DiagnosisMetadata?
 
     var plant: Plant?
 
@@ -27,14 +26,12 @@ final class PlantRecord {
         createdAt: Date = .now,
         note: String = "",
         photoData: Data?,
-        diagnosis: DiagnosisMetadata? = nil,
         plant: Plant? = nil
     ) {
         self.actionTypeRawValue = nil
         self.createdAt = createdAt
         self.note = note
         self.photoData = photoData
-        self.diagnosis = diagnosis
         self.plant = plant
     }
 
@@ -147,18 +144,4 @@ enum RecordType: Hashable {
             .primary
         }
     }
-}
-
-struct DiagnosisMetadata: Codable {
-    var result: DiagnosisResult
-}
-
-// MARK: - AI 诊断结果（附着在记录类条目上）
-
-struct DiagnosisResult: Codable {
-    var species: String
-    var problem: String
-    var causes: [String]
-    var suggestions: [String]
-    var rawResponse: String
 }

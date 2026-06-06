@@ -36,6 +36,19 @@ struct PixelProgressMeter: View {
         self.style = style
         self.accessibilityLabel = accessibilityLabel
     }
+    
+    init(indicator: PixelCareIndicator) {
+        switch indicator {
+        case let .level(level):
+            self.init(value: level,
+                      style: .fixed,
+                      accessibilityLabel: "Level \(level) of 3")
+        case let .temperature(activeBands):
+            self.init(activeSegments: activeBands.pixelMeterSegments,
+                      style: .colorful,
+                      accessibilityLabel: "Temperature range")
+        }
+    }
 
     var body: some View {
         HStack(spacing: 5) {

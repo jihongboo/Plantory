@@ -49,109 +49,17 @@ struct PlantRecordCard: View {
                             .stroke(Color(.pixelPaperShadow).opacity(0.72), lineWidth: 2)
                     }
             }
-
-            if let result = record.diagnosis?.result {
-                PlantRecordDiagnosisView(result: result)
-            }
         }
         .padding(.vertical, 12)
     }
 }
 
-private struct PlantRecordDiagnosisView: View {
-    let result: DiagnosisResult
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Label("Diagnosis", systemImage: "stethoscope")
-                .font(.pixel(.title3))
-                .foregroundStyle(Color(.pixelLeaf))
-            Text(result.problem)
-                .font(.pixel(.body))
-                .foregroundStyle(Color(.pixelInk))
-                .fixedSize(horizontal: false, vertical: true)
-
-            PlantRecordDiagnosisTag(
-                title: "Possible Cause",
-                systemImage: "exclamationmark.triangle.fill",
-                contents: result.causes,
-                tint: .orange
-            )
-
-            PlantRecordDiagnosisTag(
-                title: "Suggestion",
-                systemImage: "leaf.fill",
-                contents: result.suggestions,
-                tint: .green
-            )
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(10)
-        .background(Color(.pixelCream), in: .rect(cornerRadius: 4))
-        .overlay {
-            Rectangle()
-                .stroke(Color(.pixelPaperShadow).opacity(0.55), lineWidth: 2)
-        }
-    }
-}
-
-private struct PlantRecordDiagnosisTag: View {
-    let title: String
-    let systemImage: String
-    let contents: [String]
-    let tint: Color
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Label(title, systemImage: systemImage)
-                .font(.pixel(.footnote))
-                .foregroundStyle(tint)
-
-            ForEach(contents, id: \.self) { content in
-                Text(content)
-                    .font(.pixel(.subheadline))
-                    .foregroundStyle(Color(.pixelInk).opacity(0.75))
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
-        .background(tint.opacity(0.12), in: .rect(cornerRadius: 3))
-        .overlay {
-            Rectangle()
-                .stroke(tint.opacity(0.36), lineWidth: 1.5)
-        }
-    }
-}
-#Preview("Action Record") {
-    CardView {
+#Preview {
+    PixelRoundedRectangleCard {
         PlantRecordCard(
             record: PlantRecord(
                 actionType: .watering,
                 createdAt: .now.addingTimeInterval(-86_400)
-            )
-        )
-    }
-    .padding()
-}
-
-#Preview("Diagnosis Record") {
-    CardView {
-        PlantRecordCard(
-            record: PlantRecord(
-                createdAt: .now.addingTimeInterval(-3 * 86_400),
-                note: "Checked yellowing on older leaves near the edge.",
-                photoData: PlatformImageData.monstera,
-                diagnosis: DiagnosisMetadata(
-                    result: DiagnosisResult(
-                        species: "Monstera deliciosa",
-                        problem: "Mild overwatering stress",
-                        causes: ["Soil stayed damp for too long"],
-                        suggestions: ["Wait for the top soil to dry before watering again"],
-                        rawResponse: ""
-                    )
-                )
             )
         )
     }

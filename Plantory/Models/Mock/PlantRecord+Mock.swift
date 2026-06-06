@@ -12,7 +12,6 @@ extension PlantRecord {
             createdAt: .now.addingTimeInterval(-3 * 86_400),
             note: "Checked a few yellow edges on older leaves.",
             photoData: PlatformImageData.monstera,
-            diagnosis: DiagnosisMetadata.overwateringStress,
             plant: .monstera
         )
     ]
@@ -28,7 +27,6 @@ extension PlantRecord {
                 createdAt: .now.addingTimeInterval(-3 * 86_400),
                 note: "Checked a few yellow edges on older leaves.",
                 photoData: PlatformImageData.monstera,
-                diagnosis: DiagnosisMetadata.overwateringStress,
                 plant: plant
             )
         ]

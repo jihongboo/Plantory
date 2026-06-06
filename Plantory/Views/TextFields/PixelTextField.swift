@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct PixelTextField: View {
-    let title: LocalizedStringKey
+    let title: LocalizedStringKey?
     let prompt: LocalizedStringKey
     @Binding var text: String
     var axis: Axis
 
     init(
-        title: LocalizedStringKey,
+        _ title: LocalizedStringKey? = nil,
         prompt: LocalizedStringKey,
         text: Binding<String>,
         axis: Axis = .horizontal
@@ -27,9 +27,11 @@ struct PixelTextField: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(title)
-                .font(.pixel(.headline))
-                .foregroundStyle(.pixelInk)
+            if let title {
+                Text(title)
+                    .font(.pixel(.headline))
+                    .foregroundStyle(.pixelInk)
+            }
 
             TextField(prompt, text: $text, axis: axis)
                 .textFieldStyle(
@@ -112,7 +114,7 @@ extension TextFieldStyle where Self == PixelTextFieldStyle {
 
     VStack(spacing: 16) {
         PixelTextField(
-            title: "Nickname",
+            "Nickname",
             prompt: "Nickname",
             text: $value
         )

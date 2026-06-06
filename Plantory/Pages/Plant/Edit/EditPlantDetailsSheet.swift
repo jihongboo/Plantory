@@ -28,15 +28,13 @@ struct EditPlantDetailsSheet: View {
             PixelPage {
                 ScrollView {
                     LazyVStack(spacing: 16) {
-                        PixelNavigationBar(title: "Edit Details")
-                        
                         PixelRoundedRectangleCard(
                             title: "Plant Details",
                             systemImage: "square.and.pencil"
                         ) {
                             VStack(alignment: .leading, spacing: 16) {
                                 PixelTextField(
-                                    title: "Nickname",
+                                    "Nickname",
                                     prompt: "Nickname",
                                     text: $nickname
                                 )
@@ -44,7 +42,7 @@ struct EditPlantDetailsSheet: View {
                                 .autocorrectionDisabled()
 
                                 PixelTextField(
-                                    title: "Note",
+                                    "Note",
                                     prompt: "Add a note about this plant",
                                     text: $note,
                                     axis: .vertical
@@ -70,6 +68,7 @@ struct EditPlantDetailsSheet: View {
                         }
                     }
                 }
+                .pixelNavigationTitle(title: "Edit Details")
             }
             .pixelBottomActionBar {
                 Button("Cancel", systemImage: "xmark") {

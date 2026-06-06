@@ -20,6 +20,7 @@ struct PixelBottomActionBarModifier<Buttons: View>: ViewModifier {
             .safeAreaBar(edge: .bottom, spacing: 0) {
                 HStack(spacing: spacing) {
                     buttons
+                        .buttonStyle(.pixelRoundedRectangle(width: .expanded))
                 }
                 .padding(.horizontal)
                 .padding(.top)

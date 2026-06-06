@@ -23,7 +23,7 @@ struct PixelCareTile: View {
                         .minimumScaleFactor(0.72)
                 }
 
-                indicatorView
+                PixelProgressMeter(indicator: indicator)
 
                 Text(detail)
                     .font(.pixel(.body))
@@ -49,30 +49,4 @@ struct PixelCareTile: View {
     )
     .padding()
     .background(.pixelPaper)
-}
-
-private extension PixelCareTile {
-    @ViewBuilder
-    var indicatorView: some View {
-        switch indicator {
-        case let .level(level):
-            PixelProgressMeter(
-                value: level,
-                style: .fixed,
-                accessibilityLabel: "Level \(level) of 3"
-            )
-        case let .temperature(activeBands):
-            PixelProgressMeter(
-                activeSegments: activeBands.pixelMeterSegments,
-                style: .colorful,
-                accessibilityLabel: "Temperature range"
-            )
-        }
-    }
-}
-
-private extension Set where Element == TemperatureBand {
-    var pixelMeterSegments: Set<Int> {
-        Swift.Set<Int>(self.map { $0.rawValue + 1 })
-    }
 }
