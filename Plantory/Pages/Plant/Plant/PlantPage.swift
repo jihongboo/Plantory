@@ -58,12 +58,12 @@ struct PlantPage: View {
                     isPresentingAddLog = true
                 })
                 
-                Menu("Actions", systemImage: "plus.circle.fill") {
-                    ForEach(RecordActionType.allCases) { type in
-                        Button(type.label, systemImage: type.systemImage) {
-                            addActionRecord(type)
-                        }
-                    }
+                PixelActionMenu(
+                    "Actions",
+                    systemImage: "plus.circle.fill",
+                    items: actionMenuItems
+                ) { type in
+                    addActionRecord(type)
                 }
             }
         }
@@ -104,6 +104,17 @@ private extension PlantPage {
 private extension PlantPage {
     var records: [PlantRecord] {
         (plant?.records ?? []).sorted { $0.createdAt > $1.createdAt }
+    }
+
+    var actionMenuItems: [PixelActionMenuItem<RecordActionType>] {
+        RecordActionType.allCases.map { type in
+            PixelActionMenuItem(
+                id: type,
+                title: type.label,
+                systemImage: type.systemImage,
+                tint: type.themeColor
+            )
+        }
     }
     
     func addActionRecord(_ type: RecordActionType) {
