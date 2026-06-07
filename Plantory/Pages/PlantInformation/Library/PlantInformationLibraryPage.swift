@@ -1,6 +1,9 @@
+import SwiftData
 import SwiftUI
 
 struct PlantInformationLibraryPage: View {
+    @Environment(\.modelContext) private var modelContext
+
     @State private var plantInformations: [PlantInformation] = []
     @State private var searchText = ""
 
@@ -73,7 +76,16 @@ private extension PlantInformationLibraryPage {
 
     func load() async throws {
         if !plantInformations.isEmpty { return }
-        plantInformations = try await service.fetchPlantInformations()
+        plantInformations = (try? service.localPlantInformations(in: modelContext)) ?? []
+
+        do {
+            plantInformations = try await service.fetchPlantInformations(in: modelContext)
+        } catch {
+            if plantInformations.isEmpty {
+                throw error
+            }
+        }
+
         if plantInformations.isEmpty {
             throw AppError.empty
         }

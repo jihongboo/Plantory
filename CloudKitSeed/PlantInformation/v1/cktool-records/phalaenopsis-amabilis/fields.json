@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Moth Orchid"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "蝴蝶兰"
-  },
   "species": {
     "type": "stringType",
     "value": "Phalaenopsis amabilis"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Moth Orchid is a common indoor orchid with long-lasting blooms. It grows in bark mix, prefers filtered light, and needs roots that can breathe."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "蝴蝶兰是常见室内兰花，花期较长。它通常种在树皮介质中，喜欢过滤光和透气的根系环境。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "medium"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Keep the crown dry and let excess water drain fully after watering."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "浇水后让多余水分充分流走，并保持叶心干燥。"
+    "value": "{\"en\":{\"commonName\":\"Moth Orchid\",\"overview\":\"Moth Orchid is a common indoor orchid with long-lasting blooms. It grows in bark mix, prefers filtered light, and needs roots that can breathe.\",\"tips\":\"Keep the crown dry and let excess water drain fully after watering.\"},\"zh-Hans\":{\"commonName\":\"蝴蝶兰\",\"overview\":\"蝴蝶兰是常见室内兰花，花期较长。它通常种在树皮介质中，喜欢过滤光和透气的根系环境。\",\"tips\":\"浇水后让多余水分充分流走，并保持叶心干燥。\"}}"
   },
   "image": {
     "type": "assetType",

@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Calathea"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "圆叶竹芋"
-  },
   "species": {
     "type": "stringType",
     "value": "Goeppertia orbifolia"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Calathea is grown for broad patterned leaves with pale striping. It prefers soft filtered light, stable warmth, and consistently moist soil."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "圆叶竹芋以宽大带浅色条纹的叶片为观赏重点。它喜欢柔和散射光、稳定温暖环境和持续微湿的土壤。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "low"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Use filtered or rested water if leaf edges brown despite good humidity."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "如果湿度合适但叶缘仍发黄发焦，可以改用过滤水或静置后的水。"
+    "value": "{\"en\":{\"commonName\":\"Calathea\",\"overview\":\"Calathea is grown for broad patterned leaves with pale striping. It prefers soft filtered light, stable warmth, and consistently moist soil.\",\"tips\":\"Use filtered or rested water if leaf edges brown despite good humidity.\"},\"zh-Hans\":{\"commonName\":\"圆叶竹芋\",\"overview\":\"圆叶竹芋以宽大带浅色条纹的叶片为观赏重点。它喜欢柔和散射光、稳定温暖环境和持续微湿的土壤。\",\"tips\":\"如果湿度合适但叶缘仍发黄发焦，可以改用过滤水或静置后的水。\"}}"
   },
   "image": {
     "type": "assetType",

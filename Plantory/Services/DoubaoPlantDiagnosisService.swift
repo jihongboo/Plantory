@@ -269,7 +269,7 @@ private extension DoubaoPlantDiagnosisService {
         return diagnosisPrompt(
             language: language,
             commonName: plant.displayName,
-            species: plant.plantInformationID ?? "",
+            species: plant.plantInformation?.species ?? "",
             note: note
         )
     }

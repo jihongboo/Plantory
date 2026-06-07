@@ -10,7 +10,7 @@ Upload target:
 - Image files: `images/*.png`
 - cktool files: `cktool-records/`
 
-The app should treat CloudKit Public Database as the source of truth for the plant encyclopedia. `PlantInformation` records are not bundled into the app and do not need to be stored in SwiftData.
+The app should treat CloudKit Public Database as the source of truth for the plant encyclopedia. The app caches `PlantInformation` records in SwiftData for local-first display and refreshes them from Public Database.
 
 ## Record Identity
 

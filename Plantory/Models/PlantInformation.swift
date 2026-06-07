@@ -1,33 +1,37 @@
 import CloudKit
 import Foundation
+import SwiftData
 
-struct PlantInformation: Identifiable, Hashable {
-    var id: String { catalogID }
+struct PlantInformationLocalizedContent: Codable, Hashable {
+    var commonName: String?
+    var overview: String?
+    var tips: String?
+}
 
-    var catalogID: String
-    var species: String
-    var commonName: String
-    var commonNameZhHans: String?
-    var overview: String
-    var overviewZhHans: String?
-    var imageData: Data?
-    var careDifficulty: String
-    var lightLevel: String
-    var waterLevel: String
-    var humidityLevel: String
-    var temperature: String
-    var diseaseRiskLevel: String
-    var fertilizerLevel: String
-    var tips: String
-    var tipsZhHans: String?
+@Model
+final class PlantInformation {
+    #Index<PlantInformation>([\.catalogID])
+
+    var catalogID: String = ""
+    var species: String = ""
+    var commonName: String = ""
+    var overview: String = ""
+    @Attribute(.externalStorage) var imageData: Data?
+    var careDifficulty: String = "moderate"
+    var lightLevel: String = "medium"
+    var waterLevel: String = "medium"
+    var humidityLevel: String = "medium"
+    var temperature: String = ""
+    var diseaseRiskLevel: String = "medium"
+    var fertilizerLevel: String = "medium"
+    var localizedContentsJSON: String = "{}"
+    var plants: [Plant]?
 
     init(
         catalogID: String? = nil,
         species: String,
         commonName: String,
-        commonNameZhHans: String? = nil,
         overview: String = "",
-        overviewZhHans: String? = nil,
         imageData: Data? = nil,
         careDifficulty: String = "moderate",
         lightLevel: String = "medium",
@@ -36,44 +40,37 @@ struct PlantInformation: Identifiable, Hashable {
         temperature: String,
         diseaseRiskLevel: String = "medium",
         fertilizerLevel: String? = nil,
-        tips: String,
-        tipsZhHans: String? = nil
+        localizedContents: [String: PlantInformationLocalizedContent] = [:]
     ) {
         self.catalogID = catalogID ?? Self.catalogID(commonName: commonName, species: species)
         self.species = species
         self.commonName = commonName
-        self.commonNameZhHans = Self.nonEmpty(commonNameZhHans)
         self.overview = overview
-        self.overviewZhHans = Self.nonEmpty(overviewZhHans)
         self.imageData = imageData
-        self.careDifficulty = careDifficulty
-        self.lightLevel = lightLevel
-        self.waterLevel = waterLevel
-        self.humidityLevel = humidityLevel
+        self.careDifficulty = Self.normalizedCareDifficulty(careDifficulty)
+        self.lightLevel = Self.normalizedLevel(lightLevel)
+        self.waterLevel = Self.normalizedLevel(waterLevel)
+        self.humidityLevel = Self.normalizedLevel(humidityLevel)
         self.temperature = temperature
-        self.diseaseRiskLevel = diseaseRiskLevel
+        self.diseaseRiskLevel = Self.normalizedLevel(diseaseRiskLevel)
         self.fertilizerLevel = Self.normalizedLevel(fertilizerLevel ?? "medium")
-        self.tips = tips
-        self.tipsZhHans = Self.nonEmpty(tipsZhHans)
+        self.localizedContentsJSON = Self.encodedLocalizedContents(localizedContents)
     }
 }
 
 extension PlantInformation {
-    init(record: CKRecord) {
+    static func catalogID(from record: CKRecord) -> String {
         let catalogID = record.stringValue(for: "catalogID")
-        let species = record.stringValue(for: "species")
-        let commonName = record.stringValue(for: "commonName")
-        let imageAsset = record["image"] as? CKAsset
-        let imageData = imageAsset?.fileURL.flatMap { try? Data(contentsOf: $0) }
+        return catalogID.isEmpty ? record.recordID.recordName : catalogID
+    }
 
+    convenience init(record: CKRecord) {
         self.init(
-            catalogID: catalogID.isEmpty ? record.recordID.recordName : catalogID,
-            species: species,
-            commonName: commonName,
-            commonNameZhHans: record.optionalStringValue(for: "commonNameZhHans"),
+            catalogID: Self.catalogID(from: record),
+            species: record.stringValue(for: "species"),
+            commonName: record.stringValue(for: "commonName"),
             overview: record.stringValue(for: "overview"),
-            overviewZhHans: record.optionalStringValue(for: "overviewZhHans"),
-            imageData: imageData,
+            imageData: Self.imageData(from: record),
             careDifficulty: record.stringValue(for: "careDifficulty", default: "moderate"),
             lightLevel: record.stringValue(for: "lightLevel", default: "medium"),
             waterLevel: record.stringValue(for: "waterLevel", default: "medium"),
@@ -81,13 +78,41 @@ extension PlantInformation {
             temperature: record.stringValue(for: "temperature"),
             diseaseRiskLevel: record.stringValue(for: "diseaseRiskLevel", default: "medium"),
             fertilizerLevel: record.stringValue(for: "fertilizerLevel", default: "medium"),
-            tips: record.stringValue(for: "tips"),
-            tipsZhHans: record.optionalStringValue(for: "tipsZhHans")
+            localizedContents: Self.localizedContents(from: record)
         )
     }
 
+    func update(from record: CKRecord) {
+        catalogID = Self.catalogID(from: record)
+        species = record.stringValue(for: "species")
+        commonName = record.stringValue(for: "commonName")
+        overview = record.stringValue(for: "overview")
+        imageData = Self.imageData(from: record)
+        careDifficulty = Self.normalizedCareDifficulty(record.stringValue(for: "careDifficulty", default: "moderate"))
+        lightLevel = Self.normalizedLevel(record.stringValue(for: "lightLevel", default: "medium"))
+        waterLevel = Self.normalizedLevel(record.stringValue(for: "waterLevel", default: "medium"))
+        humidityLevel = Self.normalizedLevel(record.stringValue(for: "humidityLevel", default: "medium"))
+        temperature = record.stringValue(for: "temperature")
+        diseaseRiskLevel = Self.normalizedLevel(record.stringValue(for: "diseaseRiskLevel", default: "medium"))
+        fertilizerLevel = Self.normalizedLevel(record.stringValue(for: "fertilizerLevel", default: "medium"))
+        localizedContentsJSON = Self.encodedLocalizedContents(Self.localizedContents(from: record))
+    }
+
+    var id: String {
+        catalogID
+    }
+
+    var localizedContents: [String: PlantInformationLocalizedContent] {
+        get {
+            Self.decodedLocalizedContents(from: localizedContentsJSON)
+        }
+        set {
+            localizedContentsJSON = Self.encodedLocalizedContents(newValue)
+        }
+    }
+
     var displayCommonName: String {
-        localizedText(zhHans: commonNameZhHans, fallback: commonName)
+        localizedValue(\.commonName, fallback: commonName)
     }
 
     var displayOverview: String {
@@ -98,11 +123,11 @@ extension PlantInformation {
             fallback = overview
         }
 
-        return localizedText(zhHans: overviewZhHans, fallback: fallback)
+        return localizedValue(\.overview, fallback: fallback)
     }
 
     var displayTips: String {
-        localizedText(zhHans: tipsZhHans, fallback: tips)
+        localizedValue(\.tips, fallback: "")
     }
 
     var careDifficultyDetail: String {
@@ -199,15 +224,22 @@ extension PlantInformation {
         [
             displayCommonName,
             commonName,
-            commonNameZhHans,
             species
         ]
-        .compactMap { $0 }
         .contains { $0.localizedCaseInsensitiveContains(searchText) }
     }
 }
 
 private extension PlantInformation {
+    static func imageData(from record: CKRecord) -> Data? {
+        let imageAsset = record["image"] as? CKAsset
+        return imageAsset?.fileURL.flatMap { try? Data(contentsOf: $0) }
+    }
+
+    static func localizedContents(from record: CKRecord) -> [String: PlantInformationLocalizedContent] {
+        decodedLocalizedContents(from: record.stringValue(for: "localizedContentsJSON", default: "{}"))
+    }
+
     static func catalogID(commonName: String, species: String) -> String {
         let source = species.isEmpty ? commonName : species
         let folded = source.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
@@ -224,13 +256,72 @@ private extension PlantInformation {
         return trimmed.isEmpty ? nil : trimmed
     }
 
-    func localizedText(zhHans: String?, fallback: String) -> String {
-        if Locale.current.language.languageCode?.identifier == "zh",
-           let zhHans = Self.nonEmpty(zhHans) {
-            return zhHans
+    func localizedValue(
+        _ keyPath: KeyPath<PlantInformationLocalizedContent, String?>,
+        fallback: String
+    ) -> String {
+        for key in Self.preferredLocalizationKeys() {
+            if let value = Self.nonEmpty(localizedContents[key]?[keyPath: keyPath]) {
+                return value
+            }
         }
 
         return fallback
+    }
+
+    static func preferredLocalizationKeys() -> [String] {
+        var keys: [String] = []
+        for identifier in Locale.preferredLanguages {
+            let normalized = identifier.replacingOccurrences(of: "_", with: "-")
+            appendLocalizationKey(normalized, to: &keys)
+
+            var parts = normalized.split(separator: "-").map(String.init)
+            while parts.count > 1 {
+                parts.removeLast()
+                appendLocalizationKey(parts.joined(separator: "-"), to: &keys)
+            }
+        }
+
+        if let languageCode = Locale.current.language.languageCode?.identifier {
+            appendLocalizationKey(languageCode, to: &keys)
+        }
+
+        appendLocalizationKey("en", to: &keys)
+        return keys
+    }
+
+    static func appendLocalizationKey(_ key: String, to keys: inout [String]) {
+        guard !key.isEmpty, !keys.contains(key) else { return }
+        keys.append(key)
+    }
+
+    static func decodedLocalizedContents(from json: String) -> [String: PlantInformationLocalizedContent] {
+        guard let data = json.data(using: .utf8),
+              let contents = try? JSONDecoder().decode([String: PlantInformationLocalizedContent].self, from: data) else {
+            return [:]
+        }
+
+        return contents
+    }
+
+    static func encodedLocalizedContents(_ contents: [String: PlantInformationLocalizedContent]) -> String {
+        guard !contents.isEmpty,
+              let data = try? JSONEncoder().encode(contents),
+              let json = String(data: data, encoding: .utf8) else {
+            return "{}"
+        }
+
+        return json
+    }
+
+    static func normalizedCareDifficulty(_ value: String) -> String {
+        let normalized = value.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        switch normalized {
+        case "easy", "moderate", "hard":
+            return normalized
+        default:
+            return "moderate"
+        }
     }
 
     static func normalizedLevel(_ value: String) -> String {
@@ -242,18 +333,12 @@ private extension PlantInformation {
             return "medium"
         }
     }
-
 }
 
 private extension CKRecord {
-    func stringValue(for key: String, default defaultValue: String = "") -> String {
+    nonisolated func stringValue(for key: String, default defaultValue: String = "") -> String {
         guard let value = self[key] as? String else { return defaultValue }
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? defaultValue : trimmed
-    }
-
-    func optionalStringValue(for key: String) -> String? {
-        let value = stringValue(for: key)
-        return value.isEmpty ? nil : value
     }
 }

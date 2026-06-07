@@ -48,24 +48,22 @@ private struct PixelMiniStat: View {
 
     var body: some View {
         PixelRectangleCard {
-            VStack(spacing: 8) {
+            HStack(spacing: 8) {
                 Image(systemName: systemImage)
                     .font(.title2.weight(.black))
                     .foregroundStyle(Color(.pixelLeaf))
                     .frame(height: 20)
+                
+                Text(value)
+                    .font(.pixel(.title3))
+                    .foregroundStyle(Color(.pixelInk))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
 
-                VStack(spacing: 0) {
-                    Text(value)
-                        .font(.pixel(.title3))
-                        .foregroundStyle(Color(.pixelInk))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.65)
-
-                    Text(title)
-                        .font(.pixel(.caption))
-                        .foregroundStyle(Color(.pixelInk).opacity(0.6))
-                        .lineLimit(1)
-                }
+                Text(title)
+                    .font(.pixel(.subheadline))
+                    .foregroundStyle(Color(.pixelInk).opacity(0.6))
+                    .lineLimit(1)
             }
             .padding(.vertical)
             .frame(maxWidth: .infinity)

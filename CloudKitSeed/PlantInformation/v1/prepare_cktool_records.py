@@ -11,10 +11,8 @@ OUT = ROOT / "cktool-records"
 STRING_FIELDS = [
     "catalogID",
     "commonName",
-    "commonNameZhHans",
     "species",
     "overview",
-    "overviewZhHans",
     "careDifficulty",
     "lightLevel",
     "waterLevel",
@@ -22,8 +20,7 @@ STRING_FIELDS = [
     "temperature",
     "diseaseRiskLevel",
     "fertilizerLevel",
-    "tips",
-    "tipsZhHans",
+    "localizedContentsJSON",
 ]
 
 
@@ -43,8 +40,14 @@ def ck_fields(item):
 
 def main():
     if OUT.exists():
-        shutil.rmtree(OUT)
-    OUT.mkdir(parents=True)
+        for child in OUT.iterdir():
+            if child.suffix == ".log":
+                continue
+            if child.is_dir():
+                shutil.rmtree(child)
+            else:
+                child.unlink()
+    OUT.mkdir(parents=True, exist_ok=True)
 
     upload_lines = [
         "#!/usr/bin/env bash",

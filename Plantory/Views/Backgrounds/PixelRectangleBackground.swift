@@ -15,17 +15,17 @@ struct PixelRectangleBackground: View {
             .fill(fill)
             .overlay {
                 Rectangle()
-                    .stroke(.white.opacity(0.6), lineWidth: 2)
-                    .padding(4)
+                    .stroke(.pixelInk.opacity(0.4), lineWidth: 3)
+                    .padding(3)
             }
             .overlay {
                 Rectangle()
-                    .stroke(.black.opacity(0.6), lineWidth: 4)
+                    .stroke(.pixelInk.opacity(0.8), lineWidth: 3)
             }
     }
 }
 
 #Preview {
-    PixelRectangleBackground(fill: .cardBackground)
+    PixelRectangleBackground(fill: .red)
         .padding()
 }

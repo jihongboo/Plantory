@@ -20,9 +20,9 @@ Result:
 - Final upload completed successfully.
 - Verification dry-run found 20 `PlantInformation` records.
 - A full query returned records with all expected fields and image assets.
-- Development records were rebuilt with Simplified Chinese values for `commonNameZhHans`, `overviewZhHans`, and `tipsZhHans`.
+- Local seed files now store localized `commonName`, `overview`, and `tips` values inside `localizedContentsJSON`.
 - Development schema cleanup removed unused `photoURL`, `imageFileName`, `sortOrder`, and `isPublished` fields.
-- Development schema update added `commonNameZhHans`, `overviewZhHans`, and `tipsZhHans` for core Simplified Chinese catalog text.
+- Local schema files now use `localizedContentsJSON` instead of language-specific top-level text fields.
 - Development schema cleanup removed long care-description fields: `careDifficultyDescription`, `light`, `water`, `humidityDescription`, `diseaseRiskDescription`, and `fertilizer`.
 - Care detail copy is now derived in the app from `careDifficulty`, `lightLevel`, `waterLevel`, `humidityLevel`, `diseaseRiskLevel`, and `fertilizerLevel`.
 

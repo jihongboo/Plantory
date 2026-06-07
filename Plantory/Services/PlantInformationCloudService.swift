@@ -1,5 +1,6 @@
 import CloudKit
 import Foundation
+import SwiftData
 
 enum PlantInformationCloudServiceError: LocalizedError {
     case notFound
@@ -19,33 +20,85 @@ struct PlantInformationCloudService {
         database = container.publicCloudDatabase
     }
 
-    func fetchPlantInformations() async throws -> [PlantInformation] {
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "PlantInformation", predicate: predicate)
-
-        return try await fetchRecords(matching: query)
-            .map(PlantInformation.init(record:))
+    @MainActor
+    func localPlantInformations(in modelContext: ModelContext) throws -> [PlantInformation] {
+        let descriptor = FetchDescriptor<PlantInformation>()
+        return try modelContext.fetch(descriptor)
             .sorted { $0.displayCommonName < $1.displayCommonName }
     }
 
-    func fetchPlantInformation(catalogID: String) async throws -> PlantInformation {
+    @MainActor
+    func localPlantInformation(
+        catalogID: String,
+        in modelContext: ModelContext
+    ) throws -> PlantInformation? {
+        var descriptor = FetchDescriptor<PlantInformation>(
+            predicate: #Predicate { information in
+                information.catalogID == catalogID
+            }
+        )
+        descriptor.fetchLimit = 1
+        return try modelContext.fetch(descriptor).first
+    }
+
+    @MainActor
+    func fetchPlantInformations(in modelContext: ModelContext) async throws -> [PlantInformation] {
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "PlantInformation", predicate: predicate)
+        let records = try await fetchRecords(matching: query)
+
+        for record in records {
+            _ = try upsert(record: record, in: modelContext)
+        }
+        try modelContext.save()
+
+        return try localPlantInformations(in: modelContext)
+    }
+
+    @MainActor
+    func fetchPlantInformation(
+        catalogID: String,
+        in modelContext: ModelContext
+    ) async throws -> PlantInformation {
         let predicate = NSPredicate(format: "catalogID == %@", catalogID)
         let query = CKQuery(recordType: "PlantInformation", predicate: predicate)
         let records = try await fetchRecords(matching: query, resultsLimit: 1)
 
         if let record = records.first {
-            return PlantInformation(record: record)
+            let information = try upsert(record: record, in: modelContext)
+            try modelContext.save()
+            return information
         }
 
-        guard let info = try await fetchPlantInformations().first(where: { $0.catalogID == catalogID }) else {
+        let recordsByFetchAll = try await fetchRecords(
+            matching: CKQuery(recordType: "PlantInformation", predicate: NSPredicate(value: true))
+        )
+
+        guard let record = recordsByFetchAll.first(where: { PlantInformation.catalogID(from: $0) == catalogID }) else {
             throw PlantInformationCloudServiceError.notFound
         }
 
-        return info
+        let information = try upsert(record: record, in: modelContext)
+        try modelContext.save()
+        return information
     }
 }
 
 private extension PlantInformationCloudService {
+    @MainActor
+    func upsert(record: CKRecord, in modelContext: ModelContext) throws -> PlantInformation {
+        let catalogID = PlantInformation.catalogID(from: record)
+
+        if let existing = try localPlantInformation(catalogID: catalogID, in: modelContext) {
+            existing.update(from: record)
+            return existing
+        }
+
+        let information = PlantInformation(record: record)
+        modelContext.insert(information)
+        return information
+    }
+
     func fetchRecords(
         matching query: CKQuery,
         resultsLimit: Int = CKQueryOperation.maximumResults

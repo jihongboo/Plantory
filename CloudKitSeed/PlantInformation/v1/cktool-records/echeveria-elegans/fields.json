@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Echeveria"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "拟石莲花"
-  },
   "species": {
     "type": "stringType",
     "value": "Echeveria elegans"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Echeveria is a compact rosette succulent with powdery leaves. It needs strong light and dry soil to stay colorful and symmetrical."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "拟石莲花是紧凑莲座状多肉，叶片带粉感。它需要强光和偏干土壤，才能保持颜色和对称株型。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "low"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "If the rosette stretches upward, it needs more light."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "如果莲座开始向上拉长，通常说明光照不足。"
+    "value": "{\"en\":{\"commonName\":\"Echeveria\",\"overview\":\"Echeveria is a compact rosette succulent with powdery leaves. It needs strong light and dry soil to stay colorful and symmetrical.\",\"tips\":\"If the rosette stretches upward, it needs more light.\"},\"zh-Hans\":{\"commonName\":\"拟石莲花\",\"overview\":\"拟石莲花是紧凑莲座状多肉，叶片带粉感。它需要强光和偏干土壤，才能保持颜色和对称株型。\",\"tips\":\"如果莲座开始向上拉长，通常说明光照不足。\"}}"
   },
   "image": {
     "type": "assetType",

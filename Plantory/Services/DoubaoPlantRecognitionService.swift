@@ -242,7 +242,13 @@ extension DoubaoPlantRecognitionService {
                 temperature: temperature,
                 diseaseRiskLevel: normalizedLevel(diseaseRiskLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
                 fertilizerLevel: normalizedLevel(fertilizerLevel, allowed: ["low", "medium", "high"], fallback: "medium"),
-                tips: tips
+                localizedContents: [
+                    AppLanguage.current.localeIdentifier: PlantInformationLocalizedContent(
+                        commonName: commonName,
+                        overview: overview,
+                        tips: tips
+                    )
+                ]
             )
         }
     }

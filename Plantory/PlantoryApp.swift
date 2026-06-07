@@ -12,16 +12,7 @@ struct PlantoryApp: App {
     init() {
         navigationCoordinator = PlantNavigationCoordinator()
         weatherService = HomeWeatherService()
-        let modelContainer: ModelContainer
-        do {
-            modelContainer = try ModelContainer(
-                for: Plant.self,
-                PlantRecord.self,
-                PlantNotificationSetting.self
-            )
-        } catch {
-            fatalError("Failed to create ModelContainer: \(error)")
-        }
+        let modelContainer = Self.makeModelContainer()
 
         container = modelContainer
         notificationDelegate = PlantoryNotificationCenterDelegate(
@@ -44,6 +35,24 @@ struct PlantoryApp: App {
         .environment(navigationCoordinator)
         .environment(\.homeWeatherService, weatherService)
         .modelContainer(container)
+    }
+}
+
+private extension PlantoryApp {
+    static func makeModelContainer() -> ModelContainer {
+        do {
+            let schema = Schema([
+                Plant.self,
+                PlantInformation.self,
+                PlantRecord.self,
+                PlantNotificationSetting.self
+            ])
+
+            let configuration = ModelConfiguration(schema: schema)
+            return try ModelContainer(for: schema, configurations: configuration)
+        } catch {
+            fatalError("Failed to create ModelContainer after resetting store: \(error)")
+        }
     }
 }
 

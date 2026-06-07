@@ -13,16 +13,13 @@ struct HomeHeaderView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            Image("PixelDoctorTip")
-                .pixelate()
-                .resizable()
-                .scaledToFit()
-                .frame(width: 62, height: 62)
-                .background(Color(.pixelCream), in: .rect(cornerRadius: 5))
-                .overlay {
-                    Rectangle()
-                        .stroke(Color(.pixelWood), lineWidth: 3)
-                }
+            PixelRectangleCard {
+                Image("PixelDoctorTip")
+                    .pixelate()
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 62, height: 62)
+            }
             
             VStack(alignment: .leading, spacing: 0) {
                 Text("My Plants")

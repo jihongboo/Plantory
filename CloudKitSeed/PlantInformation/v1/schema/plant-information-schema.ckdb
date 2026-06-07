@@ -21,10 +21,8 @@ DEFINE SCHEMA
         "___recordID"               REFERENCE QUERYABLE,
         catalogID                   STRING QUERYABLE,
         commonName                  STRING QUERYABLE,
-        commonNameZhHans            STRING,
         species                     STRING,
         overview                    STRING,
-        overviewZhHans              STRING,
         image                       ASSET,
         careDifficulty              STRING,
         lightLevel                  STRING,
@@ -33,8 +31,7 @@ DEFINE SCHEMA
         temperature                 STRING,
         diseaseRiskLevel            STRING,
         fertilizerLevel             STRING,
-        tips                        STRING,
-        tipsZhHans                  STRING,
+        localizedContentsJSON       STRING,
         GRANT WRITE TO "_creator",
         GRANT READ TO "_world"
     );

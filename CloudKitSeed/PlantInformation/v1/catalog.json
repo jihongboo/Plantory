@@ -11,10 +11,7 @@
     "temperature": "18-30°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "medium",
-    "tips": "Give it a moss pole or support if you want larger, more mature leaves.",
-    "commonNameZhHans": "龟背竹",
-    "overviewZhHans": "龟背竹是一种热带攀援型室内观叶植物，以带有裂口和孔洞的大叶片闻名。它喜欢稳定温暖的环境、明亮散射光和疏松排水好的介质。",
-    "tipsZhHans": "如果想让叶片更大更成熟，可以给它加苔藓杆或支撑架。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Monstera\",\"overview\":\"Monstera is a tropical climbing houseplant known for its split leaves. It grows best with steady warmth, bright filtered light, and a chunky, well-draining potting mix.\",\"tips\":\"Give it a moss pole or support if you want larger, more mature leaves.\"},\"zh-Hans\":{\"commonName\":\"龟背竹\",\"overview\":\"龟背竹是一种热带攀援型室内观叶植物，以带有裂口和孔洞的大叶片闻名。它喜欢稳定温暖的环境、明亮散射光和疏松排水好的介质。\",\"tips\":\"如果想让叶片更大更成熟，可以给它加苔藓杆或支撑架。\"}}"
   },
   {
     "catalogID": "epipremnum-aureum",
@@ -28,10 +25,7 @@
     "temperature": "18-29°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "low",
-    "tips": "Trim long vines to encourage fuller growth and root cuttings in water.",
-    "commonNameZhHans": "绿萝",
-    "overviewZhHans": "绿萝是一种生长很快的垂吊植物，叶片呈心形。它非常适合新手，能适应多种室内光照和养护条件。",
-    "tipsZhHans": "定期修剪过长藤蔓可以让株型更丰满，剪下的枝条也能水培生根。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Pothos\",\"overview\":\"Pothos is a fast-growing trailing plant with heart-shaped leaves. It is one of the easiest indoor plants for beginners and tolerates a wide range of rooms.\",\"tips\":\"Trim long vines to encourage fuller growth and root cuttings in water.\"},\"zh-Hans\":{\"commonName\":\"绿萝\",\"overview\":\"绿萝是一种生长很快的垂吊植物，叶片呈心形。它非常适合新手，能适应多种室内光照和养护条件。\",\"tips\":\"定期修剪过长藤蔓可以让株型更丰满，剪下的枝条也能水培生根。\"}}"
   },
   {
     "catalogID": "dracaena-trifasciata",
@@ -45,10 +39,7 @@
     "temperature": "16-29°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "low",
-    "tips": "Use a pot with drainage and avoid watering into the center of the rosette.",
-    "commonNameZhHans": "虎尾兰",
-    "overviewZhHans": "虎尾兰有直立剑形叶片，厚实叶片能储水。它非常耐旱，适合卧室、办公室和低维护空间。",
-    "tipsZhHans": "使用带排水孔的花盆，浇水时尽量避免让水积在叶心。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Snake Plant\",\"overview\":\"Snake Plant has upright sword-like leaves and stores water in thick foliage. It is highly drought tolerant and works well in bedrooms, offices, and low-maintenance spaces.\",\"tips\":\"Use a pot with drainage and avoid watering into the center of the rosette.\"},\"zh-Hans\":{\"commonName\":\"虎尾兰\",\"overview\":\"虎尾兰有直立剑形叶片，厚实叶片能储水。它非常耐旱，适合卧室、办公室和低维护空间。\",\"tips\":\"使用带排水孔的花盆，浇水时尽量避免让水积在叶心。\"}}"
   },
   {
     "catalogID": "zamioculcas-zamiifolia",
@@ -62,10 +53,7 @@
     "temperature": "18-30°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "low",
-    "tips": "Rotate the pot occasionally so stems grow evenly toward the light.",
-    "commonNameZhHans": "金钱树",
-    "overviewZhHans": "金钱树有油亮直立的叶片和能储水的肥厚根茎。它适合光线偏弱的空间，也能容忍不规律浇水。",
-    "tipsZhHans": "偶尔转动花盆，让枝叶均匀朝光生长。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"ZZ Plant\",\"overview\":\"ZZ Plant has glossy upright leaves and thick rhizomes that store water. It is a reliable choice for lower-light spaces and irregular watering routines.\",\"tips\":\"Rotate the pot occasionally so stems grow evenly toward the light.\"},\"zh-Hans\":{\"commonName\":\"金钱树\",\"overview\":\"金钱树有油亮直立的叶片和能储水的肥厚根茎。它适合光线偏弱的空间，也能容忍不规律浇水。\",\"tips\":\"偶尔转动花盆，让枝叶均匀朝光生长。\"}}"
   },
   {
     "catalogID": "spathiphyllum-wallisii",
@@ -79,10 +67,7 @@
     "temperature": "18-27°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "medium",
-    "tips": "Wipe leaves regularly so the plant can photosynthesize efficiently.",
-    "commonNameZhHans": "白掌",
-    "overviewZhHans": "白掌有浓绿叶片和白色佛焰苞，花序高于叶丛。它喜欢土壤保持微湿和稳定的室内环境。",
-    "tipsZhHans": "定期擦拭叶片能提高光合作用效率，也能让叶片更有光泽。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Peace Lily\",\"overview\":\"Peace Lily is a leafy indoor plant with white spathes that appear above dark green foliage. It prefers evenly moist soil and stable indoor conditions.\",\"tips\":\"Wipe leaves regularly so the plant can photosynthesize efficiently.\"},\"zh-Hans\":{\"commonName\":\"白掌\",\"overview\":\"白掌有浓绿叶片和白色佛焰苞，花序高于叶丛。它喜欢土壤保持微湿和稳定的室内环境。\",\"tips\":\"定期擦拭叶片能提高光合作用效率，也能让叶片更有光泽。\"}}"
   },
   {
     "catalogID": "chlorophytum-comosum",
@@ -96,10 +81,7 @@
     "temperature": "16-27°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "medium",
-    "tips": "Plantlets can be rooted while still attached or clipped and rooted separately.",
-    "commonNameZhHans": "吊兰",
-    "overviewZhHans": "吊兰会长出拱形条纹叶片，并在长茎上形成小植株。它适应性强、生长快，也很容易繁殖。",
-    "tipsZhHans": "小吊兰可以连在母株上生根，也可以剪下后单独扦插。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Spider Plant\",\"overview\":\"Spider Plant forms arching striped leaves and baby plantlets on long stems. It is adaptable, fast-growing, and simple to propagate.\",\"tips\":\"Plantlets can be rooted while still attached or clipped and rooted separately.\"},\"zh-Hans\":{\"commonName\":\"吊兰\",\"overview\":\"吊兰会长出拱形条纹叶片，并在长茎上形成小植株。它适应性强、生长快，也很容易繁殖。\",\"tips\":\"小吊兰可以连在母株上生根，也可以剪下后单独扦插。\"}}"
   },
   {
     "catalogID": "ficus-elastica",
@@ -113,10 +95,7 @@
     "temperature": "18-29°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "medium",
-    "tips": "Dust the large leaves often and rotate the pot for even growth.",
-    "commonNameZhHans": "橡皮树",
-    "overviewZhHans": "橡皮树有宽大油亮的叶片和挺拔株型。在明亮散射光和稳定浇水下，它能长成很有存在感的室内小树。",
-    "tipsZhHans": "经常清洁大叶片，并定期转盆，让植株受光更均匀。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Rubber Plant\",\"overview\":\"Rubber Plant has broad glossy leaves and a strong upright shape. It becomes a bold indoor tree when given bright filtered light and consistent watering.\",\"tips\":\"Dust the large leaves often and rotate the pot for even growth.\"},\"zh-Hans\":{\"commonName\":\"橡皮树\",\"overview\":\"橡皮树有宽大油亮的叶片和挺拔株型。在明亮散射光和稳定浇水下，它能长成很有存在感的室内小树。\",\"tips\":\"经常清洁大叶片，并定期转盆，让植株受光更均匀。\"}}"
   },
   {
     "catalogID": "ficus-lyrata",
@@ -130,10 +109,7 @@
     "temperature": "18-27°C",
     "diseaseRiskLevel": "high",
     "fertilizerLevel": "medium",
-    "tips": "Avoid moving it often; choose a bright spot and let it settle.",
-    "commonNameZhHans": "琴叶榕",
-    "overviewZhHans": "琴叶榕是一种室内树形植物，拥有大而像小提琴的叶片。它需要稳定的强散射光和规律浇水，不喜欢频繁移动。",
-    "tipsZhHans": "选好明亮位置后尽量少移动，让它有时间适应环境。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Fiddle Leaf Fig\",\"overview\":\"Fiddle Leaf Fig is an indoor tree with large violin-shaped leaves. It rewards stable bright light and steady watering but dislikes frequent movement.\",\"tips\":\"Avoid moving it often; choose a bright spot and let it settle.\"},\"zh-Hans\":{\"commonName\":\"琴叶榕\",\"overview\":\"琴叶榕是一种室内树形植物，拥有大而像小提琴的叶片。它需要稳定的强散射光和规律浇水，不喜欢频繁移动。\",\"tips\":\"选好明亮位置后尽量少移动，让它有时间适应环境。\"}}"
   },
   {
     "catalogID": "pilea-peperomioides",
@@ -147,10 +123,7 @@
     "temperature": "16-27°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "medium",
-    "tips": "Separate offsets once they have their own small roots.",
-    "commonNameZhHans": "镜面草",
-    "overviewZhHans": "镜面草有圆圆的硬币状叶片和细长叶柄。它株型紧凑，在明亮光线下生长较快，也常长出小侧芽。",
-    "tipsZhHans": "等侧芽长出自己的小根后，再把它们分株栽种。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Chinese Money Plant\",\"overview\":\"Chinese Money Plant has round coin-shaped leaves on slender stems. It stays compact, grows quickly in bright light, and often produces small offsets.\",\"tips\":\"Separate offsets once they have their own small roots.\"},\"zh-Hans\":{\"commonName\":\"镜面草\",\"overview\":\"镜面草有圆圆的硬币状叶片和细长叶柄。它株型紧凑，在明亮光线下生长较快，也常长出小侧芽。\",\"tips\":\"等侧芽长出自己的小根后，再把它们分株栽种。\"}}"
   },
   {
     "catalogID": "nephrolepis-exaltata",
@@ -164,10 +137,7 @@
     "temperature": "16-24°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "medium",
-    "tips": "A bright bathroom or humid corner is often better than a dry sunny shelf.",
-    "commonNameZhHans": "波士顿蕨",
-    "overviewZhHans": "波士顿蕨有柔软下垂的羽状叶，整体质感蓬松。相比多数常见室内植物，它更喜欢湿润土壤、过滤光和较高空气湿度。",
-    "tipsZhHans": "明亮的浴室或湿度较高的角落，通常比干燥晒台更适合它。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Boston Fern\",\"overview\":\"Boston Fern has soft arching fronds and a lush texture. It prefers evenly moist soil, filtered light, and higher humidity than most common houseplants.\",\"tips\":\"A bright bathroom or humid corner is often better than a dry sunny shelf.\"},\"zh-Hans\":{\"commonName\":\"波士顿蕨\",\"overview\":\"波士顿蕨有柔软下垂的羽状叶，整体质感蓬松。相比多数常见室内植物，它更喜欢湿润土壤、过滤光和较高空气湿度。\",\"tips\":\"明亮的浴室或湿度较高的角落，通常比干燥晒台更适合它。\"}}"
   },
   {
     "catalogID": "goeppertia-orbifolia",
@@ -181,10 +151,7 @@
     "temperature": "18-27°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "low",
-    "tips": "Use filtered or rested water if leaf edges brown despite good humidity.",
-    "commonNameZhHans": "圆叶竹芋",
-    "overviewZhHans": "圆叶竹芋以宽大带浅色条纹的叶片为观赏重点。它喜欢柔和散射光、稳定温暖环境和持续微湿的土壤。",
-    "tipsZhHans": "如果湿度合适但叶缘仍发黄发焦，可以改用过滤水或静置后的水。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Calathea\",\"overview\":\"Calathea is grown for broad patterned leaves with pale striping. It prefers soft filtered light, stable warmth, and consistently moist soil.\",\"tips\":\"Use filtered or rested water if leaf edges brown despite good humidity.\"},\"zh-Hans\":{\"commonName\":\"圆叶竹芋\",\"overview\":\"圆叶竹芋以宽大带浅色条纹的叶片为观赏重点。它喜欢柔和散射光、稳定温暖环境和持续微湿的土壤。\",\"tips\":\"如果湿度合适但叶缘仍发黄发焦，可以改用过滤水或静置后的水。\"}}"
   },
   {
     "catalogID": "philodendron-hederaceum",
@@ -198,10 +165,7 @@
     "temperature": "18-29°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "medium",
-    "tips": "Pinch back long vines to keep the plant full.",
-    "commonNameZhHans": "心叶蔓绿绒",
-    "overviewZhHans": "心叶蔓绿绒是一种垂吊植物，叶片柔软呈心形。它适应性强、生长快，适合吊盆或摆在架子上自然垂落。",
-    "tipsZhHans": "适当摘心或修剪长藤，可以让植株保持丰满。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Heartleaf Philodendron\",\"overview\":\"Heartleaf Philodendron is a trailing plant with soft heart-shaped leaves. It is adaptable, fast-growing, and works well in hanging pots or on shelves.\",\"tips\":\"Pinch back long vines to keep the plant full.\"},\"zh-Hans\":{\"commonName\":\"心叶蔓绿绒\",\"overview\":\"心叶蔓绿绒是一种垂吊植物，叶片柔软呈心形。它适应性强、生长快，适合吊盆或摆在架子上自然垂落。\",\"tips\":\"适当摘心或修剪长藤，可以让植株保持丰满。\"}}"
   },
   {
     "catalogID": "aloe-barbadensis-miller",
@@ -215,10 +179,7 @@
     "temperature": "16-29°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "low",
-    "tips": "A gritty cactus mix and drainage hole are more important than frequent watering.",
-    "commonNameZhHans": "芦荟",
-    "overviewZhHans": "芦荟是叶片肥厚、能储水的多肉植物。它需要充足光照、快速排水的土壤，以及两次浇水之间较长的干燥期。",
-    "tipsZhHans": "颗粒感强的仙人掌介质和排水孔，比频繁浇水更重要。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Aloe Vera\",\"overview\":\"Aloe Vera is a succulent with thick water-storing leaves. It needs strong light, fast-draining soil, and long dry periods between watering.\",\"tips\":\"A gritty cactus mix and drainage hole are more important than frequent watering.\"},\"zh-Hans\":{\"commonName\":\"芦荟\",\"overview\":\"芦荟是叶片肥厚、能储水的多肉植物。它需要充足光照、快速排水的土壤，以及两次浇水之间较长的干燥期。\",\"tips\":\"颗粒感强的仙人掌介质和排水孔，比频繁浇水更重要。\"}}"
   },
   {
     "catalogID": "echeveria-elegans",
@@ -232,10 +193,7 @@
     "temperature": "15-28°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "low",
-    "tips": "If the rosette stretches upward, it needs more light.",
-    "commonNameZhHans": "拟石莲花",
-    "overviewZhHans": "拟石莲花是紧凑莲座状多肉，叶片带粉感。它需要强光和偏干土壤，才能保持颜色和对称株型。",
-    "tipsZhHans": "如果莲座开始向上拉长，通常说明光照不足。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Echeveria\",\"overview\":\"Echeveria is a compact rosette succulent with powdery leaves. It needs strong light and dry soil to stay colorful and symmetrical.\",\"tips\":\"If the rosette stretches upward, it needs more light.\"},\"zh-Hans\":{\"commonName\":\"拟石莲花\",\"overview\":\"拟石莲花是紧凑莲座状多肉，叶片带粉感。它需要强光和偏干土壤，才能保持颜色和对称株型。\",\"tips\":\"如果莲座开始向上拉长，通常说明光照不足。\"}}"
   },
   {
     "catalogID": "crassula-ovata",
@@ -249,10 +207,7 @@
     "temperature": "18-27°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "low",
-    "tips": "Prune lightly to keep a compact tree-like shape.",
-    "commonNameZhHans": "玉树",
-    "overviewZhHans": "玉树是木质化多肉植物，叶片厚实椭圆。它生长较慢、寿命很长，喜欢明亮光线和干湿分明的浇水节奏。",
-    "tipsZhHans": "轻度修剪能帮助它维持紧凑的小树形态。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Jade Plant\",\"overview\":\"Jade Plant is a woody succulent with thick oval leaves. It grows slowly, lives for many years, and prefers bright light with dry soil cycles.\",\"tips\":\"Prune lightly to keep a compact tree-like shape.\"},\"zh-Hans\":{\"commonName\":\"玉树\",\"overview\":\"玉树是木质化多肉植物，叶片厚实椭圆。它生长较慢、寿命很长，喜欢明亮光线和干湿分明的浇水节奏。\",\"tips\":\"轻度修剪能帮助它维持紧凑的小树形态。\"}}"
   },
   {
     "catalogID": "mammillaria-elongata",
@@ -266,10 +221,7 @@
     "temperature": "15-30°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "low",
-    "tips": "Use a gritty mineral-heavy mix and never let the pot sit in water.",
-    "commonNameZhHans": "金手指仙人掌",
-    "overviewZhHans": "金手指仙人掌会形成一簇簇细长圆柱茎，表面布满小刺。它株型小巧、耐旱，适合明亮窗台。",
-    "tipsZhHans": "使用颗粒和矿物质比例高的介质，避免花盆长期积水。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Ladyfinger Cactus\",\"overview\":\"Ladyfinger Cactus forms clusters of narrow cylindrical stems covered in small spines. It is compact, drought tolerant, and ideal for bright windowsills.\",\"tips\":\"Use a gritty mineral-heavy mix and never let the pot sit in water.\"},\"zh-Hans\":{\"commonName\":\"金手指仙人掌\",\"overview\":\"金手指仙人掌会形成一簇簇细长圆柱茎，表面布满小刺。它株型小巧、耐旱，适合明亮窗台。\",\"tips\":\"使用颗粒和矿物质比例高的介质，避免花盆长期积水。\"}}"
   },
   {
     "catalogID": "phalaenopsis-amabilis",
@@ -283,10 +235,7 @@
     "temperature": "18-27°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "medium",
-    "tips": "Keep the crown dry and let excess water drain fully after watering.",
-    "commonNameZhHans": "蝴蝶兰",
-    "overviewZhHans": "蝴蝶兰是常见室内兰花，花期较长。它通常种在树皮介质中，喜欢过滤光和透气的根系环境。",
-    "tipsZhHans": "浇水后让多余水分充分流走，并保持叶心干燥。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Moth Orchid\",\"overview\":\"Moth Orchid is a common indoor orchid with long-lasting blooms. It grows in bark mix, prefers filtered light, and needs roots that can breathe.\",\"tips\":\"Keep the crown dry and let excess water drain fully after watering.\"},\"zh-Hans\":{\"commonName\":\"蝴蝶兰\",\"overview\":\"蝴蝶兰是常见室内兰花，花期较长。它通常种在树皮介质中，喜欢过滤光和透气的根系环境。\",\"tips\":\"浇水后让多余水分充分流走，并保持叶心干燥。\"}}"
   },
   {
     "catalogID": "anthurium-andraeanum",
@@ -300,10 +249,7 @@
     "temperature": "18-28°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "medium",
-    "tips": "Use an airy mix with bark or perlite instead of dense potting soil.",
-    "commonNameZhHans": "红掌",
-    "overviewZhHans": "红掌有油亮心形叶片和彩色蜡质佛焰苞。它喜欢明亮散射光、透气介质和温暖湿润环境。",
-    "tipsZhHans": "使用含树皮或珍珠岩的透气介质，不要用过于板结的土。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Anthurium\",\"overview\":\"Anthurium has glossy heart-shaped leaves and colorful waxy spathes. It prefers bright filtered light, airy soil, and warm humid conditions.\",\"tips\":\"Use an airy mix with bark or perlite instead of dense potting soil.\"},\"zh-Hans\":{\"commonName\":\"红掌\",\"overview\":\"红掌有油亮心形叶片和彩色蜡质佛焰苞。它喜欢明亮散射光、透气介质和温暖湿润环境。\",\"tips\":\"使用含树皮或珍珠岩的透气介质，不要用过于板结的土。\"}}"
   },
   {
     "catalogID": "dracaena-sanderiana",
@@ -317,10 +263,7 @@
     "temperature": "18-29°C",
     "diseaseRiskLevel": "low",
     "fertilizerLevel": "low",
-    "tips": "Use filtered water if leaf tips brown or stems yellow.",
-    "commonNameZhHans": "富贵竹",
-    "overviewZhHans": "富贵竹是常以水培或轻质介质栽培的龙血树属植物。它株型小巧、有装饰性，也能适应室内光线。",
-    "tipsZhHans": "如果叶尖发黄或茎秆变黄，可以尝试使用过滤水。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"Lucky Bamboo\",\"overview\":\"Lucky Bamboo is a Dracaena often grown in water or a light potting mix. It is compact, decorative, and tolerant of indoor light.\",\"tips\":\"Use filtered water if leaf tips brown or stems yellow.\"},\"zh-Hans\":{\"commonName\":\"富贵竹\",\"overview\":\"富贵竹是常以水培或轻质介质栽培的龙血树属植物。它株型小巧、有装饰性，也能适应室内光线。\",\"tips\":\"如果叶尖发黄或茎秆变黄，可以尝试使用过滤水。\"}}"
   },
   {
     "catalogID": "hedera-helix",
@@ -334,9 +277,6 @@
     "temperature": "12-24°C",
     "diseaseRiskLevel": "medium",
     "fertilizerLevel": "medium",
-    "tips": "Trim vines regularly for a denser, less tangled plant.",
-    "commonNameZhHans": "常春藤",
-    "overviewZhHans": "常春藤是一种带裂叶的垂蔓植物。室内养护时，它更喜欢凉爽房间、明亮散射光和均匀微湿的土壤。",
-    "tipsZhHans": "定期修剪藤蔓，可以让株型更浓密，也不容易打结。"
+    "localizedContentsJSON": "{\"en\":{\"commonName\":\"English Ivy\",\"overview\":\"English Ivy is a trailing vine with lobed leaves. Indoors it prefers cool rooms, bright filtered light, and evenly moist soil.\",\"tips\":\"Trim vines regularly for a denser, less tangled plant.\"},\"zh-Hans\":{\"commonName\":\"常春藤\",\"overview\":\"常春藤是一种带裂叶的垂蔓植物。室内养护时，它更喜欢凉爽房间、明亮散射光和均匀微湿的土壤。\",\"tips\":\"定期修剪藤蔓，可以让株型更浓密，也不容易打结。\"}}"
   }
 ]

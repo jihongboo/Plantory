@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Snake Plant"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "虎尾兰"
-  },
   "species": {
     "type": "stringType",
     "value": "Dracaena trifasciata"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Snake Plant has upright sword-like leaves and stores water in thick foliage. It is highly drought tolerant and works well in bedrooms, offices, and low-maintenance spaces."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "虎尾兰有直立剑形叶片，厚实叶片能储水。它非常耐旱，适合卧室、办公室和低维护空间。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "low"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Use a pot with drainage and avoid watering into the center of the rosette."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "使用带排水孔的花盆，浇水时尽量避免让水积在叶心。"
+    "value": "{\"en\":{\"commonName\":\"Snake Plant\",\"overview\":\"Snake Plant has upright sword-like leaves and stores water in thick foliage. It is highly drought tolerant and works well in bedrooms, offices, and low-maintenance spaces.\",\"tips\":\"Use a pot with drainage and avoid watering into the center of the rosette.\"},\"zh-Hans\":{\"commonName\":\"虎尾兰\",\"overview\":\"虎尾兰有直立剑形叶片，厚实叶片能储水。它非常耐旱，适合卧室、办公室和低维护空间。\",\"tips\":\"使用带排水孔的花盆，浇水时尽量避免让水积在叶心。\"}}"
   },
   "image": {
     "type": "assetType",

@@ -38,6 +38,14 @@ struct PlantPage: View {
             }
             .load(load)
             .pixelNavigationTitle(title: plant?.displayName ?? "") {
+                NavigationLink {
+                    if let plant {
+                        PlantNotificationsPage(plant: plant)
+                    }
+                } label: {
+                    Image(systemName: "bell.badge.fill")
+                        .frame(width: 16, height: 16)
+                }
                 Button {
                     isPresentingEditDetails = true
                 } label: {

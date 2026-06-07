@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Spider Plant"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "吊兰"
-  },
   "species": {
     "type": "stringType",
     "value": "Chlorophytum comosum"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Spider Plant forms arching striped leaves and baby plantlets on long stems. It is adaptable, fast-growing, and simple to propagate."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "吊兰会长出拱形条纹叶片，并在长茎上形成小植株。它适应性强、生长快，也很容易繁殖。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "medium"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Plantlets can be rooted while still attached or clipped and rooted separately."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "小吊兰可以连在母株上生根，也可以剪下后单独扦插。"
+    "value": "{\"en\":{\"commonName\":\"Spider Plant\",\"overview\":\"Spider Plant forms arching striped leaves and baby plantlets on long stems. It is adaptable, fast-growing, and simple to propagate.\",\"tips\":\"Plantlets can be rooted while still attached or clipped and rooted separately.\"},\"zh-Hans\":{\"commonName\":\"吊兰\",\"overview\":\"吊兰会长出拱形条纹叶片，并在长茎上形成小植株。它适应性强、生长快，也很容易繁殖。\",\"tips\":\"小吊兰可以连在母株上生根，也可以剪下后单独扦插。\"}}"
   },
   "image": {
     "type": "assetType",

@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Ladyfinger Cactus"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "金手指仙人掌"
-  },
   "species": {
     "type": "stringType",
     "value": "Mammillaria elongata"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Ladyfinger Cactus forms clusters of narrow cylindrical stems covered in small spines. It is compact, drought tolerant, and ideal for bright windowsills."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "金手指仙人掌会形成一簇簇细长圆柱茎，表面布满小刺。它株型小巧、耐旱，适合明亮窗台。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "low"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Use a gritty mineral-heavy mix and never let the pot sit in water."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "使用颗粒和矿物质比例高的介质，避免花盆长期积水。"
+    "value": "{\"en\":{\"commonName\":\"Ladyfinger Cactus\",\"overview\":\"Ladyfinger Cactus forms clusters of narrow cylindrical stems covered in small spines. It is compact, drought tolerant, and ideal for bright windowsills.\",\"tips\":\"Use a gritty mineral-heavy mix and never let the pot sit in water.\"},\"zh-Hans\":{\"commonName\":\"金手指仙人掌\",\"overview\":\"金手指仙人掌会形成一簇簇细长圆柱茎，表面布满小刺。它株型小巧、耐旱，适合明亮窗台。\",\"tips\":\"使用颗粒和矿物质比例高的介质，避免花盆长期积水。\"}}"
   },
   "image": {
     "type": "assetType",

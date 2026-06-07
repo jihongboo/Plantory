@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Monstera"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "龟背竹"
-  },
   "species": {
     "type": "stringType",
     "value": "Monstera deliciosa"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Monstera is a tropical climbing houseplant known for its split leaves. It grows best with steady warmth, bright filtered light, and a chunky, well-draining potting mix."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "龟背竹是一种热带攀援型室内观叶植物，以带有裂口和孔洞的大叶片闻名。它喜欢稳定温暖的环境、明亮散射光和疏松排水好的介质。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "medium"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Give it a moss pole or support if you want larger, more mature leaves."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "如果想让叶片更大更成熟，可以给它加苔藓杆或支撑架。"
+    "value": "{\"en\":{\"commonName\":\"Monstera\",\"overview\":\"Monstera is a tropical climbing houseplant known for its split leaves. It grows best with steady warmth, bright filtered light, and a chunky, well-draining potting mix.\",\"tips\":\"Give it a moss pole or support if you want larger, more mature leaves.\"},\"zh-Hans\":{\"commonName\":\"龟背竹\",\"overview\":\"龟背竹是一种热带攀援型室内观叶植物，以带有裂口和孔洞的大叶片闻名。它喜欢稳定温暖的环境、明亮散射光和疏松排水好的介质。\",\"tips\":\"如果想让叶片更大更成熟，可以给它加苔藓杆或支撑架。\"}}"
   },
   "image": {
     "type": "assetType",

@@ -4,9 +4,9 @@ struct PlantCardView: View {
     let plant: Plant
 
     var body: some View {
-        PixelRoundedRectangleCard {
+        PixelRoundedRectangleCard(fill: .buttonBackground) {
             VStack {
-                ZStack(alignment: .topTrailing) {
+                PixelRectangleCard {
                     Rectangle()
                         .fill(.clear)
                         .frame(height: 132)
@@ -18,12 +18,12 @@ struct PlantCardView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     Text(plant.displayName)
                         .font(.pixel(.title2))
-                        .foregroundStyle(Color(.pixelInk))
+                        .foregroundStyle(.white)
                         .lineLimit(1)
                     
-                    Text(plant.hasPlantInformation ? "Saved plant guide" : "Houseplant")
+                    Text(plant.plantInformation?.displayCommonName ?? "")
                         .font(.pixel(.callout))
-                        .foregroundStyle(Color(.pixelInk).opacity(0.64))
+                        .foregroundStyle(.white.secondary)
                         .lineLimit(1)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -36,7 +36,11 @@ struct PlantCardView: View {
 #Preview {
     HStack {
         PlantCardView(plant: {
-            let p = Plant(nickname: "My Monstera", imageData: PlatformImageData.monstera, information: .init(species: "", commonName: "Plant", temperature: "", tips: ""))
+            let p = Plant(
+                nickname: "My Monstera",
+                imageData: PlatformImageData.monstera,
+                information: .init(species: "", commonName: "Plant", temperature: "")
+            )
             return p
         }())
     }

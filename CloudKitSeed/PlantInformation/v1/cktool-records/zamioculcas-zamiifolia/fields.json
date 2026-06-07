@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "ZZ Plant"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "金钱树"
-  },
   "species": {
     "type": "stringType",
     "value": "Zamioculcas zamiifolia"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "ZZ Plant has glossy upright leaves and thick rhizomes that store water. It is a reliable choice for lower-light spaces and irregular watering routines."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "金钱树有油亮直立的叶片和能储水的肥厚根茎。它适合光线偏弱的空间，也能容忍不规律浇水。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "low"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Rotate the pot occasionally so stems grow evenly toward the light."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "偶尔转动花盆，让枝叶均匀朝光生长。"
+    "value": "{\"en\":{\"commonName\":\"ZZ Plant\",\"overview\":\"ZZ Plant has glossy upright leaves and thick rhizomes that store water. It is a reliable choice for lower-light spaces and irregular watering routines.\",\"tips\":\"Rotate the pot occasionally so stems grow evenly toward the light.\"},\"zh-Hans\":{\"commonName\":\"金钱树\",\"overview\":\"金钱树有油亮直立的叶片和能储水的肥厚根茎。它适合光线偏弱的空间，也能容忍不规律浇水。\",\"tips\":\"偶尔转动花盆，让枝叶均匀朝光生长。\"}}"
   },
   "image": {
     "type": "assetType",

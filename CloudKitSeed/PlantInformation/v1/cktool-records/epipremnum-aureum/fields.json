@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Pothos"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "绿萝"
-  },
   "species": {
     "type": "stringType",
     "value": "Epipremnum aureum"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Pothos is a fast-growing trailing plant with heart-shaped leaves. It is one of the easiest indoor plants for beginners and tolerates a wide range of rooms."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "绿萝是一种生长很快的垂吊植物，叶片呈心形。它非常适合新手，能适应多种室内光照和养护条件。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "low"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Trim long vines to encourage fuller growth and root cuttings in water."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "定期修剪过长藤蔓可以让株型更丰满，剪下的枝条也能水培生根。"
+    "value": "{\"en\":{\"commonName\":\"Pothos\",\"overview\":\"Pothos is a fast-growing trailing plant with heart-shaped leaves. It is one of the easiest indoor plants for beginners and tolerates a wide range of rooms.\",\"tips\":\"Trim long vines to encourage fuller growth and root cuttings in water.\"},\"zh-Hans\":{\"commonName\":\"绿萝\",\"overview\":\"绿萝是一种生长很快的垂吊植物，叶片呈心形。它非常适合新手，能适应多种室内光照和养护条件。\",\"tips\":\"定期修剪过长藤蔓可以让株型更丰满，剪下的枝条也能水培生根。\"}}"
   },
   "image": {
     "type": "assetType",

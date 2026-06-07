@@ -84,9 +84,16 @@ Plantory/Pages/
 
 ### Plant（核心模型）
 ```swift
-id, nickname, plantInformationID, photoData, createdAt, note, activeIssues
-// plantInformationID 用于按需加载 PlantInformation 原始信息；不要在 Plant 中重复保存 species/commonName/care levels 等快照字段
+id, nickname, plantInformation, photoData, createdAt, note, activeIssues
+// plantInformation 通过 SwiftData relationship 关联 PlantInformation 原始信息；不要在 Plant 中重复保存 species/commonName/care levels 等快照字段
 // healthStatus 从 activeIssues 派生：healthy | warning | critical
+```
+
+### PlantInformation（植物百科原始信息）
+```swift
+catalogID, species, commonName, overview, imageData, care levels, localizedContentsJSON
+// CloudKit Public Database 是远端 source of truth；本地 SwiftData 缓存用于优先展示，再异步刷新 CloudKit 并更新本地数据库
+// 多语言 commonName/overview/tips 存在 localizedContentsJSON，不要新增按语言展开的顶层文本字段
 ```
 
 ### Diagnosis（AI诊断记录）

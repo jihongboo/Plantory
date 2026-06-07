@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Jade Plant"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "玉树"
-  },
   "species": {
     "type": "stringType",
     "value": "Crassula ovata"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Jade Plant is a woody succulent with thick oval leaves. It grows slowly, lives for many years, and prefers bright light with dry soil cycles."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "玉树是木质化多肉植物，叶片厚实椭圆。它生长较慢、寿命很长，喜欢明亮光线和干湿分明的浇水节奏。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "low"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Prune lightly to keep a compact tree-like shape."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "轻度修剪能帮助它维持紧凑的小树形态。"
+    "value": "{\"en\":{\"commonName\":\"Jade Plant\",\"overview\":\"Jade Plant is a woody succulent with thick oval leaves. It grows slowly, lives for many years, and prefers bright light with dry soil cycles.\",\"tips\":\"Prune lightly to keep a compact tree-like shape.\"},\"zh-Hans\":{\"commonName\":\"玉树\",\"overview\":\"玉树是木质化多肉植物，叶片厚实椭圆。它生长较慢、寿命很长，喜欢明亮光线和干湿分明的浇水节奏。\",\"tips\":\"轻度修剪能帮助它维持紧凑的小树形态。\"}}"
   },
   "image": {
     "type": "assetType",

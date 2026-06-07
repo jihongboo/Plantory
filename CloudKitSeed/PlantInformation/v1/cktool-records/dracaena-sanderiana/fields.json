@@ -7,10 +7,6 @@
     "type": "stringType",
     "value": "Lucky Bamboo"
   },
-  "commonNameZhHans": {
-    "type": "stringType",
-    "value": "富贵竹"
-  },
   "species": {
     "type": "stringType",
     "value": "Dracaena sanderiana"
@@ -18,10 +14,6 @@
   "overview": {
     "type": "stringType",
     "value": "Lucky Bamboo is a Dracaena often grown in water or a light potting mix. It is compact, decorative, and tolerant of indoor light."
-  },
-  "overviewZhHans": {
-    "type": "stringType",
-    "value": "富贵竹是常以水培或轻质介质栽培的龙血树属植物。它株型小巧、有装饰性，也能适应室内光线。"
   },
   "careDifficulty": {
     "type": "stringType",
@@ -51,13 +43,9 @@
     "type": "stringType",
     "value": "low"
   },
-  "tips": {
+  "localizedContentsJSON": {
     "type": "stringType",
-    "value": "Use filtered water if leaf tips brown or stems yellow."
-  },
-  "tipsZhHans": {
-    "type": "stringType",
-    "value": "如果叶尖发黄或茎秆变黄，可以尝试使用过滤水。"
+    "value": "{\"en\":{\"commonName\":\"Lucky Bamboo\",\"overview\":\"Lucky Bamboo is a Dracaena often grown in water or a light potting mix. It is compact, decorative, and tolerant of indoor light.\",\"tips\":\"Use filtered water if leaf tips brown or stems yellow.\"},\"zh-Hans\":{\"commonName\":\"富贵竹\",\"overview\":\"富贵竹是常以水培或轻质介质栽培的龙血树属植物。它株型小巧、有装饰性，也能适应室内光线。\",\"tips\":\"如果叶尖发黄或茎秆变黄，可以尝试使用过滤水。\"}}"
   },
   "image": {
     "type": "assetType",

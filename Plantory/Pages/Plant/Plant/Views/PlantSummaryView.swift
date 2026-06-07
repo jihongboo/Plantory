@@ -12,13 +12,15 @@ struct PlantSummaryView: View {
                             .font(.pixel(.title))
                             .foregroundStyle(.pixelInk)
                             .lineLimit(2)
+                        Text(plant.plantInformation?.displayCommonName ?? "")
+                            .foregroundStyle(.pixelInk.secondary)
                     }
 
                     Spacer(minLength: 8)
 
-                    if let plantInformationID = plant.plantInformationID {
+                    if let plantInformation = plant.plantInformation {
                         NavigationLink {
-                            PlantInformationPage(id: plantInformationID)
+                            PlantInformationPage(plantInformation: plantInformation)
                         } label: {
                             Image(systemName: "book.pages.fill")
                                 .font(.headline.weight(.black))

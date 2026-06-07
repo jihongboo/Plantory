@@ -15,7 +15,7 @@ extension ModelContainer {
     static let preview: ModelContainer = {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try! ModelContainer(
-            for: Plant.self, PlantRecord.self, PlantNotificationSetting.self,
+            for: Plant.self, PlantInformation.self, PlantRecord.self, PlantNotificationSetting.self,
             configurations: config
         )
         PreviewData.populate(into: container.mainContext)
@@ -25,7 +25,7 @@ extension ModelContainer {
     static let empty: ModelContainer = {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try! ModelContainer(
-            for: Plant.self, PlantRecord.self, PlantNotificationSetting.self,
+            for: Plant.self, PlantInformation.self, PlantRecord.self, PlantNotificationSetting.self,
             configurations: config
         )
         return container
@@ -34,6 +34,8 @@ extension ModelContainer {
 
 enum PreviewData {
     static func populate(into context: ModelContext) {
+        context.insert(PlantInformation.monstera)
+        context.insert(PlantInformation.succulent)
         context.insert(Plant.monstera)
         context.insert(Plant.succulent)
     }

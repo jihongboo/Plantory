@@ -12,7 +12,7 @@ struct PixelRectangleCard<Content: View>: View {
     @ViewBuilder var content: Content
     
     init(
-        fill: Color = .cardBackground,
+        fill: Color = .pixelCream,
         @ViewBuilder content: () -> Content
     ) {
         self.fill = fill
