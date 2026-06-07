@@ -40,7 +40,9 @@ struct AddLogPage: View {
         }
         .pixelBottomActionBar {
             Button("Save Log", systemImage: "checkmark") {
-                saveLog()
+                Task {
+                    await saveLog()
+                }
             }
             .buttonStyle(.pixelRoundedRectangle(width: .expanded))
         }
@@ -57,23 +59,44 @@ private extension AddLogPage {
         value.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
-    func saveLog() {
+    func saveLog() async {
         do {
             let trimmedNote = trimmed(note)
+            let recordID = UUID()
+            let photoID = recordImage == nil ? nil : UUID()
             let photoData = try recordImage.map {
-                try ImageCompression.compressedPNGData(from: $0)
+                guard let data = ImageCompression.compressedJPEGData(from: $0) else {
+                    throw AppError.custom("The photo data is broken.")
+                }
+                return data
+            }
+
+            if let photoData, let photoID {
+                try PlantRecordPhotoStore.shared.savePhotoData(photoData, for: photoID)
             }
 
             let record = PlantRecord(
+                id: recordID,
                 createdAt: createdAt,
                 note: trimmedNote,
-                photoData: photoData,
+                photoID: photoID,
                 plant: plant
             )
             
             modelContext.insert(record)
             try modelContext.save()
             dismiss()
+
+            if photoID != nil {
+                Task { @MainActor in
+                    do {
+                        try await PlantRecordPhotoStore.shared.uploadPhoto(for: record)
+                        try modelContext.save()
+                    } catch {
+                        // Keep the local log usable. A later sync pass can retry the upload.
+                    }
+                }
+            }
         } catch {
             // show error alert
         }

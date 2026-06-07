@@ -4,26 +4,34 @@ import SwiftData
 
 @Model
 final class PlantRecord {
+    #Index<PlantRecord>([\.id])
+
+    var id: UUID = UUID()
     var actionType: RecordActionType?
     var createdAt: Date = Date()
     var note: String = ""
-    @Attribute(.externalStorage)
-    var photoData: Data?
+    var photoID: UUID?
 
     var plant: Plant?
 
     init(
+        id: UUID = UUID(),
         actionType: RecordActionType? = nil,
         createdAt: Date = .now,
         note: String = "",
-        photoData: Data? = nil,
+        photoID: UUID? = nil,
         plant: Plant? = nil
     ) {
+        self.id = id
         self.actionType = actionType
         self.createdAt = createdAt
         self.note = note
-        self.photoData = photoData
+        self.photoID = photoID
         self.plant = plant
+    }
+
+    var hasPhoto: Bool {
+        photoID != nil
     }
 
     @MainActor
@@ -31,7 +39,7 @@ final class PlantRecord {
         if let actionType {
             return actionType.label
         }
-        if photoData != nil {
+        if hasPhoto {
             return "Photo Record"
         }
         return "Record"
@@ -42,7 +50,7 @@ final class PlantRecord {
         if let actionType {
             return actionType.systemImage
         }
-        if photoData != nil {
+        if hasPhoto {
             return "camera.fill"
         }
         return "note.text"
@@ -53,7 +61,7 @@ final class PlantRecord {
         if let actionType {
             return actionType.themeColor
         }
-        if photoData != nil {
+        if hasPhoto {
             return .pixelLeaf
         }
         return .pixelPaperShadow

@@ -2,6 +2,8 @@ import SwiftUI
 
 struct PlantRecordView: View {
     let record: PlantRecord
+    
+    @State private var photoData: Data?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -36,7 +38,7 @@ struct PlantRecordView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
 
-            if let photoData = record.photoData,
+            if let photoData,
                let image = Image(data: photoData) {
                 image
                     .resizable()
@@ -51,6 +53,9 @@ struct PlantRecordView: View {
             }
         }
         .padding(.vertical, 12)
+        .task(id: record.photoID) {
+            await loadPhoto()
+        }
     }
 }
 
@@ -64,4 +69,14 @@ struct PlantRecordView: View {
         )
     }
     .padding()
+}
+
+private extension PlantRecordView {
+    func loadPhoto() async {
+        do {
+            photoData = try await PlantRecordPhotoStore.shared.photoData(for: record)
+        } catch {
+            photoData = nil
+        }
+    }
 }

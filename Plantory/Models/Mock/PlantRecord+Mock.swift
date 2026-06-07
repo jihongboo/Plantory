@@ -9,9 +9,10 @@ extension PlantRecord {
             plant: .monstera
         ),
         PlantRecord(
+            id: PlantRecord.monsteraPhotoRecordID,
             createdAt: .now.addingTimeInterval(-3 * 86_400),
             note: "Checked a few yellow edges on older leaves.",
-            photoData: PlatformImageData.monstera,
+            photoID: PlantRecord.prepareMonsteraPhoto,
             plant: .monstera
         )
     ]
@@ -24,11 +25,27 @@ extension PlantRecord {
                 plant: plant
             ),
             PlantRecord(
+                id: Self.monsteraPhotoRecordID,
                 createdAt: .now.addingTimeInterval(-3 * 86_400),
                 note: "Checked a few yellow edges on older leaves.",
-                photoData: PlatformImageData.monstera,
+                photoID: Self.prepareMonsteraPhoto,
                 plant: plant
             )
         ]
+    }
+}
+
+@MainActor
+private extension PlantRecord {
+    static let monsteraPhotoRecordID = UUID(uuidString: "9AE7F5F5-5970-4D99-9877-75693626FE73")!
+    static let monsteraPhotoID = UUID(uuidString: "9D44A7D7-5B6F-44FE-9C66-1BA55B140305")!
+
+    static var prepareMonsteraPhoto: UUID? {
+        guard let photoData = PlatformImageData.monstera else {
+            return nil
+        }
+
+        try? PlantRecordPhotoStore.shared.savePhotoData(photoData, for: monsteraPhotoID)
+        return monsteraPhotoID
     }
 }
