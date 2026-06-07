@@ -12,47 +12,44 @@ struct AddLogPage: View {
     @State private var recordImage: PlatformImage?
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section {
-                    RecordPhotoButton(image: $recordImage)
-                        .aspectRatio(1.8, contentMode: .fit)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                }
-                
-                Section("Log Detail") {
-                    DatePicker("Time", selection: $createdAt)
-                        .font(.headline)
-                    
-                    
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Notes(Optional)")
-                            .font(.headline)
-                        
-                        TextField("Write something about this plant", text: $note, axis: .vertical)
-                            .lineLimit(4...8)
+        PixelPage {
+            ScrollView {
+                LazyVStack(spacing: 16) {
+                    PixelRoundedRectangleCard(
+                        title: "Record Photo",
+                        systemImage: "camera.fill"
+                    ) {
+                        RecordPhotoButton(image: $recordImage)
+                            .aspectRatio(1.8, contentMode: .fit)
                     }
+                                        
+                    AddLogDetailsCard(
+                        createdAt: $createdAt,
+                        note: $note
+                    )
                 }
             }
-            .navigationTitle("Add Log")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        saveLog()
-                    }
-                    .disabled(recordImage == nil)
+            .pixelNavigationTitle(title: "Add Log", subtitle: plant.displayName) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .frame(width: 16, height: 16)
                 }
             }
         }
+        .pixelBottomActionBar {
+            Button("Save Log", systemImage: "checkmark") {
+                saveLog()
+            }
+            .buttonStyle(.pixelRoundedRectangle(width: .expanded))
+        }
     }
+}
+
+#Preview {
+    AddLogPage(plant: .monstera)
+        .modelContainer(.preview)
 }
 
 private extension AddLogPage {
@@ -61,11 +58,11 @@ private extension AddLogPage {
     }
     
     func saveLog() {
-        guard let recordImage else { return }
-
         do {
             let trimmedNote = trimmed(note)
-            let photoData = try ImageCompression.compressedPNGData(from: recordImage)
+            let photoData = try recordImage.map {
+                try ImageCompression.compressedPNGData(from: $0)
+            }
 
             let record = PlantRecord(
                 createdAt: createdAt,
@@ -81,9 +78,4 @@ private extension AddLogPage {
             // show error alert
         }
     }
-}
-
-#Preview {
-    AddLogPage(plant: .monstera)
-        .modelContainer(.preview)
 }

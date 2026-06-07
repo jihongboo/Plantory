@@ -40,29 +40,31 @@ private extension RecordPhotoButton {
     @ViewBuilder
     var photoPreview: some View {
         if let selectedImage {
-            selectedImage
-                .resizable()
-                .scaledToFit()
-                .frame(maxWidth: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            PixelRectangleCard(fill: .pixelCream) {
+                selectedImage
+                    .pixelate()
+                    .resizable()
+                    .scaledToFill()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .clipped()
+            }
         } else {
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(Color.green.opacity(0.08))
-                .overlay {
-                    VStack(spacing: 10) {
-                        Image(systemName: "camera.on.rectangle")
-                            .font(.system(size: 28))
-                            .foregroundStyle(.green)
+            PixelRectangleCard(fill: .pixelCream) {
+                VStack(spacing: 10) {
+                    Image(systemName: "camera.on.rectangle")
+                        .font(.title2.weight(.black))
+                        .foregroundStyle(.pixelLeaf)
 
-                        Text("No photo attached")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                    Text("No photo attached")
+                        .font(.pixel(.headline))
+                        .foregroundStyle(.pixelInk)
 
-                        Text("Tap to add")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
+                    Text("Tap to add")
+                        .font(.pixel(.subheadline))
+                        .foregroundStyle(Color.pixelInk.opacity(0.62))
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
     }
 

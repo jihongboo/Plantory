@@ -6,24 +6,24 @@ struct PlantRecordView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 10) {
-                Image(systemName: record.type.systemImage)
+                Image(systemName: record.displaySystemImage)
                     .font(.subheadline.weight(.black))
                     .foregroundStyle(.white)
                     .frame(width: 34, height: 34)
-                    .background(record.type.themeColor)
+                    .background(record.displayThemeColor)
                     .overlay {
                         Rectangle()
-                            .stroke(Color(.pixelInk).opacity(0.58), lineWidth: 2)
+                            .stroke(Color.pixelInk.opacity(0.58), lineWidth: 2)
                     }
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(record.type.label)
+                    Text(record.displayLabel)
                         .font(.pixel(.title3))
-                        .foregroundStyle(Color(.pixelInk))
+                        .foregroundStyle(.pixelInk)
 
                     Text(record.createdAt.formatted(date: .abbreviated, time: .shortened))
                         .font(.pixel(.footnote))
-                        .foregroundStyle(Color(.pixelInk).opacity(0.54))
+                        .foregroundStyle(Color.pixelInk.opacity(0.54))
                 }
 
                 Spacer(minLength: 0)
@@ -32,7 +32,7 @@ struct PlantRecordView: View {
             if !record.note.isEmpty {
                 Text(record.note)
                     .font(.pixel(.callout))
-                    .foregroundStyle(Color(.pixelInk).opacity(0.76))
+                    .foregroundStyle(Color.pixelInk.opacity(0.76))
                     .fixedSize(horizontal: false, vertical: true)
             }
 
@@ -43,10 +43,10 @@ struct PlantRecordView: View {
                     .scaledToFit()
                     .frame(maxHeight: 180)
                     .padding(6)
-                    .background(Color(.pixelCream))
+                    .background(.pixelCream)
                     .overlay {
                         Rectangle()
-                            .stroke(Color(.pixelPaperShadow).opacity(0.72), lineWidth: 2)
+                            .stroke(Color.pixelPaperShadow.opacity(0.72), lineWidth: 2)
                     }
             }
         }

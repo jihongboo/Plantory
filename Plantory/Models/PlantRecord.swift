@@ -4,7 +4,7 @@ import SwiftData
 
 @Model
 final class PlantRecord {
-    var actionTypeRawValue: String?
+    var actionType: RecordActionType?
     var createdAt: Date = Date()
     var note: String = ""
     @Attribute(.externalStorage)
@@ -13,59 +13,50 @@ final class PlantRecord {
     var plant: Plant?
 
     init(
-        actionType: RecordActionType,
-        createdAt: Date = .now,
-        plant: Plant? = nil
-    ) {
-        self.actionTypeRawValue = actionType.rawValue
-        self.createdAt = createdAt
-        self.plant = plant
-    }
-
-    init(
+        actionType: RecordActionType? = nil,
         createdAt: Date = .now,
         note: String = "",
-        photoData: Data?,
+        photoData: Data? = nil,
         plant: Plant? = nil
     ) {
-        self.actionTypeRawValue = nil
+        self.actionType = actionType
         self.createdAt = createdAt
         self.note = note
         self.photoData = photoData
         self.plant = plant
     }
 
-    var category: RecordCategory {
-        actionType == nil ? .entry : .action
-    }
-
-    var actionType: RecordActionType? {
-        get {
-            guard let actionTypeRawValue else { return nil }
-            return RecordActionType(rawValue: actionTypeRawValue)
-        }
-        set {
-            actionTypeRawValue = newValue?.rawValue
-        }
-    }
-
-    var type: RecordType {
+    @MainActor
+    var displayLabel: LocalizedStringKey {
         if let actionType {
-            return .action(actionType)
+            return actionType.label
         }
-        return .entry
+        if photoData != nil {
+            return "Photo Record"
+        }
+        return "Record"
     }
-}
 
-enum RecordCategory: String, Codable, CaseIterable, Hashable {
-    case action
-    case entry
-
-    var label: LocalizedStringKey {
-        switch self {
-        case .action: "Action"
-        case .entry: "Record"
+    @MainActor
+    var displaySystemImage: String {
+        if let actionType {
+            return actionType.systemImage
         }
+        if photoData != nil {
+            return "camera.fill"
+        }
+        return "note.text"
+    }
+
+    @MainActor
+    var displayThemeColor: Color {
+        if let actionType {
+            return actionType.themeColor
+        }
+        if photoData != nil {
+            return .pixelLeaf
+        }
+        return .pixelPaperShadow
     }
 }
 
@@ -110,38 +101,6 @@ enum RecordActionType: String, Codable, CaseIterable, Hashable, Identifiable {
             .brown
         case .repotting:
             .mint
-        }
-    }
-}
-
-enum RecordType: Hashable {
-    case action(RecordActionType)
-    case entry
-
-    var label: LocalizedStringKey {
-        switch self {
-        case .action(let actionType):
-            actionType.label
-        case .entry:
-            "Record"
-        }
-    }
-
-    var systemImage: String {
-        switch self {
-        case .action(let actionType):
-            actionType.systemImage
-        case .entry:
-            "camera.fill"
-        }
-    }
-
-    var themeColor: Color {
-        switch self {
-        case .action(let actionType):
-            actionType.themeColor
-        case .entry:
-            .primary
         }
     }
 }
