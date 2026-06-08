@@ -7,24 +7,6 @@ import UIKit
 enum PlantPhotoImportPurpose {
     case addPlant
     case diagnosis
-
-    var navigationTitle: LocalizedStringKey {
-        switch self {
-        case .addPlant:
-            "Add Plant Photo"
-        case .diagnosis:
-            "Diagnose Plant"
-        }
-    }
-
-    var captureTitle: LocalizedStringKey {
-        switch self {
-        case .addPlant:
-            "Take Plant Photo"
-        case .diagnosis:
-            "Take Diagnosis Photo"
-        }
-    }
 }
 
 struct CameraPickerPage: View {
@@ -47,23 +29,17 @@ struct CameraPickerPage: View {
 
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color.blue.ignoresSafeArea()
+            GeometryReader { geometry in
+                ZStack {
+                    CameraPreviewView(session: camera.session)
+                        .ignoresSafeArea()
+                        .blur(radius: 6)
+                        .overlay(.pixelInk.opacity(0.48))
 
-                CameraPreviewView(session: camera.session)
-                    .ignoresSafeArea()
-
-                LinearGradient(
-                    colors: [.black.opacity(0.72), .clear, .black.opacity(0.82)],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-
-                cameraChrome
+                    cameraChrome(in: geometry.size)
+                }
             }
-            .navigationTitle(purpose.navigationTitle)
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
             .task {
                 await camera.start()
             }
@@ -89,25 +65,6 @@ struct CameraPickerPage: View {
                     if image != nil {
                         isPresented = false
                     }
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close", systemImage: "xmark") {
-                        isPresented = false
-                    }
-                }
-                
-                ToolbarItemGroup(placement: .primaryAction) {
-                    Button("Flash", systemImage: camera.flashMode.systemImage) {
-                        camera.toggleFlash()
-                    }
-                    .disabled(!camera.isFlashAvailable)
-
-                    Button("Zoom", systemImage: "plus.magnifyingglass") {
-                        camera.toggleZoom()
-                    }
-                    .accessibilityValue(camera.zoomLabel)
                 }
             }
         }
@@ -166,58 +123,144 @@ extension View {
 }
 
 private extension CameraPickerPage {
-    var cameraChrome: some View {
+    func cameraChrome(in size: CGSize) -> some View {
         VStack(spacing: 0) {
+            cameraTopBar
+
+            Spacer(minLength: 26)
+
+            cameraPanel(maxWidth: min(size.width - 28, 368))
+
+            Spacer(minLength: 18)
+        }
+        .padding(.horizontal, 14)
+        .padding(.top, 12)
+        .padding(.bottom, 18)
+        .frame(width: size.width, height: size.height)
+    }
+
+    var cameraTopBar: some View {
+        HStack {
+            Button {
+                isPresented = false
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.pixel(.headline))
+                    .frame(width: 16, height: 16)
+            }
+            .buttonStyle(.pixelRectangle(fill: .pixelWood))
+            .accessibilityLabel("Close")
+
             Spacer()
 
-            scanBadge
-            
+            Text("Take Plant Photo")
+                .font(.pixel(.largeTitle))
+                .foregroundStyle(.white)
+                .shadow(color: .pixelInk, radius: 0, x: 2, y: 2)
+
+            Spacer()
+
+            Button {
+                camera.toggleZoom()
+            } label: {
+                Image(systemName: "questionmark")
+                    .font(.pixel(.headline))
+                    .frame(width: 16, height: 16)
+            }
+            .buttonStyle(.pixelRectangle(fill: .pixelWood))
+            .accessibilityLabel("Zoom")
+            .accessibilityValue(camera.zoomLabel)
+            .opacity(0)
+        }
+        .padding(.horizontal, 2)
+    }
+
+    func cameraPanel(maxWidth: CGFloat) -> some View {
+        VStack(spacing: 0) {
+            Text("对准植物拍摄\n确保光线充足")
+                .font(.pixel(.title2))
+                .foregroundStyle(.white.opacity(0.82))
+                .multilineTextAlignment(.center)
+                .lineSpacing(4)
+                .shadow(color: .pixelInk, radius: 0, x: 2, y: 2)
+                .padding(.top, 38)
+
+            Spacer()
+
+            PixelCameraViewfinder()
+
             Spacer()
 
             bottomBar
         }
-        .padding(.horizontal, 24)
-        .padding(.top, 18)
-        .padding(.bottom, 28)
-    }
-
-    var scanBadge: some View {
-        Image(systemName: "viewfinder")
-            .symbolRenderingMode(.hierarchical)
-            .foregroundStyle(.white)
-            .font(.system(size: 300, weight: .thin))
+        .frame(maxWidth: maxWidth)
+        .frame(maxHeight: .infinity)
     }
 
     var bottomBar: some View {
-        ZStack {
-            HStack {
-                Button {
-                    camera.isPhotoLibraryPresented = true
-                } label: {
-                    Label("Photo Library", systemImage: "photo.on.rectangle")
-                        .padding(8)
-                        .labelStyle(.iconOnly)
-                        .font(.title2.weight(.semibold))
-                }
-                .buttonBorderShape(.circle)
-                .buttonStyle(.glass)
-                
-                Spacer()
+        HStack {
+            cameraAssetButton(
+                title: "相册",
+                imageName: "PixelCameraGalleryButton",
+                imageSize: 80
+            ) {
+                camera.isPhotoLibraryPresented = true
             }
+
+            Spacer()
 
             Button {
                 camera.capturePhoto()
             } label: {
-                Label(purpose.captureTitle, systemImage: "camera.fill")
-                    .font(.title.weight(.bold))
-                    .labelStyle(.iconOnly)
-                    .padding()
+                Image("PixelCameraShutterButton")
+                    .pixelate()
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
             }
-            .buttonStyle(.glassProminent)
-            .tint(.green)
-            .buttonBorderShape(.circle)
+            .buttonStyle(.plain)
             .disabled(!camera.isReady)
+            .opacity(camera.isReady ? 1 : 0.58)
+            .accessibilityLabel("Take Plant Photo")
+
+            Spacer()
+
+            cameraAssetButton(
+                title: "开灯",
+                imageName: "PixelCameraFlashButton",
+                imageSize: 80,
+                isEnabled: camera.isFlashAvailable
+            ) {
+                camera.toggleFlash()
+            }
         }
+    }
+
+    func cameraAssetButton(
+        title: LocalizedStringKey,
+        imageName: String,
+        imageSize: CGFloat,
+        isEnabled: Bool = true,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            VStack(spacing: 0) {
+                Image(imageName)
+                    .pixelate()
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: imageSize, height: imageSize)
+
+                Text(title)
+                    .font(.pixel(.headline))
+                    .foregroundStyle(.white)
+                    .shadow(color: .pixelInk, radius: 0, x: 2, y: 2)
+            }
+            .frame(width: 64)
+        }
+        .buttonStyle(.plain)
+        .disabled(!isEnabled)
+        .opacity(isEnabled ? 1 : 0.46)
     }
 
     func loadImage(from item: PhotosPickerItem) async -> PlatformImage? {
@@ -225,5 +268,13 @@ private extension CameraPickerPage {
             return nil
         }
         return PlatformImage(data: data)
+    }
+}
+
+private struct PixelCameraViewfinder: View {
+    var body: some View {
+        PixelRectangleBackground(fill: .clear)
+            .aspectRatio(1, contentMode: .fit)
+            .accessibilityHidden(true)
     }
 }
