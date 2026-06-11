@@ -1,8 +1,9 @@
 # Upload Status
 
-Last upload: 2026-06-06
+Last upload: 2026-06-11
 Last schema cleanup: 2026-06-06
 Last localization schema update: 2026-06-06
+Last image refresh: 2026-06-11
 
 Target:
 
@@ -25,6 +26,8 @@ Result:
 - Local schema files now use `localizedContentsJSON` instead of language-specific top-level text fields.
 - Development schema cleanup removed long care-description fields: `careDifficultyDescription`, `light`, `water`, `humidityDescription`, `diseaseRiskDescription`, and `fertilizer`.
 - Care detail copy is now derived in the app from `careDifficulty`, `lightLevel`, `waterLevel`, `humidityLevel`, `diseaseRiskLevel`, and `fertilizerLevel`.
+- AI-generated pixel plant images were refreshed with remove.bg cutouts and uploaded to both development and production.
+- Production was refreshed for TestFlight access.
 
 Verification commands:
 
