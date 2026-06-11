@@ -22,7 +22,7 @@ struct HomePage: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            PixelPage {
+            PixelPage(backgroundStyle: .primary) {
                 VStack {
                     HomeHeaderView()
                     ScrollView {

@@ -23,7 +23,7 @@ enum AppError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .empty:
-            "Try to add one!"
+            String(localized: "Try to add one!")
         case .custom(let string):
             string
         }

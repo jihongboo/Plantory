@@ -8,7 +8,16 @@
 import SwiftUI
 
 struct PixelPage<Content: View>: View {
+    let backgroundStyle: PixelPageBackground.Style
     @ViewBuilder var content: Content
+    
+    init(
+        backgroundStyle: PixelPageBackground.Style = .secondary,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.backgroundStyle = backgroundStyle
+        self.content = content()
+    }
     
     var body: some View {
         content
@@ -16,7 +25,7 @@ struct PixelPage<Content: View>: View {
             .scenePadding(.horizontal)
             .scenePadding(.top)
             .background {
-                PixelPageBackground(style: .secondary)
+                PixelPageBackground(style: backgroundStyle)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(.hidden, for: .navigationBar)

@@ -19,63 +19,21 @@ private struct ImageCropperPage: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 16) {
-                GeometryReader { proxy in
-                    let imageFrame = sourceImage.size.aspectFitRect(in: CGRect(origin: .zero, size: proxy.size))
+            PixelPage {
+                VStack(spacing: 16) {
+                    cropperNavigationBar
 
-                    ZStack {
-                        Color.white
+                    cropCanvas
 
-                        Image(uiImage: sourceImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: imageFrame.width, height: imageFrame.height)
-                            .position(x: imageFrame.midX, y: imageFrame.midY)
-
-                        cropOverlay(in: imageFrame)
-
-                        Color.clear
-                            .onAppear {
-                                updateImageFrame(imageFrame)
-                            }
-                            .onChange(of: proxy.size) {
-                                updateImageFrame(imageFrame)
-                            }
-                            .allowsHitTesting(false)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    cropHint
                 }
-                .padding(.horizontal, 20)
-
-                Button("Reset", systemImage: "arrow.counterclockwise") {
-                    cropRect = activeImageFrame == .zero ? .zero : defaultCropRect(in: activeImageFrame)
-                    didUserAdjustCrop = false
-                }
-                .buttonStyle(.bordered)
             }
-            .padding(.vertical, 20)
-            .background(Color.white)
-            .navigationTitle("Crop Photo")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: onCancel)
-                }
+            .pixelBottomActionBar(spacing: 10) {
+                Button("Reset", systemImage: "arrow.counterclockwise", action: resetCrop)
+                    .buttonStyle(.pixelRoundedRectangle(fill: .pixelPaperShadow, foreground: .pixelInk, width: .expanded))
 
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Use Photo") {
-                        guard cropRect.width > 1,
-                              cropRect.height > 1,
-                              activeImageFrame.width > 1,
-                              activeImageFrame.height > 1 else { return }
-                        let croppedImage = sourceImage.croppedImage(
-                            cropRect: cropRect,
-                            imageFrame: activeImageFrame
-                        )
-                        onCrop(croppedImage)
-                    }
-                    .bold()
-                }
+                Button("Use Photo", systemImage: "checkmark", action: performCrop)
+                    .buttonStyle(.pixelRoundedRectangle(width: .expanded))
             }
         }
     }
@@ -168,6 +126,25 @@ private extension CGSize {
     }
 }
 
+private struct GridPattern: Shape {
+    nonisolated func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let step: CGFloat = 16
+
+        stride(from: rect.minX, through: rect.maxX, by: step).forEach { x in
+            path.move(to: CGPoint(x: x, y: rect.minY))
+            path.addLine(to: CGPoint(x: x, y: rect.maxY))
+        }
+
+        stride(from: rect.minY, through: rect.maxY, by: step).forEach { y in
+            path.move(to: CGPoint(x: rect.minX, y: y))
+            path.addLine(to: CGPoint(x: rect.maxX, y: y))
+        }
+
+        return path
+    }
+}
+
 private enum CropHandle: CaseIterable, Identifiable {
     case topLeading
     case topTrailing
@@ -217,6 +194,85 @@ private enum CropHandle: CaseIterable, Identifiable {
 }
 
 private extension ImageCropperPage {
+    var cropperNavigationBar: some View {
+        HStack(spacing: 12) {
+            Button(action: onCancel) {
+                Image(systemName: "xmark")
+                    .frame(width: 16, height: 16)
+            }
+            .buttonStyle(.pixelRectangle(fill: .pixelPaperShadow, foreground: .pixelInk, padding: 12))
+            .accessibilityLabel("Cancel")
+
+            VStack(alignment: .leading, spacing: -4) {
+                Text("Crop Photo")
+                    .font(.pixel(.title))
+                    .foregroundStyle(.white)
+                    .shadow(color: .pixelInk, radius: 0, x: 2, y: 2)
+
+                Text("Frame your plant")
+                    .font(.pixel(.body))
+                    .foregroundStyle(.pixelCream)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    var cropCanvas: some View {
+        PixelRoundedRectangleCard(fill: .pixelPaper, padding: 8) {
+            GeometryReader { proxy in
+                let imageFrame = sourceImage.size.aspectFitRect(in: CGRect(origin: .zero, size: proxy.size))
+
+                ZStack {
+                    pixelCanvasBackground
+
+                    Image(uiImage: sourceImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: imageFrame.width, height: imageFrame.height)
+                        .position(x: imageFrame.midX, y: imageFrame.midY)
+
+                    cropOverlay(in: imageFrame)
+
+                    Color.clear
+                        .onAppear {
+                            updateImageFrame(imageFrame)
+                        }
+                        .onChange(of: proxy.size) {
+                            updateImageFrame(imageFrame)
+                        }
+                        .allowsHitTesting(false)
+                }
+                .clipShape(.rect(cornerRadius: 18))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 18)
+                        .stroke(.pixelInk.opacity(0.64), lineWidth: 3)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    var cropHint: some View {
+        Label("Drag the frame or pull the corner blocks.", systemImage: "crop")
+            .font(.pixel(.callout))
+            .foregroundStyle(.pixelCream)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 4)
+    }
+
+    var pixelCanvasBackground: some View {
+        ZStack {
+            Color.pixelInk.opacity(0.9)
+
+            Color.pixelLeafDark.opacity(0.28)
+
+            GridPattern()
+                .stroke(.pixelCream.opacity(0.08), lineWidth: 1)
+        }
+    }
+
     @ViewBuilder
     func cropOverlay(in imageFrame: CGRect) -> some View {
         let activeRect = cropRect == .zero ? defaultCropRect(in: imageFrame) : cropRect
@@ -224,29 +280,13 @@ private extension ImageCropperPage {
         ZStack {
             dimmingLayer(cropRect: activeRect, imageFrame: imageFrame)
 
-            Rectangle()
-                .stroke(.white, lineWidth: 2)
-                .shadow(color: .black.opacity(0.35), radius: 6)
-                .frame(width: activeRect.width, height: activeRect.height)
+            cropFrame(activeRect)
                 .position(x: activeRect.midX, y: activeRect.midY)
                 .contentShape(Rectangle())
                 .gesture(moveGesture(in: imageFrame))
 
             ForEach(CropHandle.allCases) { handle in
-                ZStack {
-                    Circle()
-                        .fill(.white.opacity(0.001))
-                        .frame(width: Self.cropHandleHitLength, height: Self.cropHandleHitLength)
-
-                    Circle()
-                        .fill(.white)
-                        .frame(width: Self.cropHandleVisibleLength, height: Self.cropHandleVisibleLength)
-                        .overlay {
-                            Circle()
-                                .stroke(.green, lineWidth: 2)
-                        }
-                }
-                    .contentShape(Circle())
+                cropHandle(for: handle, in: activeRect)
                     .position(handle.point(in: activeRect))
                     .highPriorityGesture(resizeGesture(handle: handle, in: imageFrame))
                     .accessibilityElement()
@@ -256,12 +296,81 @@ private extension ImageCropperPage {
         }
     }
 
+    func cropFrame(_ rect: CGRect) -> some View {
+        Rectangle()
+            .stroke(.pixelCream, lineWidth: 4)
+            .overlay {
+                Rectangle()
+                    .stroke(.pixelLeaf, style: StrokeStyle(lineWidth: 2, dash: [8, 6]))
+                    .padding(8)
+            }
+            .shadow(color: .pixelInk.opacity(0.75), radius: 0, x: 4, y: 4)
+            .frame(width: rect.width, height: rect.height)
+    }
+
+    func cropHandle(for handle: CropHandle, in rect: CGRect) -> some View {
+        ZStack {
+            Rectangle()
+                .fill(.white.opacity(0.001))
+                .frame(width: Self.cropHandleHitLength, height: Self.cropHandleHitLength)
+
+            PixelRectangleBackground(fill: .pixelCream)
+                .frame(width: Self.cropHandleVisibleLength, height: Self.cropHandleVisibleLength)
+                .overlay {
+                    handleAccent(for: handle)
+                        .stroke(.pixelLeaf, lineWidth: 3)
+                        .padding(8)
+                }
+        }
+        .contentShape(Rectangle())
+    }
+
+    func handleAccent(for handle: CropHandle) -> Path {
+        Path { path in
+            switch handle {
+            case .topLeading:
+                path.move(to: CGPoint(x: 0, y: 12))
+                path.addLine(to: .zero)
+                path.addLine(to: CGPoint(x: 12, y: 0))
+            case .topTrailing:
+                path.move(to: .zero)
+                path.addLine(to: CGPoint(x: 12, y: 0))
+                path.addLine(to: CGPoint(x: 12, y: 12))
+            case .bottomLeading:
+                path.move(to: .zero)
+                path.addLine(to: CGPoint(x: 0, y: 12))
+                path.addLine(to: CGPoint(x: 12, y: 12))
+            case .bottomTrailing:
+                path.move(to: CGPoint(x: 12, y: 0))
+                path.addLine(to: CGPoint(x: 12, y: 12))
+                path.addLine(to: CGPoint(x: 0, y: 12))
+            }
+        }
+    }
+
     func dimmingLayer(cropRect: CGRect, imageFrame: CGRect) -> some View {
         Path { path in
             path.addRect(imageFrame)
             path.addRect(cropRect)
         }
-        .fill(.black.opacity(0.42), style: FillStyle(eoFill: true))
+        .fill(.pixelInk.opacity(0.56), style: FillStyle(eoFill: true))
+    }
+
+    func resetCrop() {
+        cropRect = activeImageFrame == .zero ? .zero : defaultCropRect(in: activeImageFrame)
+        didUserAdjustCrop = false
+    }
+
+    func performCrop() {
+        guard cropRect.width > 1,
+              cropRect.height > 1,
+              activeImageFrame.width > 1,
+              activeImageFrame.height > 1 else { return }
+        let croppedImage = sourceImage.croppedImage(
+            cropRect: cropRect,
+            imageFrame: activeImageFrame
+        )
+        onCrop(croppedImage)
     }
 
     func moveGesture(in imageFrame: CGRect) -> some Gesture {

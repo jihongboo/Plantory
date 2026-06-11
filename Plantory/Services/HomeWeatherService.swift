@@ -19,7 +19,7 @@ extension HomeWeatherSnapshot {
         humidity: 0.68,
         uvIndex: 4,
         symbolName: "cloud.sun.fill",
-        condition: "Partly Cloudy"
+        condition: String(localized: "Partly Cloudy")
     )
 }
 
@@ -55,7 +55,7 @@ final class HomeWeatherService: NSObject, CLLocationManagerDelegate {
             humidity: current.humidity,
             uvIndex: current.uvIndex.value,
             symbolName: current.symbolName,
-            condition: String(describing: current.condition)
+            condition: current.condition.description
         )
     }
 

@@ -24,6 +24,8 @@ struct HomeHeaderView: View {
             VStack(alignment: .leading, spacing: 0) {
                 Text("My Plants")
                     .font(.pixel(.largeTitle))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.2)
                     .foregroundStyle(.white)
                     .shadow(color: Color(.pixelInk), radius: 0, x: 2, y: 2)
                 
@@ -54,4 +56,6 @@ struct HomeHeaderView: View {
 
 #Preview {
     HomeHeaderView()
+        .padding()
+        .environment(\.locale, Locale(identifier: "en"))
 }

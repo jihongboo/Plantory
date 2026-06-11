@@ -116,7 +116,7 @@ enum ImageCompression {
         if let bestData {
             return bestData
         } else {
-            throw AppError.custom("The photo data is broken.")
+            throw AppError.custom(String(localized: "The photo data is broken."))
         }
     }
 }

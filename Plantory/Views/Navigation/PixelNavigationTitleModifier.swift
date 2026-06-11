@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct PixelNavigationTitleModifier<Trailing: View>: ViewModifier {
-    let title: String
-    let subtitle: String?
+    let title: Text
+    let subtitle: Text?
     let trailing: Trailing
     
     init(
-        title: String,
-        subtitle: String? = nil,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil,
+        @ViewBuilder trailing: () -> Trailing
+    ) {
+        self.title = Text(title)
+        self.subtitle = subtitle.map { Text($0) }
+        self.trailing = trailing()
+    }
+    
+    init(
+        title: Text,
+        subtitle: Text?,
         @ViewBuilder trailing: () -> Trailing
     ) {
         self.title = title
@@ -34,19 +44,57 @@ struct PixelNavigationTitleModifier<Trailing: View>: ViewModifier {
 }
 
 extension PixelNavigationTitleModifier where Trailing == EmptyView {
-    init(title: String,
-         subtitle: String? = nil) {
+    init(
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil
+    ) {
+        self.title = Text(title)
+        self.subtitle = subtitle.map { Text($0) }
+        self.trailing = EmptyView()
+    }
+    
+    init(
+        title: Text,
+        subtitle: Text? = nil
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.trailing = EmptyView()
     }
 }
 
-
 extension View {
     func pixelNavigationTitle<Trailing: View>(
-        title: String,
-        subtitle: String? = nil,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil,
+        @ViewBuilder trailing: () -> Trailing
+    ) -> some View {
+        modifier(
+            PixelNavigationTitleModifier(
+                title: title,
+                subtitle: subtitle,
+                trailing: trailing
+            )
+        )
+    }
+    
+    func pixelNavigationTitle<Trailing: View>(
+        title: LocalizedStringKey,
+        subtitle: Text?,
+        @ViewBuilder trailing: () -> Trailing
+    ) -> some View {
+        modifier(
+            PixelNavigationTitleModifier(
+                title: Text(title),
+                subtitle: subtitle,
+                trailing: trailing
+            )
+        )
+    }
+    
+    func pixelNavigationTitle<Trailing: View>(
+        title: Text,
+        subtitle: Text? = nil,
         @ViewBuilder trailing: () -> Trailing
     ) -> some View {
         modifier(
@@ -59,13 +107,37 @@ extension View {
     }
     
     func pixelNavigationTitle(
-        title: String,
-        subtitle: String? = nil,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil
     ) -> some View {
         modifier(
             PixelNavigationTitleModifier(
                 title: title,
-                subtitle: subtitle,
+                subtitle: subtitle
+            )
+        )
+    }
+    
+    func pixelNavigationTitle(
+        title: LocalizedStringKey,
+        subtitle: Text?
+    ) -> some View {
+        modifier(
+            PixelNavigationTitleModifier(
+                title: Text(title),
+                subtitle: subtitle
+            )
+        )
+    }
+    
+    func pixelNavigationTitle(
+        title: Text,
+        subtitle: Text? = nil
+    ) -> some View {
+        modifier(
+            PixelNavigationTitleModifier(
+                title: title,
+                subtitle: subtitle
             )
         )
     }

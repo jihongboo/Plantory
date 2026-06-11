@@ -23,7 +23,7 @@ struct NotificationsOverviewCard: View {
                             .fixedSize(horizontal: false, vertical: true)
                         
                         PixelRectangleCard(fill: .pixelSun) {
-                            Text("\(enabledCount) / \(settingsCount) enabled")
+                            Text("\(enabledCount) / \(settingsCount)")
                                 .font(.pixel(.headline))
                                 .foregroundStyle(.pixelInk)
                                 .padding(.horizontal, 8)

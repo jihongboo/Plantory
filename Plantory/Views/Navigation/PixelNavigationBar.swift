@@ -1,15 +1,25 @@
 import SwiftUI
 
 struct PixelNavigationBar<Trailing: View>: View {
-    let title: String
-    let subtitle: String?
+    let title: Text
+    let subtitle: Text?
     let trailing: Trailing
     
     @Environment(\.dismiss) private var dismiss
     
     init(
-        title: String,
-        subtitle: String? = nil,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey? = nil,
+        @ViewBuilder trailing: () -> Trailing
+    ) {
+        self.title = Text(title)
+        self.subtitle = subtitle.map { Text($0) }
+        self.trailing = trailing()
+    }
+    
+    init(
+        title: Text,
+        subtitle: Text? = nil,
         @ViewBuilder trailing: () -> Trailing
     ) {
         self.title = title
@@ -27,14 +37,14 @@ struct PixelNavigationBar<Trailing: View>: View {
             }
             
             VStack(alignment: .leading, spacing: -6) {
-                Text(title)
+                title
                     .font(.pixel(.title))
                     .foregroundStyle(.white)
                     .shadow(color: Color(.pixelInk), radius: 0, x: 2, y: 2)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
                 if let subtitle {
-                    Text(subtitle)
+                    subtitle
                         .font(.pixel(.body))
                         .foregroundStyle(.pixelCream)
                 }
@@ -48,7 +58,13 @@ struct PixelNavigationBar<Trailing: View>: View {
 }
 
 extension PixelNavigationBar where Trailing == EmptyView {
-    init(title: String, subtitle: String? = nil,) {
+    init(title: LocalizedStringKey, subtitle: LocalizedStringKey? = nil) {
+        self.init(title: title, subtitle: subtitle) {
+            EmptyView()
+        }
+    }
+    
+    init(title: Text, subtitle: Text? = nil) {
         self.init(title: title, subtitle: subtitle) {
             EmptyView()
         }

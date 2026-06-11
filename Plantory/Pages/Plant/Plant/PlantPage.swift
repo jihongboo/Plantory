@@ -37,7 +37,7 @@ struct PlantPage: View {
                 }
             }
             .load(load)
-            .pixelNavigationTitle(title: plant?.displayName ?? "") {
+            .pixelNavigationTitle(title: Text(verbatim: plant?.displayName ?? "")) {
                 NavigationLink {
                     if let plant {
                         PlantNotificationsPage(plant: plant)
@@ -53,18 +53,18 @@ struct PlantPage: View {
                         .frame(width: 16, height: 16)
                 }
             }
-            .pixelBottomActionBar {
-                Button("Add Log", systemImage: "camera.fill", action: {
-                    isPresentingAddLog = true
-                })
-                
-                PixelActionMenu(
-                    "Actions",
-                    systemImage: "plus.circle.fill",
-                    items: actionMenuItems
-                ) { type in
-                    addActionRecord(type)
-                }
+        }
+        .pixelBottomActionBar {
+            Button("Add Log", systemImage: "camera.fill", action: {
+                isPresentingAddLog = true
+            })
+            
+            PixelActionMenu(
+                "Actions",
+                systemImage: "plus.circle.fill",
+                items: actionMenuItems
+            ) { type in
+                addActionRecord(type)
             }
         }
         .sheet(isPresented: $isPresentingAddLog) {

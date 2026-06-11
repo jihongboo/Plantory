@@ -10,7 +10,7 @@ struct HomeWeatherCard: View {
     
     var body: some View {
         PixelRoundedRectangleCard {
-            HStack {
+            HStack(spacing: 0) {
                 VStack {
                     image
                         .font(.system(size: 36))
@@ -24,11 +24,11 @@ struct HomeWeatherCard: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
-                .containerRelativeFrame(.horizontal, count: 4, spacing: 0)
+                .padding(.horizontal)
                 
                 switch viewState {
                 case .loading, .loaded:
-                    HStack {
+                    HStack(spacing: 0) {
                         HomeWeatherMetricTile(
                             title: "Temp",
                             value: viewState.value?.temperatureText,
@@ -65,6 +65,7 @@ struct HomeWeatherCard: View {
                         }
                     }
                     .buttonStyle(.pixelRoundedRectangle)
+                    .frame(maxWidth: .infinity)
                 }
             }
         }
@@ -97,6 +98,8 @@ private struct HomeWeatherMetricTile: View {
                 .font(.pixel(.callout))
                 .foregroundStyle(level.color)
                 .labelIconToTitleSpacing(4)
+                .lineLimit(1)
+                .minimumScaleFactor(0.2)
             
             Text(value)
                 .font(.pixel(.title))
@@ -226,6 +229,7 @@ private extension HomeWeatherSnapshot {
         HomeWeatherCard(.failed(AppError.custom("error")))
     }
     .padding()
+    .environment(\.locale, Locale(identifier: "en"))
 }
 
 private extension HomeWeatherCard {

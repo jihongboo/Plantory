@@ -29,7 +29,7 @@ struct AddLogPage: View {
                     )
                 }
             }
-            .pixelNavigationTitle(title: "Add Log", subtitle: plant.displayName) {
+            .pixelNavigationTitle(title: "Add Log", subtitle: Text(verbatim: plant.displayName)) {
                 Button {
                     dismiss()
                 } label: {
@@ -66,7 +66,7 @@ private extension AddLogPage {
             let photoID = recordImage == nil ? nil : UUID()
             let photoData = try recordImage.map {
                 guard let data = ImageCompression.compressedJPEGData(from: $0) else {
-                    throw AppError.custom("The photo data is broken.")
+                    throw AppError.custom(String(localized: "The photo data is broken."))
                 }
                 return data
             }
