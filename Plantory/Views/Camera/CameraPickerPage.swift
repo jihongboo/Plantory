@@ -34,10 +34,14 @@ struct CameraPickerPage: View {
                 ZStack {
                     CameraPreviewView(session: camera.session)
                         .ignoresSafeArea()
-                        .blur(radius: 6)
-                        .overlay(.pixelInk.opacity(0.48))
 
-                    cameraChrome(in: geometry.size)
+                    ZStack {
+                        Color.pixelWood.opacity(0.46)
+                            .ignoresSafeArea()
+
+                        cameraChrome(in: geometry.size)
+                    }
+                    .compositingGroup()
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
@@ -275,8 +279,14 @@ private extension CameraPickerPage {
 
 private struct PixelCameraViewfinder: View {
     var body: some View {
-        PixelRectangleBackground(fill: .clear)
-            .aspectRatio(1, contentMode: .fit)
-            .accessibilityHidden(true)
+        ZStack {
+            Rectangle()
+                .fill(.black)
+                .blendMode(.destinationOut)
+
+            PixelRectangleBackground(fill: .clear)
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .accessibilityHidden(true)
     }
 }

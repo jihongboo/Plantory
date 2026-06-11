@@ -45,6 +45,21 @@ struct PlantRecordPhotoStore {
         }
         return try Data(contentsOf: fileURL)
     }
+    
+    func deletePhoto(photoID: UUID) async {
+        try? deleteLocalPhoto(photoID: photoID)
+        guard (try? await container.accountStatus()) == .available else {
+            return
+        }
+        
+        do {
+            try await database.deleteRecord(withID: CKRecord.ID(recordName: photoID.uuidString))
+        } catch let error as CKError where error.code == .unknownItem {
+            return
+        } catch {
+            return
+        }
+    }
 
     @MainActor
     func photoData(for record: PlantRecord) async throws -> Data? {
@@ -110,6 +125,14 @@ private extension PlantRecordPhotoStore {
     func localPhotoURL(fileName: String) throws -> URL {
         let safeFileName = URL(fileURLWithPath: fileName).lastPathComponent
         return try localPhotoDirectoryURL.appendingPathComponent(safeFileName)
+    }
+    
+    func deleteLocalPhoto(photoID: UUID) throws {
+        let fileURL = try localPhotoURL(fileName: fileName(for: photoID))
+        guard fileManager.fileExists(atPath: fileURL.path) else {
+            return
+        }
+        try fileManager.removeItem(at: fileURL)
     }
 
     func cloudRecord(recordName: String) async throws -> CKRecord {

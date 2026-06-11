@@ -122,11 +122,11 @@ final class PlantCameraController: NSObject, AVCapturePhotoCaptureDelegate {
 
             self.session.addInput(input)
             self.session.addOutput(self.output)
-            self.device = cameraDevice
             self.session.commitConfiguration()
             self.session.startRunning()
 
             Task { @MainActor in
+                self.device = cameraDevice
                 self.isFlashAvailable = cameraDevice.hasFlash
                 self.flashMode = .off
                 self.zoomIndex = 0
