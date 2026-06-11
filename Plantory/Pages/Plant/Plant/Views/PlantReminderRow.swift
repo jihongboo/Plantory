@@ -6,14 +6,13 @@
 //
 
 import SwiftUI
+import NavigatorUI
 
 struct PlantReminderRow: View {
     let plant: Plant
     
     var body: some View {
-        NavigationLink {
-            PlantNotificationsPage(plant: plant)
-        } label: {
+        NavigationLink(to: PlantoryDestination.plantNotifications(PlantRoute(plant: plant))) {
             PixelRoundedRectangleCard(fill: Color(.pixelPaper)) {
                 HStack(spacing: 12) {
                     Image(systemName: "bell.badge.fill")

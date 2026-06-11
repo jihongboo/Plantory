@@ -7,21 +7,21 @@
 
 import SwiftUI
 import SwiftData
+import NavigatorUI
 
 struct HomePage: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.navigator) private var navigator
     @Environment(PlantNavigationCoordinator.self) private var navigationCoordinator
     @Query(sort: \Plant.createdAt, order: .reverse) private var plants: [Plant]
-    
-    @State private var path = NavigationPath()
     @State private var plantPendingDeletion: Plant?
     @Namespace private var heroNamespace
 
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
-        NavigationStack(path: $path) {
+        ManagedNavigationStack(scene: "home") {
             PixelPage(backgroundStyle: .primary) {
                 VStack {
                     HomeHeaderView()
@@ -34,7 +34,7 @@ struct HomePage: View {
                             } else {
                                 LazyVGrid(columns: columns, spacing: 14) {
                                     ForEach(plants) { plant in
-                                        NavigationLink(value: HomeDestination.plant(plant.id)) {
+                                        NavigationLink(to: PlantoryDestination.plant(PlantRoute(plantID: plant.id, heroNamespace: heroNamespace))) {
                                             PlantCardView(plant: plant)
                                                 .matchedTransitionSource(id: plant.id, in: heroNamespace)
                                         }
@@ -48,6 +48,7 @@ struct HomePage: View {
                                         .buttonStyle(.plain)
                                     }
                                 }
+                                .animation(.smooth, value: plants)
                             }
                         }
                     }
@@ -66,19 +67,6 @@ struct HomePage: View {
                     Button("Cancel", role: .cancel) {}
                 } message: { plant in
                     Text("This will also remove its care records and AI diagnosis history.")
-                }
-                .navigationDestination(for: HomeDestination.self) { destination in
-                    switch destination {
-                    case .plant(let plantID):
-                        PlantPage(plantID: plantID)
-                            .navigationTransition(.zoom(sourceID: plantID, in: heroNamespace))
-
-                    case .plantInformationLibrary:
-                        PlantInformationLibraryPage()
-
-                    case .debugNotifications:
-                        DebugNotificationsPage()
-                    }
                 }
             }
             .pixelBottomActionBar {
@@ -105,11 +93,6 @@ struct HomePage: View {
     }
 }
 
-enum HomeDestination: Hashable {
-    case plant(UUID)
-    case plantInformationLibrary
-    case debugNotifications
-}
 
 #Preview {
     HomePage()
@@ -149,6 +132,6 @@ private extension HomePage {
             return
         }
         navigationCoordinator.clearTargetPlantIdentifierPrefix()
-        path.append(HomeDestination.plant(plant.id))
+        navigator.push(PlantoryDestination.plant(PlantRoute(plantID: plant.id)))
     }
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import NavigatorUI
 
 struct HomeHeaderView: View {
     @Query(sort: \Plant.createdAt, order: .reverse) private var plants: [Plant]
@@ -37,14 +38,14 @@ struct HomeHeaderView: View {
             
             Spacer(minLength: 8)
 
-            NavigationLink(value: HomeDestination.plantInformationLibrary) {
+            NavigationLink(to: PlantoryDestination.plantInformationLibrary(.normal)) {
                 Image(systemName: "book.pages.fill")
                     .font(.body)
             }
             .buttonStyle(.pixelRectangle)
             
 #if DEBUG
-            NavigationLink(value: HomeDestination.debugNotifications) {
+            NavigationLink(to: PlantoryDestination.debugNotifications) {
                 Image(systemName: "ladybug")
                     .font(.body)
             }

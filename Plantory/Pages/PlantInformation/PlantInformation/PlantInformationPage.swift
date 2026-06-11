@@ -1,5 +1,6 @@
 import SwiftData
 import SwiftUI
+import NavigatorUI
 
 struct PlantInformationPage: View {
     @Environment(\.modelContext) private var modelContext
@@ -77,15 +78,16 @@ struct PlantInformationPage: View {
             .pixelNavigationTitle(title: "Plant Info")
         }
         .pixelBottomActionBar {
-            NavigationLink {
-                if let plantInformation = viewState.value {
-                    AddPlantPage(plantInformation: plantInformation)
+            if let plantInformation = viewState.value {
+                NavigationLink(to: PlantoryDestination.addPlant(PlantInformationRoute(plantInformation: plantInformation))) {
+                    Label("Add to my garden", systemImage: "plus")
                 }
-            } label: {
-                Label("Add to my garden", systemImage: "plus")
+                .buttonStyle(.pixelRoundedRectangle(width: .expanded))
+            } else {
+                Button("Add to my garden", systemImage: "plus") {}
+                    .buttonStyle(.pixelRoundedRectangle(width: .expanded))
+                    .disabled(true)
             }
-            .buttonStyle(.pixelRoundedRectangle(width: .expanded))
-            .disabled(viewState.value == nil)
         }
     }
 }

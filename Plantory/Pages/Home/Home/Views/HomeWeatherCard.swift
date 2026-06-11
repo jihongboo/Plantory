@@ -254,8 +254,8 @@ private extension HomeWeatherCard {
             "Loading weather"
         case .loaded(let weather):
             weather.condition
-        case .failed(let error):
-            error.localizedDescription
+        case .failed(let _):
+            "Load failed"//error.localizedDescription
         }
     }
 

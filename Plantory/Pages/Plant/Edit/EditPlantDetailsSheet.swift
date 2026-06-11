@@ -24,52 +24,50 @@ struct EditPlantDetailsSheet: View {
     }
 
     var body: some View {
-        NavigationStack {
-            PixelPage {
-                ScrollView {
-                    LazyVStack(spacing: 16) {
-                        PixelRoundedRectangleCard(
-                            title: "Plant Details",
-                            systemImage: "square.and.pencil"
-                        ) {
-                            VStack(alignment: .leading, spacing: 16) {
-                                PixelTextField(
-                                    "Nickname",
-                                    prompt: "Nickname",
-                                    text: $nickname
-                                )
-                                .textInputAutocapitalization(.words)
-                                .autocorrectionDisabled()
+        PixelPage {
+            ScrollView {
+                LazyVStack(spacing: 16) {
+                    PixelRoundedRectangleCard(
+                        title: "Plant Details",
+                        systemImage: "square.and.pencil"
+                    ) {
+                        VStack(alignment: .leading, spacing: 16) {
+                            PixelTextField(
+                                "Nickname",
+                                prompt: "Nickname",
+                                text: $nickname
+                            )
+                            .textInputAutocapitalization(.words)
+                            .autocorrectionDisabled()
 
-                                PixelTextField(
-                                    "Note",
-                                    prompt: "Add a note about this plant",
-                                    text: $note,
-                                    axis: .vertical
-                                )
-                            }
+                            PixelTextField(
+                                "Note",
+                                prompt: "Add a note about this plant",
+                                text: $note,
+                                axis: .vertical
+                            )
                         }
                     }
                 }
-                .pixelNavigationTitle(title: "Edit Details")
             }
-            .pixelBottomActionBar {
-                Button("Cancel", systemImage: "xmark") {
-                    dismiss()
-                }
-                .buttonStyle(
-                    .pixelRoundedRectangle(
-                        fill: .pixelPaperShadow,
-                        foreground: .pixelInk,
-                        width: .expanded
-                    )
+            .pixelNavigationTitle(title: "Edit Details")
+        }
+        .pixelBottomActionBar {
+            Button("Cancel", systemImage: "xmark") {
+                dismiss()
+            }
+            .buttonStyle(
+                .pixelRoundedRectangle(
+                    fill: .pixelPaperShadow,
+                    foreground: .pixelInk,
+                    width: .expanded
                 )
+            )
 
-                Button("Save", systemImage: "checkmark") {
-                    saveChanges()
-                }
-                .buttonStyle(.pixelRoundedRectangle(width: .expanded))
+            Button("Save", systemImage: "checkmark") {
+                saveChanges()
             }
+            .buttonStyle(.pixelRoundedRectangle(width: .expanded))
         }
     }
 

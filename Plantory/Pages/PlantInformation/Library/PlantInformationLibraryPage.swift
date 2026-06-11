@@ -1,5 +1,6 @@
 import SwiftData
 import SwiftUI
+import NavigatorUI
 
 struct PlantInformationLibraryPage: View {
     @Environment(\.modelContext) private var modelContext
@@ -33,9 +34,7 @@ struct PlantInformationLibraryPage: View {
 
                     LazyVGrid(columns: columns, spacing: 14) {
                         ForEach(filteredInfos) { info in
-                            NavigationLink {
-                                PlantInformationPage(plantInformation: info)
-                            } label: {
+                            NavigationLink(to: PlantoryDestination.plantInformation(PlantInformationRoute(plantInformation: info))) {
                                 PlantInformationLibraryCard(info: info)
                             }
                             .buttonStyle(.plain)

@@ -1,23 +1,26 @@
 import SwiftUI
 import SwiftData
+import NavigatorUI
 
 struct PlantPage: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.navigator) private var navigator
     
     @State private var plant: Plant?
-    @State private var isPresentingAddLog = false
-    @State private var isPresentingEditDetails = false
 
     private let plantID: UUID?
+    private let heroNamespace: Namespace.ID?
 
-    init(plant: Plant) {
+    init(plant: Plant, heroNamespace: Namespace.ID? = nil) {
         plantID = plant.id
+        self.heroNamespace = heroNamespace
         _plant = State(initialValue: plant)
     }
 
-    init(plantID: UUID) {
+    init(plantID: UUID, heroNamespace: Namespace.ID? = nil) {
         self.plantID = plantID
+        self.heroNamespace = heroNamespace
         _plant = State(initialValue: nil)
     }
 
@@ -38,25 +41,26 @@ struct PlantPage: View {
             }
             .load(load)
             .pixelNavigationTitle(title: Text(verbatim: plant?.displayName ?? "")) {
-                NavigationLink {
-                    if let plant {
-                        PlantNotificationsPage(plant: plant)
+                if let plant {
+                    NavigationLink(to: PlantoryDestination.plantNotifications(PlantRoute(plant: plant))) {
+                        Image(systemName: "bell.badge.fill")
+                            .frame(width: 16, height: 16)
                     }
-                } label: {
-                    Image(systemName: "bell.badge.fill")
-                        .frame(width: 16, height: 16)
                 }
                 Button {
-                    isPresentingEditDetails = true
+                    guard let plant else { return }
+                    navigator.present(sheet: PlantoryDestination.editPlantDetails(PlantRoute(plant: plant)), managed: true)
                 } label: {
                     Image(systemName: "square.and.pencil")
                         .frame(width: 16, height: 16)
                 }
             }
         }
+        .plantHeroNavigationTransition(sourceID: plantID, namespace: heroNamespace)
         .pixelBottomActionBar {
             Button("Add Log", systemImage: "camera.fill", action: {
-                isPresentingAddLog = true
+                guard let plant else { return }
+                navigator.present(sheet: PlantoryDestination.addLog(PlantRoute(plant: plant)), managed: true)
             })
             
             PixelActionMenu(
@@ -67,16 +71,6 @@ struct PlantPage: View {
                 addActionRecord(type)
             }
         }
-        .sheet(isPresented: $isPresentingAddLog) {
-            if let plant {
-                AddLogPage(plant: plant)
-            }
-        }
-        .sheet(isPresented: $isPresentingEditDetails) {
-            if let plant {
-                EditPlantDetailsSheet(plant: plant)
-            }
-        }
     }
 }
 
@@ -85,6 +79,17 @@ struct PlantPage: View {
         PlantPage(plant: .monstera)
     }
     .modelContainer(.preview)
+}
+
+private extension View {
+    @ViewBuilder
+    func plantHeroNavigationTransition(sourceID: UUID?, namespace: Namespace.ID?) -> some View {
+        if let sourceID, let namespace {
+            navigationTransition(.zoom(sourceID: sourceID, in: namespace))
+        } else {
+            self
+        }
+    }
 }
 
 private extension PlantPage {

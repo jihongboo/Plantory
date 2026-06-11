@@ -1,4 +1,5 @@
 import SwiftUI
+import NavigatorUI
 
 struct PlantSummaryView: View {
     let plant: Plant
@@ -19,9 +20,7 @@ struct PlantSummaryView: View {
                     Spacer(minLength: 8)
 
                     if let plantInformation = plant.plantInformation {
-                        NavigationLink {
-                            PlantInformationPage(plantInformation: plantInformation)
-                        } label: {
+                        NavigationLink(to: PlantoryDestination.plantInformation(PlantInformationRoute(plantInformation: plantInformation))) {
                             Image(systemName: "book.pages.fill")
                                 .font(.headline.weight(.black))
                                 .foregroundStyle(.white)

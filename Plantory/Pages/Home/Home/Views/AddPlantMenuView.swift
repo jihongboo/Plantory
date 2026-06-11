@@ -1,22 +1,22 @@
 import SwiftUI
+import NavigatorUI
 
 struct AddPlantMenuView: View {
-    @State private var isPresentingLibrary = false
+    @Environment(\.navigator) private var navigator
 
     var body: some View {
         Button {
-            isPresentingLibrary = true
+            navigator
+                .present(
+                    sheet: PlantoryDestination.plantInformationLibrary(.add),
+                    managed: true
+                )
         } label: {
             Label("Add Plant", systemImage: "plus")
         }
         .buttonStyle(.pixelRoundedRectangle(width: .expanded))
         .accessibilityLabel("Add Plant")
         .accessibilityHint("Open the plant encyclopedia and choose a plant to add.")
-        .sheet(isPresented: $isPresentingLibrary) {
-            NavigationStack {
-                PlantInformationLibraryPage()
-            }
-        }
     }
 }
 

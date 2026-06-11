@@ -1,10 +1,11 @@
 import SwiftUI
 import SwiftData
+import NavigatorUI
 
 struct AddPlantPage: View {
     let plantInformation: PlantInformation
     
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.navigator) private var navigator
     @Environment(\.modelContext) private var modelContext
     
     @State private var nickname = ""
@@ -72,6 +73,6 @@ private extension AddPlantPage {
             information: plantInformation
         )
         modelContext.insert(plant)
-        dismiss()
+        navigator.dismissAnyChildren()
     }
 }

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FFD40AA72FDA8E06008DE295 /* NavigatorUI in Frameworks */ = {isa = PBXBuildFile; productRef = FFD40AA62FDA8E06008DE295 /* NavigatorUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		FF9018202F61558B0056B8CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFD40AA72FDA8E06008DE295 /* NavigatorUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			);
 			name = Plantory;
 			packageProductDependencies = (
+				FFD40AA62FDA8E06008DE295 /* NavigatorUI */,
 			);
 			productName = Plantory;
 			productReference = FF90180E2F61558A0056B8CC /* LeafAid.app */;
@@ -210,6 +216,7 @@
 			mainGroup = FF9018052F61558A0056B8CC;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				FFD40AA52FDA8E06008DE295 /* XCRemoteSwiftPackageReference "Navigator" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FF90180F2F61558A0056B8CC /* Products */;
@@ -659,6 +666,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FFD40AA52FDA8E06008DE295 /* XCRemoteSwiftPackageReference "Navigator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Navigator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FFD40AA62FDA8E06008DE295 /* NavigatorUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFD40AA52FDA8E06008DE295 /* XCRemoteSwiftPackageReference "Navigator" */;
+			productName = NavigatorUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FF9018062F61558A0056B8CC /* Project object */;
 }

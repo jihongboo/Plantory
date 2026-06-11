@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import NavigatorUI
 
 struct ImageCropperItem: Identifiable {
     let id = UUID()
@@ -61,6 +62,7 @@ private struct ImageCropperModifier: ViewModifier {
                         onCrop(image)
                     }
                 )
+                .managedPresentationView()
             }
     }
 }

@@ -1,5 +1,6 @@
 import SwiftUI
 import PhotosUI
+import NavigatorUI
 import Observation
 import UIKit
 @preconcurrency import AVFoundation
@@ -100,6 +101,7 @@ private struct CameraPickerModifier: ViewModifier {
                     isPresented: $isPresented,
                     image: $image
                 )
+                .managedPresentationView()
             }
     }
 }
