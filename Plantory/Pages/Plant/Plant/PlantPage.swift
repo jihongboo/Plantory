@@ -8,6 +8,7 @@ struct PlantPage: View {
     @Environment(\.navigator) private var navigator
     
     @State private var plant: Plant?
+    @State private var heroEffect: PlantHeroEffect?
 
     private let plantID: UUID?
     private let heroNamespace: Namespace.ID?
@@ -29,7 +30,7 @@ struct PlantPage: View {
             ScrollView {
                 if let plant {
                     LazyVStack(spacing: 16) {
-                        PlantHeroCard(plant: plant)
+                        PlantHeroCard(plant: plant, effect: heroEffect)
 
                         PlantSummaryView(plant: plant)
                         
@@ -127,9 +128,20 @@ private extension PlantPage {
         let record = PlantRecord(actionType: type, plant: plant)
         modelContext.insert(record)
         try? modelContext.save()
+        triggerHeroEffect(for: type)
         
         Task {
             _ = await PlantNotificationScheduler.shared.syncNotifications(for: plant)
+        }
+    }
+
+    func triggerHeroEffect(for type: RecordActionType) {
+        heroEffect = nil
+        heroEffect = PlantHeroEffect(actionType: type)
+
+        Task {
+            try? await Task.sleep(for: PlantHeroEffect.displayDuration)
+            heroEffect = nil
         }
     }
 }

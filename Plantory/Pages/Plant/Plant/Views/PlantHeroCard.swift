@@ -9,15 +9,24 @@ import SwiftUI
 
 struct PlantHeroCard: View {
     let plant: Plant
+    var effect: PlantHeroEffect?
 
     var body: some View {
         PixelRoundedRectangleCard(fill: .buttonBackground) {
             VStack(spacing: 14) {
                 ZStack(alignment: .bottomTrailing) {
                     PixelRectangleCard {
-                        plantPhoto
-                            .frame(height: 300)
-                            .frame(maxWidth: .infinity)
+                        ZStack {
+                            plantPhoto
+                                .frame(height: 300)
+                                .frame(maxWidth: .infinity)
+
+                            if let effect {
+                                PlantHeroEffectOverlay(effect: effect)
+                                    .transition(.opacity)
+                            }
+                        }
+                        .clipped()
                     }
                 }
 
@@ -38,7 +47,6 @@ struct PlantHeroCard: View {
             .padding(4)
         }
     }
-
 }
 
 private struct PixelMiniStat: View {
