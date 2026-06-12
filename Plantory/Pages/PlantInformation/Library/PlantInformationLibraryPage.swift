@@ -10,11 +10,6 @@ struct PlantInformationLibraryPage: View {
 
     private let loadsOnAppear: Bool
     private let service = PlantInformationCloudService()
-    private let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-
     init(_ plantInformations: [PlantInformation] = []) {
         loadsOnAppear = !AppEnvironment.isPreview
         _viewState = State(initialValue: plantInformations.isEmpty ? .loading : .loaded(plantInformations))
@@ -79,7 +74,7 @@ private extension PlantInformationLibraryPage {
     @ViewBuilder
     var content: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 16) {
+            LazyVStack(alignment: .leading, spacing: 4) {
                 PixelRoundedRectangleCard(
                     title: "Find Plants",
                     systemImage: "magnifyingglass"
@@ -90,7 +85,7 @@ private extension PlantInformationLibraryPage {
                         .autocorrectionDisabled()
                 }
 
-                LazyVGrid(columns: columns, spacing: 14) {
+                LazyVStack(spacing: 4) {
                     ForEach(filteredInfos) { info in
                         NavigationLink(to: PlantoryDestination.plantInformation(PlantInformationRoute(plantInformation: info))) {
                             PlantInformationLibraryCard(info: info)

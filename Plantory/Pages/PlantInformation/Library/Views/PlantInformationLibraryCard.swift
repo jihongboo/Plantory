@@ -11,59 +11,54 @@ struct PlantInformationLibraryCard: View {
     let info: PlantInformation
 
     var body: some View {
-        PixelRoundedRectangleCard {
-            VStack(alignment: .leading, spacing: 12) {
+        PixelRoundedRectangleCard(fill: .cardBackground, cornerRadius: 18) {
+            HStack(spacing: 12) {
                 PixelRectangleCard(fill: .pixelCream) {
                     plantImage
-                        .frame(height: 128)
-                        .frame(maxWidth: .infinity)
-                        .padding(8)
-                }
-                .overlay(alignment: .topTrailing) {
-                    PixelTag(systemName: difficultyIcon, fill: difficultyColor)
-                        .scaleEffect(0.78, anchor: .topTrailing)
+                        .frame(width: 72, height: 72)
                         .padding(6)
                 }
-                .frame(height: 144)
+                .frame(width: 84, height: 84)
 
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(info.displayCommonName)
-                        .font(.pixel(.title3))
-                        .foregroundStyle(.pixelInk)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.76)
+                VStack(alignment: .leading, spacing: 6) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(info.displayCommonName)
+                            .font(.pixel(.title3))
+                            .foregroundStyle(.pixelInk)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.76)
 
-                    Text(info.species)
-                        .font(.pixel(.callout))
-                        .foregroundStyle(Color.pixelInk.opacity(0.58))
-                        .italic()
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.78)
+                        Text(info.species)
+                            .font(.pixel(.callout))
+                            .foregroundStyle(Color.pixelInk.opacity(0.58))
+                            .italic()
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.78)
+                    }
+
+                    HStack(spacing: 8) {
+                        label(systemName: "sun.max.fill", text: info.lightLevel.capitalized)
+                        label(systemName: "drop.fill", text: info.waterLevel.capitalized)
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
 
-                PixelDashedDivider()
+                VStack(alignment: .trailing, spacing: 10) {
+                    PixelTag(systemName: difficultyIcon, fill: difficultyColor)
+                        .scaleEffect(0.82, anchor: .topTrailing)
 
-                HStack(spacing: 8) {
-                    PlantInformationMiniMetric(
-                        title: "Light",
-                        value: info.lightLevel.capitalized,
-                        systemImage: "sun.max.fill"
-                    )
-
-                    PlantInformationMiniMetric(
-                        title: "Water",
-                        value: info.waterLevel.capitalized,
-                        systemImage: "drop.fill"
-                    )
+                    Image(systemName: "chevron.right")
+                        .font(.headline.weight(.black))
+                        .foregroundStyle(Color.pixelInk.opacity(0.48))
                 }
             }
+            .padding(.vertical, 2)
         }
     }
 }
 
 #Preview {
     PlantInformationLibraryCard(info: .monstera)
-        .containerRelativeFrame(.horizontal, count: 2, spacing: 16)
         .padding()
 }
 
@@ -74,14 +69,29 @@ private extension PlantInformationLibraryCard {
                 image
                     .pixelate()
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
             } else {
                 Image(systemName: "leaf.fill")
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(.white.opacity(0.8))
-                    .padding(32)
+                    .padding(18)
             }
+        }
+        .clipped()
+    }
+
+    func label(systemName: String, text: String) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: systemName)
+                .font(.caption.weight(.black))
+                .foregroundStyle(.pixelLeaf)
+
+            Text(text)
+                .font(.pixel(.caption))
+                .foregroundStyle(Color.pixelInk.opacity(0.68))
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
         }
     }
 

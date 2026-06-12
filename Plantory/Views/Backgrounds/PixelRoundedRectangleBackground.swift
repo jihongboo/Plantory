@@ -19,13 +19,13 @@ struct PixelRoundedRectangleBackground: View {
     init(
         fill: Color,
         strokeColor: Color = .black.opacity(0.8),
-        cornerRadius: CGFloat = 28,
+        cornerRadius: CGFloat? = nil,
         pixelSize: CGFloat = 4,
         lineWidth: CGFloat = 4,
         innerBorderColor: Color = .white.opacity(0.6),
         innerBorderWidth: CGFloat = 4
     ) {
-        self.cornerRadius = cornerRadius
+        self.cornerRadius = cornerRadius ?? 28
         self.pixelSize = pixelSize
         self.lineWidth = lineWidth
         self.strokeColor = strokeColor
