@@ -5,9 +5,10 @@ import NavigatorUI
 struct PlantInformationLibraryPage: View {
     @Environment(\.modelContext) private var modelContext
 
-    @State private var plantInformations: [PlantInformation] = []
+    @State private var viewState: ViewState<[PlantInformation]>
     @State private var searchText = ""
 
+    private let loadsOnAppear: Bool
     private let service = PlantInformationCloudService()
     private let columns = [
         GridItem(.flexible()),
@@ -15,53 +16,96 @@ struct PlantInformationLibraryPage: View {
     ]
 
     init(_ plantInformations: [PlantInformation] = []) {
-        _plantInformations = State(initialValue: plantInformations)
+        loadsOnAppear = !AppEnvironment.isPreview
+        _viewState = State(initialValue: plantInformations.isEmpty ? .loading : .loaded(plantInformations))
+    }
+
+    init(initialState: ViewState<[PlantInformation]>) {
+        loadsOnAppear = false
+        _viewState = State(initialValue: initialState)
     }
 
     var body: some View {
         PixelPage {
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 16) {
-                    PixelRoundedRectangleCard(
-                        title: "Find Plants",
-                        systemImage: "magnifyingglass"
-                    ) {
-                        TextField("Search by name or species", text: $searchText)
-                            .textFieldStyle(.pixel)
-                            .textInputAutocapitalization(.words)
-                            .autocorrectionDisabled()
-                    }
-
-                    LazyVGrid(columns: columns, spacing: 14) {
-                        ForEach(filteredInfos) { info in
-                            NavigationLink(to: PlantoryDestination.plantInformation(PlantInformationRoute(plantInformation: info))) {
-                                PlantInformationLibraryCard(info: info)
+            Group {
+                switch viewState {
+                case .loading:
+                    PixelProgressView("Loading plant encyclopedia...")
+                case .loaded:
+                    content
+                case .failed(let error):
+                    PixelContentUnavailableView(error: error) {
+                        Button("Retry", systemImage: "arrow.circlepath") {
+                            Task {
+                                await load()
                             }
-                            .buttonStyle(.plain)
                         }
+                        .buttonStyle(.pixelRoundedRectangle)
                     }
-                    .load(load)
+                    .scenePadding()
                 }
-                .padding(.bottom, 24)
+            }
+            .task {
+                guard loadsOnAppear else { return }
+                await load()
             }
             .pixelNavigationTitle(title: "Plant Encyclopedia", subtitle: "\(filteredInfos.count) plants")
         }
     }
 }
 
-#Preview {
+#Preview("Loaded") {
     NavigationStack {
-        PlantInformationLibraryPage([.monstera, .succulent])
+        PlantInformationLibraryPage(initialState: .loaded([.monstera, .succulent]))
     }
+    .modelContainer(.preview)
 }
 
-#Preview("Remote") {
+#Preview("Loading") {
     NavigationStack {
-        PlantInformationLibraryPage([])
+        PlantInformationLibraryPage(initialState: .loading)
     }
+    .modelContainer(.preview)
+}
+
+#Preview("Failed") {
+    NavigationStack {
+        PlantInformationLibraryPage(initialState: .failed(AppError.empty))
+    }
+    .modelContainer(.preview)
 }
 
 private extension PlantInformationLibraryPage {
+    @ViewBuilder
+    var content: some View {
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 16) {
+                PixelRoundedRectangleCard(
+                    title: "Find Plants",
+                    systemImage: "magnifyingglass"
+                ) {
+                    TextField("Search by name or species", text: $searchText)
+                        .textFieldStyle(.pixel)
+                        .textInputAutocapitalization(.words)
+                        .autocorrectionDisabled()
+                }
+
+                LazyVGrid(columns: columns, spacing: 14) {
+                    ForEach(filteredInfos) { info in
+                        NavigationLink(to: PlantoryDestination.plantInformation(PlantInformationRoute(plantInformation: info))) {
+                            PlantInformationLibraryCard(info: info)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .padding(.bottom, 24)
+        }
+    }
+
+    var plantInformations: [PlantInformation] {
+        viewState.value ?? []
+    }
 
     var trimmedSearchText: String {
         searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -73,20 +117,24 @@ private extension PlantInformationLibraryPage {
         return plantInformations.filter { $0.matchesSearchText(trimmedSearchText) }
     }
 
-    func load() async throws {
-        if !plantInformations.isEmpty { return }
-        plantInformations = (try? service.localPlantInformations(in: modelContext)) ?? []
-
-        do {
-            plantInformations = try await service.fetchPlantInformations(in: modelContext)
-        } catch {
-            if plantInformations.isEmpty {
-                throw error
-            }
+    func load() async {
+        if viewState.value == nil,
+           let localPlantInformations = try? service.localPlantInformations(in: modelContext),
+           !localPlantInformations.isEmpty {
+            viewState = .loaded(localPlantInformations)
         }
 
-        if plantInformations.isEmpty {
-            throw AppError.empty
+        do {
+            let refreshedPlantInformations = try await service.fetchPlantInformations(in: modelContext)
+            if refreshedPlantInformations.isEmpty {
+                viewState = .failed(AppError.empty)
+            } else {
+                viewState = .loaded(refreshedPlantInformations)
+            }
+        } catch {
+            if viewState.value == nil {
+                viewState = .failed(error)
+            }
         }
     }
 }
