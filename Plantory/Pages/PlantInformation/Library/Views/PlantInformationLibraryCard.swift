@@ -69,7 +69,8 @@ private extension PlantInformationLibraryCard {
                 image
                     .pixelate()
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
+                    .frame(width: 72, height: 72)
             } else {
                 Image(systemName: "leaf.fill")
                     .resizable()

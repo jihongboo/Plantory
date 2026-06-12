@@ -50,18 +50,34 @@ struct PlantCardView: View {
 private extension PlantCardView {
     @ViewBuilder
     var plantPhoto: some View {
-        ZStack {
-            if let photoData = plant.photoData,
-               let image = Image(data: photoData) {
+        if let photoData = plant.photoData,
+           let image = Image(data: photoData) {
+            image
+                .resizable()
+                .scaledToFit()
+        } else {
+            plantInformationImage
+        }
+    }
+
+    var plantInformationImage: some View {
+        AsyncImage(url: plant.plantInformation?.imageURL) { phase in
+            if case let .success(image) = phase {
                 image
-                    .resizable()
-                    .scaledToFit()
-            } else {
-                Image(.Plants.succulentHealthy)
                     .pixelate()
                     .resizable()
                     .scaledToFit()
+            } else {
+                defaultPlantImage
             }
         }
+    }
+
+    var defaultPlantImage: some View {
+        Image(systemName: "leaf.fill")
+            .resizable()
+            .scaledToFit()
+            .foregroundStyle(.white.opacity(0.8))
+            .padding(18)
     }
 }
