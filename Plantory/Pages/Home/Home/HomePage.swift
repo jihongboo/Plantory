@@ -27,8 +27,6 @@ struct HomePage: View {
                     HomeHeaderView()
                     ScrollView {
                         LazyVStack {
-                            HomeWeatherCard()
-
                             if plants.isEmpty {
                                 PixelContentUnavailableView(error: AppError.empty)
                             } else {

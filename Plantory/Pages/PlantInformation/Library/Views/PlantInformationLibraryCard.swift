@@ -76,10 +76,11 @@ private extension PlantInformationLibraryCard {
                     .resizable()
                     .scaledToFit()
             } else {
-                Image("PixelMonsteraHealthy")
-                    .pixelate()
+                Image(systemName: "leaf.fill")
                     .resizable()
                     .scaledToFit()
+                    .foregroundStyle(.white.opacity(0.8))
+                    .padding(32)
             }
         }
     }

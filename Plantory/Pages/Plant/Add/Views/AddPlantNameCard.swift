@@ -24,6 +24,7 @@ struct AddPlantNameCard: View {
                     text: $note,
                     axis: .vertical
                 )
+                .frame(height: 200)
             }
         }
         .onAppear {

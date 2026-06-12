@@ -47,10 +47,11 @@ private extension AddPlantProfileCard {
                         .resizable()
                         .scaledToFit()
                 } else {
-                    Image("PixelMonsteraHealthy")
-                        .pixelate()
+                    Image(systemName: "leaf.fill")
                         .resizable()
                         .scaledToFit()
+                        .foregroundStyle(.pixelLeaf)
+                        .padding(18)
                 }
             }
         }

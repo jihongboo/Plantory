@@ -33,13 +33,38 @@ struct PixelTextField: View {
                     .foregroundStyle(.pixelInk)
             }
 
-            TextField(prompt, text: $text, axis: axis)
-                .textFieldStyle(
-                    .pixel(
-                        minHeight: axis == .vertical ? 116 : 52,
-                        alignment: .topLeading
+            if axis == .vertical {
+                ZStack(alignment: .topLeading) {
+                    TextEditor(text: $text)
+                        .font(.pixel(.body))
+                        .foregroundStyle(.pixelInk)
+                        .tint(.pixelLeafDark)
+                        .scrollContentBackground(.hidden)
+                        .background(.clear)
+                        .padding(8)
+
+                    if text.isEmpty {
+                        Text(prompt)
+                            .font(.pixel(.body))
+                            .foregroundStyle(Color.pixelInk.opacity(0.36))
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 18)
+                            .allowsHitTesting(false)
+                    }
+                }
+                .frame(maxWidth: .infinity, minHeight: 116, alignment: .topLeading)
+                .background {
+                    PixelTextInputBackground()
+                }
+            } else {
+                TextField(prompt, text: $text, axis: axis)
+                    .textFieldStyle(
+                        .pixel(
+                            minHeight: 52,
+                            alignment: .topLeading
+                        )
                     )
-                )
+            }
         }
     }
 }
@@ -74,16 +99,30 @@ struct PixelTextFieldStyle: TextFieldStyle {
             .padding(12)
             .frame(minHeight: minHeight, alignment: alignment)
             .background {
-                PixelRoundedRectangleBackground(
+                PixelTextInputBackground(
                     fill: fill,
-                    strokeColor: stroke,
-                    cornerRadius: cornerRadius,
-                    pixelSize: 4,
-                    lineWidth: 3,
-                    innerBorderColor: Color.white.opacity(0.44),
-                    innerBorderWidth: 3
+                    stroke: stroke,
+                    cornerRadius: cornerRadius
                 )
             }
+    }
+}
+
+private struct PixelTextInputBackground: View {
+    var fill: Color = .pixelCream
+    var stroke: Color = Color.pixelInk.opacity(0.82)
+    var cornerRadius: CGFloat = 12
+
+    var body: some View {
+        PixelRoundedRectangleBackground(
+            fill: fill,
+            strokeColor: stroke,
+            cornerRadius: cornerRadius,
+            pixelSize: 4,
+            lineWidth: 3,
+            innerBorderColor: Color.white.opacity(0.44),
+            innerBorderWidth: 3
+        )
     }
 }
 
@@ -121,6 +160,13 @@ extension TextFieldStyle where Self == PixelTextFieldStyle {
 
         TextField("Styled Only", text: $value)
             .textFieldStyle(.pixel)
+
+        PixelTextField(
+            "Notes",
+            prompt: "Optional care notes",
+            text: $value,
+            axis: .vertical
+        )
     }
     .padding()
     .background(.pixelPaper)

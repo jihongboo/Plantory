@@ -7,11 +7,9 @@ struct PlantoryApp: App {
     let container: ModelContainer
     private let navigationCoordinator: PlantNavigationCoordinator
     private let notificationDelegate: PlantoryNotificationCenterDelegate
-    private let weatherService: HomeWeatherService
 
     init() {
         navigationCoordinator = PlantNavigationCoordinator()
-        weatherService = HomeWeatherService()
         let modelContainer = Self.makeModelContainer()
 
         container = modelContainer
@@ -33,7 +31,6 @@ struct PlantoryApp: App {
                 .tint(.green)
         }
         .environment(navigationCoordinator)
-        .environment(\.homeWeatherService, weatherService)
         .modelContainer(container)
     }
 }

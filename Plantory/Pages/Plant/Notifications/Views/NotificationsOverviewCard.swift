@@ -20,7 +20,7 @@ struct NotificationsOverviewCard: View {
                             .font(.pixel(.largeTitle))
                             .foregroundStyle(.white)
                             .shadow(color: .pixelInk, radius: 0, x: 2, y: 2)
-                            .fixedSize(horizontal: false, vertical: true)
+                            .minimumScaleFactor(0.2)
                         
                         PixelRectangleCard(fill: .pixelSun) {
                             Text("\(enabledCount) / \(settingsCount)")

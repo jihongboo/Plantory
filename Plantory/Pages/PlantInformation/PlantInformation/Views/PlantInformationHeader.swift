@@ -60,10 +60,11 @@ private extension PlantInformationHeader {
                         .resizable()
                         .scaledToFit()
                 } else {
-                    Image("PixelMonsteraHealthy")
-                        .pixelate()
+                    Image(systemName: "leaf.fill")
                         .resizable()
                         .scaledToFit()
+                        .foregroundStyle(.pixelLeaf)
+                        .padding(18)
                 }
             }
         }
