@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Fiddle Leaf Fig\",\"overview\":\"Fiddle Leaf Fig is an indoor tree with large violin-shaped leaves. It rewards stable bright light and steady watering but dislikes frequent movement.\",\"tips\":\"Avoid moving it often; choose a bright spot and let it settle.\"},\"zh-Hans\":{\"commonName\":\"琴叶榕\",\"overview\":\"琴叶榕是一种室内树形植物，拥有大而像小提琴的叶片。它需要稳定的强散射光和规律浇水，不喜欢频繁移动。\",\"tips\":\"选好明亮位置后尽量少移动，让它有时间适应环境。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "ficus-lyrata.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/ficus-lyrata.png"
   }
 }

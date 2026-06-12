@@ -14,8 +14,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/monstera-deliciosa/fields.json \
-  --asset-files monstera-deliciosa.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/monstera-deliciosa.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/monstera-deliciosa/fields.json
 
 echo "Creating epipremnum-aureum"
 ${CKTOOL} create-record \
@@ -24,8 +23,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/epipremnum-aureum/fields.json \
-  --asset-files epipremnum-aureum.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/epipremnum-aureum.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/epipremnum-aureum/fields.json
 
 echo "Creating dracaena-trifasciata"
 ${CKTOOL} create-record \
@@ -34,8 +32,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/dracaena-trifasciata/fields.json \
-  --asset-files dracaena-trifasciata.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/dracaena-trifasciata.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/dracaena-trifasciata/fields.json
 
 echo "Creating zamioculcas-zamiifolia"
 ${CKTOOL} create-record \
@@ -44,8 +41,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/zamioculcas-zamiifolia/fields.json \
-  --asset-files zamioculcas-zamiifolia.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/zamioculcas-zamiifolia.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/zamioculcas-zamiifolia/fields.json
 
 echo "Creating spathiphyllum-wallisii"
 ${CKTOOL} create-record \
@@ -54,8 +50,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/spathiphyllum-wallisii/fields.json \
-  --asset-files spathiphyllum-wallisii.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/spathiphyllum-wallisii.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/spathiphyllum-wallisii/fields.json
 
 echo "Creating chlorophytum-comosum"
 ${CKTOOL} create-record \
@@ -64,8 +59,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/chlorophytum-comosum/fields.json \
-  --asset-files chlorophytum-comosum.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/chlorophytum-comosum.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/chlorophytum-comosum/fields.json
 
 echo "Creating ficus-elastica"
 ${CKTOOL} create-record \
@@ -74,8 +68,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/ficus-elastica/fields.json \
-  --asset-files ficus-elastica.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/ficus-elastica.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/ficus-elastica/fields.json
 
 echo "Creating ficus-lyrata"
 ${CKTOOL} create-record \
@@ -84,8 +77,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/ficus-lyrata/fields.json \
-  --asset-files ficus-lyrata.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/ficus-lyrata.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/ficus-lyrata/fields.json
 
 echo "Creating pilea-peperomioides"
 ${CKTOOL} create-record \
@@ -94,8 +86,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/pilea-peperomioides/fields.json \
-  --asset-files pilea-peperomioides.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/pilea-peperomioides.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/pilea-peperomioides/fields.json
 
 echo "Creating nephrolepis-exaltata"
 ${CKTOOL} create-record \
@@ -104,8 +95,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/nephrolepis-exaltata/fields.json \
-  --asset-files nephrolepis-exaltata.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/nephrolepis-exaltata.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/nephrolepis-exaltata/fields.json
 
 echo "Creating goeppertia-orbifolia"
 ${CKTOOL} create-record \
@@ -114,8 +104,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/goeppertia-orbifolia/fields.json \
-  --asset-files goeppertia-orbifolia.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/goeppertia-orbifolia.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/goeppertia-orbifolia/fields.json
 
 echo "Creating philodendron-hederaceum"
 ${CKTOOL} create-record \
@@ -124,8 +113,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/philodendron-hederaceum/fields.json \
-  --asset-files philodendron-hederaceum.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/philodendron-hederaceum.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/philodendron-hederaceum/fields.json
 
 echo "Creating aloe-barbadensis-miller"
 ${CKTOOL} create-record \
@@ -134,8 +122,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/aloe-barbadensis-miller/fields.json \
-  --asset-files aloe-barbadensis-miller.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/aloe-barbadensis-miller.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/aloe-barbadensis-miller/fields.json
 
 echo "Creating echeveria-elegans"
 ${CKTOOL} create-record \
@@ -144,8 +131,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/echeveria-elegans/fields.json \
-  --asset-files echeveria-elegans.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/echeveria-elegans.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/echeveria-elegans/fields.json
 
 echo "Creating crassula-ovata"
 ${CKTOOL} create-record \
@@ -154,8 +140,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/crassula-ovata/fields.json \
-  --asset-files crassula-ovata.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/crassula-ovata.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/crassula-ovata/fields.json
 
 echo "Creating mammillaria-elongata"
 ${CKTOOL} create-record \
@@ -164,8 +149,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/mammillaria-elongata/fields.json \
-  --asset-files mammillaria-elongata.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/mammillaria-elongata.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/mammillaria-elongata/fields.json
 
 echo "Creating phalaenopsis-amabilis"
 ${CKTOOL} create-record \
@@ -174,8 +158,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/phalaenopsis-amabilis/fields.json \
-  --asset-files phalaenopsis-amabilis.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/phalaenopsis-amabilis.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/phalaenopsis-amabilis/fields.json
 
 echo "Creating anthurium-andraeanum"
 ${CKTOOL} create-record \
@@ -184,8 +167,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/anthurium-andraeanum/fields.json \
-  --asset-files anthurium-andraeanum.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/anthurium-andraeanum.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/anthurium-andraeanum/fields.json
 
 echo "Creating dracaena-sanderiana"
 ${CKTOOL} create-record \
@@ -194,8 +176,7 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/dracaena-sanderiana/fields.json \
-  --asset-files dracaena-sanderiana.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/dracaena-sanderiana.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/dracaena-sanderiana/fields.json
 
 echo "Creating hedera-helix"
 ${CKTOOL} create-record \
@@ -204,6 +185,5 @@ ${CKTOOL} create-record \
   --environment "${CK_ENVIRONMENT}" \
   --database-type public \
   --record-type PlantInformation \
-  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/hedera-helix/fields.json \
-  --asset-files hedera-helix.png=/Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/images/hedera-helix.png
+  --fields-file /Users/jihongbo/Developer/Plantory/CloudKitSeed/PlantInformation/v1/cktool-records/hedera-helix/fields.json
 

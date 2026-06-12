@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"English Ivy\",\"overview\":\"English Ivy is a trailing vine with lobed leaves. Indoors it prefers cool rooms, bright filtered light, and evenly moist soil.\",\"tips\":\"Trim vines regularly for a denser, less tangled plant.\"},\"zh-Hans\":{\"commonName\":\"常春藤\",\"overview\":\"常春藤是一种带裂叶的垂蔓植物。室内养护时，它更喜欢凉爽房间、明亮散射光和均匀微湿的土壤。\",\"tips\":\"定期修剪藤蔓，可以让株型更浓密，也不容易打结。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "hedera-helix.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/hedera-helix.png"
   }
 }

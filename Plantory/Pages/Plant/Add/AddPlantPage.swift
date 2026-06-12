@@ -17,7 +17,7 @@ struct AddPlantPage: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         
-                        AddPlantProfileCard(info: plantInformation, image: plantImage)
+                        AddPlantProfileCard(info: plantInformation)
                         
                         AddPlantNameCard(nickname: $nickname, note: $note)
                         
@@ -60,15 +60,9 @@ struct AddPlantPage: View {
 }
 
 private extension AddPlantPage {
-    var plantImage: Image? {
-        guard let imageData = plantInformation.imageData else { return nil }
-        return Image(data: imageData)
-    }
-    
     func addPlant() {
         let plant = Plant(
             nickname: nickname,
-            imageData: plantInformation.imageData,
             note: note.trimmingCharacters(in: .whitespacesAndNewlines),
             information: plantInformation
         )

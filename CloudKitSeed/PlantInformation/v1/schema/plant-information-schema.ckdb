@@ -24,6 +24,7 @@ DEFINE SCHEMA
         species                     STRING,
         overview                    STRING,
         image                       ASSET,
+        imageURL                    STRING,
         careDifficulty              STRING,
         lightLevel                  STRING,
         waterLevel                  STRING,

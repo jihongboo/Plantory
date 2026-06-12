@@ -14,6 +14,7 @@ DEFINE SCHEMA
         fertilizerLevel           STRING,
         humidityLevel             STRING,
         image                     ASSET,
+        imageURL                  STRING,
         localizedContentsJSON     STRING,
         lightLevel                STRING,
         overview                  STRING,

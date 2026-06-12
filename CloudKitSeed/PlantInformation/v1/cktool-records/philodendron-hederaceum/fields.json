@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Heartleaf Philodendron\",\"overview\":\"Heartleaf Philodendron is a trailing plant with soft heart-shaped leaves. It is adaptable, fast-growing, and works well in hanging pots or on shelves.\",\"tips\":\"Pinch back long vines to keep the plant full.\"},\"zh-Hans\":{\"commonName\":\"心叶蔓绿绒\",\"overview\":\"心叶蔓绿绒是一种垂吊植物，叶片柔软呈心形。它适应性强、生长快，适合吊盆或摆在架子上自然垂落。\",\"tips\":\"适当摘心或修剪长藤，可以让植株保持丰满。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "philodendron-hederaceum.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/philodendron-hederaceum.png"
   }
 }

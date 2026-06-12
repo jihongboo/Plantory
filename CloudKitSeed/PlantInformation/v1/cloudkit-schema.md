@@ -10,7 +10,8 @@ Fields:
 | `commonName` | String | Default English display name. |
 | `species` | String | Scientific name. |
 | `overview` | String | Default English encyclopedia summary. |
-| `image` | Asset | Transparent pixel plant PNG. |
+| `image` | Asset | Retired. Kept only because CloudKit does not allow removing an active production field through cktool. Do not write or read it. |
+| `imageURL` | String | Public Supabase Storage URL for the transparent pixel plant PNG. |
 | `careDifficulty` | String | `easy`, `moderate`, or `hard`. |
 | `lightLevel` | String | `low`, `medium`, or `high`. |
 | `waterLevel` | String | `low`, `medium`, or `high`. |

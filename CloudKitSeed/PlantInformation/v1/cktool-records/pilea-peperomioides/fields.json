@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Chinese Money Plant\",\"overview\":\"Chinese Money Plant has round coin-shaped leaves on slender stems. It stays compact, grows quickly in bright light, and often produces small offsets.\",\"tips\":\"Separate offsets once they have their own small roots.\"},\"zh-Hans\":{\"commonName\":\"镜面草\",\"overview\":\"镜面草有圆圆的硬币状叶片和细长叶柄。它株型紧凑，在明亮光线下生长较快，也常长出小侧芽。\",\"tips\":\"等侧芽长出自己的小根后，再把它们分株栽种。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "pilea-peperomioides.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/pilea-peperomioides.png"
   }
 }

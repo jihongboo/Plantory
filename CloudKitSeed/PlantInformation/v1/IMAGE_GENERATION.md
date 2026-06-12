@@ -173,7 +173,7 @@ for input in tmp/removebg-inputs/*.png; do
 done
 ```
 
-Then regenerate final CloudKit images:
+Then regenerate final Supabase Storage image sources:
 
 ```bash
 python3 CloudKitSeed/PlantInformation/v1/generate_pixel_images.py

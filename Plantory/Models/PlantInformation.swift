@@ -16,7 +16,7 @@ final class PlantInformation {
     var species: String = ""
     var commonName: String = ""
     var overview: String = ""
-    @Attribute(.externalStorage) var imageData: Data?
+    var imageURL: URL?
     var careDifficulty: String = "moderate"
     var lightLevel: String = "medium"
     var waterLevel: String = "medium"
@@ -32,7 +32,7 @@ final class PlantInformation {
         species: String,
         commonName: String,
         overview: String = "",
-        imageData: Data? = nil,
+        imageURL: URL? = nil,
         careDifficulty: String = "moderate",
         lightLevel: String = "medium",
         waterLevel: String = "medium",
@@ -46,7 +46,7 @@ final class PlantInformation {
         self.species = species
         self.commonName = commonName
         self.overview = overview
-        self.imageData = imageData
+        self.imageURL = imageURL
         self.careDifficulty = Self.normalizedCareDifficulty(careDifficulty)
         self.lightLevel = Self.normalizedLevel(lightLevel)
         self.waterLevel = Self.normalizedLevel(waterLevel)
@@ -70,7 +70,7 @@ extension PlantInformation {
             species: record.stringValue(for: "species"),
             commonName: record.stringValue(for: "commonName"),
             overview: record.stringValue(for: "overview"),
-            imageData: Self.imageData(from: record),
+            imageURL: Self.imageURL(from: record),
             careDifficulty: record.stringValue(for: "careDifficulty", default: "moderate"),
             lightLevel: record.stringValue(for: "lightLevel", default: "medium"),
             waterLevel: record.stringValue(for: "waterLevel", default: "medium"),
@@ -87,7 +87,7 @@ extension PlantInformation {
         species = record.stringValue(for: "species")
         commonName = record.stringValue(for: "commonName")
         overview = record.stringValue(for: "overview")
-        imageData = Self.imageData(from: record)
+        imageURL = Self.imageURL(from: record)
         careDifficulty = Self.normalizedCareDifficulty(record.stringValue(for: "careDifficulty", default: "moderate"))
         lightLevel = Self.normalizedLevel(record.stringValue(for: "lightLevel", default: "medium"))
         waterLevel = Self.normalizedLevel(record.stringValue(for: "waterLevel", default: "medium"))
@@ -231,9 +231,15 @@ extension PlantInformation {
 }
 
 private extension PlantInformation {
-    static func imageData(from record: CKRecord) -> Data? {
-        let imageAsset = record["image"] as? CKAsset
-        return imageAsset?.fileURL.flatMap { try? Data(contentsOf: $0) }
+    static func imageURL(from record: CKRecord) -> URL? {
+        guard let url = URL(string: record.stringValue(for: "imageURL")),
+              let scheme = url.scheme?.lowercased(),
+              ["http", "https"].contains(scheme),
+              url.host != nil else {
+            return nil
+        }
+
+        return url
     }
 
     static func localizedContents(from record: CKRecord) -> [String: PlantInformationLocalizedContent] {

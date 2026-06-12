@@ -107,23 +107,6 @@ species, light, water, temperature, fertilizer
 - Pro：无限植物 + 无限诊断
 - 使用 StoreKit 2 实现，本地缓存订阅状态
 
----
-
-## Axiom Skills 使用规则
-
-这是一个 iOS Swift 项目，**在回答任何 iOS/Swift 问题前必须先检查 Axiom skills**：
-
-- UI/SwiftUI 问题 → `axiom:axiom-ios-ui`
-- SwiftData 问题 → `axiom:axiom-swiftdata`
-- CloudKit 同步 → `axiom:axiom-cloud-sync`
-- Swift Concurrency → `axiom:axiom-swift-concurrency`
-- StoreKit/IAP → `axiom:axiom-in-app-purchases`
-- 构建失败 → `axiom:axiom-ios-build`
-- iOS 26 / Liquid Glass → `axiom:axiom-swiftui-26-ref` 或 `axiom:axiom-liquid-glass`
-- 相机/Vision → `axiom:axiom-camera-capture`
-
----
-
 ## MVP 开发优先级
 
 1. **数据模型** — 替换 `Item.swift`，建立 `Plant` + `Diagnosis` 模型

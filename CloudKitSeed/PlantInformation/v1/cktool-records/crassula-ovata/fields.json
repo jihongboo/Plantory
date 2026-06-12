@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Jade Plant\",\"overview\":\"Jade Plant is a woody succulent with thick oval leaves. It grows slowly, lives for many years, and prefers bright light with dry soil cycles.\",\"tips\":\"Prune lightly to keep a compact tree-like shape.\"},\"zh-Hans\":{\"commonName\":\"玉树\",\"overview\":\"玉树是木质化多肉植物，叶片厚实椭圆。它生长较慢、寿命很长，喜欢明亮光线和干湿分明的浇水节奏。\",\"tips\":\"轻度修剪能帮助它维持紧凑的小树形态。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "crassula-ovata.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/crassula-ovata.png"
   }
 }

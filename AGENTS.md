@@ -5,7 +5,6 @@
 **Plantory**（副标题：AI Plant Doctor）是一款面向新手养花用户的 AI 植物助手 iOS App。
 
 核心功能：拍照 → AI诊断植物问题 → 提供养护建议，同时支持植物管理、虚拟植物状态和订阅付费。
-
 PRD 文档：[Documents/PRD.markdown](Documents/PRD.markdown)
 
 ---
@@ -91,8 +90,9 @@ id, nickname, plantInformation, photoData, createdAt, note, activeIssues
 
 ### PlantInformation（植物百科原始信息）
 ```swift
-catalogID, species, commonName, overview, imageData, care levels, localizedContentsJSON
+catalogID, species, commonName, overview, imageURL, care levels, localizedContentsJSON
 // CloudKit Public Database 是远端 source of truth；本地 SwiftData 缓存用于优先展示，再异步刷新 CloudKit 并更新本地数据库
+// PlantInformation 图片存储在 Supabase Storage，模型只保存公开 imageURL；不要在 CloudKit 或 SwiftData 中保存植物百科图片二进制数据
 // 多语言 commonName/overview/tips 存在 localizedContentsJSON，不要新增按语言展开的顶层文本字段
 ```
 
@@ -152,23 +152,6 @@ species, light, water, temperature, fertilizer
 - 免费：最多 4 个植物，每天 3 次 AI 诊断
 - Pro：无限植物 + 无限诊断
 - 使用 StoreKit 2 实现，本地缓存订阅状态
-
----
-
-## Axiom Skills 使用规则
-
-这是一个 iOS Swift 项目，**在回答任何 iOS/Swift 问题前必须先检查 Axiom skills**：
-
-- UI/SwiftUI 问题 → `axiom:axiom-ios-ui`
-- SwiftData 问题 → `axiom:axiom-swiftdata`
-- CloudKit 同步 → `axiom:axiom-cloud-sync`
-- Swift Concurrency → `axiom:axiom-swift-concurrency`
-- StoreKit/IAP → `axiom:axiom-in-app-purchases`
-- 构建失败 → `axiom:axiom-ios-build`
-- iOS 26 / Liquid Glass → `axiom:axiom-swiftui-26-ref` 或 `axiom:axiom-liquid-glass`
-- 相机/Vision → `axiom:axiom-camera-capture`
-
----
 
 ## MVP 开发优先级
 

@@ -45,11 +45,12 @@ struct PlantInformationCloudService {
     func fetchPlantInformations(in modelContext: ModelContext) async throws -> [PlantInformation] {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: "PlantInformation", predicate: predicate)
-        let records = try await fetchRecords(matching: query)
+        let records = try await fetchRecords(
+            matching: query,
+            desiredKeys: Self.summaryDesiredKeys
+        )
 
-        for record in records {
-            _ = try upsert(record: record, in: modelContext)
-        }
+        try upsert(records: records, in: modelContext)
         try modelContext.save()
 
         return try localPlantInformations(in: modelContext)
@@ -85,6 +86,43 @@ struct PlantInformationCloudService {
 }
 
 private extension PlantInformationCloudService {
+    static var summaryDesiredKeys: [CKRecord.FieldKey] {
+        [
+            "catalogID",
+            "species",
+            "commonName",
+            "overview",
+            "imageURL",
+            "careDifficulty",
+            "lightLevel",
+            "waterLevel",
+            "humidityLevel",
+            "temperature",
+            "diseaseRiskLevel",
+            "fertilizerLevel",
+            "localizedContentsJSON"
+        ]
+    }
+
+    @MainActor
+    func upsert(records: [CKRecord], in modelContext: ModelContext) throws {
+        let existingInformations = try localPlantInformations(in: modelContext)
+        var informationsByCatalogID = Dictionary(
+            uniqueKeysWithValues: existingInformations.map { ($0.catalogID, $0) }
+        )
+
+        for record in records {
+            let catalogID = PlantInformation.catalogID(from: record)
+            if let existing = informationsByCatalogID[catalogID] {
+                existing.update(from: record)
+            } else {
+                let information = PlantInformation(record: record)
+                modelContext.insert(information)
+                informationsByCatalogID[catalogID] = information
+            }
+        }
+    }
+
     @MainActor
     func upsert(record: CKRecord, in modelContext: ModelContext) throws -> PlantInformation {
         let catalogID = PlantInformation.catalogID(from: record)
@@ -101,26 +139,32 @@ private extension PlantInformationCloudService {
 
     func fetchRecords(
         matching query: CKQuery,
+        desiredKeys: [CKRecord.FieldKey]? = nil,
         resultsLimit: Int = CKQueryOperation.maximumResults
     ) async throws -> [CKRecord] {
         var records: [CKRecord] = []
         let firstPage = try await database.records(
             matching: query,
+            desiredKeys: desiredKeys,
             resultsLimit: resultsLimit
         )
-        records.append(contentsOf: try decodedRecords(from: firstPage.matchResults))
+        records.append(contentsOf: try Self.decodedRecords(from: firstPage.matchResults))
 
         var cursor = firstPage.queryCursor
         while let currentCursor = cursor {
-            let page = try await database.records(continuingMatchFrom: currentCursor)
-            records.append(contentsOf: try decodedRecords(from: page.matchResults))
+            let page = try await database.records(
+                continuingMatchFrom: currentCursor,
+                desiredKeys: desiredKeys,
+                resultsLimit: resultsLimit
+            )
+            records.append(contentsOf: try Self.decodedRecords(from: page.matchResults))
             cursor = page.queryCursor
         }
 
         return records
     }
 
-    func decodedRecords(
+    nonisolated static func decodedRecords(
         from matchResults: [(CKRecord.ID, Result<CKRecord, Error>)]
     ) throws -> [CKRecord] {
         try matchResults.map { _, result in

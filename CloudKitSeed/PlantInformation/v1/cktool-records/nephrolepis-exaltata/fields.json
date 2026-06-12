@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Boston Fern\",\"overview\":\"Boston Fern has soft arching fronds and a lush texture. It prefers evenly moist soil, filtered light, and higher humidity than most common houseplants.\",\"tips\":\"A bright bathroom or humid corner is often better than a dry sunny shelf.\"},\"zh-Hans\":{\"commonName\":\"波士顿蕨\",\"overview\":\"波士顿蕨有柔软下垂的羽状叶，整体质感蓬松。相比多数常见室内植物，它更喜欢湿润土壤、过滤光和较高空气湿度。\",\"tips\":\"明亮的浴室或湿度较高的角落，通常比干燥晒台更适合它。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "nephrolepis-exaltata.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/nephrolepis-exaltata.png"
   }
 }

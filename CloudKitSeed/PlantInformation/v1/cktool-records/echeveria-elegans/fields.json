@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Echeveria\",\"overview\":\"Echeveria is a compact rosette succulent with powdery leaves. It needs strong light and dry soil to stay colorful and symmetrical.\",\"tips\":\"If the rosette stretches upward, it needs more light.\"},\"zh-Hans\":{\"commonName\":\"拟石莲花\",\"overview\":\"拟石莲花是紧凑莲座状多肉，叶片带粉感。它需要强光和偏干土壤，才能保持颜色和对称株型。\",\"tips\":\"如果莲座开始向上拉长，通常说明光照不足。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "echeveria-elegans.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/echeveria-elegans.png"
   }
 }

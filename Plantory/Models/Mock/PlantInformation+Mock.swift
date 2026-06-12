@@ -6,7 +6,7 @@ extension PlantInformation {
         species: "Monstera deliciosa",
         commonName: "Monstera",
         overview: "Monstera is a tropical climbing plant that thrives in bright filtered light and appreciates a stable indoor routine.",
-        imageData: PlatformImageData.monstera,
+        imageURL: URL(string: "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/monstera-deliciosa.png"),
         temperature: "18-30°C",
         localizedContents: [
             "en": PlantInformationLocalizedContent(
@@ -25,7 +25,7 @@ extension PlantInformation {
         species: "Echeveria elegans",
         commonName: "Succulent",
         overview: "Succulents store water in their leaves and stay compact when they receive strong light and dry soil between waterings.",
-        imageData: PlatformImageData.succulent,
+        imageURL: URL(string: "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/echeveria-elegans.png"),
         lightLevel: "high",
         waterLevel: "low",
         humidityLevel: "low",

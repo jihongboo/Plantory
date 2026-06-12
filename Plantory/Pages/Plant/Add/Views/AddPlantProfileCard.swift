@@ -2,7 +2,6 @@ import SwiftUI
 
 struct AddPlantProfileCard: View {
     let info: PlantInformation
-    let image: Image?
 
     var body: some View {
         PixelRoundedRectangleCard(fill: .buttonBackground, padding: 24) {
@@ -32,7 +31,7 @@ struct AddPlantProfileCard: View {
 }
 
 #Preview {
-    AddPlantProfileCard(info: .monstera, image: nil)
+    AddPlantProfileCard(info: .monstera)
         .padding()
         .background(.pixelPaper)
 }
@@ -41,16 +40,18 @@ private extension AddPlantProfileCard {
     @ViewBuilder
     var plantImage: some View {
         PixelRectangleCard {
-            if let image {
-                image
-                    .pixelate()
-                    .resizable()
-                    .scaledToFit()
-            } else {
-                Image("PixelMonsteraHealthy")
-                    .pixelate()
-                    .resizable()
-                    .scaledToFit()
+            AsyncImage(url: info.imageURL) { phase in
+                if case let .success(image) = phase {
+                    image
+                        .pixelate()
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    Image("PixelMonsteraHealthy")
+                        .pixelate()
+                        .resizable()
+                        .scaledToFit()
+                }
             }
         }
     }

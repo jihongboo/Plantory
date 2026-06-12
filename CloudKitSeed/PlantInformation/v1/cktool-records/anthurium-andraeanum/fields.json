@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Anthurium\",\"overview\":\"Anthurium has glossy heart-shaped leaves and colorful waxy spathes. It prefers bright filtered light, airy soil, and warm humid conditions.\",\"tips\":\"Use an airy mix with bark or perlite instead of dense potting soil.\"},\"zh-Hans\":{\"commonName\":\"红掌\",\"overview\":\"红掌有油亮心形叶片和彩色蜡质佛焰苞。它喜欢明亮散射光、透气介质和温暖湿润环境。\",\"tips\":\"使用含树皮或珍珠岩的透气介质，不要用过于板结的土。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "anthurium-andraeanum.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/anthurium-andraeanum.png"
   }
 }

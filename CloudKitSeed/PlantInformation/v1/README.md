@@ -5,12 +5,14 @@ This folder contains the first public PlantInformation catalog for Plantory.
 Upload target:
 - CloudKit database: Public Database
 - Record type: `PlantInformation`
-- Asset field: `image`
+- Image URL field: `imageURL`
 - Source data: `catalog.json`
-- Image files: `images/*.png`
+- Image files: `images/*.png` uploaded to Supabase Storage
 - cktool files: `cktool-records/`
 
 The app should treat CloudKit Public Database as the source of truth for the plant encyclopedia. The app caches `PlantInformation` records in SwiftData for local-first display and refreshes them from Public Database.
+
+The old CloudKit `image` Asset field is retired. It may still exist in the CloudKit schema because it was already active in production; new records should only write `imageURL`.
 
 ## Record Identity
 
@@ -25,15 +27,15 @@ recordName: monstera-deliciosa
 
 ## Images
 
-Each `catalogID` maps to a transparent-background pixel plant PNG in `images/` using `<catalogID>.png`. Upload that PNG to the CloudKit `image` Asset field for the matching record.
+Each `catalogID` maps to a transparent-background pixel plant PNG in `images/` using `<catalogID>.png`. Upload those PNGs to Supabase Storage and store the public URL in the CloudKit `imageURL` field for the matching record.
 
 The current v1 image pipeline uses one AI-generated contact sheet plus remove.bg cutouts:
 
 - `source/ai-pixel-plants-contact-sheet.png`: original AI contact sheet, arranged in the same order as `catalog.json`.
 - `source/removebg/<catalogID>.png`: per-plant transparent source PNGs returned by remove.bg.
-- `images/<catalogID>.png`: final `1254x1254` transparent PNGs used by CloudKit.
+- `images/<catalogID>.png`: final `1254x1254` transparent PNGs uploaded to Supabase Storage.
 
-Regenerate final CloudKit images:
+Regenerate final Supabase Storage image sources:
 
 ```bash
 python3 CloudKitSeed/PlantInformation/v1/generate_pixel_images.py

@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Peace Lily\",\"overview\":\"Peace Lily is a leafy indoor plant with white spathes that appear above dark green foliage. It prefers evenly moist soil and stable indoor conditions.\",\"tips\":\"Wipe leaves regularly so the plant can photosynthesize efficiently.\"},\"zh-Hans\":{\"commonName\":\"白掌\",\"overview\":\"白掌有浓绿叶片和白色佛焰苞，花序高于叶丛。它喜欢土壤保持微湿和稳定的室内环境。\",\"tips\":\"定期擦拭叶片能提高光合作用效率，也能让叶片更有光泽。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "spathiphyllum-wallisii.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/spathiphyllum-wallisii.png"
   }
 }

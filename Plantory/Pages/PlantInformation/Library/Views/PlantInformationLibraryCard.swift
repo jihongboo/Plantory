@@ -68,19 +68,19 @@ struct PlantInformationLibraryCard: View {
 }
 
 private extension PlantInformationLibraryCard {
-    @ViewBuilder
     var plantImage: some View {
-        if let imageData = info.imageData,
-           let image = Image(data: imageData) {
-            image
-                .pixelate()
-                .resizable()
-                .scaledToFit()
-        } else {
-            Image("PixelMonsteraHealthy")
-                .pixelate()
-                .resizable()
-                .scaledToFit()
+        AsyncImage(url: info.imageURL) { phase in
+            if case let .success(image) = phase {
+                image
+                    .pixelate()
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                Image("PixelMonsteraHealthy")
+                    .pixelate()
+                    .resizable()
+                    .scaledToFit()
+            }
         }
     }
 

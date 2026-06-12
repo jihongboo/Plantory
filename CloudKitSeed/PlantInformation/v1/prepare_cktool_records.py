@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import json
+import os
 import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CATALOG = ROOT / "catalog.json"
-IMAGES = ROOT / "images"
 OUT = ROOT / "cktool-records"
 
 STRING_FIELDS = [
@@ -21,24 +21,35 @@ STRING_FIELDS = [
     "diseaseRiskLevel",
     "fertilizerLevel",
     "localizedContentsJSON",
+    "imageURL",
 ]
 
 
-def ck_fields(item):
+def image_base_url():
+    value = os.environ.get("PLANT_INFORMATION_IMAGE_BASE_URL", "").strip()
+    if not value:
+        raise SystemExit(
+            "Set PLANT_INFORMATION_IMAGE_BASE_URL, for example "
+            "https://example.supabase.co/storage/v1/object/public/Plantory"
+        )
+
+    return value.rstrip("/")
+
+
+def ck_fields(item, base_url):
     fields = {}
     for key in STRING_FIELDS:
-        fields[key] = {"type": "stringType", "value": item.get(key, "")}
+        value = item.get(key, "")
+        if key == "imageURL" and not value:
+            value = f"{base_url}/{item['catalogID']}.png"
+        fields[key] = {"type": "stringType", "value": value}
 
-    image_file_name = f"{item['catalogID']}.png"
-    image_path = (IMAGES / image_file_name).resolve()
-    fields["image"] = {
-        "type": "assetType",
-        "value": image_file_name,
-    }
-    return fields, image_path
+    return fields
 
 
 def main():
+    base_url = image_base_url()
+
     if OUT.exists():
         for child in OUT.iterdir():
             if child.suffix == ".log":
@@ -65,11 +76,10 @@ def main():
     for item in catalog:
         record_dir = OUT / item["catalogID"]
         record_dir.mkdir()
-        fields, image_path = ck_fields(item)
+        fields = ck_fields(item, base_url)
         (record_dir / "fields.json").write_text(
             json.dumps(fields, indent=2, ensure_ascii=False) + "\n"
         )
-        (record_dir / "asset-path.txt").write_text(str(image_path) + "\n")
 
         upload_lines.extend([
             f'echo "Creating {item["catalogID"]}"',
@@ -79,8 +89,7 @@ def main():
             '  --environment "${CK_ENVIRONMENT}" \\',
             "  --database-type public \\",
             "  --record-type PlantInformation \\",
-            f"  --fields-file {record_dir / 'fields.json'} \\",
-            f"  --asset-files {image_path.name}={image_path}",
+            f"  --fields-file {record_dir / 'fields.json'}",
             "",
         ])
 

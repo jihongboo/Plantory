@@ -128,13 +128,16 @@ private extension PlantInformationLibraryPage {
             let refreshedPlantInformations = try await service.fetchPlantInformations(in: modelContext)
             if refreshedPlantInformations.isEmpty {
                 viewState = .failed(AppError.empty)
-            } else {
-                viewState = .loaded(refreshedPlantInformations)
+                return
             }
+
+            viewState = .loaded(refreshedPlantInformations)
         } catch {
             if viewState.value == nil {
                 viewState = .failed(error)
+                return
             }
         }
+
     }
 }

@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Aloe Vera\",\"overview\":\"Aloe Vera is a succulent with thick water-storing leaves. It needs strong light, fast-draining soil, and long dry periods between watering.\",\"tips\":\"A gritty cactus mix and drainage hole are more important than frequent watering.\"},\"zh-Hans\":{\"commonName\":\"芦荟\",\"overview\":\"芦荟是叶片肥厚、能储水的多肉植物。它需要充足光照、快速排水的土壤，以及两次浇水之间较长的干燥期。\",\"tips\":\"颗粒感强的仙人掌介质和排水孔，比频繁浇水更重要。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "aloe-barbadensis-miller.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/aloe-barbadensis-miller.png"
   }
 }

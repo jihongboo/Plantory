@@ -1,33 +1,35 @@
 # Upload Status
 
-Last upload: 2026-06-11
+Last upload: 2026-06-12
 Last schema cleanup: 2026-06-06
 Last localization schema update: 2026-06-06
 Last image refresh: 2026-06-11
+Current image storage plan: Supabase Storage public URLs stored in CloudKit `imageURL`; the old CloudKit `image` Asset field is retired and should not be read or written.
 
 Target:
 
 - Team ID: `CR7BE3B56R`
 - Container ID: `iCloud.com.hongbo.Plantory`
-- Environment: `development`
+- Environments: `development`, `production`
 - Database: Public Database
 - Record type: `PlantInformation`
 
 Result:
 
-- Schema imported with `PlantInformation`.
+- Development schema imported with `PlantInformation.imageURL`; production schema was deployed from CloudKit Console.
 - Query indexes added for `___recordID`, `catalogID`, and `commonName`.
-- Duplicate records from earlier attempts were deleted.
-- Final upload completed successfully.
-- Verification dry-run found 20 `PlantInformation` records.
-- A full query returned records with all expected fields and image assets.
+- Existing 20 records were deleted from both development and production.
+- 20 records were recreated in both development and production from `cktool-records/`.
+- Verification dry-run found 20 `PlantInformation` records in both environments.
+- Production sample query returned Supabase Storage `imageURL` values.
+- The old `image` asset field may still exist in schema because CloudKit rejected removing an active production field.
 - Local seed files now store localized `commonName`, `overview`, and `tips` values inside `localizedContentsJSON`.
 - Development schema cleanup removed unused `photoURL`, `imageFileName`, `sortOrder`, and `isPublished` fields.
 - Local schema files now use `localizedContentsJSON` instead of language-specific top-level text fields.
 - Development schema cleanup removed long care-description fields: `careDifficultyDescription`, `light`, `water`, `humidityDescription`, `diseaseRiskDescription`, and `fertilizer`.
 - Care detail copy is now derived in the app from `careDifficulty`, `lightLevel`, `waterLevel`, `humidityLevel`, `diseaseRiskLevel`, and `fertilizerLevel`.
-- AI-generated pixel plant images were refreshed with remove.bg cutouts and uploaded to both development and production.
-- Production was refreshed for TestFlight access.
+- AI-generated pixel plant images are now hosted in Supabase Storage and referenced from CloudKit by `imageURL`.
+- Production was refreshed for TestFlight access on 2026-06-12.
 
 Verification commands:
 

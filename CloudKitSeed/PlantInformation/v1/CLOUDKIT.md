@@ -8,7 +8,7 @@ This document describes the CloudKit Public Database setup and release workflow 
 - Container ID: `iCloud.com.hongbo.Plantory`
 - Database: Public Database
 - Record type: `PlantInformation`
-- Asset field: `image`
+- Image URL field: `imageURL`
 - Stable business identifier: `catalogID`
 
 The app treats CloudKit Public Database as the remote source of truth. Local SwiftData storage is only a cache for local-first display and background refresh.
@@ -23,7 +23,8 @@ Fields:
 | `commonName` | String | Default English display name. Queryable. |
 | `species` | String | Scientific name. |
 | `overview` | String | Default English encyclopedia summary. |
-| `image` | Asset | Transparent pixel plant PNG. |
+| `image` | Asset | Retired. Kept only because CloudKit does not allow removing an active production field through cktool. Do not write or read it. |
+| `imageURL` | String | Public Supabase Storage URL for the transparent pixel plant PNG. |
 | `careDifficulty` | String | `easy`, `moderate`, or `hard`. |
 | `lightLevel` | String | `low`, `medium`, or `high`. |
 | `waterLevel` | String | `low`, `medium`, or `high`. |
@@ -42,17 +43,37 @@ Care detail copy for difficulty, light, water, humidity, disease risk, and ferti
 ## Local Seed Files
 
 - `catalog.json`: source data.
-- `images/<catalogID>.png`: final CloudKit image assets.
-- `prepare_cktool_records.py`: converts `catalog.json` and `images/` into cktool field directories.
+- `images/<catalogID>.png`: final image assets uploaded to Supabase Storage.
+- `prepare_cktool_records.py`: converts `catalog.json` into cktool field directories and derives `imageURL` from a Supabase Storage base URL.
 - `cktool-records/<catalogID>/fields.json`: record field payload.
-- `cktool-records/<catalogID>/asset-path.txt`: image asset path.
 - `cktool-records/upload_all.sh`: uploads all records.
 
-Regenerate cktool payloads after catalog or image changes:
+Regenerate cktool payloads after catalog or image URL changes:
 
 ```bash
+export PLANT_INFORMATION_IMAGE_BASE_URL="https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory"
 python3 CloudKitSeed/PlantInformation/v1/prepare_cktool_records.py
 ```
+
+`PLANT_INFORMATION_IMAGE_BASE_URL` should point at the public folder that contains `<catalogID>.png` files.
+
+## Supabase Storage Images
+
+Use one public folder for this seed version:
+
+```text
+https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/<catalogID>.png
+```
+
+Recommended Supabase setup:
+
+1. Create a public Supabase Storage bucket named `Plantory`.
+2. Upload every `images/<catalogID>.png` file to the bucket root as `<catalogID>.png`.
+3. Set `PLANT_INFORMATION_IMAGE_BASE_URL` to `https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory`.
+
+CloudKit records store only the derived URL. Do not upload these PNGs as CloudKit assets.
+
+The old `image` Asset field may still appear in CloudKit schema because it was already active in production. Treat it as retired.
 
 ## Tokens
 
@@ -85,6 +106,7 @@ If schema is missing, import or create it before uploading records. If the `Plan
 Prepare payloads and upload:
 
 ```bash
+export PLANT_INFORMATION_IMAGE_BASE_URL="https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory"
 python3 CloudKitSeed/PlantInformation/v1/prepare_cktool_records.py
 CloudKitSeed/PlantInformation/v1/cktool-records/upload_all.sh
 ```
@@ -122,7 +144,7 @@ Dry run. Found 20 matching records to delete.
 
 ## Production Release
 
-Production schema cannot be imported with the same development `import-schema` flow. Deploy the schema from CloudKit Console first, then verify it exists:
+Production schema cannot be imported with the same development `import-schema` flow. Deploy the development schema changes from CloudKit Console first, then verify `imageURL` exists:
 
 ```bash
 xcrun cktool export-schema \
@@ -164,6 +186,7 @@ Upload to production:
 export CK_TEAM_ID="CR7BE3B56R"
 export CK_CONTAINER_ID="iCloud.com.hongbo.Plantory"
 export CK_ENVIRONMENT="production"
+export PLANT_INFORMATION_IMAGE_BASE_URL="https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory"
 
 python3 CloudKitSeed/PlantInformation/v1/prepare_cktool_records.py
 CloudKitSeed/PlantInformation/v1/cktool-records/upload_all.sh
@@ -192,14 +215,14 @@ xcrun cktool query-records \
   --environment production \
   --database-type public \
   --record-type PlantInformation \
-  --requested-fields catalogID commonName localizedContentsJSON image tips commonNameZhHans overviewZhHans tipsZhHans \
+  --requested-fields catalogID commonName localizedContentsJSON imageURL tips commonNameZhHans overviewZhHans tipsZhHans \
   --limit 1
 ```
 
 Expected:
 
 - 20 matching records.
-- Sample includes `catalogID`, `commonName`, `localizedContentsJSON`, and `image`.
+- Sample includes `catalogID`, `commonName`, `localizedContentsJSON`, and `imageURL`.
 - Sample does not include old fields: `tips`, `commonNameZhHans`, `overviewZhHans`, `tipsZhHans`.
 
 ## Current Status

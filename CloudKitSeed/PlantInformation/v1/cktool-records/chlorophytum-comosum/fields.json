@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Spider Plant\",\"overview\":\"Spider Plant forms arching striped leaves and baby plantlets on long stems. It is adaptable, fast-growing, and simple to propagate.\",\"tips\":\"Plantlets can be rooted while still attached or clipped and rooted separately.\"},\"zh-Hans\":{\"commonName\":\"吊兰\",\"overview\":\"吊兰会长出拱形条纹叶片，并在长茎上形成小植株。它适应性强、生长快，也很容易繁殖。\",\"tips\":\"小吊兰可以连在母株上生根，也可以剪下后单独扦插。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "chlorophytum-comosum.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/chlorophytum-comosum.png"
   }
 }

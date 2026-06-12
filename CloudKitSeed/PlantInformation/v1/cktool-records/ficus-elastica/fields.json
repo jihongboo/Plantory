@@ -47,8 +47,8 @@
     "type": "stringType",
     "value": "{\"en\":{\"commonName\":\"Rubber Plant\",\"overview\":\"Rubber Plant has broad glossy leaves and a strong upright shape. It becomes a bold indoor tree when given bright filtered light and consistent watering.\",\"tips\":\"Dust the large leaves often and rotate the pot for even growth.\"},\"zh-Hans\":{\"commonName\":\"橡皮树\",\"overview\":\"橡皮树有宽大油亮的叶片和挺拔株型。在明亮散射光和稳定浇水下，它能长成很有存在感的室内小树。\",\"tips\":\"经常清洁大叶片，并定期转盆，让植株受光更均匀。\"}}"
   },
-  "image": {
-    "type": "assetType",
-    "value": "ficus-elastica.png"
+  "imageURL": {
+    "type": "stringType",
+    "value": "https://gfdywyqwbajcetpywino.supabase.co/storage/v1/object/public/Plantory/ficus-elastica.png"
   }
 }
