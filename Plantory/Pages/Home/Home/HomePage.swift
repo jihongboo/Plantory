@@ -18,7 +18,7 @@ struct HomePage: View {
     @State private var plantPendingDeletion: Plant?
     @Namespace private var heroNamespace
 
-    private let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    private let columns = [GridItem(.adaptive(minimum: 160, maximum: 220), spacing: 14)]
 
     var body: some View {
         ManagedNavigationStack(scene: "home") {

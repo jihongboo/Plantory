@@ -3,88 +3,132 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LeafAid</title>
+  <title>Plantory</title>
   <meta
     name="description"
-    content="LeafAid is an AI plant care app that helps you identify plants, diagnose visible issues from photos, and keep your plant collection organized."
+    content="Plantory is a pixel game style plant care app for building a playful plant collection, tracking care, and learning every plant's needs."
   >
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <div class="page-shell">
-    <header class="hero">
-      <p class="eyebrow">LeafAid</p>
-      <h1>AI plant care that gives clear answers from a photo.</h1>
-      <p class="lead">
-        Identify plants, diagnose visible issues, review care guidance, and keep your plant collection in one place.
-      </p>
-      <div class="actions">
-        <a class="button button-primary" href="./privacy.html">Privacy Policy</a>
-        <a class="button button-secondary" href="https://github.com/jihongboo/Plantory">GitHub</a>
-      </div>
+    <header class="site-header" aria-label="Plantory navigation">
+      <a class="brand" href="./index.html" aria-label="Plantory home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Plantory</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#features">Features</a>
+        <a href="#screens">Screens</a>
+        <a href="./support.html">Support</a>
+      </nav>
     </header>
 
     <main>
-      <section class="showcase card">
-        <div class="showcase-copy">
-          <p class="section-label">App Preview</p>
-          <h2>From first photo to ongoing plant care.</h2>
-          <p>
-            LeafAid keeps the flow simple: add a plant, recognize it from a photo, review diagnosis history, and manage practical care guidance without hunting through multiple apps or articles.
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Version 2.0</p>
+          <h1>Plant care, rebuilt like a cozy pixel game.</h1>
+          <p class="lead">
+            Build a tiny digital garden, learn what every plant needs, keep care records, and never miss the next watering window.
           </p>
+          <div class="actions">
+            <a class="button button-primary" href="./support.html">Get Support</a>
+            <a class="button button-secondary" href="./privacy.html">Privacy Policy</a>
+          </div>
+          <dl class="hero-stats" aria-label="Plantory 2.0 highlights">
+            <div>
+              <dt>20+</dt>
+              <dd>plant guides</dd>
+            </div>
+            <div>
+              <dt>4</dt>
+              <dd>care rhythms</dd>
+            </div>
+            <div>
+              <dt>2.0</dt>
+              <dd>pixel redesign</dd>
+            </div>
+          </dl>
         </div>
-        <div class="showcase-grid">
-          <figure class="phone-shot shot-offset-top">
-            <img src="./screenshots/home.png" alt="LeafAid home screen showing a plant list">
+
+        <div class="hero-stage" id="screens" aria-label="Plantory app screenshots">
+          <figure class="phone-shot hero-phone hero-phone-primary">
+            <img src="./screenshots/plant-list.png" alt="Plantory pixel game style plant list screen">
           </figure>
-          <figure class="phone-shot shot-offset-bottom">
-            <img src="./screenshots/add-plant.png" alt="LeafAid add plant screen with AI recognition results">
-          </figure>
-          <figure class="phone-shot shot-offset-top">
-            <img src="./screenshots/records.png" alt="LeafAid plant record screen with AI diagnosis">
-          </figure>
-          <figure class="phone-shot shot-offset-bottom">
-            <img src="./screenshots/guide.png" alt="LeafAid plant information screen with care guidance">
+          <figure class="phone-shot hero-phone hero-phone-secondary">
+            <img src="./screenshots/plant-info.png" alt="Plantory plant encyclopedia screen with pixel cards">
           </figure>
         </div>
       </section>
 
-      <section class="card-grid">
-        <article class="card">
-          <h2>Photo-based plant help</h2>
+      <section class="feature-strip" id="features" aria-label="Plantory core features">
+        <article class="feature-card accent-leaf">
+          <span class="pixel-icon" aria-hidden="true"></span>
+          <h2>Grow a pixel garden</h2>
           <p>
-            Take or import a photo to identify a plant and get AI-powered diagnosis for visible issues such as yellowing, drooping, spots, or stress.
+            Turn every saved plant into a playful collection card with health, reminders, and a room-like home screen.
           </p>
         </article>
-        <article class="card">
-          <h2>Actionable care guidance</h2>
+        <article class="feature-card accent-sun">
+          <span class="pixel-icon" aria-hidden="true"></span>
+          <h2>Know each plant</h2>
           <p>
-            See likely causes, practical suggestions, and simple next steps designed for beginners who want to keep plants healthy without guesswork.
+            Browse compact plant profiles with light, watering, humidity, temperature, and beginner-friendly tips.
           </p>
         </article>
-        <article class="card">
-          <h2>Your plant library</h2>
+        <article class="feature-card accent-water">
+          <span class="pixel-icon" aria-hidden="true"></span>
+          <h2>Track every action</h2>
           <p>
-            Save plants, track records, review diagnosis history, and keep essential plant information available when you need it.
+            Log watering, fertilizing, pruning, repotting, and diagnosis moments in one readable plant history.
           </p>
         </article>
       </section>
 
-      <section class="card details">
-        <h2>About LeafAid</h2>
+      <section class="screens-section" aria-label="More Plantory screens">
+        <div class="section-heading">
+          <p class="section-label">Screenshots</p>
+          <h2>A sharper, game-like interface for daily care.</h2>
+        </div>
+        <div class="screen-grid">
+          <figure class="phone-shot">
+            <img src="./screenshots/plant-list.png" alt="Plantory home screen showing a pixel plant list">
+            <figcaption>Pixel garden home</figcaption>
+          </figure>
+          <figure class="phone-shot">
+            <img src="./screenshots/plant-info.png" alt="Plantory plant information screen showing care details">
+            <figcaption>Plant encyclopedia</figcaption>
+          </figure>
+          <figure class="phone-shot">
+            <img src="./screenshots/plant-records.png" alt="Plantory plant records screen showing care logs">
+            <figcaption>Care history</figcaption>
+          </figure>
+          <figure class="phone-shot">
+            <img src="./screenshots/notification.png" alt="Plantory notification settings screen for care reminders">
+            <figcaption>Care reminders</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="about-panel">
+        <div>
+          <p class="section-label">About Plantory</p>
+          <h2>Your plant shelf, with rules you can actually follow.</h2>
+        </div>
         <p>
-          LeafAid is built for people who love plants but do not always know what a struggling leaf is trying to say. The app combines photo input, AI analysis, plant organization, and care reminders into a focused experience for everyday plant care.
-        </p>
-        <p>
-          For support or privacy questions, contact
-          <a href="mailto:jihongboo@gmail.com">jihongboo@gmail.com</a>.
+          Plantory helps new plant owners move from guesswork to a simple care loop: save the plant, understand the guide, record what happened, and get reminded before care slips.
         </p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <span>© 2026 LeafAid</span>
-      <a href="./privacy.html">Privacy Policy</a>
+      <span>© 2026 Plantory</span>
+      <span class="footer-links">
+        <a href="./support.html">Support</a>
+        <a href="./privacy.html">Privacy Policy</a>
+      </span>
     </footer>
   </div>
 </body>

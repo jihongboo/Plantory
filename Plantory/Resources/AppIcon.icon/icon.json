@@ -8,7 +8,7 @@
         {
           "blend-mode" : "normal",
           "fill" : {
-            "solid" : "gray:1.00000,1.00000"
+            "automatic-gradient" : "gray:1.00000,1.00000"
           },
           "image-name" : "Vector-2.svg",
           "name" : "Vector-2",
@@ -22,8 +22,9 @@
           }
         },
         {
+          "blend-mode" : "normal",
           "fill" : {
-            "solid" : "srgb:1.00000,1.00000,1.00000,1.00000"
+            "automatic-gradient" : "srgb:1.00000,1.00000,1.00000,1.00000"
           },
           "glass" : true,
           "image-name" : "Vector.svg",
